@@ -14,14 +14,17 @@ type Inputs = {
 
 interface IAuthProps {
     isRegistration?: boolean
+    handlerForSubmit : (data : Inputs) => void
 }
 
-const Auth: React.FC<IAuthProps> = (props) => {
+const AuthForm: React.FC<IAuthProps> = (props) => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+
     const onSubmit: SubmitHandler<Inputs> = data => {
-        console.log(data);
+        props.handlerForSubmit(data)
     }
+
     console.log(watch("email"));
     return (
         <div className={styles.formWrapper}>
@@ -85,4 +88,4 @@ const Auth: React.FC<IAuthProps> = (props) => {
     );
 }
 
-export default Auth;
+export default AuthForm;
