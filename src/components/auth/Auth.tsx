@@ -1,64 +1,88 @@
-import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm, SubmitHandler } from "react-hook-form";
+import AuthError from './authError/AuthError';
+import React from 'react';
+import styles from "./from.module.css"
+import { NavLink } from 'react-router-dom';
 
 type Inputs = {
-    example: string,
-    exampleRequired: string,
-  };
+    email: string,
+    password: string,
+    login?: string
+};
 
-function BasicExample() {
+interface IAuthProps {
+    isRegistration?: boolean
+}
+
+const Auth: React.FC<IAuthProps> = (props) => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = data => {
-        debugger
         console.log(data);
     }
-
-    console.log(watch("example"));
+    console.log(watch("email"));
     return (
-        <Container>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group 
-                className="mb-3" 
-                controlId="formBasicEmail"
-            >
-                <Form.Label>Email address</Form.Label>
-                <Form.Control 
-                    type="text" 
-                    placeholder="Enter email" 
-                    {...register("example",{required:true, pattern : /\w{1,8}@\w{1,}/})} 
-                />
-                {errors.example && <span>This field is is not patter</span>}
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
-            </Form.Group>
-
-            <Form.Group 
-                className="mb-3" 
-                controlId="formBasicPassword"
-            >
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password" 
-                    placeholder="Password" 
-                    {...register("exampleRequired", { required: true })}
-                />
-            </Form.Group>
-            {errors.exampleRequired && <span>This field is required</span> 
-            
-            }
-            <Button 
-                variant="primary" 
-                type="submit"
-            >
-                Submit
-            </Button>
-        </Form>
-        </Container>
+        <div className={styles.formWrapper}>
+            <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                <Form.Group
+                    className="mb-3"
+                    controlId="formBasicEmail"
+                >
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter email"
+                        {...register("email", { required: true, pattern: /\w{1,8}@\w{1,}/ })}
+                    />
+                    {errors.email?.type === "pattern" && <AuthError message='Не правильно написан email' />}
+                    {errors.email?.type === "required" && <AuthError message='Поле является обязательным' />}
+                </Form.Group>
+                {props.isRegistration ? (
+                    <Form.Group
+                        className="mb-3"
+                        controlId="formBasicLogin"
+                    >
+                        <Form.Label>Логин</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="login"
+                            {...register("login", { required: true })}
+                        />
+                        {errors.password && <AuthError message='Поле является обязательным' />}
+                    </Form.Group>)
+                 : ""}
+                <Form.Group
+                    className="mb-3"
+                    controlId="formBasicPassword"
+                >
+                    <Form.Label>Пароль</Form.Label>
+                    <Form.Control
+                        type="password"
+                        placeholder="Password"
+                        {...register("password", { required: true })}
+                    />
+                </Form.Group>
+                {errors.password && <AuthError message='Поле является обязательным' />}
+                <Button
+                    variant="primary"
+                    type="submit"
+                >
+                    {props.isRegistration ? "Зарегестрироваться" : "Войти"}
+                </Button>
+                {!props.isRegistration ? 
+                    (
+                        <div>
+                            <span>Нет аккаунта? </span>
+                             <NavLink to="/registration">Зарегестрироваться</NavLink>
+                        </div>
+                    )    
+                    : ""
+                }
+            </Form>
+        </div>
     );
 }
 
-export default BasicExample;
+export default Auth;
