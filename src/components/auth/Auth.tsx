@@ -5,8 +5,9 @@ import AuthError from './authError/AuthError';
 import React from 'react';
 import styles from "./from.module.css"
 import { NavLink } from 'react-router-dom';
+import { useAppDispatch } from '../../app/hooks';
 
-type Inputs = {
+export type Inputs = {
     email: string,
     password: string,
     login?: string
@@ -14,15 +15,16 @@ type Inputs = {
 
 interface IAuthProps {
     isRegistration?: boolean
-    handlerForSubmit : (data : Inputs) => void
+    handlerForSubmit : (data : Inputs) => any
 }
 
 const AuthForm: React.FC<IAuthProps> = (props) => {
+    let dispatch = useAppDispatch();
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = data => {
-        props.handlerForSubmit(data)
+        dispatch(props.handlerForSubmit(data))
     }
 
     console.log(watch("email"));
@@ -53,7 +55,7 @@ const AuthForm: React.FC<IAuthProps> = (props) => {
                             placeholder="login"
                             {...register("login", { required: true })}
                         />
-                        {errors.password && <AuthError message='Поле является обязательным' />}
+                        {errors.login && <AuthError message='Поле является обязательным' />}
                     </Form.Group>)
                  : ""}
                 <Form.Group
