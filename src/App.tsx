@@ -11,8 +11,10 @@ function App() {
     <div className="App">
       <Container>
         <Routes>
-          <Route path="/auth" element={<AuthForm isRegistration={false} handlerForSubmit={authUser}/>}/>
-          <Route path="/registration" element={<AuthForm isRegistration={true} handlerForSubmit={registrationUser}/>}/>
+          <Route path="/auth">
+            <Route path="login" element={<AuthForm isRegistration={false} handlerForSubmit={authUser}/>}/>
+            <Route path="registration" element={<AuthForm isRegistration={true} handlerForSubmit={registrationUser}/>}/>
+          </Route>
         </Routes>
       </Container>
     </div>

@@ -80,7 +80,7 @@ const AuthForm: React.FC<IAuthProps> = (props) => {
                     (
                         <div>
                             <span>Нет аккаунта? </span>
-                             <NavLink to="/registration">Зарегестрироваться</NavLink>
+                             <NavLink to="/auth/registration">Зарегестрироваться</NavLink>
                         </div>
                     )    
                     : ""
