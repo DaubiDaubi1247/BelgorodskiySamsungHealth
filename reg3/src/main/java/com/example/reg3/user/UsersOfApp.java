@@ -23,7 +23,7 @@ public class UsersOfApp {
             generator = "user_sequence"
     )
     private Long id;
-    private String name;
+    private String login;
     @Column(unique=true)
     private String email;
     private String password;
@@ -33,7 +33,7 @@ public class UsersOfApp {
     public UsersOfApp(String name,
                       String email,
                       String password) {
-        this.name = name;
+        this.login = name;
         this.email = email;
         this.password = password;
     }
