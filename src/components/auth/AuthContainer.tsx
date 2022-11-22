@@ -10,8 +10,7 @@ interface IAuthContainerProps {
 }
 
 const AuthContainer: React.FunctionComponent<IAuthContainerProps> = ({isRegistration}) => {
-    const [prevValue, setprevValue] = useState(isRegistration)
-    let errorMessage = useAppSelector(state => state.auth.errorMessage)
+    let errorMessage = useAppSelector(state => isRegistration ? state.auth.registrationError : state.auth.loginError)
     let isAuth = useAppSelector(state => state.auth.isAuth)
 
     let handlerForSubmit = isRegistration ? registrationUser : authUser
@@ -21,13 +20,11 @@ const AuthContainer: React.FunctionComponent<IAuthContainerProps> = ({isRegistra
         navigate("/")
     }
 
-    if (prevValue !== isRegistration) {
-        errorMessage = null
-    }
-
-  return (
-    <AuthForm isRegistration={isRegistration} handlerForSubmit={handlerForSubmit} errorMessage={errorMessage}/>
-  );
+  return <AuthForm 
+        isRegistration={isRegistration} 
+        handlerForSubmit={handlerForSubmit} 
+        errorMessage={errorMessage}
+    />
 };
 
 export default AuthContainer;

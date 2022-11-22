@@ -7,13 +7,15 @@ import { IResponse } from '../../API/authAPI/API_T';
 export interface AuthState {
     isAuth: boolean
     accessData: Inputs | null
-    errorMessage: string | null
+    loginError: string | null
+    registrationError: string | null
 }
 
 const initialState: AuthState = {
     isAuth: false,
     accessData: null,
-    errorMessage: null
+    loginError: null,
+    registrationError : null
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -49,7 +51,7 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {                                                        //для санок!!!!
         builder
             .addCase(registrationUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
-                state.errorMessage = action.payload.message
+                state.registrationError = action.payload.message
                 if (action.payload.status === ResponseStatus.SUCCESS) {
                     state.accessData = action.payload.usersOfApp
                     state.isAuth = true
@@ -57,7 +59,7 @@ export const authSlice = createSlice({
             })
             .addCase(authUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
                 
-                state.errorMessage = action.payload.message
+                state.loginError = action.payload.message
                 if (action.payload.status === ResponseStatus.SUCCESS) {
                     state.accessData = action.payload.usersOfApp
                     state.isAuth = true
