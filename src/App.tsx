@@ -5,6 +5,7 @@ import './App.css';
 
 import AuthForm from './components/auth/Auth';
 import { authUser, registrationUser } from './slices/auth/thunk';
+import AuthContainer from './components/auth/AuthContainer';
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       <Container>
         <Routes>
           <Route path="/auth">
-            <Route path="login" element={<AuthForm isRegistration={false} handlerForSubmit={authUser}/>}/>
-            <Route path="registration" element={<AuthForm isRegistration={true} handlerForSubmit={registrationUser}/>}/>
+            <Route path="login" element={<AuthContainer isRegistration={false}/>}/>
+            <Route path="registration" element={<AuthContainer isRegistration={true}/>}/>
           </Route>
         </Routes>
       </Container>

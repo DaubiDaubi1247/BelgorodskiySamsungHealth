@@ -2,26 +2,27 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm, SubmitHandler } from "react-hook-form";
 import AuthError from './authError/AuthError';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from "./from.module.css"
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Inputs } from '../../slices/auth/Types';
 
 
 interface IAuthProps {
-    isRegistration?: boolean
+    isRegistration : boolean
+    errorMessage : string | null
     handlerForSubmit : (data : Inputs) => any
 }
 
-const AuthForm: React.FC<IAuthProps> = (props) => {
+const AuthForm: React.FC<IAuthProps> = ({isRegistration, errorMessage, handlerForSubmit}) => {
 
     let dispatch = useAppDispatch();
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = data => {
-        dispatch(props.handlerForSubmit(data))
+        dispatch(handlerForSubmit(data))
     }
 
     return (
@@ -40,7 +41,7 @@ const AuthForm: React.FC<IAuthProps> = (props) => {
                     {errors.email?.type === "pattern" && <AuthError message='Не правильно написан email' />}
                     {errors.email?.type === "required" && <AuthError message='Поле является обязательным' />}
                 </Form.Group>
-                {props.isRegistration ? (
+                {isRegistration ? (
                     <Form.Group
                         className="mb-3"
                         controlId="formBasicLogin"
@@ -66,13 +67,14 @@ const AuthForm: React.FC<IAuthProps> = (props) => {
                     />
                 </Form.Group>
                 {errors.password && <AuthError message='Поле является обязательным' />}
+                {errorMessage !== null ? <AuthError message={errorMessage} /> : <></>}
                 <Button
                     variant="primary"
                     type="submit"
                 >
-                    {props.isRegistration ? "Зарегестрироваться" : "Войти"}
+                    {isRegistration ? "Зарегестрироваться" : "Войти"}
                 </Button>
-                {!props.isRegistration ? 
+                {!isRegistration ? 
                     (
                         <div>
                             <span>Нет аккаунта? </span>

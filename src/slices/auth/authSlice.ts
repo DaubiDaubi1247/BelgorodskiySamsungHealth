@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Inputs, ResponseStatus } from './Types';
-import { registrationUser } from './thunk';
+import { authUser, registrationUser } from './thunk';
 import { IResponse } from '../../API/authAPI/API_T';
 
 export interface AuthState {
@@ -49,9 +49,17 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {                                                        //для санок!!!!
         builder
             .addCase(registrationUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
-                state.errorMessage = action.payload.errorMessage
+                state.errorMessage = action.payload.message
                 if (action.payload.status === ResponseStatus.SUCCESS) {
-                    state.accessData = action.payload.userData
+                    state.accessData = action.payload.usersOfApp
+                    state.isAuth = true
+                }
+            })
+            .addCase(authUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
+                
+                state.errorMessage = action.payload.message
+                if (action.payload.status === ResponseStatus.SUCCESS) {
+                    state.accessData = action.payload.usersOfApp
                     state.isAuth = true
                 }
             })
