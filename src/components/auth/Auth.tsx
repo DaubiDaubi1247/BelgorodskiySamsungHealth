@@ -6,12 +6,8 @@ import React from 'react';
 import styles from "./from.module.css"
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
+import { Inputs } from '../../slices/auth/Types';
 
-export type Inputs = {
-    email: string,
-    password: string,
-    login?: string
-};
 
 interface IAuthProps {
     isRegistration?: boolean
@@ -19,6 +15,7 @@ interface IAuthProps {
 }
 
 const AuthForm: React.FC<IAuthProps> = (props) => {
+
     let dispatch = useAppDispatch();
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
@@ -27,7 +24,6 @@ const AuthForm: React.FC<IAuthProps> = (props) => {
         dispatch(props.handlerForSubmit(data))
     }
 
-    console.log(watch("email"));
     return (
         <div className={styles.formWrapper}>
             <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
