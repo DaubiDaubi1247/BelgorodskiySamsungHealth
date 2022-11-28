@@ -5,7 +5,7 @@ export const AuthRoutes = {
     registration : auth + "/registration"
 } 
 
-export const main = "/";
+export const main = "";
 export const MainRoutes = {
-    
+    training : main + "/training"
 } 

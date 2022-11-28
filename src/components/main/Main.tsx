@@ -14,10 +14,10 @@ const Main: React.FunctionComponent<IMainProps> = (props) => {
     let navigate = useNavigate();
 
     //if (!isAuth) navigate(AuthRoutes.authRoute)
-
+    debugger
   return (
     <div className='d-flex'>
-        <NavBar/>
+       
     </div>
   );
 };

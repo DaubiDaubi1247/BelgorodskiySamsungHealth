@@ -6,14 +6,14 @@ import { IResponse } from '../../API/authAPI/API_T';
 
 export interface AuthState {
     isAuth: boolean
-    accessData: Inputs
+    accessData: Inputs | null
     loginError: string | null
     registrationError: string | null
 }
 
 const initialState: AuthState = {
     isAuth: false,
-    accessData: {}},
+    accessData: null,
     loginError: null,
     registrationError : null
 };
