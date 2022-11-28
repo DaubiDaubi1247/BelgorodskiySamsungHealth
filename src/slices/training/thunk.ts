@@ -14,14 +14,14 @@ export const getSmallDataAboutTrainings = createAsyncThunk(
     }
 )
 
-// export const authUser = createAsyncThunk(
-//     "auth/authUser",
-//     async (accessData : Inputs,thunkApi) => {
-//         try {
-//             const response = await authAPI.authUser(accessData)
-//             return response.data
-//         } catch (error) {
-//             thunkApi.rejectWithValue("Что то пошло не так ...")
-//         }
-//     }
-// )
+export const getUserTraining = createAsyncThunk(
+    "training/getUserTraining",
+    async (id : number,thunkApi) => {
+        try {
+            const response = await trainingAPI.getUserTraining(id)
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+    }
+)
