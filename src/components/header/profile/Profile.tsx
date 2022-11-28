@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../../app/hooks'
 
 type Props = {}
@@ -6,7 +7,7 @@ type Props = {}
 const Profile = (props: Props) => {
     let login = useAppSelector(state => state.auth.accessData?.login)
     return (
-        <div>{login}</div>
+        <Link to="/profile">{login}</Link>
     )
 }
 

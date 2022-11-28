@@ -7,6 +7,7 @@ import AuthForm from './components/auth/Auth';
 import { authUser, registrationUser } from './slices/auth/thunk';
 import AuthContainer from './components/auth/AuthContainer';
 import Header from './components/header/Header';
+import NavBar from './components/navBar/NavBar';
 
 function App() {
   return (
