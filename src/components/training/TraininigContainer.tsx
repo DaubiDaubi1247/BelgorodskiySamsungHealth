@@ -14,9 +14,10 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
     let userId = useAppSelector(state => state.auth.accessData?.id)
 
     let dispatch = useAppDispatch()
+    
     useEffect(() => {
-        if (userId) {
-            dispatch(getUserTraining(userId))
+        if (1) {
+            dispatch(getUserTraining(1))
         }
     },[userId])
 
