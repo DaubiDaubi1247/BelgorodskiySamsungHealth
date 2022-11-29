@@ -16,17 +16,19 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <NavBar/>
-      <Container>
-        <Routes>  
-          <Route path={main}>
-            <Route path={MainRoutes.training} element={<TrainingContainer/>}/>
-          </Route>
-          <Route path={auth}>
-            <Route path={AuthRoutes.authRoute} element={<AuthContainer isRegistration={false}/>}/>
-            <Route path={AuthRoutes.registration} element={<AuthContainer isRegistration={true}/>}/>
-          </Route>
-        </Routes>
+      <Container className='d-flex'>
+        <NavBar/>
+        <div className="flex-fill">
+            <Routes>
+              <Route path={main}>
+                <Route path={MainRoutes.training} element={<TrainingContainer/>}/>
+              </Route>
+              <Route path={auth}>
+                <Route path={AuthRoutes.authRoute} element={<AuthContainer isRegistration={false}/>}/>
+                <Route path={AuthRoutes.registration} element={<AuthContainer isRegistration={true}/>}/>
+              </Route>
+            </Routes>
+        </div>
       </Container>
     </div>
   );
