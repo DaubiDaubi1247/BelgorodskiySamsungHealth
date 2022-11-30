@@ -18,7 +18,6 @@ export const getUserTraining = createAsyncThunk(
     "training/getUserTraining",
     async (id : number,thunkApi) => {
         try {
-            debugger
             const response = await trainingAPI.getUserTraining(id)
             return response.data
         } catch (error) {
