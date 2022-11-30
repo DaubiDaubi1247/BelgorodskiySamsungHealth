@@ -13,6 +13,10 @@ export const trainingAPI = {
 
     getUserTraining(id : number) {
         return trainingAxios.get<ItrainigData>(`${id}`)
+    },
+
+    getFullDataAboutTrainings(id : number) {
+        return trainingAxios.get<>(`${id}`)
     }
 
     // registrationUser(accessData : Inputs) {

@@ -13,7 +13,7 @@ interface ISubscribeTrainingProps {
 const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = (props) => {
 
     let smallDataAboutTRainings = useAppSelector(state => state.training.smallDataTrainings)
-    const trainingItemArr = smallDataAboutTRainings.map(el => <TrainingItem {...el}/>)
+    const trainingItemArr = smallDataAboutTRainings.map(el => <TrainingItem {...el} isUserTraining={false}/>)
 
     const [show, setShow] = useState(false)
     const dispatch = useAppDispatch()
