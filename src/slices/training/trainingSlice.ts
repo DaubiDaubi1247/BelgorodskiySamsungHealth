@@ -32,7 +32,7 @@ const trainingSlice = createSlice({
             .addCase(getUserTraining.fulfilled.type, (state, action: PayloadAction<ItrainigData>) => {
                 //state.smallUserTraining = action.payload
                 state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
-                state.today = 1 / 9 * 100
+                state.today = Math.round(2 / 9 * 100)
             })
     },
 });
