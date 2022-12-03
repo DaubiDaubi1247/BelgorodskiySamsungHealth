@@ -14,20 +14,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class UserRegistrationData {
     @Id//зачем он здесь гененрирует значение
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1)
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_registration_data_id", nullable = false)
     private Long id;
+    @Column(name = "login")
     private String login;
-    @Column(unique=true)
+    @Column(name = "email", unique=true)
     private String email;
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "is_admin")
     private Boolean isAdmin;
 
     public UserRegistrationData(String name,
