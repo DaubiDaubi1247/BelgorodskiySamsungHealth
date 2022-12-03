@@ -1,19 +1,16 @@
 package com.example.reg3.user;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
-@Builder
-@Table(name = "user")
+@AllArgsConstructor
+@Table(name = "user_of_app")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
