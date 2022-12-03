@@ -1,4 +1,4 @@
-package com.example.reg3.user;
+package com.example.reg3.userRegistrationData;
 
 import com.example.reg3.requastion.Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,23 +8,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserRegistrationDataService {
 
-    private final UserRepository userRepository;
+    private final UserRegistrationDataRepository userRepository;
 
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserRegistrationDataService(UserRegistrationDataRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public List<UsersOfApp> getUsers() {
+    public List<UserRegistrationData> getUsers() {
         return userRepository.findAll();
     }
 
-    public Request addNewUser(UsersOfApp usersOfApp)
+    public Request addNewUser(UserRegistrationData usersOfApp)
             throws IllegalAccessException {
-        Optional<UsersOfApp> userOptional =
+        Optional<UserRegistrationData> userOptional =
                 userRepository.findUsertByEmail(usersOfApp.getEmail());
 
         if (userOptional.isPresent()) {
@@ -37,9 +37,9 @@ public class UserService {
         }
     }
 
-    public Request checkUser(UsersOfApp usersOfApp)
+    public Request checkUser(UserRegistrationData usersOfApp)
             throws IllegalAccessException {
-        Optional<UsersOfApp> userOptional =
+        Optional<UserRegistrationData> userOptional =
                 userRepository.findUsertByEmail(usersOfApp.getEmail());
 
         if (!userOptional.isPresent()) {
@@ -47,7 +47,7 @@ public class UserService {
                     (1, "student with email " + usersOfApp.getEmail() + " doesn't exist", usersOfApp);
         }
 
-        UsersOfApp usersOfAppOnBD = userOptional.get();
+        UserRegistrationData usersOfAppOnBD = userOptional.get();
         if (!usersOfAppOnBD.getPassword().equals(usersOfApp.getPassword())) {
             return new Request
                     (2, "wrong password", usersOfApp);

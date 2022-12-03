@@ -1,4 +1,4 @@
-package com.example.reg3.user;
+package com.example.reg3.userRegistrationData;
 
 
 import lombok.*;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsersOfApp {
+public class UserRegistrationData {
     @Id//зачем он здесь гененрирует значение
     @SequenceGenerator(
             name = "user_sequence",
@@ -30,9 +30,9 @@ public class UsersOfApp {
 
     private Boolean isAdmin;
 
-    public UsersOfApp(String name,
-                      String email,
-                      String password) {
+    public UserRegistrationData(String name,
+                                String email,
+                                String password) {
         this.login = name;
         this.email = email;
         this.password = password;

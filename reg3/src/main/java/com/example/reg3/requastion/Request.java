@@ -1,6 +1,6 @@
 package com.example.reg3.requastion;
 
-import com.example.reg3.user.UsersOfApp;
+import com.example.reg3.userRegistrationData.UserRegistrationData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +14,10 @@ import lombok.Setter;
 public class Request {
     private Integer status;
     private String message;
-    UsersOfApp usersOfApp;
+    UserRegistrationData usersOfApp;
 
 
-    public Request(UsersOfApp usersOfApp) {
+    public Request(UserRegistrationData usersOfApp) {
         this.usersOfApp = usersOfApp;
     }
 }

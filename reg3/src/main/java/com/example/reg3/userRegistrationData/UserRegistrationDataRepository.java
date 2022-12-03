@@ -1,0 +1,12 @@
+package com.example.reg3.userRegistrationData;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Optional;
+
+public interface UserRegistrationDataRepository
+        extends JpaRepository<UserRegistrationData, Long> {
+    @Query("SELECT u FROM UserRegistrationData u WHERE u.email = ?1")
+    Optional<UserRegistrationData> findUsertByEmail(String email);
+}
