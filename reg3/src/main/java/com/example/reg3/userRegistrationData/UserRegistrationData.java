@@ -1,6 +1,7 @@
 package com.example.reg3.userRegistrationData;
 
 
+import com.example.reg3.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,12 @@ public class UserRegistrationData {
 
     @Column(name = "is_admin")
     private Boolean isAdmin;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",
+            referencedColumnName = "user_id")
+    private User transports;
+
 
     public UserRegistrationData(String name,
                                 String email,
