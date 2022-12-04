@@ -24,9 +24,15 @@ public class Training {
     @Column(name = "count_of_days", nullable = false)
     private Integer countOfDays;
 
+    @Column(name = "description")
+    private String description;
 
-    public Training(String label, Integer countOfDays) {
+
+    public Training(String label,
+                    Integer countOfDays,
+                    String description) {
         this.label = label;
         this.countOfDays = countOfDays;
+        this.description = description;
     }
 }
