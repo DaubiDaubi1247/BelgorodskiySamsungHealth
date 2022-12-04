@@ -25,4 +25,8 @@ public class Training {
     private Integer countOfDays;
 
 
+    public Training(String label, Integer countOfDays) {
+        this.label = label;
+        this.countOfDays = countOfDays;
+    }
 }

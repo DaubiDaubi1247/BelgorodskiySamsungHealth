@@ -12,6 +12,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "exercise")
 public class Exercise {
+    public Exercise(String label, String description) {
+        this.label = label;
+        this.description = description;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exercise_id", nullable = false)

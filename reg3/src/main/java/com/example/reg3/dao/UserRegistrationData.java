@@ -40,4 +40,12 @@ public class UserRegistrationData {
         this.email = email;
         this.password = password;
     }
+
+    public UserRegistrationData(String login, String email, String password, Boolean isAdmin, User transports) {
+        this.login = login;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.transports = transports;
+    }
 }

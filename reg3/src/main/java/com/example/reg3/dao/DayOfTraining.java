@@ -44,4 +44,9 @@ public class DayOfTraining {
     )
     private List<Set> sets;
 
+    public DayOfTraining(Integer numberOfDay, Training training, List<Set> sets) {
+        this.numberOfDay = numberOfDay;
+        this.training = training;
+        this.sets = sets;
+    }
 }

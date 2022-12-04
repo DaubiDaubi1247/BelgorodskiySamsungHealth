@@ -35,5 +35,11 @@ public class User {
     private Training trainingId;
 
 
-
+    public User(String name, Float weight, Integer height, Integer dayOfTraining, Training trainingId) {
+        this.name = name;
+        this.weight = weight;
+        this.height = height;
+        this.dayOfTraining = dayOfTraining;
+        this.trainingId = trainingId;
+    }
 }

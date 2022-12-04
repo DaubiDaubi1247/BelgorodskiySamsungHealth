@@ -25,9 +25,15 @@ public class Set {
 
     @Column(name = "rest_time", nullable = false)
     @Temporal(TemporalType.TIME)
-    Date restTime;
+    private Date restTime;
 
     @ManyToOne
     @JoinColumn(name = "exercise_id")
-    Exercise exercise;
+    private Exercise exercise;
+
+    public Set(Integer numberOfRepetitions, Date restTime, Exercise exercise) {
+        this.numberOfRepetitions = numberOfRepetitions;
+        this.restTime = restTime;
+        this.exercise = exercise;
+    }
 }
