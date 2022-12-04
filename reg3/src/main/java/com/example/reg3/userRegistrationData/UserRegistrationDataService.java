@@ -1,5 +1,6 @@
 package com.example.reg3.userRegistrationData;
 
+import com.example.reg3.dao.UserRegistrationData;
 import com.example.reg3.requastion.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

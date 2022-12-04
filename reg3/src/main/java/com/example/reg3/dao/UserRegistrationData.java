@@ -1,7 +1,7 @@
-package com.example.reg3.userRegistrationData;
+package com.example.reg3.dao;
 
 
-import com.example.reg3.user.User;
+import com.example.reg3.dao.User;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,6 +1,6 @@
 package com.example.reg3.requastion;
 
-import com.example.reg3.userRegistrationData.UserRegistrationData;
+import com.example.reg3.dao.UserRegistrationData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

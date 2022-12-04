@@ -1,5 +1,6 @@
 package com.example.reg3.userRegistrationData;
 
+import com.example.reg3.dao.UserRegistrationData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
