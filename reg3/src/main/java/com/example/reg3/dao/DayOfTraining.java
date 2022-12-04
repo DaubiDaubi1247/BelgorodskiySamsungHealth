@@ -4,6 +4,7 @@ package com.example.reg3.dao;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,5 +26,22 @@ public class DayOfTraining {
     @JoinColumn(name = "training_id",
     referencedColumnName = "training_id")
     private Training training;
+
+
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinTable(
+            name = "set_day_map",
+            joinColumns = @JoinColumn(
+                    name = "days_of_training_id",
+                    referencedColumnName = "days_of_training_id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "set_id",
+                    referencedColumnName = "set_id"
+            )
+    )
+    private List<Set> sets;
 
 }
