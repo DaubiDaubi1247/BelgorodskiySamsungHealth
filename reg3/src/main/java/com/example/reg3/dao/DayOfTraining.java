@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class DayOfTraining {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "days_of_training_id", nullable = false)
     private Long id;
 
     @Column(name = "number_of_day", nullable = false)
