@@ -26,4 +26,8 @@ public class Set {
     @Column(name = "rest_time", nullable = false)
     @Temporal(TemporalType.TIME)
     Date restTime;
+
+    @ManyToOne
+    @JoinColumn(name = "exercise_id")
+    Exercise exercise;
 }
