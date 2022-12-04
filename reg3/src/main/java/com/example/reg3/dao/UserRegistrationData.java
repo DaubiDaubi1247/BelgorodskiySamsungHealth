@@ -1,22 +1,21 @@
 package com.example.reg3.dao;
 
 
-import com.example.reg3.dao.User;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users_registration_data")
 public class UserRegistrationData {
     @Id//зачем он здесь гененрирует значение
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_registration_data_id", nullable = false)
+    @Column(name = "users_registration_data_id", nullable = false)
     private Long id;
     @Column(name = "login")
     private String login;

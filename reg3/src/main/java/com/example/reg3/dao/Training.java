@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "trainings")
-public class Trainings {
+public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "training_id", nullable = false)
@@ -23,4 +23,6 @@ public class Trainings {
 
     @Column(name = "count_of_days", nullable = false)
     private Integer countOfDays;
+
+
 }
