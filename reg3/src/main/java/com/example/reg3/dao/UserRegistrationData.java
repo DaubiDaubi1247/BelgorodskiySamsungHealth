@@ -13,13 +13,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "users_registration_data")
 public class UserRegistrationData {
-    @Id//зачем он здесь гененрирует значение
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "users_registration_data_id", nullable = false)
+    @Column(name = "users_registration_data_id",
+            nullable = false)
     private Long id;
     @Column(name = "login")
     private String login;
-    @Column(name = "email", unique=true)
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "password")
     private String password;
@@ -30,22 +31,43 @@ public class UserRegistrationData {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id",
             referencedColumnName = "user_id")
-    private User transports;
+    private User user;
 
 
-    public UserRegistrationData(String name,
+    public UserRegistrationData(String login,
                                 String email,
-                                String password) {
-        this.login = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserRegistrationData(String login, String email, String password, Boolean isAdmin, User transports) {
+                                String password,
+                                Boolean isAdmin,
+                                User user) {
         this.login = login;
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
-        this.transports = transports;
+        this.user = user;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

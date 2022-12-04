@@ -25,21 +25,19 @@ public class User {
     @Column(name = "height")
     private Integer height;
 
-    @Column(name = "day_of_training")
-    private Integer dayOfTraining;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_progress_in_training_id",
+            referencedColumnName = "user_progress_in_training_id")
+    private UserProgressInTraining userProgresInTraining;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "training_id",
-            referencedColumnName = "training_id")
-    private Training trainingId;
-
-
-    public User(String name, Float weight, Integer height, Integer dayOfTraining, Training trainingId) {
+    public User(String name,
+                Float weight,
+                Integer height,
+                UserProgressInTraining userProgresInTraining) {
         this.name = name;
         this.weight = weight;
         this.height = height;
-        this.dayOfTraining = dayOfTraining;
-        this.trainingId = trainingId;
+        this.userProgresInTraining = userProgresInTraining;
     }
 }
