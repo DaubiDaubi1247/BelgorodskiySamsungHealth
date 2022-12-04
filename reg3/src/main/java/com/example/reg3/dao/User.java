@@ -29,10 +29,12 @@ public class User {
     @Column(name = "day_of_training")
     private Integer dayOfTraining;
 
-    @Column(name = "training_id")
-    private Long trainingId;
 
-    @Column(name = "diet_id")
-    private Long dietId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id",
+            referencedColumnName = "training_id")
+    private Training trainingId;
+
+
 
 }
