@@ -12,10 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "exercise")
 public class Exercise {
-    public Exercise(String label, String description) {
-        this.label = label;
-        this.description = description;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +25,9 @@ public class Exercise {
 
     @Column(name = "description")
     private String description;
+
+    public Exercise(String label, String description) {
+        this.label = label;
+        this.description = description;
+    }
 }

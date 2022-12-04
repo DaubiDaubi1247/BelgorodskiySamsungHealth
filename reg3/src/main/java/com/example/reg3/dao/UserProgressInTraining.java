@@ -26,4 +26,10 @@ public class UserProgressInTraining {
     @JoinColumn(name = "training_id",
             referencedColumnName = "training_id")
     private Training trainingId;
+
+    public UserProgressInTraining(Integer dayOfTraining,
+                                  Training trainingId) {
+        this.dayOfTraining = dayOfTraining;
+        this.trainingId = trainingId;
+    }
 }

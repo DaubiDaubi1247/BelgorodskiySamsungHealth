@@ -22,15 +22,14 @@ public class DayOfTraining {
     @Column(name = "number_of_day", nullable = false)
     private Integer numberOfDay;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+//            (cascade = CascadeType.ALL)
     @JoinColumn(name = "training_id",
     referencedColumnName = "training_id")
     private Training training;
 
 
-    @ManyToMany(
-            cascade = CascadeType.ALL
-    )
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "set_day_map",
             joinColumns = @JoinColumn(
@@ -44,7 +43,9 @@ public class DayOfTraining {
     )
     private List<Set> sets;
 
-    public DayOfTraining(Integer numberOfDay, Training training, List<Set> sets) {
+    public DayOfTraining(Integer numberOfDay,
+                         Training training,
+                         List<Set> sets) {
         this.numberOfDay = numberOfDay;
         this.training = training;
         this.sets = sets;

@@ -24,16 +24,18 @@ public class Set {
 
 
     @Column(name = "rest_time", nullable = false)
-    @Temporal(TemporalType.TIME)
-    private Date restTime;
 
-    @ManyToOne
+    private Integer restTimeInSec;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 
-    public Set(Integer numberOfRepetitions, Date restTime, Exercise exercise) {
+    public Set(Integer numberOfRepetitions,
+               Exercise exercise,
+               Integer restTimeInSec) {
         this.numberOfRepetitions = numberOfRepetitions;
-        this.restTime = restTime;
+        this.restTimeInSec = restTimeInSec;
         this.exercise = exercise;
     }
 }
