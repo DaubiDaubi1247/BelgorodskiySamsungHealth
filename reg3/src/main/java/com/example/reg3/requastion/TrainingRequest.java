@@ -12,21 +12,18 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class TrainingRequest {
-    private Integer status;
-    private String message;
+public class TrainingRequest extends Request {
+
     List<Training> trainings;
 
     public TrainingRequest() {
-        status = 404;
-        message = "тренеровоки отстутсвуют";
+        super(404, "тренеровоки отстутсвуют");
         trainings = null;
     }
 
     public TrainingRequest(List<Training> trainings) {
+        super(404, "тренеровоки отстутсвуют");
         this.trainings = trainings;
-        status = 200;
-        message = "тренеровки получены успешно";
+
     }
 }

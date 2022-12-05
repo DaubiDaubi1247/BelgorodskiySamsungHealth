@@ -2,7 +2,7 @@ package com.example.reg3.controller;
 
 import com.example.reg3.Service.UserRegistrationDataService;
 import com.example.reg3.dao.UserRegistrationData;
-import com.example.reg3.requastion.Request;
+import com.example.reg3.requastion.UserRegistrationDataRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +25,15 @@ public class UserRegistrationDataController {
     }
 
     @PostMapping("registration")
-    public Request registrationUser(@RequestBody UserRegistrationData user)
+    public UserRegistrationDataRequest registrationUser(@RequestBody UserRegistrationData user)
             throws IllegalAccessException {
         return userRegistrationDataService.addNewUser(user);
     }
 
     @PostMapping("authentication")
-    public Request authenticationUser(@RequestBody UserRegistrationData user)
+    public UserRegistrationDataRequest authenticationUser(@RequestBody UserRegistrationData user)
             throws IllegalAccessException {
+
         return userRegistrationDataService.checkUser(user);
     }
 

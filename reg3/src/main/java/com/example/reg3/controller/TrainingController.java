@@ -1,13 +1,11 @@
 package com.example.reg3.controller;
 
 
+import com.example.reg3.Service.DayOfTrainingService;
 import com.example.reg3.Service.TrainingService;
-import com.example.reg3.requastion.TrainingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -16,16 +14,27 @@ public class TrainingController {
 
     private final TrainingService trainingService;
 
+    private final DayOfTrainingService dayOfTrainingService;
+
     @Autowired
-    public TrainingController(TrainingService trainingService) {
+    public TrainingController(TrainingService trainingService,
+                              DayOfTrainingService dayOfTraining) {
         this.trainingService = trainingService;
+        this.dayOfTrainingService = dayOfTraining;
     }
 
     @GetMapping("LightBackground")
-    public TrainingRequest getLightBackground() {
+    public ResponseEntity<Object> getLightBackground() {
         return trainingService.getTrainings();
-
     }
+
+    @GetMapping("daysOfTrain")
+    public ResponseEntity<Object> getTrainingDays(@RequestParam(required =false) Long id) {
+        return dayOfTrainingService.getTrainingDays(id);
+    }
+
+
+
 
 
 

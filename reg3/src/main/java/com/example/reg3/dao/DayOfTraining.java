@@ -1,6 +1,7 @@
 package com.example.reg3.dao;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class DayOfTraining {
 //            (cascade = CascadeType.ALL)
     @JoinColumn(name = "training_id",
     referencedColumnName = "training_id")
+    @JsonIgnore
     private Training training;
 
 
@@ -42,6 +44,7 @@ public class DayOfTraining {
             )
     )
     private List<Set> sets;
+
 
     public DayOfTraining(Integer numberOfDay,
                          Training training,
