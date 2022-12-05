@@ -65,9 +65,7 @@ export const authSlice = createSlice({
                     state.isAuth = true
                 }
             })
-        //   .addCase(incrementAsync.rejected, (state) => {
-        //     state.status = 'failed';
-        //   });
+
     },
 });
 
@@ -79,15 +77,5 @@ export const { setAuth, setAccessData } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth.isAuth;
 export const selectAccessData = (state: RootState) => state.auth.accessData;
 
-// We can also write thunks by hand, which may contain both sync and async logic.
-// Here's an example of conditionally dispatching actions based on current state.
-// export const incrementIfOdd =
-//   (amount: number): AppThunk =>
-//   (dispatch, getState) => {
-//     const currentValue = selectCount(getState());
-//     if (currentValue % 2 === 1) {
-//       dispatch(incrementByAmount(amount));
-//     }
-//   };
-
+    
 export default authSlice.reducer;

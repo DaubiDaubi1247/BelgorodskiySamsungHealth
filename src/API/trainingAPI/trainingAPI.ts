@@ -16,7 +16,7 @@ export const trainingAPI = {
     },
 
     getFullDataAboutTrainings(id : number) {
-        return trainingAxios.get<>(`${id}`)
+        //return trainingAxios.get<>(`${id}`)
     }
 
     // registrationUser(accessData : Inputs) {
