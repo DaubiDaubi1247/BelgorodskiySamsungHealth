@@ -2,16 +2,20 @@ import * as React from 'react';
 import DayDescription from './dayDescription/DayDescription';
 
 interface IDayListProps {
-    trainingsArr : Array<any>
+    trainingsArr: Array<any>
+    isVisible : boolean
 }
 
-const DayList: React.FunctionComponent<IDayListProps> = ({trainingsArr}) => {
+const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible }) => {
 
-    const getAllTrainingsDay = () => trainingsArr.map(day => <DayDescription {...day}/>)
+    const getAllTrainingsDay = () => trainingsArr.map(day => <DayDescription {...day} />)
 
-    return <>
-        {getAllTrainingsDay()}
-    </>;
+    return (isVisible ? 
+        <>
+            {getAllTrainingsDay()}
+        </>
+        : <></>
+    );
 };
 
 export default DayList;

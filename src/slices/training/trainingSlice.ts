@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr } from './../../API/trainingAPI/TtrainingAPI';
+import { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr, ArrDaysExpires } from './../../API/trainingAPI/TtrainingAPI';
 import { CONST, ItrainitState } from './Types';
-import { getSmallDataAboutTrainings, getUserTraining } from './thunk';
+import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires } from './thunk';
 import { useAppSelector } from '../../app/hooks';
 
 
 const initialState: ItrainitState = {
     smallDataTrainings : [],
     smallUserTraining : null,
+    arrDaysExpires : [],
     today : CONST.NO_DATA
 };
 
@@ -33,6 +34,10 @@ const trainingSlice = createSlice({
                 state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
                 state.today = Math.round(2 / 9 * 100)
             })
+            .addCase(getArrDaysExpires.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
+                state.arrDaysExpires = action.payload
+            })
+            
     },
 });
 

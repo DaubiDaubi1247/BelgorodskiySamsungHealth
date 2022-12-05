@@ -32,3 +32,18 @@ export const getUserTraining = createAsyncThunk(
         }
     }
 )
+
+export const getArrDaysExpires = createAsyncThunk(
+    "training/getArrDaysExpires",
+   async (id : number, thunkApi) => {
+        try {
+            const response = await trainingAPI.getDataDaysExpires(id);
+            thunkApi.dispatch(setLoading(false))
+            return response.data
+        } catch (error) {
+            thunkApi.dispatch(setLoading(false)); // ---- пока нет сервера прийдется так тестить
+
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+   }
+)

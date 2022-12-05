@@ -1,5 +1,5 @@
 import axios from "axios"
-import { IsmallDataAboutTrainings, ItrainigData } from "./TtrainingAPI"
+import { IDaysData, IsmallDataAboutTrainings, ItrainigData } from "./TtrainingAPI"
 
 
 const trainingAxios = axios.create({
@@ -15,8 +15,8 @@ export const trainingAPI = {
         return trainingAxios.get<ItrainigData>(`${id}`)
     },
 
-    getFullDataAboutTrainings(id : number) {
-        //return trainingAxios.get<>(`${id}`)
+    getDataDaysExpires(id : number) {
+        return trainingAxios.get<IDaysData>(`${id}`)
     }
 
     // registrationUser(accessData : Inputs) {

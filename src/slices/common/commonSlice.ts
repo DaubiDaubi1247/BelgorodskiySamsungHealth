@@ -13,7 +13,6 @@ const commonSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         setLoading: (state, action: PayloadAction<boolean>) => {
-            debugger
             state.isLoading = action.payload;
         },
 

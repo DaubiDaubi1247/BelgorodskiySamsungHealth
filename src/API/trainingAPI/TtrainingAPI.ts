@@ -9,3 +9,16 @@ export interface ItrainigData {
     name : string
     countDays : number
 }
+
+export interface IDaysData {
+    daysData : ArrDaysExpires
+}
+
+export type ArrDaysExpires = Array<DayExercises>
+
+export type DayExercises = Array<Exercises>
+
+type Exercises = {
+    exercises : string
+    countOfRepeats : number
+}
