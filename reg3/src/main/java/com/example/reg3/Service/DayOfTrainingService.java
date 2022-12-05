@@ -26,8 +26,18 @@ public class DayOfTrainingService {
         else {
             return ResponseEntity.status(HttpStatus.OK).body(trainingDays);
         }
+    }
 
+    public ResponseEntity<Object> getTrainingDay(Long trainId, Integer numOfDay) {
+        var trainingDay = dayOfTrainingRepository.
+                findDayOfTrainingByTrainingIdAndNumberOfDay(trainId, numOfDay);
 
+        if (trainingDay == null) {
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("отствует данный день тренеровки");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body(trainingDay);
+        }
     }
 
 }

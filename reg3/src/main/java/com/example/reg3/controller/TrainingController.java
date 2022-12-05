@@ -33,6 +33,12 @@ public class TrainingController {
         return dayOfTrainingService.getTrainingDays(id);
     }
 
+    @GetMapping("dayOfTrain")
+    public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
+                                                 @RequestParam(required =false) Integer numOfDay) {
+        return dayOfTrainingService.getTrainingDay(id, numOfDay);
+    }
+
 
 
 

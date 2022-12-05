@@ -12,10 +12,9 @@ import java.util.List;
 public interface DayOfTrainingRepository
         extends JpaRepository<DayOfTraining, Long> {
 
-//    @Query("SELECT d FROM DayOfTraining d WHERE d.training.id = ?1")
-//    List<DayOfTraining> findTrainingDaysByTrainingId(Long idOfTrainingDay);
-
     List<DayOfTraining> findDayOfTrainingByTrainingId(Long id);
+
+    DayOfTraining findDayOfTrainingByTrainingIdAndNumberOfDay(Long id, Integer numberOfDay);
 
 
 }
