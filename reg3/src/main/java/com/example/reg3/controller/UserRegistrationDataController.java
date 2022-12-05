@@ -1,5 +1,6 @@
-package com.example.reg3.userRegistrationData;
+package com.example.reg3.controller;
 
+import com.example.reg3.Service.UserRegistrationDataService;
 import com.example.reg3.dao.UserRegistrationData;
 import com.example.reg3.requastion.Request;
 import org.springframework.beans.factory.annotation.Autowired;

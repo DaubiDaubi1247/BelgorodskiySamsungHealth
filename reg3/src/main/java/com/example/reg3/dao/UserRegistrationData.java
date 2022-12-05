@@ -1,6 +1,7 @@
 package com.example.reg3.dao;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,9 +29,12 @@ public class UserRegistrationData {
     @Column(name = "is_admin")
     private Boolean isAdmin;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,
+    fetch =  FetchType.LAZY)
     @JoinColumn(name = "user_id",
             referencedColumnName = "user_id")
+    @ToString.Exclude
+    @JsonIgnore
     private User user;
 
 

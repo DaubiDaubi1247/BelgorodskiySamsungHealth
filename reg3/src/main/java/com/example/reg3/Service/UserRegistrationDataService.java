@@ -1,4 +1,4 @@
-package com.example.reg3.userRegistrationData;
+package com.example.reg3.Service;
 
 import com.example.reg3.dao.UserRegistrationData;
 import com.example.reg3.repository.UserRegistrationDataRepository;
@@ -16,7 +16,8 @@ public class UserRegistrationDataService {
 
 
     @Autowired
-    public UserRegistrationDataService(UserRegistrationDataRepository userRepository) {
+    public UserRegistrationDataService(UserRegistrationDataRepository
+                                                   userRepository) {
         this.userRepository = userRepository;
     }
 
