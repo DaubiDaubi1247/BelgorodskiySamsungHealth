@@ -74,7 +74,7 @@ public class UserRegistrationDataService {
     //@Transactional
     public UserRegistrationDataRequest addNewUser(UserRegistrationData usersOfApp) {
         Optional<UserRegistrationData> userOptional =
-                userRepository.findUserByEmail(usersOfApp.getEmail());
+                userRepository.findUserRegistrationDataByEmail(usersOfApp.getEmail());
 
         if (userOptional.isPresent()) {
 
@@ -99,7 +99,7 @@ public class UserRegistrationDataService {
     }
 
     public UserRegistrationDataRequest checkUser(UserRegistrationData usersOfApp) {
-        Optional<UserRegistrationData> userOptional = userRepository.findUserByEmail(usersOfApp.getEmail());
+        Optional<UserRegistrationData> userOptional = userRepository.findUserRegistrationDataByEmail(usersOfApp.getEmail());
 
         if (userOptional.isEmpty()) {
             return new UserRegistrationDataRequest(1, "user with email " +
