@@ -21,7 +21,8 @@ public class TrainingController {
 
     @Autowired
     public TrainingController(TrainingService trainingService,
-                              DayOfTrainingService dayOfTraining, UserService userService) {
+                              DayOfTrainingService dayOfTraining,
+                              UserService userService) {
         this.trainingService = trainingService;
         this.dayOfTrainingService = dayOfTraining;
         this.userService = userService;

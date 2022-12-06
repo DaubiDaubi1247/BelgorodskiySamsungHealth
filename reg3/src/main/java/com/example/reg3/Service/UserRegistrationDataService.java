@@ -30,7 +30,8 @@ public class UserRegistrationDataService {
 
     {
         Properties props = new Properties();
-        try (InputStream in = Files.newInputStream(Paths.get("reg3/src/main/resources/encryptionAlgorithm.properties"))) {
+        try (InputStream in = Files.newInputStream
+                (Paths.get("reg3/src/main/resources/encryptionAlgorithm.properties"))) {
             props.load(in);
 
             String keyOfCipher = props.getProperty("key");
@@ -65,6 +66,14 @@ public class UserRegistrationDataService {
     public UserRegistrationDataService(UserRegistrationDataRepository
                                                userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public String cipherStrWithLocalKey(String password) {
+        try {
+            return new String(cipher.doFinal(password.getBytes()));
+        } catch (IllegalBlockSizeException | BadPaddingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<UserRegistrationData> getUsers() {
