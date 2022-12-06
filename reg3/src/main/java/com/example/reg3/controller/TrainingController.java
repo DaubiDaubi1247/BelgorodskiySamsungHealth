@@ -47,13 +47,4 @@ public class TrainingController {
     public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {
         return userService.getProgressOfUser(id);
     }
-
-
-
-
-
-
-
-
-
 }

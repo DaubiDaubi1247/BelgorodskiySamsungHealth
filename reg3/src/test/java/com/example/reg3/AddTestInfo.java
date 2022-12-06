@@ -122,7 +122,7 @@ public class AddTestInfo {
 
 
     @Test
-    public void addUsers() {
+    public void addTrainings() {
         var training1 = trainingRepository.findById(1L).get();
         var training2 = trainingRepository.findById(2L).get();
 
@@ -144,12 +144,11 @@ public class AddTestInfo {
         dayOfTrainingRepository.saveAll(dayOfTrainingsPower);
         dayOfTrainingRepository.saveAll(dayOfTrainingsFloppy);
 
+    }
 
-
-
-
-
-
+    @Test
+    public void addUsers() {
+        userRegistrationData.saveAll(userRegistrationDataList);
     }
 
 
