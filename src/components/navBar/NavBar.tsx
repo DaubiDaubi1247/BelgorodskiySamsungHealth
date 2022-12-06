@@ -7,7 +7,7 @@ interface INavBarProps {
 
 const NavBar: React.FunctionComponent<INavBarProps> = (props) => {
   return (
-    <div className="h-100">
+    <div className="h-100 align-self-start">
         <NavLinkConfig path={main} text='Главная'/>
         <NavLinkConfig path={MainRoutes.training} text='Мои тренировки'/>
     </div>

@@ -58,9 +58,10 @@ export const authSlice = createSlice({
                 }
             })
             .addCase(authUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
-                
+                debugger
                 state.loginError = action.payload.message
                 if (action.payload.status === ResponseStatus.SUCCESS) {
+                    debugger
                     state.accessData = action.payload.usersOfApp
                     state.isAuth = true
                 }

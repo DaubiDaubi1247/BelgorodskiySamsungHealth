@@ -6,8 +6,10 @@ export type TrainingDataArr = Array<ItrainigData>
 
 export interface ItrainigData {
     id : number
-    name : string
-    countDays : number
+    label : string
+    countOfDays : number
+    description : string
+    percentExecution? : number
 }
 
 export interface IDaysData {

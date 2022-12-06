@@ -26,13 +26,13 @@ const trainingSlice = createSlice({
 
     extraReducers: (builder) => {                                                        //для санок!!!!
         builder
-            .addCase(getSmallDataAboutTrainings.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutTrainings>) => {
-                state.smallDataTrainings = action.payload.trainingArr
+            .addCase(getSmallDataAboutTrainings.fulfilled.type, (state, action: PayloadAction<TrainingDataArr>) => {
+                state.smallDataTrainings = action.payload
             })
             .addCase(getUserTraining.fulfilled.type, (state, action: PayloadAction<ItrainigData>) => {
-                //state.smallUserTraining = action.payload
-                state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
-                state.today = Math.round(2 / 9 * 100)
+                state.smallUserTraining = action.payload
+                // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
+                // state.today = Math.round(2 / 9 * 100)
             })
             .addCase(getArrDaysExpires.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
                 state.arrDaysExpires = action.payload

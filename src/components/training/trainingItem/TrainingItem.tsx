@@ -12,7 +12,7 @@ interface ITrainingProps extends ItrainigData {
     isUserTraining : boolean
 }
 
-const TrainingItem: React.FunctionComponent<ITrainingProps> = ({name, countDays, isUserTraining, id}) => {
+const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDays, isUserTraining, id}) => {
     let percentAction = useAppSelector(state => state.training.today)
     
     let dispatch = useAppDispatch();
@@ -22,8 +22,8 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({name, countDays,
     return (
         <Card style={{ width: '37rem', margin: "0 auto" }}>
           <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countDays}</Card.Subtitle>
+            <Card.Title>{label}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
             <Card.Text>
               Процент выполнения
             </Card.Text>
@@ -31,7 +31,7 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({name, countDays,
               <ProgressBar animated style={{height : "27px"}} now={percentAction} label={`${percentAction}%`}/>
             </Card.Text>
             {isUserTraining ? <Button>Посмотреть упражнения на сегодня</Button> : <Button onClick={onClickHandler}>Посмотреть все упражения</Button>}
-            <DayList/>
+            {/* <DayList/> */}
           </Card.Body>
         </Card>
       );

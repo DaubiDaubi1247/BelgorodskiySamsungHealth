@@ -7,6 +7,8 @@ import TrainingItem from './trainingItem/TrainingItem';
 import SubscribeTraining from './subscribeTraining/SubscribeTrainig';
 import { setLoading } from '../../slices/common/commonSlice';
 import Preloader from '../../common/preloader/Preloader';
+import { useNavigate } from 'react-router-dom';
+import { AuthRoutes } from '../../Routes/Routes';
 
 interface ITrainingContainerProps {
 }
@@ -18,11 +20,18 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
     let isLoading = useAppSelector(state => state.common.isLoading)
 
     let dispatch = useAppDispatch()
-    
+
+    let isAuth: boolean = useAppSelector(state => state.auth.isAuth)
+
+    let navigate = useNavigate();
     useEffect(() => {
-        if (1) {
+        if (!isAuth) navigate(AuthRoutes.authRoute, {replace : true})
+    })
+
+    useEffect(() => {
+        if (userId) {
             dispatch(setLoading(true))
-            dispatch(getUserTraining(1))
+            dispatch(getUserTraining(userId))
         }
     },[])
 
@@ -33,4 +42,5 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
     );
 };
 
-export default TrainingContainer;
+// export default WithAuthRedirect(TrainingContainer);
+export default TrainingContainer

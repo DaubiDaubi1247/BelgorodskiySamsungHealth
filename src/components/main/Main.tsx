@@ -1,25 +1,23 @@
-import * as React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { redirect, Route, Routes, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
-import { AuthRoutes } from '../../Routes/Routes';
-import NavBar from '../navBar/NavBar';
+import { AuthRoutes, MainRoutes } from '../../Routes/Routes';
+
 
 interface IMainProps {
 }
 
-const Main: React.FunctionComponent<IMainProps> = (props) => {
-
+const MainContainer: React.FunctionComponent<IMainProps> = (props) => {
     let isAuth = useAppSelector(state => state.auth.isAuth)
+    const navigate = useNavigate()
 
-    let navigate = useNavigate();
+    useEffect(() => {
+        if (!isAuth) navigate(AuthRoutes.authRoute, {replace : true})
+    })
 
-    //if (!isAuth) navigate(AuthRoutes.authRoute)
-    debugger
-  return (
-    <div className='d-flex'>
-       
-    </div>
-  );
+    return (
+        <></>
+    );
 };
 
-export default Main;
+export default MainContainer;
