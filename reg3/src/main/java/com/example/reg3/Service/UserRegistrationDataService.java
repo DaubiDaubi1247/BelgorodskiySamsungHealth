@@ -28,7 +28,7 @@ public class UserRegistrationDataService {
     public UserRegistrationDataRequest addNewUser(UserRegistrationData usersOfApp)
             throws IllegalAccessException {
         Optional<UserRegistrationData> userOptional =
-                userRepository.findUsertByEmail(usersOfApp.getEmail());
+                userRepository.findUserByEmail(usersOfApp.getEmail());
 
         if (userOptional.isPresent()) {
             return new UserRegistrationDataRequest
@@ -43,7 +43,7 @@ public class UserRegistrationDataService {
     public UserRegistrationDataRequest checkUser(UserRegistrationData usersOfApp)
             throws IllegalAccessException {
         Optional<UserRegistrationData> userOptional =
-                userRepository.findUsertByEmail(usersOfApp.getEmail());
+                userRepository.findUserByEmail(usersOfApp.getEmail());
 
         if (!userOptional.isPresent()) {
             return new UserRegistrationDataRequest
