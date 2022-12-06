@@ -10,6 +10,8 @@ public interface ProgressOfUser {
 
     Integer getCountOfDays();
 
+    String getDescription();
+
     Integer getDayOfTraining();
 
 }

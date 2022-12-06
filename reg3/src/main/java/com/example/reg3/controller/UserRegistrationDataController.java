@@ -25,14 +25,12 @@ public class UserRegistrationDataController {
     }
 
     @PostMapping("registration")
-    public UserRegistrationDataRequest registrationUser(@RequestBody UserRegistrationData user)
-            throws IllegalAccessException {
+    public UserRegistrationDataRequest registrationUser(@RequestBody UserRegistrationData user) {
         return userRegistrationDataService.addNewUser(user);
     }
 
     @PostMapping("authentication")
-    public UserRegistrationDataRequest authenticationUser(@RequestBody UserRegistrationData user)
-            throws IllegalAccessException {
+    public UserRegistrationDataRequest authenticationUser(@RequestBody UserRegistrationData user) {
 
         return userRegistrationDataService.checkUser(user);
     }

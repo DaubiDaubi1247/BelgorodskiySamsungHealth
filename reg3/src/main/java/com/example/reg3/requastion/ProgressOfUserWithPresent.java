@@ -14,21 +14,23 @@ import java.util.Optional;
 @NoArgsConstructor
 public class ProgressOfUserWithPresent {
 
-    Long idOfTrain;
+    Long id;
 
-    String labelOfTrain;
+    String label;
 
     Integer countOfDays;
 
+    String description;
     @JsonIgnore
     Integer dayOfTraining;
 
     Long  presentOfProgress;
 
     public ProgressOfUserWithPresent(ProgressOfUser progress) {
-        idOfTrain = progress.getId();
-        labelOfTrain = progress.getLabel();
+        id = progress.getId();
+        label = progress.getLabel();
         countOfDays = progress.getCountOfDays();
+        description = progress.getDescription();
         dayOfTraining = progress.getDayOfTraining();
         presentOfProgress =  Math.round(((countOfDays) * 1. - 1) / dayOfTraining * 100);
     }

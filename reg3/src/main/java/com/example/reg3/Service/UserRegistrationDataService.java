@@ -71,28 +71,30 @@ public class UserRegistrationDataService {
         return userRepository.findAll();
     }
 
-    @Transactional
+    //@Transactional
     public UserRegistrationDataRequest addNewUser(UserRegistrationData usersOfApp) {
         Optional<UserRegistrationData> userOptional =
                 userRepository.findUserByEmail(usersOfApp.getEmail());
 
         if (userOptional.isPresent()) {
+
             return new UserRegistrationDataRequest
                     (1, "email taken", usersOfApp);
         } else {
             try {
                 String userPass = usersOfApp.getPassword();
-                usersOfApp.setPassword(new String(cipher.doFinal(userPass.getBytes())));
+                usersOfApp.setPassword
+                        (new String(cipher.doFinal(userPass.getBytes())));
                 usersOfApp = userRepository.save(usersOfApp);
                 usersOfApp.setPassword(userPass);
 
                 return new UserRegistrationDataRequest
-                        (0, "registration was successful", usersOfApp);
+                        (0, "registration was successful",
+                                usersOfApp);
 
             } catch (IllegalBlockSizeException | BadPaddingException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
 

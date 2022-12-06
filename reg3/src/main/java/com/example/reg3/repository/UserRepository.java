@@ -13,13 +13,5 @@ import java.util.Optional;
 public interface UserRepository
         extends JpaRepository<User, Long> {
 
-    @Query("SELECT train.id as id, " +
-            " train.label as label, " +
-            " train.countOfDays as countOfDays, " +
-            " prog.dayOfTraining as dayOfTraining " +
-            "FROM User u " +
-            "JOIN u.userProgresInTraining prog " +
-            "JOIN prog.trainingId train " +
-            "WHERE u.id = ?1")
-    List<ProgressOfUser> findProgressOfUser(Long id);
+
 }
