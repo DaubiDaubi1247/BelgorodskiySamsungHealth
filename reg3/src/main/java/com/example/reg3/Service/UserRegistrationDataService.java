@@ -119,7 +119,7 @@ public class UserRegistrationDataService {
         }
 
         usersOfAppOnBD.setPassword(userPass);
-        return new UserRegistrationDataRequest(0, "authentication was successful", usersOfApp);
+        return new UserRegistrationDataRequest(0, "authentication was successful", usersOfAppOnBD);
     }
 
 
