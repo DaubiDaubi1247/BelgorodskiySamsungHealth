@@ -17,9 +17,8 @@ class UserRepositoryTest {
     @Test
     void findProgressOfUser() {
 
-        var progres =
-                (userRepository.findProgressOfUser(1L));
-
+//        var progres = (userRepository.findProgressOfUser(1L));
+//
 
     }
 }
