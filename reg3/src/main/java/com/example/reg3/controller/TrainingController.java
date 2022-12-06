@@ -3,6 +3,7 @@ package com.example.reg3.controller;
 
 import com.example.reg3.Service.DayOfTrainingService;
 import com.example.reg3.Service.TrainingService;
+import com.example.reg3.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,14 @@ public class TrainingController {
 
     private final DayOfTrainingService dayOfTrainingService;
 
+    private final UserService userService;
+
     @Autowired
     public TrainingController(TrainingService trainingService,
-                              DayOfTrainingService dayOfTraining) {
+                              DayOfTrainingService dayOfTraining, UserService userService) {
         this.trainingService = trainingService;
         this.dayOfTrainingService = dayOfTraining;
+        this.userService = userService;
     }
 
     @GetMapping("LightBackground")
@@ -37,6 +41,11 @@ public class TrainingController {
     public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
                                                  @RequestParam(required =false) Integer numOfDay) {
         return dayOfTrainingService.getTrainingDay(id, numOfDay);
+    }
+
+    @GetMapping("userTrainingProgress")
+    public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {
+        return userService.getProgressOfUser(id);
     }
 
 

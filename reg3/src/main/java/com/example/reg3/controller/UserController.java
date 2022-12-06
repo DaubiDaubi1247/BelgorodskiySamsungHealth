@@ -18,9 +18,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("userTrainingProgress")
-    public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {
-        return userService.getProgressOfUser(id);
-    }
+
 
 }
