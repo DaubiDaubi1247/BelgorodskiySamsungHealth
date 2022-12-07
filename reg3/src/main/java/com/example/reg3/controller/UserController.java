@@ -2,6 +2,7 @@ package com.example.reg3.controller;
 
 
 import com.example.reg3.Service.UserService;
+import com.example.reg3.dao.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,13 @@ public class UserController {
         return userService.addTrain(userId, trainId);
     }
 
+    @PostMapping("setUserData")
+    public ResponseEntity<Object> setUserData(@RequestBody User user) {
+        return userService.setUserData(user);
+    }
 
-
-
+    @GetMapping("getUserData")
+    public ResponseEntity<Object> getUserData(@RequestParam(required =false) Long userId) {
+        return userService.getUserData(userId);
+    }
 }

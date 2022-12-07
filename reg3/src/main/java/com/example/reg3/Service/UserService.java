@@ -81,7 +81,7 @@ public class UserService {
             var train = trainingRepository.getReferenceById(trainId);
 
             var progress = new UserProgressInTraining();
-            progress.setDayOfTraining(0);
+            progress.setDayOfTraining(1);
             progress.setTrainingId(train);
 
              progress = userProgressInTrainingRepository.save(progress);
@@ -93,5 +93,31 @@ public class UserService {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь или тренеровки с таким id не найдено");
         }
+    }
+
+    public ResponseEntity<Object> setUserData(User updateUserdata) {
+        try {
+            var user = userRepository.getReferenceById(updateUserdata.getId());
+
+            user.setName(updateUserdata.getName());
+            user.setWeight(updateUserdata.getWeight());
+            user.setHeight(updateUserdata.getHeight());
+
+            userRepository.save(user);
+            return ResponseEntity.status(HttpStatus.OK).body("данные пользователя успешно обновлены");
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдено");
+        }
+    }
+
+    public ResponseEntity<Object> getUserData(Long userId) {
+
+        var userInfo = userRepository.findUserById(userId);
+
+        if (userInfo.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдено");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(userInfo.get());
     }
 }
