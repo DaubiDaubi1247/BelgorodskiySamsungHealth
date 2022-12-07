@@ -10,7 +10,7 @@ const initialState: ItrainitState = {
     smallDataTrainings : [],
     smallUserTraining : null,
     arrDaysExpires : [],
-    today : CONST.NO_DATA
+    today : CONST.NO_DATA,
 };
 
 const trainingSlice = createSlice({

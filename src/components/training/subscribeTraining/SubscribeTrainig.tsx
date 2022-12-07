@@ -18,12 +18,10 @@ const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = (pro
 
     const [show, setShow] = useState(false)
 
-    const setShowWrapper = (a : boolean) => setShow(true)
-
     const dispatch = useAppDispatch()
 
     const handleShowAndClose = () => {
-        setShow(true);
+        setShow(!show);
         dispatch(getSmallDataAboutTrainings());
     }
 
@@ -33,7 +31,7 @@ const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = (pro
             <Button variant="primary" onClick={handleShowAndClose}>
                 Просмотреть список тренировок
             </Button>
-            <ModalAllTraining show={show} setShow={setShowWrapper} trainigCardArr={trainingItemArr}/>
+            <ModalAllTraining show={show} setShow={setShow} trainigCardArr={trainingItemArr}/>
         </div>
     )
 };

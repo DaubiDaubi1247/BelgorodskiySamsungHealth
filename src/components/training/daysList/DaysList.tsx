@@ -12,9 +12,9 @@ const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisib
     const getAllTrainingsDay = () => trainingsArr.map(day => <DayDescription dayData={day} />)
 
     return (isVisible ? 
-        <>
+        <div className='mt-4'>
             {getAllTrainingsDay()}
-        </>
+        </div>
         : <></>
     );
 };

@@ -17,8 +17,7 @@ interface ITrainingProps extends ItrainigData {
 
 const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDays, isUserTraining, id}) => {
 
-    const [isVisible, setVisible] = useState(true);
-    const [isFirstClick, setFirstclick] = useState(true);
+    const [isVisible, setVisible] = useState(false);
     let percentAction = useAppSelector(state => state.training.today)
     
     let dispatch = useAppDispatch();
@@ -26,8 +25,7 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
     const onClickHandler = () => {
         setVisible(!isVisible)
 
-        if (isFirstClick) dispatch(getArrDaysExpires(id))
-        setFirstclick(false)
+        if (!isVisible) dispatch(getArrDaysExpires(id))
     }
     const subscribeTraininghandler = () => 1
     return (
@@ -40,7 +38,7 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
                 <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
                 {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler}>+</Button>}
             </div>
-            <DayListContainer isVisible={isVisible}/>
+            <DayListContainer  isVisible={isVisible}/>
           </Card.Body>
         </Card>
       );
