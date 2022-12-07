@@ -19,14 +19,17 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
     let dispatch = useAppDispatch();
 
     const onClickHandler = () => dispatch(getArrDaysExpires(id))
-
+    const subscribeTraininghandler = () => 1
     return (
-        <Card style={{ width: '37rem', margin: "0 auto" }}>
+        <Card style={{ width: '100%', margin: "0 auto" }}>
           <Card.Body>
             <Card.Title>{label}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
             <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>
-            <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
+            <div className="d-flex justify-content-between">
+                <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
+                {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler}>+</Button>}
+            </div>
             {/* <DayList/> */}
           </Card.Body>
         </Card>

@@ -1,6 +1,6 @@
 export type Inputs = {
     email: string,
-    password: string,
+    password: string,   // убрать
     login: string,
     id: number
 };
