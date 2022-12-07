@@ -1,11 +1,11 @@
 package com.example.reg3.Service;
 
+import com.example.reg3.dao.User;
 import com.example.reg3.dao.UserRegistrationData;
 import com.example.reg3.repository.UserRegistrationDataRepository;
 import com.example.reg3.requastion.UserRegistrationDataRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -80,31 +80,41 @@ public class UserRegistrationDataService {
         return userRepository.findAll();
     }
 
-    //@Transactional
+
     public UserRegistrationDataRequest addNewUser(UserRegistrationData usersOfApp) {
         Optional<UserRegistrationData> userOptional =
                 userRepository.findUserRegistrationDataByEmail(usersOfApp.getEmail());
 
         if (userOptional.isPresent()) {
 
-            return new UserRegistrationDataRequest
-                    (1, "email taken", usersOfApp);
+            return new UserRegistrationDataRequest(1, "email taken", usersOfApp);
         } else {
             try {
-                String userPass = usersOfApp.getPassword();
-                usersOfApp.setPassword
-                        (new String(cipher.doFinal(userPass.getBytes())));
-                usersOfApp = userRepository.save(usersOfApp);
-                usersOfApp.setPassword(userPass);
+                usersOfApp = saveNewUser(usersOfApp);
 
-                return new UserRegistrationDataRequest
-                        (0, "registration was successful",
-                                usersOfApp);
-
+                return new UserRegistrationDataRequest(0, "registration was successful", usersOfApp);
             } catch (IllegalBlockSizeException | BadPaddingException e) {
                 throw new RuntimeException(e);
             }
-        }///agbdfgadfhg
+        }
+    }
+
+    private UserRegistrationData saveNewUser(UserRegistrationData usersOfApp)
+            throws IllegalBlockSizeException, BadPaddingException {
+
+        String userPass = usersOfApp.getPassword();
+        usersOfApp.setPassword(new String(cipher.doFinal(userPass.getBytes())));
+
+        User user = new User();
+        usersOfApp.setUser(user);
+
+        usersOfApp = userRepository.save(usersOfApp);
+        usersOfApp.setPassword(userPass);
+        usersOfApp.setId(usersOfApp.getUser().getId());
+
+
+
+        return usersOfApp;
     }
 
     public UserRegistrationDataRequest checkUser(UserRegistrationData usersOfApp) {
@@ -114,7 +124,6 @@ public class UserRegistrationDataService {
             return new UserRegistrationDataRequest(1, "user with email " +
                             usersOfApp.getEmail() + " doesn't exist", usersOfApp);
         }
-
         UserRegistrationData usersOfAppOnBD = userOptional.get();
 
         String userPass = usersOfApp.getPassword();
@@ -128,10 +137,7 @@ public class UserRegistrationDataService {
         }
 
         usersOfAppOnBD.setPassword(userPass);
-        //usersOfAppOnBD.setId(usersOfAppOnBD.getUser().getId());
-        return new UserRegistrationDataRequest(0,
-
-                "authentication was successful", usersOfAppOnBD);
+        return new UserRegistrationDataRequest(0, "authentication was successful", usersOfAppOnBD);
     }
 
 

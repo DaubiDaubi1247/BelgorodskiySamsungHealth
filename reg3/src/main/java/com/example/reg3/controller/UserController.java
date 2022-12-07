@@ -18,6 +18,13 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("updayteDayOfTrain")
+    public ResponseEntity<Object> updateDayOfTraining
+            (@RequestParam(required =false) Long userId) {
+        return userService.addProgressOfTrain(userId);
+
+    }
+
 
 
 }

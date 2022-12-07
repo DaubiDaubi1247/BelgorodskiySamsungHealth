@@ -9,6 +9,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "users_of_app")
 public class User {
     @Id
@@ -16,7 +17,7 @@ public class User {
     @Column(name = "user_id", nullable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "weight")
@@ -24,6 +25,11 @@ public class User {
 
     @Column(name = "height")
     private Integer height;
+
+    @Column(name = "completedTrainers")
+    private Integer countOfCompletedTrainers;
+
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_progress_in_training_id",
@@ -39,5 +45,14 @@ public class User {
         this.weight = weight;
         this.height = height;
         this.userProgresInTraining = userProgresInTraining;
+    }
+
+    public void incCountOfTrainigs() {
+        if (countOfCompletedTrainers == null) throw new RuntimeException("отсутстуют програма тренеровок");
+
+        if (!userProgresInTraining.isComplite()){
+            countOfCompletedTrainers++;
+        }
+
     }
 }

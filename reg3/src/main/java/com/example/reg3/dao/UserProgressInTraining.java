@@ -4,6 +4,7 @@ package com.example.reg3.dao;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -32,4 +33,9 @@ public class UserProgressInTraining {
         this.dayOfTraining = dayOfTraining;
         this.trainingId = trainingId;
     }
+
+    public boolean isComplite() {
+        return Objects.equals(getDayOfTraining(), getTrainingId().getCountOfDays());
+    }
+
 }
