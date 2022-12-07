@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { AuthRoutes } from '../../Routes/Routes';
 
-const withAuthRedicrect = (Component : any) => (props : any) => {
+const withLoading = (Component : any) => (props : any) => {
     const navigate = useNavigate()
     let isAuth = useAppSelector(state => state.auth.isAuth);
 
@@ -15,4 +15,4 @@ const withAuthRedicrect = (Component : any) => (props : any) => {
     return <Component {...props} />;
 };
 
-export default withAuthRedicrect
+export default withLoading

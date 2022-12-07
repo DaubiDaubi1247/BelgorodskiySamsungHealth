@@ -13,17 +13,17 @@ interface ISubscribeTrainingProps {
 const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = (props) => {
 
     let smallDataAboutTRainings = useAppSelector(state => state.training.smallDataTrainings)
+
     const trainingItemArr = smallDataAboutTRainings.map(el => <TrainingItem {...el} isUserTraining={false}/>)
 
     const [show, setShow] = useState(false)
+
+    const setShowWrapper = (a : boolean) => setShow(true)
+
     const dispatch = useAppDispatch()
 
-    const submitHandler = () => {
-
-    }
-
     const handleShowAndClose = () => {
-        setShow(!show);
+        setShow(true);
         dispatch(getSmallDataAboutTrainings());
     }
 
@@ -33,7 +33,7 @@ const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = (pro
             <Button variant="primary" onClick={handleShowAndClose}>
                 Просмотреть список тренировок
             </Button>
-            <ModalAllTraining show={show} setShow={setShow} trainigCardArr={trainingItemArr}/>
+            <ModalAllTraining show={show} setShow={setShowWrapper} trainigCardArr={trainingItemArr}/>
         </div>
     )
 };

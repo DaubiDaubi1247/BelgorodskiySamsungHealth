@@ -16,11 +16,20 @@ export interface IDaysData {
     daysData : ArrDaysExpires
 }
 
-export type ArrDaysExpires = Array<DayExercises>
+export type ArrDaysExpires = Array<IdayDescription>
 
 export type DayExercises = Array<Exercises>
 
-type Exercises = {
-    exercises : string
-    countOfRepeats : number
+export interface IdayDescription {
+    numberOfDay : number
+    sets : DayExercises
+}
+
+export type Exercises = {
+    restTimeInSec : string
+    numberOfRepetitions : number
+    exercise : {
+        label : string
+        description : string
+    }
 }

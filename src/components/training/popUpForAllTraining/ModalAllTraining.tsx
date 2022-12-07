@@ -12,7 +12,6 @@ interface Iprops {
 const ModalAllTraining: React.FC<Iprops> = ({ show, setShow, trainigCardArr }) => {
 
     const handleShowAndClose = () => setShow(!show);
-
     return (
         <>
             <Modal show={show} onHide={handleShowAndClose}>

@@ -8,17 +8,27 @@ import DayList from './../daysList/DaysList';
 import { useAppDispatch } from './../../../app/hooks';
 import { getArrDaysExpires } from './../../../slices/training/thunk';
 import Progressbar from './progressBar/progressbar';
+import DayListContainer from './../daysList/dayListContainer/DayListContainer';
+import { setLoading } from '../../../slices/common/commonSlice';
 
 interface ITrainingProps extends ItrainigData {
     isUserTraining : boolean
 }
 
 const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDays, isUserTraining, id}) => {
+
+    const [isVisible, setVisible] = useState(true);
+    const [isFirstClick, setFirstclick] = useState(true);
     let percentAction = useAppSelector(state => state.training.today)
     
     let dispatch = useAppDispatch();
 
-    const onClickHandler = () => dispatch(getArrDaysExpires(id))
+    const onClickHandler = () => {
+        setVisible(!isVisible)
+
+        if (isFirstClick) dispatch(getArrDaysExpires(id))
+        setFirstclick(false)
+    }
     const subscribeTraininghandler = () => 1
     return (
         <Card style={{ width: '100%', margin: "0 auto" }}>
@@ -30,7 +40,7 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
                 <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
                 {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler}>+</Button>}
             </div>
-            {/* <DayList/> */}
+            <DayListContainer isVisible={isVisible}/>
           </Card.Body>
         </Card>
       );

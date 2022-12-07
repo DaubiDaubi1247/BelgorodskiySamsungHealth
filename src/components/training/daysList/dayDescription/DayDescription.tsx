@@ -1,18 +1,21 @@
 import * as React from 'react';
 import { Dropdown } from 'react-bootstrap';
+import { DayExercises } from '../../../../API/trainingAPI/TtrainingAPI';
+import { IdayDescription } from './../../../../API/trainingAPI/TtrainingAPI';
+import ExcercisesInfo from './exerciseInfo/ExcercisesInfo';
 
 interface IDayDescriptionProps {
-    exercisesDayArr : Array<any>
+    dayData : IdayDescription
 }
 
-const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({exercisesDayArr}) => {
+const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData}) => {
 
-    const getAllexercisesForDay = () => exercisesDayArr.map(exercises => <Dropdown.Item>{exercises}</Dropdown.Item>)
+    const getAllexercisesForDay = () => dayData.sets.map(exercises => <Dropdown.Item><ExcercisesInfo {...exercises}/></Dropdown.Item>)
 
     return (
         <Dropdown>
             <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                Dropdown Button
+                День № {dayData.numberOfDay}
             </Dropdown.Toggle>
 
             <Dropdown.Menu variant="dark">
