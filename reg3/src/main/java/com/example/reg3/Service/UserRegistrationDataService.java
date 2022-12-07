@@ -128,8 +128,10 @@ public class UserRegistrationDataService {
         }
 
         usersOfAppOnBD.setPassword(userPass);
-        usersOfAppOnBD.setId(usersOfAppOnBD.getUser().getId());
-        return new UserRegistrationDataRequest(0, "authentication was successful", usersOfAppOnBD);
+        //usersOfAppOnBD.setId(usersOfAppOnBD.getUser().getId());
+        return new UserRegistrationDataRequest(0,
+
+                "authentication was successful", usersOfAppOnBD);
     }
 
 
