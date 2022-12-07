@@ -4,6 +4,7 @@ package com.example.reg3.Service;
 import com.example.reg3.dao.User;
 import com.example.reg3.dao.UserProgressInTraining;
 import com.example.reg3.repository.TrainingRepository;
+import com.example.reg3.repository.UserProgressInTrainingRepository;
 import com.example.reg3.repository.UserRepository;
 import com.example.reg3.requastion.ProgressOfUserWithPresent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,15 @@ public class UserService {
     private final TrainingRepository trainingRepository;
     private final UserRepository userRepository;
 
+    private final UserProgressInTrainingRepository userProgressInTrainingRepository;
+
 
     @Autowired
     public UserService(TrainingRepository trainingRepository,
-                       UserRepository userRepository) {
+                       UserRepository userRepository, UserProgressInTrainingRepository userProgressInTrainingRepository) {
         this.trainingRepository = trainingRepository;
         this.userRepository = userRepository;
+        this.userProgressInTrainingRepository = userProgressInTrainingRepository;
     }
 
 
@@ -59,7 +63,7 @@ public class UserService {
 
                 userRepository.save(user);
                 return ResponseEntity.status(HttpStatus.OK).body("Пользователь завершил программу тренеровок");
-            }else {
+            } else {
                 user.incCountOfTrainigs();
                 userRepository.save(user);
                 return ResponseEntity.status(HttpStatus.OK)
@@ -71,4 +75,23 @@ public class UserService {
     }
 
 
+    public ResponseEntity<Object> addTrain(Long userId, Long trainId) {
+        try {
+            var user = userRepository.getReferenceById(userId);
+            var train = trainingRepository.getReferenceById(trainId);
+
+            var progress = new UserProgressInTraining();
+            progress.setDayOfTraining(0);
+            progress.setTrainingId(train);
+
+             progress = userProgressInTrainingRepository.save(progress);
+
+            user.setUserProgresInTraining(progress);
+            userRepository.save(user);
+
+            return ResponseEntity.status(HttpStatus.OK).body("пользователь подписан на новую тренеровку");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь или тренеровки с таким id не найдено");
+        }
+    }
 }

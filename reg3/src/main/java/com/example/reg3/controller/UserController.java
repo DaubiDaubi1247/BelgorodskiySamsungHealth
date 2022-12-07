@@ -22,8 +22,14 @@ public class UserController {
     public ResponseEntity<Object> updateDayOfTraining
             (@RequestParam(required =false) Long userId) {
         return userService.addProgressOfTrain(userId);
-
     }
+
+    @GetMapping("setTrainToUser")
+    public ResponseEntity<Object> addTrainToUser(@RequestParam(required =false) Long userId,
+                                                 @RequestParam(required =false) Long trainId) {
+        return userService.addTrain(userId, trainId);
+    }
+
 
 
 
