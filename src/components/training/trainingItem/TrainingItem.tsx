@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap';
 import DayList from './../daysList/DaysList';
 import { useAppDispatch } from './../../../app/hooks';
 import { getArrDaysExpires } from './../../../slices/training/thunk';
+import Progressbar from './progressBar/progressbar';
 
 interface ITrainingProps extends ItrainigData {
     isUserTraining : boolean
@@ -24,13 +25,8 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
           <Card.Body>
             <Card.Title>{label}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
-            <Card.Text>
-              Процент выполнения
-            </Card.Text>
-            <Card.Text >
-              <ProgressBar animated style={{height : "27px"}} now={percentAction} label={`${percentAction}%`}/>
-            </Card.Text>
-            {isUserTraining ? <Button>Посмотреть упражнения на сегодня</Button> : <Button onClick={onClickHandler}>Посмотреть все упражения</Button>}
+            <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>
+            <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
             {/* <DayList/> */}
           </Card.Body>
         </Card>

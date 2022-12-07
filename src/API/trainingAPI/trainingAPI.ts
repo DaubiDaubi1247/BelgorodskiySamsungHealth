@@ -19,7 +19,4 @@ export const trainingAPI = {
         return trainingAxios.get<IDaysData>(`/daysOfTrain?id=${trainingId}`)
     }
 
-    // registrationUser(accessData : Inputs) {
-    //     return trainingAxios.post<IResponse>("/hole/registration", accessData)
-    // }
 }
