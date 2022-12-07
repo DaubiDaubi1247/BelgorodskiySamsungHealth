@@ -148,7 +148,14 @@ public class AddTestInfo {
 
     @Test
     public void addUsers() {
-        userRegistrationData.saveAll(userRegistrationDataList);
+        var user = new User();
+        user.setId(900L);
+
+        var userRegistrationData1 = new UserRegistrationData();
+        userRegistrationData1.setUser(user);
+        userRegistrationData1.setId(900L);
+
+
     }
 
 

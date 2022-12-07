@@ -111,14 +111,12 @@ public class AddInformationController {
 
 
     static List<User> userList = List.of(
-            new User("Саня", 68.23f,
-                    null, userProgressInTrainings.get(1)),
+            new User( "Саня", 68.23f,
+                    null, userProgressInTrainings.get(1),0 ),
             new User("Александр", 76.24f,
-                    178, userProgressInTrainings.get(0)),
+                    178, userProgressInTrainings.get(0), 1),
             new User("Влад", 76.24f,
-                    178, null)
-
-
+                    178, null, 5)
     );
 
 

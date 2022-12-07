@@ -35,7 +35,7 @@ public class UserProgressInTraining {
     }
 
     public boolean isComplite() {
-        return Objects.equals(getDayOfTraining(), getTrainingId().getCountOfDays());
+        return getDayOfTraining() >= getTrainingId().getCountOfDays();
     }
 
 }

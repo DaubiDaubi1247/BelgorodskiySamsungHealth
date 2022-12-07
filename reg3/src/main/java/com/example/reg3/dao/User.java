@@ -40,11 +40,13 @@ public class User {
     public User(String name,
                 Float weight,
                 Integer height,
-                UserProgressInTraining userProgresInTraining) {
+                UserProgressInTraining userProgresInTraining,
+                Integer countOfCompletedTrainers) {
         this.name = name;
         this.weight = weight;
         this.height = height;
         this.userProgresInTraining = userProgresInTraining;
+        this.countOfCompletedTrainers = countOfCompletedTrainers;
     }
 
     public void incCountOfTrainigs() {
