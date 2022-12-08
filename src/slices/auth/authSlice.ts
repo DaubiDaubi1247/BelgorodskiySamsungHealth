@@ -51,19 +51,19 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {                                                        //для санок!!!!
         builder
             .addCase(registrationUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
-                state.registrationError = action.payload.message
                 if (action.payload.status === ResponseStatus.SUCCESS) {
                     state.accessData = action.payload.usersOfApp
                     state.isAuth = true
+                } else {
+                    state.registrationError = action.payload.message                    
                 }
             })
             .addCase(authUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
-                debugger
-                state.loginError = action.payload.message
                 if (action.payload.status === ResponseStatus.SUCCESS) {
-                    debugger
                     state.accessData = action.payload.usersOfApp
                     state.isAuth = true
+                } else {
+                    state.loginError = action.payload.message
                 }
             })
 

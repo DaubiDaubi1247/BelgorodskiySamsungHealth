@@ -9,7 +9,7 @@ export interface ItrainigData {
     label : string
     countOfDays : number
     description : string
-    percentExecution? : number
+    presentOfProgress? : number
 }
 
 export interface IDaysData {

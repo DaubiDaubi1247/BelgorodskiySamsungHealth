@@ -8,9 +8,10 @@ import TrainingItem from "../trainingItem/TrainingItem";
 
 
 interface ISubscribeTrainingProps {
+    isUserTrain : boolean
 }
 
-const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = (props) => {
+const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = ({isUserTrain}) => {
 
     let smallDataAboutTRainings = useAppSelector(state => state.training.smallDataTrainings)
 
@@ -27,7 +28,7 @@ const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = (pro
 
     return (
         <div className={"d-flex " + styles.wrapper}>
-            <span className="d-block">Кажется Вы не подписаны на тренировку...</span>
+            {!isUserTrain ? <span className="d-block">Кажется Вы не подписаны на тренировку...</span> :<></>}
             <Button variant="primary" onClick={handleShowAndClose}>
                 Просмотреть список тренировок
             </Button>

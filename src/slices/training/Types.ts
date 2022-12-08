@@ -6,7 +6,7 @@ export interface ItrainitState {
     smallDataTrainings : TrainingDataArr,
     smallUserTraining :  ItrainigData | null
     arrDaysExpires : ArrDaysExpires,
-    today : number
+    percentOfProgress : number
 }
 
 export enum CONST  {

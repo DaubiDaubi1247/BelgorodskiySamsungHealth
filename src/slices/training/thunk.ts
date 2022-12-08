@@ -1,5 +1,7 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { DataForSetTrain } from '../../API/userAPI/TuserAPI';
+import { userAPI } from '../../API/userAPI/userAPI';
 import { setLoading } from '../common/commonSlice';
 import { trainingAPI } from './../../API/trainingAPI/trainingAPI';
 
@@ -36,6 +38,19 @@ export const getArrDaysExpires = createAsyncThunk(
    async (id : number, thunkApi) => {
         try {
             const response = await trainingAPI.getDataDaysExpires(id);
+            thunkApi.dispatch(setLoading(false))
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+   }
+)
+
+export const setUserTrain = createAsyncThunk(
+    "training/setUserTrain",
+   async (body : DataForSetTrain, thunkApi) => {
+        try {
+            const response = await userAPI.setUserTrain(body.userId, body.trainId);
             thunkApi.dispatch(setLoading(false))
             return response.data
         } catch (error) {

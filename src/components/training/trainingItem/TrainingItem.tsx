@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../app/hooks';
 import { Button } from 'react-bootstrap';
 import DayList from './../daysList/DaysList';
 import { useAppDispatch } from './../../../app/hooks';
-import { getArrDaysExpires } from './../../../slices/training/thunk';
+import { getArrDaysExpires, setUserTrain } from './../../../slices/training/thunk';
 import Progressbar from './progressBar/progressbar';
 import DayListContainer from './../daysList/dayListContainer/DayListContainer';
 import { setLoading } from '../../../slices/common/commonSlice';
@@ -18,7 +18,8 @@ interface ITrainingProps extends ItrainigData {
 const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDays, isUserTraining, id}) => {
 
     const [isVisible, setVisible] = useState(false);
-    let percentAction = useAppSelector(state => state.training.today)
+    let percentAction = useAppSelector(state => state.training.percentOfProgress)
+
     
     let dispatch = useAppDispatch();
 
@@ -27,9 +28,17 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
 
         if (!isVisible) dispatch(getArrDaysExpires(id))
     }
-    const subscribeTraininghandler = () => 1
+
+    let userId = useAppSelector(state => state.auth.accessData?.id)
+
+    const subscribeTraininghandler = () => {
+        if (userId) {
+            dispatch(setUserTrain({userId : userId, trainId : id}))
+        }
+    }
+
     return (
-        <Card style={{ width: '100%', margin: "0 auto" }}>
+        <Card style={{ maxWidth: '400px', margin: "0 auto" }}>
           <Card.Body>
             <Card.Title>{label}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
