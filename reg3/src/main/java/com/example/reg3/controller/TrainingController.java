@@ -4,6 +4,7 @@ package com.example.reg3.controller;
 import com.example.reg3.Service.DayOfTrainingService;
 import com.example.reg3.Service.TrainingService;
 import com.example.reg3.Service.UserService;
+import com.example.reg3.dao.Training;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,4 +49,10 @@ public class TrainingController {
     public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {
         return userService.getProgressOfUser(id);
     }
+
+//    @GetMapping("addTrain")
+//    public ResponseEntity<Object> addNewTrain(@RequestBody Training train) {
+//        return trainingService.addTrain(train);
+//    }
+
 }

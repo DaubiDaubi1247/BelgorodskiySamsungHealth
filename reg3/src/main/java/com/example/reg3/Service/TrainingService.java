@@ -1,15 +1,13 @@
 package com.example.reg3.Service;
 
 
+import com.example.reg3.controller.TrainingController;
 import com.example.reg3.dao.Training;
 import com.example.reg3.repository.TrainingRepository;
-import com.example.reg3.requastion.TrainingRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TrainingService {
@@ -35,4 +33,12 @@ public class TrainingService {
 
     }
 
+//    public ResponseEntity<Object> addTrain(Training train) {
+//        var questionTrain = trainingRepository.findByLabel(train.getLabel());
+//
+//        if (!questionTrain.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Данное название тренеровки уже занято");
+//        }
+//
+//    }
 }

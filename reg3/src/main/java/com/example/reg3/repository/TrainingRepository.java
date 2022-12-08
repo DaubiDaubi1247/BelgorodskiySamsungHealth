@@ -22,4 +22,7 @@ public interface TrainingRepository
             "JOIN prog.trainingId train " +
             "WHERE u.id = ?1")
     List<ProgressOfUser> findProgressOfUser(Long id);
+
+
+    List<Training> findByLabel(String label);
 }
