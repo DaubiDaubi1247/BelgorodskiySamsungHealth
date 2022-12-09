@@ -1,9 +1,11 @@
 package com.example.reg3.dao;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,12 +29,22 @@ public class Training {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "status")
+    private String status;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<DayOfTraining>  daysOfTrainings;
+
 
     public Training(String label,
                     Integer countOfDays,
-                    String description) {
+                    String description,
+                    String status) {
         this.label = label;
         this.countOfDays = countOfDays;
         this.description = description;
+        this.status = status;
     }
 }

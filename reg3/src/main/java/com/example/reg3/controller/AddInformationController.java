@@ -88,18 +88,12 @@ public class AddInformationController {
 
 
 
-
-
-
     //todo добавить упражнения
-
-
-
     static List<Training> trainingList = List.of(
-            new Training("Гибкость", 2, "Станешь гибким"),
-            new Training("Сила", 3, "Станешь не очень сильным"),
-            new Training("Выносливость", 0, "Станешь немного выносливым"),
-            new Training("Разминание очка", 0, "будем сдавать сис. мод...")
+            new Training("Гибкость", 2, "Станешь гибким", "not available"),
+            new Training("Сила", 3, "Станешь не очень сильным", "available"),
+            new Training("Выносливость", 0, "Станешь немного выносливым", "not available"),
+            new Training("Разминание очка", 0, "будем сдавать сис. мод...", "available")
     );
 
 
@@ -134,11 +128,7 @@ public class AddInformationController {
 
         );
 
-
         userRegistrationData.saveAll(userRegistrationDataList);
-
-
-
 
         var training1 = trainingRepository.findById(1L).get();
         var training2 = trainingRepository.findById(2L).get();

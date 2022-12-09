@@ -22,7 +22,7 @@ public class TrainingService {
 
     public ResponseEntity<Object> getTrainings() {
 
-        var trainingListings = trainingRepository.findAll();
+        var trainingListings = trainingRepository.findByStatus("available");
 
         if (trainingListings.size() == 0) {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("тренеровки отсутствуют в бд");
@@ -30,7 +30,6 @@ public class TrainingService {
         else {
             return ResponseEntity.status(HttpStatus.OK).body(trainingListings);
         }
-
     }
 
 //    public ResponseEntity<Object> addTrain(Training train) {

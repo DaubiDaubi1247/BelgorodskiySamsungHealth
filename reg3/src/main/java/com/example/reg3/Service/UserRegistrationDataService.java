@@ -112,8 +112,6 @@ public class UserRegistrationDataService {
         usersOfApp.setPassword(userPass);
         usersOfApp.setId(usersOfApp.getUser().getId());
 
-
-
         return usersOfApp;
     }
 

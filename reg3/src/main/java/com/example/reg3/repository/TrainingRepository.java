@@ -23,6 +23,8 @@ public interface TrainingRepository
             "WHERE u.id = ?1")
     List<ProgressOfUser> findProgressOfUser(Long id);
 
+    List<Training> findByStatus(String status);
+
 
     List<Training> findByLabel(String label);
 }
