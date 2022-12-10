@@ -95,7 +95,8 @@ public class AddInformationController {
 
     List<DayOfTraining> daysOfTrainingsPower = List.of(
             new DayOfTraining(1, setListone),
-            new DayOfTraining(2, setListJump)
+            new DayOfTraining(2, setListJump),
+            new DayOfTraining(3, setListJump)
     );
 
     //todo добавить упражнения
