@@ -99,20 +99,19 @@ public class UserRegistrationDataService {
         }
     }
 
-    private UserRegistrationData saveNewUser(UserRegistrationData usersOfApp)
+    private UserRegistrationData saveNewUser(UserRegistrationData userOfApp)
             throws IllegalBlockSizeException, BadPaddingException {
 
-        String userPass = usersOfApp.getPassword();
-        usersOfApp.setPassword(new String(cipher.doFinal(userPass.getBytes())));
+        String userPass = userOfApp.getPassword();
+        userOfApp.setPassword(new String(cipher.doFinal(userPass.getBytes())));
 
-        User user = new User();
-        usersOfApp.setUser(user);
+        if (userOfApp.getUser() == null) userOfApp.setUser(new User());
 
-        usersOfApp = userRepository.save(usersOfApp);
-        usersOfApp.setPassword(userPass);
-        usersOfApp.setId(usersOfApp.getUser().getId());
+        userOfApp = userRepository.save(userOfApp);
+        //userOfApp.setPassword("");
+        userOfApp.setId(userOfApp.getUser().getId());
 
-        return usersOfApp;
+        return userOfApp;
     }
 
     public UserRegistrationDataRequest checkUser(UserRegistrationData usersOfApp) {

@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("setTrainToUser")
     public ResponseEntity<Object> addTrainToUser(@RequestParam(required =false) Long userId,
                                                  @RequestParam(required =false) Long trainId) {
-        return userService.addTrain(userId, trainId);
+        return userService.setTrainToUser(userId, trainId);
     }
 
     @PostMapping("setUserData")

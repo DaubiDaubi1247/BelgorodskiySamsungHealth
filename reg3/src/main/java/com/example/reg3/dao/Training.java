@@ -41,10 +41,12 @@ public class Training {
     public Training(String label,
                     Integer countOfDays,
                     String description,
-                    String status) {
+                    String status,
+                    List<DayOfTraining> daysOfTrainings) {
         this.label = label;
         this.countOfDays = countOfDays;
         this.description = description;
         this.status = status;
+        this.daysOfTrainings = daysOfTrainings;
     }
 }

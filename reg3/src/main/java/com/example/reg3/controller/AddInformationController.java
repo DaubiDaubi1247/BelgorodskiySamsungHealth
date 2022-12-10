@@ -3,12 +3,12 @@ package com.example.reg3.controller;
 
 import com.example.reg3.Service.TrainingService;
 import com.example.reg3.Service.UserRegistrationDataService;
+import com.example.reg3.Service.UserService;
 import com.example.reg3.dao.*;
 import com.example.reg3.repository.DayOfTrainingRepository;
 import com.example.reg3.repository.TrainingRepository;
 import com.example.reg3.repository.UserRegistrationDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,29 +20,23 @@ import java.util.List;
 public class AddInformationController {
 
     private UserRegistrationDataRepository userRegistrationData;
-
-
-    private DayOfTrainingRepository dayOfTrainingRepository;
-
-    private UserRegistrationDataService userRegistrationDataService;
-
-
-    private TrainingRepository trainingRepository;
-
-
-    private TrainingService trainingService;
-
+    private final DayOfTrainingRepository dayOfTrainingRepository;
+    private final UserRegistrationDataService userRegistrationDataService;
+    private final TrainingRepository trainingRepository;
+    private final TrainingService trainingService;
+    private final UserService userService;
     @Autowired
     public AddInformationController(UserRegistrationDataRepository userRegistrationData,
                                     DayOfTrainingRepository dayOfTrainingRepositor,
                                     TrainingRepository trainingRepository,
                                     UserRegistrationDataService dayOfTrainingService,
-                                    TrainingService trainingService) {
+                                    TrainingService trainingService, UserService userService) {
         this.trainingRepository = trainingRepository;
         this.dayOfTrainingRepository = dayOfTrainingRepositor;
         this.userRegistrationData = userRegistrationData;
         this.userRegistrationDataService = dayOfTrainingService;
         this.trainingService = trainingService;
+        this.userService = userService;
     }
 
     List<Exercise> exerciseList = new ArrayList<>();
@@ -93,50 +87,52 @@ public class AddInformationController {
     );
 
 
+     List<DayOfTraining> daysOfTrainingsFloppy1 = List.of(
+            new DayOfTraining(1, setListPushUps),
+            new DayOfTraining(2, setListJump),
+            new DayOfTraining(3, setListTwo)
+    );
+
+    List<DayOfTraining> daysOfTrainingsPower = List.of(
+            new DayOfTraining(1, setListone),
+            new DayOfTraining(2, setListJump)
+    );
+
     //todo добавить упражнения
-    static List<Training> trainingList = List.of(
-            new Training("Гибкость1", 2, "Станешь гибким", "not available"),
-            new Training("Сила", 3, "Станешь не очень сильным", "available"),
-            new Training("Выносливость", 0, "Станешь немного выносливым", "not available"),
-            new Training("Разминание очка", 0, "будем сдавать сис. мод...", "available")
+//    {
+//        List<Set> setListUp = new ArrayList<>();
+//
+//        setListUp.add(new Set(5, exerciseList.get(1), 15));
+//        setListUp.add(new Set(6, exerciseList.get(1), 15));
+//        setListUp.add(new Set(7, exerciseList.get(1), 15));
+//        setListUp.add(new Set(8, exerciseList.get(1), 15));
+//
+//    }
+
+
+    //todo дни тренеровки
+     List<Training> trainingList = List.of(
+            new Training("Гибкость1", 2, "Станешь гибким", "not available", daysOfTrainingsFloppy1),
+            new Training("Сила", 3, "Станешь не очень сильным", "available", daysOfTrainingsPower),
+            new Training("Выносливость", 0, "Станешь немного выносливым", "not available", new ArrayList<>()),
+            new Training("Разминание очка", 0, "будем сдавать сис. мод...", "available", new ArrayList<>())
     );
 
 
-    static List<UserProgressInTraining> userProgressInTrainings = List.of(
-            new UserProgressInTraining(1, trainingList.get(0)),
-            new UserProgressInTraining(3, trainingList.get(1))
-    );
+//    static List<UserProgressInTraining> userProgressInTrainings = List.of(
+//            new UserProgressInTraining(1, trainingList.get(0)),
+//            new UserProgressInTraining(3, trainingList.get(1))
+//    );
 
 
     static List<User> userList = List.of(
-            new User("Саня", 68.23f,
-                    null, userProgressInTrainings.get(1), 0),
-            new User("Александр", 76.24f,
-                    178, userProgressInTrainings.get(0), 1),
-            new User("Влад", 76.24f,
-                    178, null, 5)
+            new User("Саня", 68.23f, null, null, 0),
+            new User("Александр", 76.24f, 178, null, 1),
+            new User("Влад", 76.24f, 178, null, 5)
     );
 
-    List<DayOfTraining> dayOfTrainingsFloppy1;
 
-    //todo добавить упражнения
-    {
-        List<Set> setListUp = new ArrayList<>();
-
-        setListUp.add(new Set(5, exerciseList.get(1), 15));
-        setListUp.add(new Set(6, exerciseList.get(1), 15));
-        setListUp.add(new Set(7, exerciseList.get(1), 15));
-        setListUp.add(new Set(8, exerciseList.get(1), 15));
-
-        dayOfTrainingsFloppy1 = new ArrayList<>();
-
-        dayOfTrainingsFloppy1.add(new DayOfTraining(1, setListPushUps));
-        dayOfTrainingsFloppy1.add(new DayOfTraining(2, setListJump));
-        dayOfTrainingsFloppy1.add(new DayOfTraining(3, setListJump));
-
-
-    }
-
+//Пользовательские данные
     List<UserRegistrationData> userRegistrationDataList = List.of(
             new UserRegistrationData("monokas", "monokas@gmail.com",
                     "monokas", true, userList.get(0)),
@@ -150,13 +146,30 @@ public class AddInformationController {
 
     @PostMapping("all")
     public void registrationUser() {
+        var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
+        var res2 =  userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
+        var res3 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(2));
 
-        userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
-        userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
-        userRegistrationDataService.addNewUser(userRegistrationDataList.get(2));
+        var res4 = trainingService.addTrain(trainingList.get(0));
+        var res5 = trainingService.addTrain(trainingList.get(1));
+        var res6 = trainingService.addTrain(trainingList.get(2));
+        var res7 = trainingService.addTrain(trainingList.get(3));
+
+        var res8 = userService.setTrainToUser(1L, 1L);
+        var res9 = userService.setTrainToUser(2L, 2L);
+
+        System.out.println(res);
+        System.out.println(res2);
+        System.out.println(res3);
+        System.out.println(res4);
+        System.out.println(res5);
+        System.out.println(res6);
+        System.out.println(res7);
+        System.out.println(res8);
+        System.out.println(res9);
 
 
-//        var training1 = trainingRepository.findById(1L).get();
+        //        var training1 = trainingRepository.findById(1L).get();
 //        var training2 = trainingRepository.findById(2L).get();
 //
 //
@@ -183,7 +196,7 @@ public class AddInformationController {
     @PostMapping("train")
     public void addTrain() {
         var trin = trainingList.get(0);
-        trin.setDaysOfTrainings(dayOfTrainingsFloppy1);
+        trin.setDaysOfTrainings(daysOfTrainingsFloppy1);
 
         var ans = trainingService.addTrain(trainingList.get(0));
 

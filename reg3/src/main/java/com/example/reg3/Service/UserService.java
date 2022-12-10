@@ -75,7 +75,7 @@ public class UserService {
     }
 
 
-    public ResponseEntity<Object> addTrain(Long userId, Long trainId) {
+    public ResponseEntity<Object> setTrainToUser(Long userId, Long trainId) {
         try {
             var user = userRepository.getReferenceById(userId);
             var train = trainingRepository.getReferenceById(trainId);

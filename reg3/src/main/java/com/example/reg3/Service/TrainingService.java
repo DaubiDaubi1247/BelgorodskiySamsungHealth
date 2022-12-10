@@ -53,11 +53,13 @@ public class TrainingService {
         var questionTrain = trainingRepository.findByLabel(train.getLabel());
 
         if (!questionTrain.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Данное название тренеровки уже занято");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body("Данное название тренеровки уже занято");
         }
 
         if (train.getCountOfDays() < 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("У тренеровки отрицательное колличество дней");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body("У тренеровки отрицательное колличество дней");
         }
 
         eliminationCollisionInDaysOfTraining(train);

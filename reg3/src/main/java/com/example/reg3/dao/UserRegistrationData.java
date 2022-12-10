@@ -23,6 +23,7 @@ public class UserRegistrationData {
     private String login;
     @Column(name = "email", unique = true)
     private String email;
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
