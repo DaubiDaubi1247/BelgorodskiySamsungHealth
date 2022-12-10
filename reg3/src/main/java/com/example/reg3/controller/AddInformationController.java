@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("add")
 public class AddInformationController {
 
@@ -144,7 +144,7 @@ public class AddInformationController {
     );
 
 
-    @PostMapping("all")
+    @GetMapping("all")
     public void registrationUser() {
         var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
         var res2 =  userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserRegistrationDataRepository
         extends JpaRepository<UserRegistrationData, Long> {
-
+    @Query("SELECT u.user.id FROM UserRegistrationData u WHERE u.email = ?1")
 
     Optional<UserRegistrationData> findUserRegistrationDataByEmail(String email);
 }

@@ -30,7 +30,6 @@ public class User {
     private Integer countOfCompletedTrainers;
 
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_progress_in_training_id",
             referencedColumnName = "user_progress_in_training_id")
