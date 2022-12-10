@@ -9,3 +9,9 @@ export const main = "/";
 export const MainRoutes = {
     training : main + "training"
 } 
+
+export const admin = "/admin";
+export const AdminRoutes = {
+    training : admin + "training"
+} 
+

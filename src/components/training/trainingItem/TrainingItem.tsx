@@ -47,7 +47,7 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
                 <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
                 {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler}>+</Button>}
             </div>
-            <DayListContainer  isVisible={isVisible}/>
+            <DayListContainer isVisible={isVisible}/>
           </Card.Body>
         </Card>
       );

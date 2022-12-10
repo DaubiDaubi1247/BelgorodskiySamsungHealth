@@ -10,7 +10,7 @@ interface IDayDescriptionProps {
 
 const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData}) => {
 
-    const isActiveDay = (day : number) => dayData.numberOfDay < day
+    const isActiveDay = (day : number) => dayData.numberOfDay === day
 
     const getAllexercisesForDay = () => dayData.sets.map((exercises) => 
         <Dropdown.Item >
@@ -18,7 +18,6 @@ const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData}
         </Dropdown.Item>
         
     )
-
 
     return (
         <Dropdown className='mb-4'>
