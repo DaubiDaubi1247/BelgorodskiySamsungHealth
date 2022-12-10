@@ -33,7 +33,7 @@ public class Training {
     private String status;
 
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<DayOfTraining>  daysOfTrainings;
 
 

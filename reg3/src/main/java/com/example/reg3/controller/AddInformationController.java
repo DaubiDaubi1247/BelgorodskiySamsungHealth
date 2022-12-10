@@ -110,7 +110,7 @@ public class AddInformationController {
 //    }
 
 
-    //todo дни тренеровки
+
      List<Training> trainingList = List.of(
             new Training("Гибкость1", 2, "Станешь гибким", "not available", daysOfTrainingsFloppy1),
             new Training("Сила", 3, "Станешь не очень сильным", "available", daysOfTrainingsPower),

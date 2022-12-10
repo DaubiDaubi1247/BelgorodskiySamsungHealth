@@ -1,5 +1,6 @@
 package com.example.reg3.repository;
 
+import com.example.reg3.dao.DayOfTraining;
 import com.example.reg3.dao.Training;
 import com.example.reg3.requastion.ProgressOfUser;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,6 +25,11 @@ public interface TrainingRepository
     List<ProgressOfUser> findProgressOfUser(Long id);
 
     List<Training> findByStatus(String status);
+
+    @Query("SELECT t.daysOfTrainings " +
+            "FROM Training t " +
+            "WHERE t.id = ?1")
+    List<DayOfTraining> findDaysOfTraining(Long idOfTrain);
 
 
     List<Training> findByLabel(String label);

@@ -36,6 +36,17 @@ public class TrainingService {
         this.dayOfTrainingRepository = dayOfTrainingRepository;
     }
 
+    public ResponseEntity<Object> getTrainingDays(Long trainId) {
+        var trainingDays = trainingRepository.findDaysOfTraining(trainId);
+
+        if (trainingDays.size() == 0) {
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("в данной тренеровки отсутствуют дни");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body(trainingDays);
+        }
+    }
+
     public ResponseEntity<Object> getTrainings() {
 
         var trainingListings = trainingRepository.findByStatus("available");
