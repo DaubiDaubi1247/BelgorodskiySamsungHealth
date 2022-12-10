@@ -40,11 +40,11 @@ public class TrainingController {
         return trainingService.getTrainingDays(id);
     }
 
-//    @GetMapping("dayOfTrain")
-//    public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
-//                                                 @RequestParam(required =false) Integer numOfDay) {
-//        return dayOfTrainingService.getTrainingDay(id, numOfDay);
-//    }
+    @GetMapping("dayOfTrain")
+    public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
+                                                 @RequestParam(required =false) Integer numOfDay) {
+        return trainingService.getTrainingDay(id, numOfDay);
+    }
 
     @GetMapping("userTrainingProgress")
     public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {

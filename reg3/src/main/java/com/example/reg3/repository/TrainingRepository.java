@@ -32,5 +32,12 @@ public interface TrainingRepository
     List<DayOfTraining> findDaysOfTraining(Long idOfTrain);
 
 
+    @Query("SELECT d " +
+            "FROM Training t " +
+            "JOIN t.daysOfTrainings d " +
+            "WHERE d.numberOfDay = :numOfDay AND t.id = :idOfTrain")
+    DayOfTraining findDayOfTrain(Long idOfTrain, Integer numOfDay);
+
+
     List<Training> findByLabel(String label);
 }

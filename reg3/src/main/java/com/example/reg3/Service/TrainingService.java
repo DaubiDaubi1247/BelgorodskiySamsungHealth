@@ -125,4 +125,17 @@ public class TrainingService {
         }
         set.setExercise(exercise);
     }
+
+
+
+    public ResponseEntity<Object> getTrainingDay(Long trainId, Integer numOfDay) {
+        var trainingDay = trainingRepository.findDayOfTrain(trainId, numOfDay);
+
+        if (trainingDay == null) {
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("отствует данный день тренеровки");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body(trainingDay);
+        }
+    }
 }
