@@ -34,25 +34,26 @@ public class TrainingController {
         return trainingService.getTrainings();
     }
 
-    @GetMapping("daysOfTrain")
-    public ResponseEntity<Object> getTrainingDays(@RequestParam(required =false) Long id) {
-        return dayOfTrainingService.getTrainingDays(id);
-    }
-
-    @GetMapping("dayOfTrain")
-    public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
-                                                 @RequestParam(required =false) Integer numOfDay) {
-        return dayOfTrainingService.getTrainingDay(id, numOfDay);
-    }
+    //todo переделать
+//    @GetMapping("daysOfTrain")
+//    public ResponseEntity<Object> getTrainingDays(@RequestParam(required =false) Long id) {
+//        return dayOfTrainingService.getTrainingDays(id);
+//    }
+//
+//    @GetMapping("dayOfTrain")
+//    public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
+//                                                 @RequestParam(required =false) Integer numOfDay) {
+//        return dayOfTrainingService.getTrainingDay(id, numOfDay);
+//    }
 
     @GetMapping("userTrainingProgress")
     public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {
         return userService.getProgressOfUser(id);
     }
 
-//    @GetMapping("addTrain")
-//    public ResponseEntity<Object> addNewTrain(@RequestBody Training train) {
-//        return trainingService.addTrain(train);
-//    }
+    @GetMapping("addTrain")
+    public ResponseEntity<Object> addNewTrain(@RequestBody Training train) {
+        return trainingService.addTrain(train);
+    }
 
 }

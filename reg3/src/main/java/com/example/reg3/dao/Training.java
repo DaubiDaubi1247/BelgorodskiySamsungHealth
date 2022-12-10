@@ -33,7 +33,7 @@ public class Training {
     private String status;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany()
     @JsonIgnore
     private List<DayOfTraining>  daysOfTrainings;
 

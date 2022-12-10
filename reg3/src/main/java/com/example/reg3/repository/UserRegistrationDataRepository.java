@@ -9,7 +9,6 @@ import java.util.Optional;
 public interface UserRegistrationDataRepository
         extends JpaRepository<UserRegistrationData, Long> {
 
-    Optional<UserRegistrationData> findUserByEmail(String email);
 
     Optional<UserRegistrationData> findUserRegistrationDataByEmail(String email);
 }

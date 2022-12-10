@@ -17,27 +17,27 @@ public class DayOfTrainingService {
     }
 
 
-    public ResponseEntity<Object> getTrainingDays(Long trainId) {
-        var trainingDays = dayOfTrainingRepository.findDayOfTrainingByTrainingId(trainId);
-
-        if (trainingDays.size() == 0) {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("в данной тренеровки отсутствуют дни");
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.OK).body(trainingDays);
-        }
-    }
-
-    public ResponseEntity<Object> getTrainingDay(Long trainId, Integer numOfDay) {
-        var trainingDay = dayOfTrainingRepository.
-                findDayOfTrainingByTrainingIdAndNumberOfDay(trainId, numOfDay);
-
-        if (trainingDay == null) {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("отствует данный день тренеровки");
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.OK).body(trainingDay);
-        }
-    }
+//    public ResponseEntity<Object> getTrainingDays(Long trainId) {
+//        var trainingDays = dayOfTrainingRepository.findDayOfTrainingByTrainingId(trainId);
+//
+//        if (trainingDays.size() == 0) {
+//            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("в данной тренеровки отсутствуют дни");
+//        }
+//        else {
+//            return ResponseEntity.status(HttpStatus.OK).body(trainingDays);
+//        }
+//    }
+//
+//    public ResponseEntity<Object> getTrainingDay(Long trainId, Integer numOfDay) {
+//        var trainingDay = dayOfTrainingRepository.
+//                findDayOfTrainingByTrainingIdAndNumberOfDay(trainId, numOfDay);
+//
+//        if (trainingDay == null) {
+//            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("отствует данный день тренеровки");
+//        }
+//        else {
+//            return ResponseEntity.status(HttpStatus.OK).body(trainingDay);
+//        }
+//    }
 
 }

@@ -12,9 +12,9 @@ import java.util.List;
 public interface DayOfTrainingRepository
         extends JpaRepository<DayOfTraining, Long> {
 
-    List<DayOfTraining> findDayOfTrainingByTrainingId(Long id);
-
-    DayOfTraining findDayOfTrainingByTrainingIdAndNumberOfDay(Long id, Integer numberOfDay);
-
+//    List<DayOfTraining> findDayOfTrainingByTrainingId(Long id);
+//
+//    DayOfTraining findDayOfTrainingByTrainingIdAndNumberOfDay(Long id, Integer numberOfDay);
+//
 
 }
