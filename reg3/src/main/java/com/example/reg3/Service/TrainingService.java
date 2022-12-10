@@ -44,6 +44,9 @@ public class TrainingService {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("тренеровки отсутствуют в бд");
         }
         else {
+            for (var train : trainingListings) {
+                train.setDaysOfTrainings(null);
+            }
             return ResponseEntity.status(HttpStatus.OK).body(trainingListings);
         }
     }
@@ -64,12 +67,14 @@ public class TrainingService {
 
         eliminationCollisionInDaysOfTraining(train);
 
+
+        try{
             trainingRepository.save(train);
-            return ResponseEntity.status(HttpStatus.OK).body("trainingListings");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ошибка сохранения "
-//                    + e.getMessage());
-//        }
+            return ResponseEntity.status(HttpStatus.OK).body("тренеровка успешно добавлена");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ошибка сохранения "
+                    + e.getMessage());
+        }
 
 
     }

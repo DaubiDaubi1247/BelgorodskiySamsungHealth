@@ -33,8 +33,7 @@ public class Training {
     private String status;
 
 
-    @OneToMany()
-    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER)
     private List<DayOfTraining>  daysOfTrainings;
 
 

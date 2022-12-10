@@ -51,7 +51,7 @@ public class TrainingController {
         return userService.getProgressOfUser(id);
     }
 
-    @GetMapping("addTrain")
+    @PostMapping("addTrain")
     public ResponseEntity<Object> addNewTrain(@RequestBody Training train) {
         return trainingService.addTrain(train);
     }

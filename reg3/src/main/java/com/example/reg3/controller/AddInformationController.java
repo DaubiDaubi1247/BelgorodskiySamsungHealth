@@ -173,7 +173,7 @@ public class AddInformationController {
 //        var training2 = trainingRepository.findById(2L).get();
 //
 //
-//        //todo добавить упражнения
+//
 //        List<DayOfTraining> dayOfTrainingsFloppy = List.of(
 //                new DayOfTraining(1, setListPushUps),
 //                new DayOfTraining(2, setListJump),
@@ -204,4 +204,8 @@ public class AddInformationController {
     }
 
 
+    @GetMapping("getTrainJSON")
+    public Training getDayOf() {
+        return trainingList.get(1);
+    }
 }
