@@ -21,7 +21,6 @@ public class ProgressOfUserWithPresent {
     Integer countOfDays;
 
     String description;
-    @JsonIgnore
     Integer dayOfTraining;
 
     Long  presentOfProgress;
@@ -32,6 +31,6 @@ public class ProgressOfUserWithPresent {
         countOfDays = progress.getCountOfDays();
         description = progress.getDescription();
         dayOfTraining = progress.getDayOfTraining();
-        presentOfProgress =  Math.round(((countOfDays) * 1. - 1) / dayOfTraining * 100);
+        presentOfProgress =  Math.round(((dayOfTraining) * 1. - 1) / countOfDays * 100);
     }
 }
