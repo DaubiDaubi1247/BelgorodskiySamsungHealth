@@ -31,8 +31,7 @@ const trainingSlice = createSlice({
             })
             .addCase(getUserTraining.fulfilled.type, (state, action: PayloadAction<ItrainigData>) => {
                 state.smallUserTraining = action.payload
-                console.log(action.payload.presentOfProgress)
-                state.percentOfProgress = action.payload.presentOfProgress ? action.payload.presentOfProgress : CONST.NO_DATA
+                state.percentOfProgress = action.payload.presentOfProgress !== undefined ? action.payload.presentOfProgress : CONST.NO_DATA
 
                 // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
                 // state.today = Math.round(2 / 9 * 100)

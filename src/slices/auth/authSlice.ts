@@ -9,13 +9,15 @@ export interface AuthState {
     accessData: Inputs | null
     loginError: string | null
     registrationError: string | null
+    isAdmin : boolean | null
 }
 
 const initialState: AuthState = {
     isAuth: false,
     accessData: null,
     loginError: null,
-    registrationError : null
+    registrationError : null,
+    isAdmin : false
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -61,6 +63,7 @@ export const authSlice = createSlice({
             .addCase(authUser.fulfilled.type, (state, action: PayloadAction<IResponse>) => {
                 if (action.payload.status === ResponseStatus.SUCCESS) {
                     state.accessData = action.payload.usersOfApp
+                    state.isAdmin = action.payload.usersOfApp.isAdmin
                     state.isAuth = true
                 } else {
                     state.loginError = action.payload.message

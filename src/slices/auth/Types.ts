@@ -3,6 +3,7 @@ export type Inputs = {
     password: string,   // убрать
     login: string,
     id: number
+    isAdmin : boolean | null
 };
 
 export enum ResponseStatus {
