@@ -77,6 +77,7 @@ public class TrainingService {
         }
 
         eliminationCollisionInDaysOfTraining(train);
+        train.setCountOfDays(train.getDaysOfTrainings().size());
 
 
         try{
