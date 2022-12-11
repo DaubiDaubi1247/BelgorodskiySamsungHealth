@@ -7,11 +7,12 @@ import Header from './components/header/Header';
 
 import MainContainer from './components/main/Main';
 import { Route, Routes } from 'react-router-dom';
-import { auth, AuthRoutes, main, MainRoutes, admin } from './Routes/Routes';
+import { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes } from './Routes/Routes';
 import AuthContainer from './components/auth/AuthContainer';
 import NavBar from './components/navBar/NavBar';
 import TrainingContainer from './components/training/TraininigContainer';
 import AdminPanelContainer from './components/adminPanel/AdminPanel';
+import AdminTrainingRedactor from './components/adminPanel/adminTrainingRedactor/AdminTrainingRedactor';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                         </Route>
                         <Route path={admin}>
                             <Route path={admin} element={<AdminPanelContainer />} />
+                            <Route path={AdminRoutes.redactOfTrain} element={<AdminTrainingRedactor/>}/>
                         </Route>
                     </Routes>
                 </div>

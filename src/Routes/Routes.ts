@@ -12,6 +12,6 @@ export const MainRoutes = {
 
 export const admin = "/admin";
 export const AdminRoutes = {
-    training : admin + "training"
+    redactOfTrain : admin + "/redact"
 } 
 

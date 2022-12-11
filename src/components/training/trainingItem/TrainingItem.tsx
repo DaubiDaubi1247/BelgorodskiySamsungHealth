@@ -10,12 +10,14 @@ import { getArrDaysExpires, setUserTrain } from './../../../slices/training/thun
 import Progressbar from './progressBar/progressbar';
 import DayListContainer from './../daysList/dayListContainer/DayListContainer';
 import { setLoading } from '../../../slices/common/commonSlice';
+import styles from "./TI.module.css"
 
 interface ITrainingProps extends ItrainigData {
     isUserTraining : boolean
+    isAdmin? :boolean
 }
 
-const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDays, isUserTraining, id}) => {
+const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDays, isUserTraining, id, isAdmin}) => {
 
     const [isVisible, setVisible] = useState(false);
     let percentAction = useAppSelector(state => state.training.percentOfProgress)
@@ -37,15 +39,21 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
         }
     }
 
+    // delete thunk
+    //const handlerForDeleteBtn = () => dispatch()
+
     return (
         <Card style={{ maxWidth: '400px', margin: "0 auto" }}>
           <Card.Body>
-            <Card.Title>{label}</Card.Title>
+            <div className="d-flex justify-content-between">
+                <Card.Title>{label}</Card.Title>
+                {isAdmin ? <Button  className={styles.myButtons} variant="danger">x</Button> : <></>}
+            </div>
             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
             <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>
             <div className="d-flex justify-content-between">
                 <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
-                {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler}>+</Button>}
+                {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler} className={styles.myButtons}>+</Button>}
             </div>
             <DayListContainer isVisible={isVisible}/>
           </Card.Body>
