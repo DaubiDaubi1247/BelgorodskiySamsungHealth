@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import styles from "../../../common/form/form.module.css"
@@ -13,45 +13,69 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = () => console.log(1);
     const watchAllFields = watch();
+    const [isVisble, setisVisble] = useState(false)
 
     useEffect(() => {
         console.log(watchAllFields); 
     },[watchAllFields])
 
+    const newTrainingDescription = () => {
+        let res : Array<any> = [];
+        res.push(<p>Название : {watchAllFields.nameOfTrain}</p>)
+        res.push(<p>Количество дней : {watchAllFields.countOfDays}</p>)
+        res.push(<p>описание  : {watchAllFields.description}</p>)
+
+        return res
+    } 
 
     return (
-        <div className={styles.formWrapper}>
+        <div className={styles.formWrapper + " d-flex justify-content-between"}>
             <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 <Form.Group
                     className="mb-3"
                     controlId="formBasicEmail"
                 >
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label>Название Тренировки</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="Enter email"
-                        {...register("email", { required: true })}
+                        placeholder="Название тренировки"
+                        {...register("nameOfTrain", { required: true })}
                     />
-                    {errors.email?.type === "required" && <FormError message='Поле является обязательным' />}
+                    {errors.nameOfTrain?.type === "required" && <FormError message='Поле является обязательным' />}
                 </Form.Group>
                 <Form.Group
                     className="mb-3"
                     controlId="formBasicPassword"
                 >
-                    <Form.Label>Пароль</Form.Label>
+                    <Form.Label>Количество дней</Form.Label>
                     <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        {...register("password", { required: true })}
+                        type="text"
+                        placeholder="Количество дней"
+                        {...register("countOfDays", { required: true })}
+                    />
+                </Form.Group>
+                {errors.password && <FormError message='Поле является обязательным' />}
+
+                <Form.Group
+                    className="mb-3"
+                    controlId="formBasicPassword"
+                >
+                    <Form.Label>Описание</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Описание"
+                        {...register("description", { required: true })}
                     />
                 </Form.Group>
                 {errors.password && <FormError message='Поле является обязательным' />}
                 <Button
                     variant="primary"
-                    type="submit"
+                    onClick={() => setisVisble(true)}
                 >
+                Сохранить общее описание
                 </Button>
             </Form>
+            <div>{isVisble ? newTrainingDescription() : <></>}</div>
         </div>
     );
 };
