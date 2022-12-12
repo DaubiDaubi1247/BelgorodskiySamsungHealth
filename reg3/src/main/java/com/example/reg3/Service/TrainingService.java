@@ -40,9 +40,8 @@ public class TrainingService {
         var trainingDays = trainingRepository.findDaysOfTraining(trainId);
 
         if (trainingDays.size() == 0) {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("в данной тренеровки отсутствуют дни");
-        }
-        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("в данной тренеровки отсутствуют дни");
+        } else {
             return ResponseEntity.status(HttpStatus.OK).body(trainingDays);
         }
     }
@@ -52,9 +51,8 @@ public class TrainingService {
         var trainingListings = trainingRepository.findByStatus("available");
 
         if (trainingListings.size() == 0) {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("тренеровки отсутствуют в бд");
-        }
-        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("тренеровки отсутствуют в бд");
+        } else {
             for (var train : trainingListings) {
                 train.setDaysOfTraining(null);
             }
@@ -76,7 +74,7 @@ public class TrainingService {
         }
         eliminationCollisionInDaysOfTraining(train);
         train.setCountOfDays(train.getDaysOfTraining().size());
-        try{
+        try {
             trainingRepository.save(train);
             return ResponseEntity.status(HttpStatus.OK).body("тренеровка успешно добавлена");
         } catch (Exception e) {
@@ -122,14 +120,12 @@ public class TrainingService {
     }
 
 
-
     public ResponseEntity<Object> getTrainingDay(Long trainId, Integer numOfDay) {
         var trainingDay = trainingRepository.findDayOfTrain(trainId, numOfDay);
 
         if (trainingDay == null) {
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("отствует данный день тренеровки");
-        }
-        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("отствует данный день тренеровки");
+        } else {
             return ResponseEntity.status(HttpStatus.OK).body(trainingDay);
         }
     }
@@ -138,10 +134,10 @@ public class TrainingService {
         try {
             var train = trainingRepository.getReferenceById(trainId);
             var status = train.getStatus();
-            if ("not available".equals(status)){
+            if ("not available".equals(status)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Тренеровка с " + trainId + " id уже и так не доступна");
-            }else {
+            } else {
                 train.setStatus("not available");
                 trainingRepository.save(train);
                 return ResponseEntity.status(HttpStatus.OK)
@@ -150,6 +146,24 @@ public class TrainingService {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Тренеровка с " + trainId + " id не найдена");
         }
-
     }
+
+    public ResponseEntity<Object> activeTrain(Long trainId) {
+        try {
+            var train = trainingRepository.getReferenceById(trainId);
+            var status = train.getStatus();
+            if ("available".equals(status)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Тренеровка с " + trainId + " id уже и так доступна");
+            } else {
+                train.setStatus("available");
+                trainingRepository.save(train);
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body("Тренеровка с " + trainId + " id теперь доступна");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Тренеровка с " + trainId + " id не найдена");
+        }
+    }
+
 }

@@ -34,6 +34,11 @@ public class TrainingController {
         return trainingService.deactivateTrain(trainId);
     }
 
+    @GetMapping("active")
+    public ResponseEntity<Object> activeTrain(@RequestParam(required =false) Long trainId) {
+        return trainingService.activeTrain(trainId);
+    }
+
     @GetMapping("LightBackground")
     public ResponseEntity<Object> getLightBackground() {
         return trainingService.getTrainings();
