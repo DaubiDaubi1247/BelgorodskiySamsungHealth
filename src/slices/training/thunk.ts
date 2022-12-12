@@ -58,3 +58,15 @@ export const setUserTrain = createAsyncThunk(
         }
    }
 )
+
+export const createTraining = createAsyncThunk(
+    "training/createTraining",
+   async (training : TCreateTrainig, thunkApi) => {
+        try {
+            const response = await trainingAPI.createTraining(training);
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+   }
+)

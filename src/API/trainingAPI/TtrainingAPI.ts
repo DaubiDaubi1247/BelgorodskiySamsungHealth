@@ -33,3 +33,5 @@ export type Exercises = {
         description : string
     }
 }
+
+export type TCreateTrainig = ItrainigData | IdayDescription

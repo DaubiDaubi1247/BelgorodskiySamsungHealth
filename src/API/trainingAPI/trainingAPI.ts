@@ -1,5 +1,5 @@
 import axios from "axios"
-import { IDaysData, IsmallDataAboutTrainings, ItrainigData, TrainingDataArr } from "./TtrainingAPI"
+import { IDaysData, IsmallDataAboutTrainings, ItrainigData, TCreateTrainig, TrainingDataArr } from "./TtrainingAPI"
 
 
 const trainingAxios = axios.create({
@@ -17,6 +17,10 @@ export const trainingAPI = {
 
     getDataDaysExpires(trainingId : number) {
         return trainingAxios.get<IDaysData>(`/daysOfTrain?id=${trainingId}`)
+    },
+
+    createTraining(trainig : TCreateTrainig) {
+        return trainingAxios.post("/addTrain", trainig)
     }
 
 }

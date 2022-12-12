@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import styles from "../../../../common/form/form.module.css"
-import localStyles from "./addTraining.module.css"
+import localStyles from "../addTraining.module.css"
 import FormError from './../../../../common/form/formError/FormError';
 import { DayExercises, Exercises, IdayDescription } from './../../../../API/trainingAPI/TtrainingAPI';
+import DayDescription from './../../../training/daysList/dayDescription/DayDescription';
 
 
 
@@ -21,14 +22,13 @@ const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuPr
     const onSubmit = () => console.log(1);
     const watchAllFields = watch();
 
-    const [counterDays, setcounterDays] = useState(0)
+    const [counterDays, setcounterDays] = useState(1)
     const [sets, setsets] = useState<DayExercises>([])
+
 
     if (!isVisible) return <></>
 
-    // useEffect(() => {
-    //     console.log(watchAllFields); 
-    // },[watchAllFields])
+    const arrForPrint = () => daysOfTraining.map(el => <DayDescription dayData={el}/>)
 
     const setExercise = () => {
         let exercise : Exercises = {
@@ -46,20 +46,11 @@ const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuPr
     const setDayOfTraining = () => {
         let day :IdayDescription = {
             numberOfDay : counterDays,
-            sets : {...sets}
+            sets : [...sets]
         }
         daysOfTraining.push(day)
         setcounterDays(counterDays + 1);
     }
-
-    // const newTrainingDescription = () => {
-    //     let res : Array<any> = [];
-    //     res.push(<p className={localStyles.resStr}>Название : {watchAllFields.nameOfTrain}</p>)
-    //     res.push(<p className={localStyles.resStr}>Количество дней : {watchAllFields.countOfDays}</p>)
-    //     res.push(<p className={localStyles.resStr}>Описание  : {watchAllFields.description}</p>)
-
-    //     return res
-    // } 
 
     return (
         <div className={styles.formWrapper + " d-flex justify-content-between"}>
@@ -116,25 +107,28 @@ const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuPr
                 <Button
                     variant="primary"
                     onClick={setExercise}
+                    className={localStyles.btnForTraining}
                 >
                 Зафиксировать Упражение
                 </Button>
                 <Button
                     variant="primary"
                     onClick={setDayOfTraining}
+                    className={localStyles.btnForTraining}
                 >
                 Закончить день тренировки
                 </Button>
                 <Button
                     variant="primary"
                     onClick={setDayOfTraining}
+                    className={localStyles.btnForTraining}
                 >
                 Закончить создание тренировки
                 </Button>
             </Form>
-            {/* <div className={localStyles.resBlock}>
-                {isVisble ? newTrainingDescription() : <></>}
-            </div> */}
+            <div className={localStyles.resBlock}>
+                {arrForPrint()}
+            </div>
         </div>
     );
 };

@@ -8,6 +8,8 @@ import FormError from './../../../common/form/formError/FormError';
 import { IdayDescription } from './../../../API/trainingAPI/TtrainingAPI';
 import AdminAddTrainingInnerForm from './innerForm/InnerForm';
 import { is } from 'immer/dist/internal';
+import { useAppDispatch } from './../../../app/hooks';
+import { createTraining } from './../../../slices/training/thunk';
 
 
 interface IAdminAddTrainingMenuProps {
@@ -21,10 +23,6 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
     const [isVisble, setisVisble] = useState(false)
     const daysOfTraining : Array<IdayDescription> = []
 
-    useEffect(() => {
-        console.log(watchAllFields); 
-    },[watchAllFields])
-
     const newTrainingDescription = () => {
         let res : Array<any> = [];
         res.push(<p className={localStyles.resStr}>Название : {watchAllFields.nameOfTrain}</p>)
@@ -33,6 +31,10 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
 
         return res
     } 
+
+    const dispatch = useAppDispatch()
+
+    const createTrainingRequest = () => dispatch(createTraining(daysOfTraining));
 
     return (
         <div className={styles.formWrapper + " d-flex justify-content-between"}>
@@ -77,6 +79,7 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
                     <Button
                         variant="primary"
                         onClick={() => setisVisble(true)}
+                        className={localStyles.btnForTraining}
                     >
                     Сохранить общее описание
                     </Button>

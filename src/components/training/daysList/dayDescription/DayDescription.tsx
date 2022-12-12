@@ -12,6 +12,7 @@ const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData}
 
     const isActiveDay = (day : number) => dayData.numberOfDay === day
 
+    console.log(dayData.sets)
     const getAllexercisesForDay = () => dayData.sets.map((exercises) => 
         <Dropdown.Item >
             <ExcercisesInfo {...exercises}/>
