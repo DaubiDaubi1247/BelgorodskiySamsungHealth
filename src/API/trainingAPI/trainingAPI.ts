@@ -20,6 +20,7 @@ export const trainingAPI = {
     },
 
     createTraining(trainig : TCreateTrainig) {
+        debugger
         return trainingAxios.post("/addTrain", trainig)
     }
 

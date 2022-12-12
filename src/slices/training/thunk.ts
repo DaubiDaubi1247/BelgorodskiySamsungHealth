@@ -1,5 +1,6 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TCreateTrainig } from '../../API/trainingAPI/TtrainingAPI';
 import { DataForSetTrain } from '../../API/userAPI/TuserAPI';
 import { userAPI } from '../../API/userAPI/userAPI';
 import { setLoading } from '../common/commonSlice';

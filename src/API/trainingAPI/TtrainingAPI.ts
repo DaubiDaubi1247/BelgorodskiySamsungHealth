@@ -12,8 +12,15 @@ export interface ItrainigData {
     presentOfProgress? : number
 }
 
+export interface ItrainigDataForCreate {
+    label : string
+    countOfDays : number
+    description : string
+    presentOfProgress? : number
+}
+
 export interface IDaysData {
-    daysData : ArrDaysExpires
+    daysOfTrainings : ArrDaysExpires
 }
 
 export type ArrDaysExpires = Array<IdayDescription>
@@ -34,4 +41,4 @@ export type Exercises = {
     }
 }
 
-export type TCreateTrainig = ItrainigData | IdayDescription
+export type TCreateTrainig = ItrainigDataForCreate | IDaysData

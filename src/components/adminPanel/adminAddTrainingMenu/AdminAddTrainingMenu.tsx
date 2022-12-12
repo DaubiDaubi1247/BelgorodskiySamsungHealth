@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import styles from "../../../common/form/form.module.css"
 import localStyles from "./addTraining.module.css"
 import FormError from './../../../common/form/formError/FormError';
-import { IdayDescription } from './../../../API/trainingAPI/TtrainingAPI';
+import { DayExercises, IdayDescription, TCreateTrainig } from './../../../API/trainingAPI/TtrainingAPI';
 import AdminAddTrainingInnerForm from './innerForm/InnerForm';
 import { is } from 'immer/dist/internal';
 import { useAppDispatch } from './../../../app/hooks';
@@ -17,29 +17,32 @@ interface IAdminAddTrainingMenuProps {
 
 const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> = (props) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = () => console.log(1);
     const watchAllFields = watch();
 
     const [isVisble, setisVisble] = useState(false)
+    const [numberOfDay, setnumberOfDay] = useState(1)
+    const [sets, setsets] = useState<DayExercises>([])
+
     const daysOfTraining : Array<IdayDescription> = []
-
-    const newTrainingDescription = () => {
-        let res : Array<any> = [];
-        res.push(<p className={localStyles.resStr}>Название : {watchAllFields.nameOfTrain}</p>)
-        res.push(<p className={localStyles.resStr}>Количество дней : {watchAllFields.countOfDays}</p>)
-        res.push(<p className={localStyles.resStr}>Описание  : {watchAllFields.description}</p>)
-
-        return res
-    } 
 
     const dispatch = useAppDispatch()
 
-    const createTrainingRequest = () => dispatch(createTraining(daysOfTraining));
+
+    const createTrainingRequest = () => {
+        let training : TCreateTrainig = {
+            label : watchAllFields.nameOfTrain,
+            countOfDays : watchAllFields.countOfDays,
+            description : watchAllFields.description,
+            daysOfTrainings : daysOfTraining
+        }
+
+        dispatch(createTraining(training))
+    }
 
     return (
         <div className={styles.formWrapper + " d-flex justify-content-between"}>
             <div>
-                <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                <Form onSubmit={handleSubmit(createTrainingRequest)} className={styles.form}>
                     <Form.Group
                         className="mb-3"
                         controlId="formBasicEmail"
@@ -84,14 +87,13 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
                     Сохранить общее описание
                     </Button>
                 
-                </Form>
                 <AdminAddTrainingInnerForm
                         isVisible={isVisble}
                         daysOfTraining={daysOfTraining}
-                    />
-            </div>
-            <div className={localStyles.resBlock}>
-                {isVisble ? newTrainingDescription() : <></>}
+                        createTraining={createTrainingRequest}
+                />
+                    
+                </Form>
             </div>
         </div>
     );

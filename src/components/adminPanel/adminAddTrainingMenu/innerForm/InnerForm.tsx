@@ -13,9 +13,10 @@ import DayDescription from './../../../training/daysList/dayDescription/DayDescr
 interface IAdminAddTrainingMenuProps {
     daysOfTraining : Array<IdayDescription>
     isVisible : boolean
+    createTraining : () => void
 }
 
-const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuProps> = ({daysOfTraining,isVisible}) => {
+const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuProps> = ({daysOfTraining,isVisible,createTraining}) => {
 
 
     const { register, handleSubmit, watch, formState: { errors },reset } = useForm();
@@ -50,6 +51,7 @@ const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuPr
         }
         daysOfTraining.push(day)
         setcounterDays(counterDays + 1);
+        sets.splice(0)
     }
 
     return (
@@ -120,7 +122,7 @@ const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuPr
                 </Button>
                 <Button
                     variant="primary"
-                    onClick={setDayOfTraining}
+                    onClick={createTraining}
                     className={localStyles.btnForTraining}
                 >
                 Закончить создание тренировки
