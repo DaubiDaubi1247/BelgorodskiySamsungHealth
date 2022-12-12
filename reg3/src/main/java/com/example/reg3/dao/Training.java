@@ -14,6 +14,13 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "trainings")
 public class Training {
+
+
+    enum Status {
+        RED, GREEN, BLUE;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "training_id", nullable = false)
