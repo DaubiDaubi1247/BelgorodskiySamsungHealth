@@ -4,7 +4,6 @@ package com.example.reg3.dao;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -38,4 +37,12 @@ public class UserProgressInTraining {
         return getDayOfTraining() >= getTrainingId().getCountOfDays();
     }
 
+    public void incCountOfDays() throws Exception {
+        if (trainingId.getCountOfDays() >= dayOfTraining ){
+            dayOfTraining++;
+        }else {
+            throw new Exception("колличество выполненых дней превышает общее колличество дней");
+        }
+
+    }
 }

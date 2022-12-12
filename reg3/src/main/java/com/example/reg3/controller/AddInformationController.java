@@ -156,8 +156,9 @@ public class AddInformationController {
         var res6 = trainingService.addTrain(trainingList.get(2));
         var res7 = trainingService.addTrain(trainingList.get(3));
 
-        var res8 = userService.setTrainToUser(1L, 1L);
+
         var res9 = userService.setTrainToUser(2L, 2L);
+        var res8 = userService.setTrainToUser(1L, 1L);
 
         System.out.println(res);
         System.out.println(res2);
@@ -197,7 +198,7 @@ public class AddInformationController {
     @PostMapping("train")
     public void addTrain() {
         var trin = trainingList.get(0);
-        trin.setDaysOfTrainings(daysOfTrainingsFloppy1);
+        trin.setDaysOfTraining(daysOfTrainingsFloppy1);
 
         var ans = trainingService.addTrain(trainingList.get(0));
 

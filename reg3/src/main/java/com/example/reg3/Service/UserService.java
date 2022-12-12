@@ -32,8 +32,7 @@ public class UserService {
 
     public ResponseEntity<Object> getProgressOfUser(Long userId) {
         try {
-            var userProgress =
-                    trainingRepository.findProgressOfUser(userId);
+            var userProgress = trainingRepository.findProgressOfUser(userId);
 
             if (userProgress.size() == 1) {
                 var progress = new ProgressOfUserWithPresent(userProgress.get(0));
@@ -50,28 +49,39 @@ public class UserService {
 
     public ResponseEntity<Object> addProgressOfTrain(Long userId) {
         User user = userRepository.getReferenceById(userId);
-
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдет");
-        }
+        if (user == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдет");
 
         if (user.getUserProgresInTraining() != null) {
             UserProgressInTraining userProgress = user.getUserProgresInTraining();
 
             if (userProgress.isComplite()) {
-                user.setUserProgresInTraining(null);
-
-                userRepository.save(user);
+                completionTrain(user);
                 return ResponseEntity.status(HttpStatus.OK).body("Пользователь завершил программу тренеровок");
             } else {
-                user.incCountOfTrainigs();
-                userRepository.save(user);
-                return ResponseEntity.status(HttpStatus.OK)
-                        .body("Пользователь перешел к следующему дню тренеровок программу тренеровок");
+                try {
+                    upProgress(userProgress);
+                    return ResponseEntity.status(HttpStatus.OK)
+                            .body("Пользователь перешел к следующему дню тренеровок программу тренеровок");
+
+                } catch (Exception e) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+                }
             }
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь не подписан на программу тренеровки");
         }
+    }
+
+    private void completionTrain(User user) {
+        user.setUserProgresInTraining(null);
+        user.incCountOfTrainigs();
+        userRepository.save(user);
+    }
+
+    private void upProgress(UserProgressInTraining userProgress) throws Exception {
+        userProgress = userProgressInTrainingRepository.getReferenceById(userProgress.getId());
+        userProgress.incCountOfDays();
+        userProgressInTrainingRepository.save(userProgress);
     }
 
 
@@ -84,7 +94,7 @@ public class UserService {
             progress.setDayOfTraining(1);
             progress.setTrainingId(train);
 
-             progress = userProgressInTrainingRepository.save(progress);
+            progress = userProgressInTrainingRepository.save(progress);
 
             user.setUserProgresInTraining(progress);
             userRepository.save(user);
@@ -105,7 +115,7 @@ public class UserService {
 
             userRepository.save(user);
             return ResponseEntity.status(HttpStatus.OK).body("данные пользователя успешно обновлены");
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдено");
         }
     }

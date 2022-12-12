@@ -1,7 +1,6 @@
 package com.example.reg3.dao;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,7 +33,7 @@ public class Training {
 
 
     @OneToMany(fetch = FetchType.LAZY)
-    private List<DayOfTraining>  daysOfTrainings;
+    private List<DayOfTraining> daysOfTraining;
 
 
     public Training(String label,
@@ -46,6 +45,6 @@ public class Training {
         this.countOfDays = countOfDays;
         this.description = description;
         this.status = status;
-        this.daysOfTrainings = daysOfTrainings;
+        this.daysOfTraining = daysOfTrainings;
     }
 }

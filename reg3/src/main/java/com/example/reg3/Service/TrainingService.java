@@ -56,7 +56,7 @@ public class TrainingService {
         }
         else {
             for (var train : trainingListings) {
-                train.setDaysOfTrainings(null);
+                train.setDaysOfTraining(null);
             }
             return ResponseEntity.status(HttpStatus.OK).body(trainingListings);
         }
@@ -70,16 +70,12 @@ public class TrainingService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body("Данное название тренеровки уже занято");
         }
-
         if (train.getCountOfDays() < 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body("У тренеровки отрицательное колличество дней");
         }
-
         eliminationCollisionInDaysOfTraining(train);
-        train.setCountOfDays(train.getDaysOfTrainings().size());
-
-
+        train.setCountOfDays(train.getDaysOfTraining().size());
         try{
             trainingRepository.save(train);
             return ResponseEntity.status(HttpStatus.OK).body("тренеровка успешно добавлена");
@@ -87,12 +83,10 @@ public class TrainingService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ошибка сохранения "
                     + e.getMessage());
         }
-
-
     }
 
     private void eliminationCollisionInDaysOfTraining(Training training) {
-        var daysOfTraining = training.getDaysOfTrainings();
+        var daysOfTraining = training.getDaysOfTraining();
 
         for (var dayOfTraining : daysOfTraining) {
             var sets = dayOfTraining.getSets();

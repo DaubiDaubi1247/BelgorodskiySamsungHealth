@@ -26,7 +26,7 @@ public interface TrainingRepository
 
     List<Training> findByStatus(String status);
 
-    @Query("SELECT t.daysOfTrainings " +
+    @Query("SELECT t.daysOfTraining " +
             "FROM Training t " +
             "WHERE t.id = ?1")
     List<DayOfTraining> findDaysOfTraining(Long idOfTrain);
@@ -34,7 +34,7 @@ public interface TrainingRepository
 
     @Query("SELECT d " +
             "FROM Training t " +
-            "JOIN t.daysOfTrainings d " +
+            "JOIN t.daysOfTraining d " +
             "WHERE d.numberOfDay = :numOfDay AND t.id = :idOfTrain")
     DayOfTraining findDayOfTrain(Long idOfTrain, Integer numOfDay);
 
