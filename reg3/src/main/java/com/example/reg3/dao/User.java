@@ -1,6 +1,7 @@
 package com.example.reg3.dao;
 
 import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,7 +22,7 @@ public class User {
     private String name;
 
     @Column(name = "weight")
-    private  Float weight;
+    private Float weight;
 
     @Column(name = "height")
     private Integer height;
@@ -49,11 +50,9 @@ public class User {
     }
 
     public void incCountOfTrainigs() {
-        if (countOfCompletedTrainers == null) throw new RuntimeException("отсутстуют програма тренеровок");
-
-        if (!userProgresInTraining.isComplite()){
-            countOfCompletedTrainers++;
-        }
-
+        //if (countOfCompletedTrainers == null) throw new RuntimeException("отсутстуют програма тренеровок");
+        countOfCompletedTrainers++;
     }
+
 }
+

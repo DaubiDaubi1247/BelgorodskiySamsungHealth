@@ -48,27 +48,30 @@ public class UserService {
     }
 
     public ResponseEntity<Object> addProgressOfTrain(Long userId) {
+        try {
         User user = userRepository.getReferenceById(userId);
-        if (user == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдет");
 
-        if (user.getUserProgresInTraining() != null) {
+
+        var check = user.getUserProgresInTraining();
+        if (check != null) {
             UserProgressInTraining userProgress = user.getUserProgresInTraining();
 
             if (userProgress.isComplite()) {
                 completionTrain(user);
                 return ResponseEntity.status(HttpStatus.OK).body("Пользователь завершил программу тренеровок");
             } else {
-                try {
+
                     upProgress(userProgress);
                     return ResponseEntity.status(HttpStatus.OK)
                             .body("Пользователь перешел к следующему дню тренеровок программу тренеровок");
 
-                } catch (Exception e) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-                }
+
             }
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь не подписан на программу тренеровки");
+        }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Пользователь с данным id не найден");
         }
     }
 
