@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import styles from "../../../common/form/form.module.css"
+import localStyles from "./addTraining.module.css"
 import FormError from './../../../common/form/formError/FormError';
+import { IdayDescription } from './../../../API/trainingAPI/TtrainingAPI';
+import AdminAddTrainingInnerForm from './innerForm/InnerForm';
+import { is } from 'immer/dist/internal';
 
 
 interface IAdminAddTrainingMenuProps {
@@ -13,7 +17,9 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = () => console.log(1);
     const watchAllFields = watch();
+
     const [isVisble, setisVisble] = useState(false)
+    const daysOfTraining : Array<IdayDescription> = []
 
     useEffect(() => {
         console.log(watchAllFields); 
@@ -21,61 +27,69 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
 
     const newTrainingDescription = () => {
         let res : Array<any> = [];
-        res.push(<p>Название : {watchAllFields.nameOfTrain}</p>)
-        res.push(<p>Количество дней : {watchAllFields.countOfDays}</p>)
-        res.push(<p>описание  : {watchAllFields.description}</p>)
+        res.push(<p className={localStyles.resStr}>Название : {watchAllFields.nameOfTrain}</p>)
+        res.push(<p className={localStyles.resStr}>Количество дней : {watchAllFields.countOfDays}</p>)
+        res.push(<p className={localStyles.resStr}>Описание  : {watchAllFields.description}</p>)
 
         return res
     } 
 
     return (
         <div className={styles.formWrapper + " d-flex justify-content-between"}>
-            <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                <Form.Group
-                    className="mb-3"
-                    controlId="formBasicEmail"
-                >
-                    <Form.Label>Название Тренировки</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Название тренировки"
-                        {...register("nameOfTrain", { required: true })}
+            <div>
+                <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="formBasicEmail"
+                    >
+                        <Form.Label>Название Тренировки</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Название тренировки"
+                            {...register("nameOfTrain", { required: true })}
+                        />
+                        {errors.nameOfTrain?.type === "required" && <FormError message='Поле является обязательным' />}
+                    </Form.Group>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="formBasicPassword"
+                    >
+                        <Form.Label>Количество дней</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Количество дней"
+                            {...register("countOfDays", { required: true })}
+                        />
+                    </Form.Group>
+                    {errors.password && <FormError message='Поле является обязательным' />}
+                    <Form.Group
+                        className="mb-3"
+                        controlId="formBasicPassword"
+                    >
+                        <Form.Label>Описание</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Описание"
+                            {...register("description", { required: true })}
+                        />
+                    </Form.Group>
+                    {errors.password && <FormError message='Поле является обязательным' />}
+                    <Button
+                        variant="primary"
+                        onClick={() => setisVisble(true)}
+                    >
+                    Сохранить общее описание
+                    </Button>
+                
+                </Form>
+                <AdminAddTrainingInnerForm
+                        isVisible={isVisble}
+                        daysOfTraining={daysOfTraining}
                     />
-                    {errors.nameOfTrain?.type === "required" && <FormError message='Поле является обязательным' />}
-                </Form.Group>
-                <Form.Group
-                    className="mb-3"
-                    controlId="formBasicPassword"
-                >
-                    <Form.Label>Количество дней</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Количество дней"
-                        {...register("countOfDays", { required: true })}
-                    />
-                </Form.Group>
-                {errors.password && <FormError message='Поле является обязательным' />}
-
-                <Form.Group
-                    className="mb-3"
-                    controlId="formBasicPassword"
-                >
-                    <Form.Label>Описание</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Описание"
-                        {...register("description", { required: true })}
-                    />
-                </Form.Group>
-                {errors.password && <FormError message='Поле является обязательным' />}
-                <Button
-                    variant="primary"
-                    onClick={() => setisVisble(true)}
-                >
-                Сохранить общее описание
-                </Button>
-            </Form>
-            <div>{isVisble ? newTrainingDescription() : <></>}</div>
+            </div>
+            <div className={localStyles.resBlock}>
+                {isVisble ? newTrainingDescription() : <></>}
+            </div>
         </div>
     );
 };
