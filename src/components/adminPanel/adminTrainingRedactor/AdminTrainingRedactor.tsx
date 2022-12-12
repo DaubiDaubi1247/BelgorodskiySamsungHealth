@@ -10,9 +10,9 @@ const AdminTrainingRedactor: React.FunctionComponent<IAdminTrainingRedactorProps
 
     const trainingItemArr = smallDataAboutTRainings.map(el => <TrainingItem {...el} isAdmin isUserTraining={false}/>)
 
-    return <>
+    return <div>
         {trainingItemArr}
-    </>
+    </div>
 };
 
 export default AdminTrainingRedactor;

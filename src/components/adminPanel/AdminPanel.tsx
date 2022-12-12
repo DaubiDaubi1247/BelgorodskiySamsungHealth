@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch } from './../../app/hooks';
 import AdminPanelButtons from './adminPanelButtons/AdminPanelButtons';
+import { Container } from 'react-bootstrap';
 
 interface IAdminPanelProps {
 }
@@ -23,7 +24,7 @@ const AdminPanelContainer: React.FunctionComponent<IAdminPanelProps> = (props) =
     })
 
     return (
-        <div style={{width : "90%", margin:"0 auto"}}>
+        <div >
             <h2>Здравствуйте, Вы посетили панель администратора</h2>
             <AdminPanelButtons/>
             

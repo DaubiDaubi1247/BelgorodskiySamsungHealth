@@ -12,6 +12,7 @@ export const MainRoutes = {
 
 export const admin = "/admin";
 export const AdminRoutes = {
-    redactOfTrain : admin + "/redact"
+    redactOfTrain : admin + "/redact",
+    createTraining : admin + "/create"
 } 
 

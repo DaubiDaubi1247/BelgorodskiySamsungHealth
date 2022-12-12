@@ -17,10 +17,12 @@ const AdminPanelButtons: React.FunctionComponent<AadminPanelButtonsProps> = (pro
         navigate(AdminRoutes.redactOfTrain);
     }
 
+    const createTraining = () => navigate(AdminRoutes.createTraining)
+
     return (
         <>
             <Button style={{marginRight:"15px"}} onClick={watchTraining}>Просмотреть тренировки</Button>
-            <Button>Создать тренировку</Button>
+            <Button onClick={createTraining}>Создать тренировку</Button>
         </>
     )
 };

@@ -13,15 +13,16 @@ import NavBar from './components/navBar/NavBar';
 import TrainingContainer from './components/training/TraininigContainer';
 import AdminPanelContainer from './components/adminPanel/AdminPanel';
 import AdminTrainingRedactor from './components/adminPanel/adminTrainingRedactor/AdminTrainingRedactor';
+import AdminAddTrainingMenu from './components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu';
 
 function App() {
 
     return (
         <div className="App">
             <Header />
-            <Container className='d-flex justify-content-center'>
+            <Container className='d-flex'>
                 <NavBar />
-                <div className='flex-fill'>
+                <div className='flex-fill d-flex justify-content-center'>
                     <Routes>
                         <Route path={main}>
                             <Route path={main} element={<MainContainer />} />
@@ -34,6 +35,7 @@ function App() {
                         <Route path={admin}>
                             <Route path={admin} element={<AdminPanelContainer />} />
                             <Route path={AdminRoutes.redactOfTrain} element={<AdminTrainingRedactor/>}/>
+                            <Route path={AdminRoutes.createTraining} element={<AdminAddTrainingMenu/>}/>
                         </Route>
                     </Routes>
                 </div>
