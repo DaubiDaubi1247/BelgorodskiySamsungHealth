@@ -44,6 +44,13 @@ public class TrainingController {
         return trainingService.getTrainings();
     }
 
+    @GetMapping("LightBackgroundAllTrain")
+    public ResponseEntity<Object> getLightBackgroundAllTrain() {
+        return trainingService.getAllTrainings();
+    }
+
+
+
 
     @GetMapping("daysOfTrain")
     public ResponseEntity<Object> getTrainingDays(@RequestParam(required =false) Long id) {

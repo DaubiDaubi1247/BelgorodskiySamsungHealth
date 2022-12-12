@@ -60,6 +60,19 @@ public class TrainingService {
         }
     }
 
+    public ResponseEntity<Object> getAllTrainings() {
+        var trainingListings = trainingRepository.findAll();
+
+        if (trainingListings.size() == 0) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("тренеровки отсутствуют в бд");
+        } else {
+            for (var train : trainingListings) {
+                train.setDaysOfTraining(null);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(trainingListings);
+        }
+    }
+
 
     public ResponseEntity<Object> addTrain(Training train) {
         var questionTrain = trainingRepository.findByLabel(train.getLabel());
@@ -165,5 +178,6 @@ public class TrainingService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Тренеровка с " + trainId + " id не найдена");
         }
     }
-
 }
+
+
