@@ -113,10 +113,10 @@ public class AddInformationController {
 
 
      List<Training> trainingList = List.of(
-            new Training("Гибкость1", 2, "Станешь гибким", "not available", daysOfTrainingsFloppy1),
+            new Training("Гибкость1", 2, "Станешь гибким", "available", daysOfTrainingsFloppy1),
             new Training("Сила", 3, "Станешь не очень сильным", "available", daysOfTrainingsPower),
-            new Training("Выносливость", 0, "Станешь немного выносливым", "not available", new ArrayList<>()),
-            new Training("Разминание очка", 0, "будем сдавать сис. мод...", "available", new ArrayList<>())
+            new Training("Выносливость", 0, "Станешь немного выносливым", "available", new ArrayList<>()),
+            new Training("Разминание очка", 0, "будем сдавать сис. мод...", "not available", new ArrayList<>())
     );
 
 

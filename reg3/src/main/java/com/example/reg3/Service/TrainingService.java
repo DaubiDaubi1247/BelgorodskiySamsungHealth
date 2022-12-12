@@ -133,4 +133,23 @@ public class TrainingService {
             return ResponseEntity.status(HttpStatus.OK).body(trainingDay);
         }
     }
+
+    public ResponseEntity<Object> deactivateTrain(Long trainId) {
+        try {
+            var train = trainingRepository.getReferenceById(trainId);
+            var status = train.getStatus();
+            if ("not available".equals(status)){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Тренеровка с " + trainId + " id уже и так не доступна");
+            }else {
+                train.setStatus("not available");
+                trainingRepository.save(train);
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body("Тренеровка с " + trainId + " id теперь не доступна");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Тренеровка с " + trainId + " id не найдена");
+        }
+
+    }
 }

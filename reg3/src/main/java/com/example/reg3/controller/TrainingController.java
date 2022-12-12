@@ -29,12 +29,17 @@ public class TrainingController {
         this.userService = userService;
     }
 
+    @GetMapping("deactivate")
+    public ResponseEntity<Object> deactivateTrain(@RequestParam(required =false) Long trainId) {
+        return trainingService.deactivateTrain(trainId);
+    }
+
     @GetMapping("LightBackground")
     public ResponseEntity<Object> getLightBackground() {
         return trainingService.getTrainings();
     }
 
-    //todo переделать
+
     @GetMapping("daysOfTrain")
     public ResponseEntity<Object> getTrainingDays(@RequestParam(required =false) Long id) {
         return trainingService.getTrainingDays(id);
