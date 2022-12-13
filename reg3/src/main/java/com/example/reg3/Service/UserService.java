@@ -40,17 +40,17 @@ public class UserService {
 
             if (userProgress.size() == 1) {
                 var progress = new ProgressOfUserWithPresent(userProgress.get(0));
-                bot.sendLog("возвращен прогресс  пользвателя с id " + userId);
+                bot.sendInfo("возвращен прогресс  пользвателя с id " + userId);
                 return ResponseEntity.status(HttpStatus.OK).body(progress);
             } else if (userProgress.size() == 0) {
-                bot.sendLog("прогресс не найден у пользвателя с id " + userId);
+                bot.sendInfo("прогресс не найден у пользвателя с id " + userId);
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("прогресс не найден");
             } else {
-                bot.sendLog("у пользователя несколько прогрессов одновременно id пользователя = " + userId);
+                bot.sendInfo("у пользователя несколько прогрессов одновременно id пользователя = " + userId);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("непредвиденная ошибка");
             }
         } catch (Exception e) {
-            bot.sendLog("ERROR " + userId);
+            bot.sendError(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("не найден прогресс ползьзователя");
         }
     }

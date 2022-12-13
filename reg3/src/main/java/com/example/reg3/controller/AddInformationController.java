@@ -151,7 +151,7 @@ public class AddInformationController {
 
     @GetMapping("all")
     public void registrationUser() {
-        bot.sendLog("Вызов http://localhost:8011/add/all");
+        bot.sendInfo("Вызов http://localhost:8011/add/all");
         var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
         var res2 =  userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
         var res3 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(2));
@@ -177,6 +177,7 @@ public class AddInformationController {
         msg.append(res8).append("\n");
         msg.append(res9).append("\n");
         bot.sendInfo(msg.toString());
+        bot.executeSendLog();
 
     }
 

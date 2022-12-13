@@ -7,6 +7,7 @@ import com.example.reg3.Service.TrainingService;
 import com.example.reg3.Service.UserService;
 import com.example.reg3.dao.Training;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,60 +35,125 @@ public class TrainingController {
     }
 
     @GetMapping("deactivate")
-    public ResponseEntity<Object> deactivateTrain(@RequestParam(required =false) Long trainId) {
-        bot.sendInfo("обращение к training/deactivate");
-        return trainingService.deactivateTrain(trainId);
+    public ResponseEntity<Object> deactivateTrain(@RequestParam(required = false) Long trainId) {
+        try {
+
+            bot.sendInfo("обращение к training/deactivate");
+            var res = trainingService.deactivateTrain(trainId);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @GetMapping("active")
-    public ResponseEntity<Object> activeTrain(@RequestParam(required =false) Long trainId) {
-        bot.sendInfo("обращение к training/active");
-        return trainingService.activeTrain(trainId);
+    public ResponseEntity<Object> activeTrain(@RequestParam(required = false) Long trainId) {
+        try {
+
+            bot.sendInfo("обращение к training/active");
+            var res = trainingService.activeTrain(trainId);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @GetMapping("LightBackground")
     public ResponseEntity<Object> getLightBackground() {
-        bot.sendInfo("обращение к training/LightBackground");
+        try {
 
-        return trainingService.getTrainings();
+            bot.sendInfo("обращение к training/LightBackground");
+            var res = trainingService.getTrainings();
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @GetMapping("LightBackgroundAllTrain")
     public ResponseEntity<Object> getLightBackgroundAllTrain() {
-        bot.sendInfo("обращение к training/LightBackgroundAllTrain");
+        try {
 
-        return trainingService.getAllTrainings();
+            bot.sendInfo("обращение к training/LightBackgroundAllTrain");
+            var res = trainingService.getAllTrainings();
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
-
-
 
 
     @GetMapping("daysOfTrain")
-    public ResponseEntity<Object> getTrainingDays(@RequestParam(required =false) Long id) {
-        bot.sendInfo("обращение к training/daysOfTrain");
+    public ResponseEntity<Object> getTrainingDays(@RequestParam(required = false) Long id) {
+        try {
 
-        return trainingService.getTrainingDays(id);
+            bot.sendInfo("обращение к training/daysOfTrain");
+            var res = trainingService.getTrainingDays(id);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @GetMapping("dayOfTrain")
-    public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
-                                                 @RequestParam(required =false) Integer numOfDay) {
-        bot.sendInfo("обращение к training/dayOfTrain");
-        return trainingService.getTrainingDay(id, numOfDay);
+    public ResponseEntity<Object> getTrainingDay(@RequestParam(required = false) Long id,
+                                                 @RequestParam(required = false) Integer numOfDay) {
+        try {
+            bot.sendInfo("обращение к training/dayOfTrain");
+            var res = trainingService.getTrainingDay(id, numOfDay);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
-    @GetMapping("userTrainingProgress")
-    public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {
-        bot.sendInfo("обращение к training/userTrainingProgress");
 
-        return userService.getProgressOfUser(id);
+
+    @GetMapping("userTrainingProgress")
+    public ResponseEntity<Object> getLightBackground(@RequestParam(required = false) Long id) {
+        try {
+            bot.sendInfo("обращение к training/userTrainingProgress");
+
+            var res = userService.getProgressOfUser(id);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @PostMapping("addTrain")
     public ResponseEntity<Object> addNewTrain(@RequestBody Training train) {
-        bot.sendInfo("обращение к training/addTrain");
-        return trainingService.addTrain(train);
+        try {
+
+            bot.sendInfo("обращение к training/addTrain");
+            var res = trainingService.addTrain(train);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
-
-
 }

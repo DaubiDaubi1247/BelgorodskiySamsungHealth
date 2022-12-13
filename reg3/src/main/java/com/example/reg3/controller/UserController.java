@@ -5,6 +5,7 @@ import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.Service.UserService;
 import com.example.reg3.dao.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,27 +26,59 @@ public class UserController {
     @GetMapping("updayteDayOfTrain")
 
     public ResponseEntity<Object> updateDayOfTraining
-            (@RequestParam(required =false) Long userId) {
-        bot.sendInfo("обращение к user/updayteDayOfTrain");
-        return userService.addProgressOfTrain(userId);
+            (@RequestParam(required = false) Long userId) {
+        try {
+            bot.sendInfo("обращение к user/updayteDayOfTrain");
+            var res = userService.addProgressOfTrain(userId);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @GetMapping("setTrainToUser")
-    public ResponseEntity<Object> addTrainToUser(@RequestParam(required =false) Long userId,
-                                                 @RequestParam(required =false) Long trainId) {
-        bot.sendInfo("обращение к user/setTrainToUser");
-        return userService.setTrainToUser(userId, trainId);
+    public ResponseEntity<Object> addTrainToUser(@RequestParam(required = false) Long userId,
+                                                 @RequestParam(required = false) Long trainId) {
+        try {
+            bot.sendInfo("обращение к user/setTrainToUser");
+            var res = userService.setTrainToUser(userId, trainId);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @PostMapping("setUserData")
     public ResponseEntity<Object> setUserData(@RequestBody User user) {
-        bot.sendInfo("обращение к user/setUserData");
-        return userService.setUserData(user);
+        try {
+            bot.sendInfo("обращение к user/setUserData");
+            var res = userService.setUserData(user);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 
     @GetMapping("getUserData")
-    public ResponseEntity<Object> getUserData(@RequestParam(required =false) Long userId) {
-        bot.sendInfo("обращение к user/getUserData");
-        return userService.getUserData(userId);
+    public ResponseEntity<Object> getUserData(@RequestParam(required = false) Long userId) {
+        try {
+            bot.sendInfo("обращение к user/getUserData");
+            var res = userService.getUserData(userId);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
     }
 }

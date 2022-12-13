@@ -15,6 +15,8 @@ public class TelegramBot
     final BotConfig config;
     private final ChatIdInfoRepository chatIdInfoRepository;
 
+    private StringBuilder accumulateInfo = new StringBuilder();
+
     public TelegramBot(BotConfig config, List<Long> idOfChats, ChatIdInfoRepository chatIdInfoRepository) {
         this.config = config;
         this.chatIdInfoRepository = chatIdInfoRepository;
@@ -66,18 +68,27 @@ public class TelegramBot
     }
 
     public void sendInfo(String msg) {
-        sendLog("(INFO): " + msg);
+        accumulateInfo.append("(INFO): ").append(msg).append("\n\n");
     }
 
     public void sendError(String msg) {
-        sendLog("(ERROR): " + msg);
+        accumulateInfo.append("(ERROR): ").append(msg).append("\n\n");
     }
 
-    public void sendWarning(String msg) {
-        sendLog("(WARNING): " + msg);
+    public void sendWarning(String msg)
+    {
+        accumulateInfo.append("(WARNING): ").append(msg).append("\n\n");
     }
 
-    public void sendLog(String msg) {
+    public void executeSendLog() {
+        if (accumulateInfo.isEmpty()) {
+            sendLog("Пустой лог");
+        }else {
+            sendLog(accumulateInfo.toString());
+            accumulateInfo = new StringBuilder();
+        }
+    }
+    private void sendLog(String msg) {
         var listIdOfChats = chatIdInfoRepository.findAll();
         for (var user : listIdOfChats) {
             sendMessge(user.getChatId(), msg);
@@ -110,7 +121,7 @@ public class TelegramBot
         try {
             execute(message);
         } catch (TelegramApiException e) {
-            throw new RuntimeException("Ошибка в телеграм боте при отправке сообщения");
+            //throw new RuntimeException("Ошибка в телеграм боте при отправке сообщения");
         }
     }
 }

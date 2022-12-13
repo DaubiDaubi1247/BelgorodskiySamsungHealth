@@ -19,7 +19,7 @@ public class BotInitiolizer {
         try {
             telegramBotsApi.registerBot(bot);
         } catch (TelegramApiException e) {
-            throw new RuntimeException();
+            //throw new RuntimeException();
         }
     }
 }
