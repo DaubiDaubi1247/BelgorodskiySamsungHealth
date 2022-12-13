@@ -21,10 +21,12 @@ public interface TrainingRepository
             "FROM User u " +
             "JOIN u.userProgresInTraining prog " +
             "JOIN prog.trainingId train " +
-            "WHERE u.id = ?1")
+            "WHERE u.id = :id")
     List<ProgressOfUser> findProgressOfUser(Long id);
 
     List<Training> findByStatus(String status);
+
+
 
     @Query("SELECT t.daysOfTrainings " +
             "FROM Training t " +

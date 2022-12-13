@@ -102,8 +102,10 @@ public class TrainingService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body("У тренеровки отрицательное колличество дней");
         }
+
         eliminationCollisionInDaysOfTraining(train);
         train.setCountOfDays(train.getDaysOfTrainings().size());
+
         try {
             if (train.getStatus() == null) train.setStatus("available");
             trainingRepository.save(train);
