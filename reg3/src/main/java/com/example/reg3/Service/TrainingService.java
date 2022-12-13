@@ -23,7 +23,6 @@ public class TrainingService {
     private final SetRepository setRepository;
     private final ExerciseRepository exerciseRepository;
     private final TrainingRepository trainingRepository;
-
     private final DayOfTrainingRepository dayOfTrainingRepository;
 
 
