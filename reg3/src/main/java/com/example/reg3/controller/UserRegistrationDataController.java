@@ -24,17 +24,19 @@ public class UserRegistrationDataController {
 
     @GetMapping
     public List<UserRegistrationData> getStudents() {
+        bot.sendInfo("обращение к hole");
         return userRegistrationDataService.getUsers();
     }
 
     @PostMapping("registration")
     public UserRegistrationDataRequest registrationUser(@RequestBody UserRegistrationData user) {
+        bot.sendInfo("обращение к hole/registration");
         return userRegistrationDataService.addNewUser(user);
     }
 
     @PostMapping("authentication")
     public UserRegistrationDataRequest authenticationUser(@RequestBody UserRegistrationData user) {
-
+        bot.sendInfo("обращение к hole/authentication");
         return userRegistrationDataService.checkUser(user);
     }
 
