@@ -9,6 +9,7 @@ const authAxios = axios.create({
 
 export const authAPI = {
     authUser(accessData : Inputs) {
+        debugger
         return authAxios.post<IResponse>("/authentication", accessData)
     },
 

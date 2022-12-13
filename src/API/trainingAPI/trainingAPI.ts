@@ -20,8 +20,11 @@ export const trainingAPI = {
     },
 
     createTraining(trainig : TCreateTrainig) {
-        debugger
         return trainingAxios.post("/addTrain", trainig)
+    },
+    
+    deactivateTraining(trainingId : number) {
+        return trainingAxios.get(`/deactivate?trainId=${trainingId}`)
     }
 
 }

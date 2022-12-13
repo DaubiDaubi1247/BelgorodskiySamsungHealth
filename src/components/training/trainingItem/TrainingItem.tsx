@@ -6,11 +6,12 @@ import { useAppSelector } from '../../../app/hooks';
 import { Button } from 'react-bootstrap';
 import DayList from './../daysList/DaysList';
 import { useAppDispatch } from './../../../app/hooks';
-import { getArrDaysExpires, setUserTrain } from './../../../slices/training/thunk';
+import { deactivateTraining, getArrDaysExpires, setUserTrain } from './../../../slices/training/thunk';
 import Progressbar from './progressBar/progressbar';
 import DayListContainer from './../daysList/dayListContainer/DayListContainer';
 import { setLoading } from '../../../slices/common/commonSlice';
 import styles from "./TI.module.css"
+import { deleteTraining } from '../../../slices/training/trainingSlice';
 
 interface ITrainingProps extends ItrainigData {
     isUserTraining : boolean
@@ -39,6 +40,11 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
         }
     }
 
+    const deactivateTrainingHandler = () => {
+        dispatch(deactivateTraining(id))
+        dispatch(deleteTraining(id))
+    }
+
     // delete thunk
     //const handlerForDeleteBtn = () => dispatch()
 
@@ -47,7 +53,7 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
           <Card.Body>
             <div className="d-flex justify-content-between">
                 <Card.Title>{label}</Card.Title>
-                {isAdmin ? <Button  className={styles.myButtons} variant="danger">x</Button> : <></>}
+                {isAdmin ? <Button  className={styles.myButtons} onClick={deactivateTrainingHandler} variant="danger">x</Button> : <></>}
             </div>
             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
             <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>

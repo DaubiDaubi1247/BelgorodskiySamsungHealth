@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr, ArrDaysExpires } from './../../API/trainingAPI/TtrainingAPI';
 import { CONST, ItrainitState } from './Types';
-import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain } from './thunk';
+import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining } from './thunk';
 import { useAppSelector } from '../../app/hooks';
 
 
@@ -11,6 +11,8 @@ const initialState: ItrainitState = {
     smallUserTraining : null,
     arrDaysExpires : [],
     percentOfProgress : CONST.NO_DATA,
+    messageForCreate : ""
+
 };
 
 const trainingSlice = createSlice({
@@ -21,6 +23,10 @@ const trainingSlice = createSlice({
         setSmallData: (state, action: PayloadAction<TrainingDataArr>) => {
             state.smallDataTrainings = action.payload;
         },
+
+        deleteTraining: (state, action : PayloadAction<number>) => {
+            state.smallDataTrainings = state.smallDataTrainings.filter(el => el.id !== action.payload)
+        }
 
     },
 
@@ -40,6 +46,10 @@ const trainingSlice = createSlice({
                 
                 state.arrDaysExpires = action.payload
             })
+            .addCase(createTraining.fulfilled.type, (state, action: PayloadAction<string>) => {
+                
+                state.messageForCreate = action.payload
+            })
             // .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
             //     state.arrDaysExpires = action.payload
             // })
@@ -47,7 +57,7 @@ const trainingSlice = createSlice({
     },
 });
 
-export const { setSmallData } = trainingSlice.actions;
+export const { setSmallData,deleteTraining } = trainingSlice.actions;
 
 export const selectSmallUserTraining = (state : RootState) => state.training.smallUserTraining
 

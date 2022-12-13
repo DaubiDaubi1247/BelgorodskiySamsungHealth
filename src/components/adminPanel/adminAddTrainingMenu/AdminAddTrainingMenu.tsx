@@ -8,7 +8,7 @@ import FormError from './../../../common/form/formError/FormError';
 import { DayExercises, IdayDescription, TCreateTrainig } from './../../../API/trainingAPI/TtrainingAPI';
 import AdminAddTrainingInnerForm from './innerForm/InnerForm';
 import { is } from 'immer/dist/internal';
-import { useAppDispatch } from './../../../app/hooks';
+import { useAppDispatch, useAppSelector } from './../../../app/hooks';
 import { createTraining } from './../../../slices/training/thunk';
 
 
@@ -16,12 +16,13 @@ interface IAdminAddTrainingMenuProps {
 }
 
 const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> = (props) => {
+
+    const messageForCreate = useAppSelector(state => state.training.messageForCreate)
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const watchAllFields = watch();
 
     const [isVisble, setisVisble] = useState(false)
-    const [numberOfDay, setnumberOfDay] = useState(1)
-    const [sets, setsets] = useState<DayExercises>([])
 
     const daysOfTraining : Array<IdayDescription> = []
 
@@ -42,6 +43,7 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
     return (
         <div className={styles.formWrapper + " d-flex justify-content-between"}>
             <div>
+            {messageForCreate.length !== 0 ? <span style={{color : "green"}}>{messageForCreate}</span> : ""}
                 <Form onSubmit={handleSubmit(createTrainingRequest)} className={styles.form}>
                     <Form.Group
                         className="mb-3"

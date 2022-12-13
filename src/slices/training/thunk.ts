@@ -71,3 +71,15 @@ export const createTraining = createAsyncThunk(
         }
    }
 )
+
+export const deactivateTraining = createAsyncThunk(
+    "training/deactivateTraining",
+   async (trainingId : number, thunkApi) => {
+        try {
+            const response = await trainingAPI.deactivateTraining(trainingId);
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+   }
+)
