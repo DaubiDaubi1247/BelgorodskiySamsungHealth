@@ -59,7 +59,5 @@ const trainingSlice = createSlice({
 
 export const { setSmallData,deleteTraining } = trainingSlice.actions;
 
-export const selectSmallUserTraining = (state : RootState) => state.training.smallUserTraining
-
 
 export default trainingSlice.reducer;
