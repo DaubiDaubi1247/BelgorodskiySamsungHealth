@@ -1,5 +1,6 @@
 package com.example.reg3.Service;
 
+import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.User;
 import com.example.reg3.dao.UserRegistrationData;
 import com.example.reg3.repository.UserRegistrationDataRepository;
@@ -24,7 +25,8 @@ import java.util.Properties;
 
 @Service
 public class UserRegistrationDataService {
-
+    @Autowired
+    TelegramBot bot;
     private final SecretKeySpec key;
     String algorithm;
 

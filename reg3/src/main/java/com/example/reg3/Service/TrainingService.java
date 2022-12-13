@@ -1,6 +1,7 @@
 package com.example.reg3.Service;
 
 
+import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.Set;
 import com.example.reg3.dao.Training;
 import com.example.reg3.repository.DayOfTrainingRepository;
@@ -17,7 +18,8 @@ import java.util.List;
 
 @Service
 public class TrainingService {
-
+    @Autowired
+    TelegramBot bot;
     private final SetRepository setRepository;
     private final ExerciseRepository exerciseRepository;
     private final TrainingRepository trainingRepository;

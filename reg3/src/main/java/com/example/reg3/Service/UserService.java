@@ -1,6 +1,7 @@
 package com.example.reg3.Service;
 
 
+import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.User;
 import com.example.reg3.dao.UserProgressInTraining;
 import com.example.reg3.repository.TrainingRepository;
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
+    @Autowired
+    TelegramBot bot;
 
     private final TrainingRepository trainingRepository;
     private final UserRepository userRepository;

@@ -1,5 +1,6 @@
 package com.example.reg3.controller;
 
+import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.Service.UserRegistrationDataService;
 import com.example.reg3.dao.UserRegistrationData;
 import com.example.reg3.requastion.UserRegistrationDataRequest;
@@ -12,6 +13,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("hole")
 public class UserRegistrationDataController {
+    @Autowired
+    TelegramBot bot;
     private final UserRegistrationDataService userRegistrationDataService;
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.example.reg3.controller;
 
 
+import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.Service.UserService;
 import com.example.reg3.dao.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("user")
 public class UserController {
+    @Autowired
+    TelegramBot bot;
 
     private final UserService userService;
 
