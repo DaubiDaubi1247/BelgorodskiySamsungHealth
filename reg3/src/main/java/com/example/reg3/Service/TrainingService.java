@@ -54,7 +54,7 @@ public class TrainingService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("тренеровки отсутствуют в бд");
         } else {
             for (var train : trainingListings) {
-                train.setDaysOfTraining(null);
+                train.setDaysOfTrainings(null);
             }
             return ResponseEntity.status(HttpStatus.OK).body(trainingListings);
         }
@@ -67,7 +67,7 @@ public class TrainingService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("тренеровки отсутствуют в бд");
         } else {
             for (var train : trainingListings) {
-                train.setDaysOfTraining(null);
+                train.setDaysOfTrainings(null);
             }
             return ResponseEntity.status(HttpStatus.OK).body(trainingListings);
         }
@@ -86,7 +86,7 @@ public class TrainingService {
                     body("У тренеровки отрицательное колличество дней");
         }
         eliminationCollisionInDaysOfTraining(train);
-        train.setCountOfDays(train.getDaysOfTraining().size());
+        train.setCountOfDays(train.getDaysOfTrainings().size());
         try {
             trainingRepository.save(train);
             return ResponseEntity.status(HttpStatus.OK).body("тренеровка успешно добавлена");
@@ -97,7 +97,7 @@ public class TrainingService {
     }
 
     private void eliminationCollisionInDaysOfTraining(Training training) {
-        var daysOfTraining = training.getDaysOfTraining();
+        var daysOfTraining = training.getDaysOfTrainings();
 
         for (var dayOfTraining : daysOfTraining) {
             var sets = dayOfTraining.getSets();

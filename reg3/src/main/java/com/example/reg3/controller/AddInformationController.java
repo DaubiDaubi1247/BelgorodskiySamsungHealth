@@ -198,7 +198,7 @@ public class AddInformationController {
     @PostMapping("train")
     public void addTrain() {
         var trin = trainingList.get(0);
-        trin.setDaysOfTraining(daysOfTrainingsFloppy1);
+        trin.setDaysOfTrainings(daysOfTrainingsFloppy1);
 
         var ans = trainingService.addTrain(trainingList.get(0));
 

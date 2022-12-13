@@ -39,8 +39,8 @@ public class Training {
     private String status;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<DayOfTraining> daysOfTraining;
+    @OneToMany
+    private List<DayOfTraining> daysOfTrainings;
 
 
     public Training(String label,
@@ -52,6 +52,6 @@ public class Training {
         this.countOfDays = countOfDays;
         this.description = description;
         this.status = status;
-        this.daysOfTraining = daysOfTrainings;
+        this.daysOfTrainings = daysOfTrainings;
     }
 }
