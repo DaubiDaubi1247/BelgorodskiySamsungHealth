@@ -8,6 +8,9 @@ const userAxios = axios.create({
 export const userAPI = {
     setUserTrain(userId : number, trainId : number) {
         return userAxios.get(`setTrainToUser?userId=${userId}&trainId=${trainId}`)
+    },
+    getUserData(userId : number ){
+        return userAxios.get(`/getUserData?userId=${userId}`)
     }
 }
 

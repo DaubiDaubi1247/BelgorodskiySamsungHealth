@@ -14,6 +14,7 @@ import TrainingContainer from './components/training/TraininigContainer';
 import AdminPanelContainer from './components/adminPanel/AdminPanel';
 import AdminTrainingRedactor from './components/adminPanel/adminTrainingRedactor/AdminTrainingRedactor';
 import AdminAddTrainingMenu from './components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu';
+import ProfileContainer from './components/profile/ProfileContainer';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
                             <Route path={AdminRoutes.redactOfTrain} element={<AdminTrainingRedactor/>}/>
                             <Route path={AdminRoutes.createTraining} element={<AdminAddTrainingMenu/>}/>
                         </Route>
+                        <Route path="/profile" element={<ProfileContainer/>}/>
                     </Routes>
                 </div>
             </Container>
