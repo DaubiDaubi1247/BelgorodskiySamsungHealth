@@ -1,13 +1,12 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import styles from "../../../common/form/form.module.css"
 import localStyles from "./addTraining.module.css"
 import FormError from './../../../common/form/formError/FormError';
-import { DayExercises, IdayDescription, TCreateTrainig } from './../../../API/trainingAPI/TtrainingAPI';
+import {IdayDescription, TCreateTrainig } from './../../../API/trainingAPI/TtrainingAPI';
 import AdminAddTrainingInnerForm from './innerForm/InnerForm';
-import { is } from 'immer/dist/internal';
 import { useAppDispatch, useAppSelector } from './../../../app/hooks';
 import { createTraining } from './../../../slices/training/thunk';
 
@@ -27,7 +26,6 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
     const daysOfTraining : Array<IdayDescription> = []
 
     const dispatch = useAppDispatch()
-
 
     const createTrainingRequest = () => {
         let training : TCreateTrainig = {
@@ -65,10 +63,10 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
                         <Form.Control
                             type="text"
                             placeholder="Количество дней"
-                            {...register("countOfDays", { required: true })}
+                            {...register("countOfDays", { required: true, pattern: /\d/ })}
                         />
                     </Form.Group>
-                    {errors.password && <FormError message='Поле является обязательным' />}
+                    {errors.countOfDays?.type === "pattern" && <FormError message='Поле может быть только числовым' />}
                     <Form.Group
                         className="mb-3"
                         controlId="formBasicPassword"
