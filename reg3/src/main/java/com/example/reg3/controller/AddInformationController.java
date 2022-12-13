@@ -176,7 +176,7 @@ public class AddInformationController {
         msg.append(res7).append("\n");
         msg.append(res8).append("\n");
         msg.append(res9).append("\n");
-        bot.sendLog(msg.toString());
+        bot.sendInfo(msg.toString());
 
     }
 

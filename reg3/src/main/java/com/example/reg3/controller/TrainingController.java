@@ -35,21 +35,27 @@ public class TrainingController {
 
     @GetMapping("deactivate")
     public ResponseEntity<Object> deactivateTrain(@RequestParam(required =false) Long trainId) {
+        bot.sendInfo("обращение к training/deactivate");
         return trainingService.deactivateTrain(trainId);
     }
 
     @GetMapping("active")
     public ResponseEntity<Object> activeTrain(@RequestParam(required =false) Long trainId) {
+        bot.sendInfo("обращение к training/active");
         return trainingService.activeTrain(trainId);
     }
 
     @GetMapping("LightBackground")
     public ResponseEntity<Object> getLightBackground() {
+        bot.sendInfo("обращение к training/LightBackground");
+
         return trainingService.getTrainings();
     }
 
     @GetMapping("LightBackgroundAllTrain")
     public ResponseEntity<Object> getLightBackgroundAllTrain() {
+        bot.sendInfo("обращение к training/LightBackgroundAllTrain");
+
         return trainingService.getAllTrainings();
     }
 
@@ -58,22 +64,28 @@ public class TrainingController {
 
     @GetMapping("daysOfTrain")
     public ResponseEntity<Object> getTrainingDays(@RequestParam(required =false) Long id) {
+        bot.sendInfo("обращение к training/daysOfTrain");
+
         return trainingService.getTrainingDays(id);
     }
 
     @GetMapping("dayOfTrain")
     public ResponseEntity<Object> getTrainingDay(@RequestParam(required =false) Long id,
                                                  @RequestParam(required =false) Integer numOfDay) {
+        bot.sendInfo("обращение к training/dayOfTrain");
         return trainingService.getTrainingDay(id, numOfDay);
     }
 
     @GetMapping("userTrainingProgress")
     public ResponseEntity<Object> getLightBackground(@RequestParam(required =false) Long id) {
+        bot.sendInfo("обращение к training/userTrainingProgress");
+
         return userService.getProgressOfUser(id);
     }
 
     @PostMapping("addTrain")
     public ResponseEntity<Object> addNewTrain(@RequestBody Training train) {
+        bot.sendInfo("обращение к training/addTrain");
         return trainingService.addTrain(train);
     }
 
