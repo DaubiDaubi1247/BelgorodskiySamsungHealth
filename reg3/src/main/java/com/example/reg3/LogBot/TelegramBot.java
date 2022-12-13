@@ -65,6 +65,18 @@ public class TelegramBot
         }
     }
 
+    public void sendInfo(String msg) {
+        sendLog("(INFO): " + msg);
+    }
+
+    public void sendError(String msg) {
+        sendLog("(ERROR): " + msg);
+    }
+
+    public void sendWarning(String msg) {
+        sendLog("(WARNING): " + msg);
+    }
+
     public void sendLog(String msg) {
         var listIdOfChats = chatIdInfoRepository.findAll();
         for (var user : listIdOfChats) {
