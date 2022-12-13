@@ -1,6 +1,7 @@
 package com.example.reg3.controller;
 
 
+import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.Service.TrainingService;
 import com.example.reg3.Service.UserRegistrationDataService;
 import com.example.reg3.Service.UserService;
@@ -18,6 +19,9 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("add")
 public class AddInformationController {
+
+    @Autowired
+    TelegramBot bot;
 
     private UserRegistrationDataRepository userRegistrationData;
     private final DayOfTrainingRepository dayOfTrainingRepository;
@@ -147,6 +151,7 @@ public class AddInformationController {
 
     @GetMapping("all")
     public void registrationUser() {
+        bot.sendLog("Вызов http://localhost:8011/add/all");
         var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
         var res2 =  userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
         var res3 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(2));
@@ -160,37 +165,18 @@ public class AddInformationController {
         var res9 = userService.setTrainToUser(2L, 2L);
         var res8 = userService.setTrainToUser(1L, 1L);
 
-        System.out.println(res);
-        System.out.println(res2);
-        System.out.println(res3);
-        System.out.println(res4);
-        System.out.println(res5);
-        System.out.println(res6);
-        System.out.println(res7);
-        System.out.println(res8);
-        System.out.println(res9);
-
-
-        //        var training1 = trainingRepository.findById(1L).get();
-//        var training2 = trainingRepository.findById(2L).get();
-//
-//
-//
-//        List<DayOfTraining> dayOfTrainingsFloppy = List.of(
-//                new DayOfTraining(1, setListPushUps),
-//                new DayOfTraining(2, setListJump),
-//                new DayOfTraining(3, setListJump)
-//
-//        );
-//
-//        List<DayOfTraining> dayOfTrainingsPower = List.of(
-//                new DayOfTraining(1, setListone),
-//                new DayOfTraining(2, setListTwo)
-//        );
-//
-//        trainingRepository.saveAll(List.of(trainingList.get(2), trainingList.get(3)));
-//        dayOfTrainingRepository.saveAll(dayOfTrainingsPower);
-//        dayOfTrainingRepository.saveAll(dayOfTrainingsFloppy);
+        StringBuilder msg = new StringBuilder();
+        msg.append("Добавление изначальных данных\n");
+        msg.append(res).append("\n");
+        msg.append(res2).append("\n");
+        msg.append(res3).append("\n");
+        msg.append(res4).append("\n");
+        msg.append(res5).append("\n");
+        msg.append(res6).append("\n");
+        msg.append(res7).append("\n");
+        msg.append(res8).append("\n");
+        msg.append(res9).append("\n");
+        bot.sendLog(msg.toString());
 
     }
 
