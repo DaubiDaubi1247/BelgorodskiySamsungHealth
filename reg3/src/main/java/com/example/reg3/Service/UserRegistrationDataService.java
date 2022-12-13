@@ -87,12 +87,14 @@ public class UserRegistrationDataService {
 
         if (userOptional.isPresent()) {
 
-            return new UserRegistrationDataRequest(1, "email taken", usersOfApp);
+            return new UserRegistrationDataRequest(1, "email занят", usersOfApp);
         } else {
             try {
+                if (usersOfApp.getIsAdmin() == null) usersOfApp.setIsAdmin(false);
+
                 usersOfApp = saveNewUser(usersOfApp);
 
-                return new UserRegistrationDataRequest(0, "registration was successful", usersOfApp);
+                return new UserRegistrationDataRequest(0, "регистрация прошлва успешно", usersOfApp);
             } catch (IllegalBlockSizeException | BadPaddingException e) {
                 throw new RuntimeException(e);
             }
@@ -108,8 +110,8 @@ public class UserRegistrationDataService {
         if (userOfApp.getUser() == null) userOfApp.setUser(new User());
 
         userOfApp = userRepository.save(userOfApp);
-        //userOfApp.setPassword("");
         userOfApp.setId(userOfApp.getUser().getId());
+        userOfApp.setPassword(userPass);
 
         return userOfApp;
     }
@@ -119,7 +121,7 @@ public class UserRegistrationDataService {
 
         if (userOptional.isEmpty()) {
             return new UserRegistrationDataRequest(1, "user with email " +
-                            usersOfApp.getEmail() + " doesn't exist", usersOfApp);
+                    usersOfApp.getEmail() + " doesn't exist", usersOfApp);
         }
         UserRegistrationData usersOfAppOnBD = userOptional.get();
 
@@ -129,7 +131,7 @@ public class UserRegistrationDataService {
             if (!usersOfAppOnBD.getPassword().equals(HashPass)) {
                 return new UserRegistrationDataRequest(2, "wrong password", usersOfApp);
             }
-        }catch (IllegalBlockSizeException | BadPaddingException e) {
+        } catch (IllegalBlockSizeException | BadPaddingException e) {
             throw new RuntimeException(e);
         }
 
