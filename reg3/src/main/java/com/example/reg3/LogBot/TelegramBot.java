@@ -13,11 +13,11 @@ public class TelegramBot
         extends TelegramLongPollingBot {
 
     final BotConfig config;
-    private final List<Long> listIdOfChats;
+    private final ChatIdInfoRepository chatIdInfoRepository;
 
-    public TelegramBot(BotConfig config, List<Long> idOfChats) {
+    public TelegramBot(BotConfig config, List<Long> idOfChats, ChatIdInfoRepository chatIdInfoRepository) {
         this.config = config;
-        this.listIdOfChats = idOfChats;
+        this.chatIdInfoRepository = chatIdInfoRepository;
     }
 
     @Override
@@ -36,32 +36,54 @@ public class TelegramBot
         if (update.hasMessage() && update.getMessage().hasText()) {
             String messageText = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
-
+            String userName = update.getMessage().getChat().getFirstName();
             if ("/start".equals(messageText)) {
-                startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
+                startCommandReceived(chatId, userName);
+            } else if ("/stopLogs".equals(messageText)) {
+                unsubUserFromLogList(chatId, userName);
+
             } else {
                 if (messageText.equals(config.getPassword())) {
-                    subUserTologList(chatId, update.getMessage().getChat().getFirstName());
+                    subUserToLogList(chatId, userName);
                 } else {
                     sendMessge(chatId, "команда не опознана");
                 }
             }
         }
-
     }
 
-    public void sendLog(String msg) {
-        for (var id: listIdOfChats) {
-            sendMessge(id, msg);
+    private void unsubUserFromLogList(long chatId, String firstName) {
+        var answer = chatIdInfoRepository.findChatIdInfoByChatId(chatId);
+
+        if (answer.isPresent()) {
+            chatIdInfoRepository.deleteById(answer.get().getId());
+            String msg = firstName + ", теперь вы отписаны от рассылки логов";
+            sendMessge(chatId, msg);
+        } else {
+            String msg = firstName + ", вы не были подписнаы на рассылку логов";
+            sendMessge(chatId, msg);
         }
     }
 
-    private void subUserTologList(long chatId, String firstName) {
-        listIdOfChats.add(chatId);
-        String msg = firstName + ", теперь вы подписаны на рассылку логов";
-        sendMessge(chatId, msg);
+    public void sendLog(String msg) {
+        var listIdOfChats = chatIdInfoRepository.findAll();
+        for (var user : listIdOfChats) {
+            sendMessge(user.getChatId(), msg);
+        }
     }
 
+    private void subUserToLogList(long chatId, String firstName) {
+        var answer = chatIdInfoRepository.findChatIdInfoByChatId(chatId);
+
+        if (answer.isEmpty()) {
+            chatIdInfoRepository.save(new ChatIdInfo(null, chatId, firstName));
+            String msg = firstName + ", теперь вы подписаны на рассылку логов";
+            sendMessge(chatId, msg);
+        } else {
+            String msg = firstName + ", выуже подписаны на рассылку";
+            sendMessge(chatId, msg);
+        }
+    }
 
     private void startCommandReceived(long chatId, String userName) {
         String anser = "welcome to the club " + userName + "!\n" +

@@ -40,7 +40,8 @@ public class TrainingService {
         var trainingDays = trainingRepository.findDaysOfTraining(trainId);
 
         if (trainingDays.size() == 0) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("в данной тренеровки отсутствуют дни");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("в данной тренеровки отсутствуют дни");
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(trainingDays);
         }
@@ -88,6 +89,8 @@ public class TrainingService {
         eliminationCollisionInDaysOfTraining(train);
         train.setCountOfDays(train.getDaysOfTrainings().size());
         try {
+            if (train.getStatus() == null) train.setStatus("available");
+
             trainingRepository.save(train);
             return ResponseEntity.status(HttpStatus.OK).body("тренеровка успешно добавлена");
         } catch (Exception e) {

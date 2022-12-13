@@ -17,7 +17,7 @@ public class ChatIdInfo {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "chat", nullable = false)
+    @Column(name = "chat", nullable = false, unique = true)
     private Long chatId;
 
     @Column(name = "userName")
