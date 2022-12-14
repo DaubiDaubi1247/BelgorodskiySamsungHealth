@@ -1,4 +1,5 @@
 import axios from "axios"
+import { IuserDataForSet } from "./TuserAPI"
 
 
 const userAxios = axios.create({
@@ -11,6 +12,9 @@ export const userAPI = {
     },
     getUserData(userId : number ){
         return userAxios.get(`/getUserData?userId=${userId}`)
-    }
+    },
+    setUserData(userData : IuserDataForSet){
+        return userAxios.post("/setUserData", userData)
+    } 
 }
 

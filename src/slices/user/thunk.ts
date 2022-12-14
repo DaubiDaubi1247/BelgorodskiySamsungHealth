@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { IuserDataForSet } from '../../API/userAPI/TuserAPI';
 import { userAPI } from '../../API/userAPI/userAPI';
 import { setLoading } from '../common/commonSlice';
 
@@ -14,3 +15,16 @@ export const getUserData = createAsyncThunk(
         }
     }
 )
+
+export const setUserData = createAsyncThunk(
+    "user/setUserData",
+    async (userData : IuserDataForSet,thunkApi) => {
+        try {
+            const response = await userAPI.setUserData(userData);
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+    }
+)
+

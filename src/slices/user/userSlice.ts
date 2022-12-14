@@ -1,7 +1,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IuserIS } from './Types';
-import { getUserData } from './thunk';
+import { getUserData} from './thunk';
 
 const initialState: IuserIS = {
     name : "",
