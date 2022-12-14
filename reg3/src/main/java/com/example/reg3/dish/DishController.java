@@ -33,7 +33,23 @@ public class DishController {
             bot.executeSendLog();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body(e.toString());
-
         }
     }
+
+    @GetMapping("getMealTimes")
+    public ResponseEntity<Object> getMealTimes() {
+        try {
+            bot.sendInfo("обращение к dish/add");
+            ResponseEntity<Object> res = dishService.getMealTimes();
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
+
+    }
+
+
 }

@@ -68,4 +68,19 @@ public class DishService {
         }
         return newDish;
     }
+
+    public ResponseEntity<Object> getMealTimes() {
+       var mealTimes =   mealTimeRepository.findAll();
+       if (mealTimes.size() == 0) {
+           bot.sendWarning("прием пищи отсутствуют в БД");
+       }
+
+       List<String> labelOfMealTimes = new ArrayList<>();
+
+       for (int i = 0; i < mealTimes.size(); i++) {
+           labelOfMealTimes.add(mealTimes.get(i).getLabel());
+       }
+        bot.sendInfo("прием пищи отсутствуют в БД");
+       return ResponseEntity.ok().body(labelOfMealTimes);
+    }
 }

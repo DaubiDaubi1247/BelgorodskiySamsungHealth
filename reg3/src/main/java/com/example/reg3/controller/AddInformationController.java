@@ -212,9 +212,4 @@ public class AddInformationController {
         System.out.println(ans);
     }
 
-
-    @GetMapping("getTrainJSON")
-    public Training getDayOf() {
-        return trainingList.get(1);
-    }
 }
