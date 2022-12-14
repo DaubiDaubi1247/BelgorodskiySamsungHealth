@@ -1,9 +1,11 @@
 package com.example.reg3.dao.Food;
 
 
+import com.example.reg3.dao.Set;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,6 +26,13 @@ public class Diet {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany()
+    @JoinTable(name = "diet_dish_map",
+            joinColumns = @JoinColumn(name = "diets_id", referencedColumnName = "diets_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id", referencedColumnName = "dish_id")
+    )
+    private List<Dish> dishes;
 
 
 }
