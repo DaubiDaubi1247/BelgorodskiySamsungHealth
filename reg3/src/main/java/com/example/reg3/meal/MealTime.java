@@ -1,4 +1,4 @@
-package com.example.reg3.dao.Food;
+package com.example.reg3.meal;
 
 
 import lombok.*;
@@ -23,4 +23,8 @@ public class MealTime {
     @Column(name = "label", nullable = false,
             unique = true, length = 20)
     private String label;
+
+    public MealTime(String label) {
+        this.label = label;
+    }
 }

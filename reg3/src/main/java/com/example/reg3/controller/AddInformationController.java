@@ -6,6 +6,8 @@ import com.example.reg3.Service.TrainingService;
 import com.example.reg3.Service.UserRegistrationDataService;
 import com.example.reg3.Service.UserService;
 import com.example.reg3.dao.*;
+import com.example.reg3.meal.MealTime;
+import com.example.reg3.meal.MealTimeRepository;
 import com.example.reg3.repository.DayOfTrainingRepository;
 import com.example.reg3.repository.TrainingRepository;
 import com.example.reg3.repository.UserRegistrationDataRepository;
@@ -29,34 +31,38 @@ public class AddInformationController {
     private final TrainingRepository trainingRepository;
     private final TrainingService trainingService;
     private final UserService userService;
+
+    private final MealTimeRepository mealTimeRepository;
+
     @Autowired
     public AddInformationController(UserRegistrationDataRepository userRegistrationData,
                                     DayOfTrainingRepository dayOfTrainingRepositor,
                                     TrainingRepository trainingRepository,
                                     UserRegistrationDataService dayOfTrainingService,
-                                    TrainingService trainingService, UserService userService) {
+                                    TrainingService trainingService, UserService userService, MealTimeRepository mealTimeRepository) {
         this.trainingRepository = trainingRepository;
         this.dayOfTrainingRepository = dayOfTrainingRepositor;
         this.userRegistrationData = userRegistrationData;
         this.userRegistrationDataService = dayOfTrainingService;
         this.trainingService = trainingService;
         this.userService = userService;
+        this.mealTimeRepository = mealTimeRepository;
     }
 
     List<Exercise> exerciseList = new ArrayList<>();
 
     {
         exerciseList.add(new Exercise("Отжиммания", "лечь на пол и толкать землю"));
-        exerciseList.add  (new Exercise("Подтягивания", "Подтягиватся"));
-            exerciseList.add  (new Exercise("Скручивания", "Скручиватся"));
-            exerciseList.add  (new Exercise("Выпрыгивания", "прыгать"));
-            exerciseList.add  (new Exercise("Наклоны", "Наклонятся"));
-            exerciseList.add  (new Exercise("выкруты", null));
-            exerciseList.add  (new Exercise("Брусья", "отжиматся на бруьях"));
-            exerciseList.add  (new Exercise("выпды", "менять ноги"));
-            exerciseList.add  (new Exercise("шпагат продольный", "сесть на шпагат"));
-            exerciseList.add (new Exercise("шпагат поперечный", "сесть на шпагат"));
-            exerciseList.add (new Exercise("повороты туловища", "повороты"));
+        exerciseList.add(new Exercise("Подтягивания", "Подтягиватся"));
+        exerciseList.add(new Exercise("Скручивания", "Скручиватся"));
+        exerciseList.add(new Exercise("Выпрыгивания", "прыгать"));
+        exerciseList.add(new Exercise("Наклоны", "Наклонятся"));
+        exerciseList.add(new Exercise("выкруты", null));
+        exerciseList.add(new Exercise("Брусья", "отжиматся на бруьях"));
+        exerciseList.add(new Exercise("выпды", "менять ноги"));
+        exerciseList.add(new Exercise("шпагат продольный", "сесть на шпагат"));
+        exerciseList.add(new Exercise("шпагат поперечный", "сесть на шпагат"));
+        exerciseList.add(new Exercise("повороты туловища", "повороты"));
     }
 
 
@@ -91,7 +97,7 @@ public class AddInformationController {
     );
 
 
-     List<DayOfTraining> daysOfTrainingsFloppy1 = List.of(
+    List<DayOfTraining> daysOfTrainingsFloppy1 = List.of(
             new DayOfTraining(1, setListPushUps),
             new DayOfTraining(2, setListJump),
             new DayOfTraining(3, setListTwo)
@@ -115,8 +121,7 @@ public class AddInformationController {
 //    }
 
 
-
-     List<Training> trainingList = List.of(
+    List<Training> trainingList = List.of(
             new Training("Гибкость1", 2, "Станешь гибким", "available", daysOfTrainingsFloppy1),
             new Training("Сила", 3, "Станешь не очень сильным", "available", daysOfTrainingsPower),
             new Training("Выносливость", 0, "Станешь немного выносливым", "available", new ArrayList<>()),
@@ -137,14 +142,14 @@ public class AddInformationController {
     );
 
 
-//Пользовательские данные
+    //Пользовательские данные
     List<UserRegistrationData> userRegistrationDataList = List.of(
             new UserRegistrationData("monokas", "monokas@gmail.com",
                     "monokas", true, userList.get(0)),
             new UserRegistrationData("prosto_chell", "prosto_chell@gmail.com",
-                   "prosto_chell", true, userList.get(1)),
+                    "prosto_chell", true, userList.get(1)),
             new UserRegistrationData("vlu", "vlu@gmail.com",
-                   "vlu", false, userList.get(2))
+                    "vlu", false, userList.get(2))
 
     );
 
@@ -153,7 +158,7 @@ public class AddInformationController {
     public void registrationUser() {
         bot.sendInfo("Вызов http://localhost:8011/add/all");
         var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
-        var res2 =  userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
+        var res2 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
         var res3 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(2));
 
         var res4 = trainingService.addTrain(trainingList.get(0));
@@ -179,6 +184,21 @@ public class AddInformationController {
         bot.sendInfo(msg.toString());
         bot.executeSendLog();
 
+    }
+
+
+    @GetMapping("MealTime")
+    public void addMealTime() {
+        List<MealTime> mealTimeList = List.of(
+                new MealTime("завтрак"),
+                new MealTime("обед"),
+                new MealTime("ужин"),
+                new MealTime("полдник"),
+                new MealTime("перекус"),
+                new MealTime("второй завтрак")
+                );
+
+        mealTimeRepository.saveAll(mealTimeList);
     }
 
 

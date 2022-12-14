@@ -1,6 +1,7 @@
-package com.example.reg3.dao.Food;
+package com.example.reg3.dish;
 
 
+import com.example.reg3.meal.MealTime;
 import lombok.*;
 
 import javax.persistence.*;
@@ -49,4 +50,14 @@ public class Dish {
                     referencedColumnName = "meal_time_id")
     )
     private List<MealTime> mealTimes;
+
+    public void setParamsWithOutMealTime(DishQuarry dish) {
+        this.id = null;
+        this.label = dish.getLabel();
+        this.calPerGram = dish.getCalPerGram();
+        this.carbsPerGram = dish.getCarbsPerGram();
+        this.fatsPerGram =dish.getFatsPerGram();
+        this.proteinsPerGram = dish.getProteinsPerGram();
+        this.type = dish.getType();
+    }
 }
