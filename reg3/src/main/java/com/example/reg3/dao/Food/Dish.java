@@ -4,6 +4,7 @@ package com.example.reg3.dao.Food;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +24,9 @@ public class Dish {
             unique = true, length = 20)
     private String label;
 
+    @Column(name = "type", length = 20)
+    private String type;
+
     @Column(name = "cals_per_gram")
     private Integer calPerGram;
 
@@ -34,4 +38,15 @@ public class Dish {
 
     @Column(name = "carbs_per_gram")
     private Float carbsPerGram;
+
+    @ManyToMany()
+    @JoinTable(name = "mealtime_dish_map",
+            joinColumns = @JoinColumn(
+                    name = "dish_id",
+                    referencedColumnName = "dish_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "meal_time_id",
+                    referencedColumnName = "meal_time_id")
+    )
+    private List<MealTime> mealTimes;
 }

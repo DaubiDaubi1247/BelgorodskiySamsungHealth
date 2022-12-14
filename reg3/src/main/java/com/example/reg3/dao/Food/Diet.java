@@ -29,8 +29,12 @@ public class Diet {
 
     @ManyToMany()
     @JoinTable(name = "diet_dish_map",
-            joinColumns = @JoinColumn(name = "diets_id", referencedColumnName = "diets_id"),
-            inverseJoinColumns = @JoinColumn(name = "dish_id", referencedColumnName = "dish_id")
+            joinColumns = @JoinColumn(
+                    name = "diet_id",
+                    referencedColumnName = "diet_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "dish_id",
+                    referencedColumnName = "dish_id")
     )
     private List<Dish> dishes;
 
