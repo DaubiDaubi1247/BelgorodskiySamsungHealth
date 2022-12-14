@@ -1,5 +1,6 @@
 package com.example.reg3.dao;
 
+import com.example.reg3.dao.Food.Diet;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,6 +31,10 @@ public class User {
     @Column(name = "completedTrainers")
     private Integer countOfCompletedTrainers;
 
+    @OneToOne()
+    @JoinColumn(name = "diet_id",
+            referencedColumnName = "diet_id")
+    private Diet diet;
 
     @OneToOne()
     @JoinColumn(name = "user_progress_in_training_id",
@@ -50,7 +55,6 @@ public class User {
     }
 
     public void incCountOfTrainigs() {
-        //if (countOfCompletedTrainers == null) throw new RuntimeException("отсутстуют програма тренеровок");
         countOfCompletedTrainers++;
     }
 

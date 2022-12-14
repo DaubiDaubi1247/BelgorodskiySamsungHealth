@@ -17,7 +17,7 @@ import java.util.List;
 public class Diet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diets_id", nullable = false)
+    @Column(name = "diet_id", nullable = false)
     private Long id;
 
     @Column(name = "label", nullable = false,

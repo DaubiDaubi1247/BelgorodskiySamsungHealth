@@ -12,8 +12,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "exercise")
 public class Exercise {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "exercise_id", nullable = false)
