@@ -23,13 +23,6 @@ public class DayOfTraining {
     @Column(name = "number_of_day", nullable = false)
     private Integer numberOfDay;
 
-//    @ManyToOne
-//            (cascade = CascadeType.ALL)
-//    @JoinColumn(name = "training_id",
-//    referencedColumnName = "training_id")
-//    @JsonIgnore
-//    private Training training;
-
 
     @ManyToMany()
     @JoinTable(
@@ -47,10 +40,8 @@ public class DayOfTraining {
 
 
     public DayOfTraining(Integer numberOfDay,
-//                         Training training,
                          List<Set> sets) {
         this.numberOfDay = numberOfDay;
-//        this.training = training;
         this.sets = sets;
     }
 }
