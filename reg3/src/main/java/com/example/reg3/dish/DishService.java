@@ -50,9 +50,7 @@ public class DishService {
     private Dish createNewDish(DishQuarry dishQuarry) throws Exception {
         Dish newDish = new Dish();
         newDish.setParamsWithOutMealTime(dishQuarry);
-        if (dishQuarry.getMealTimes().size() == 0) {
-            newDish.setMealTimes(new ArrayList<>());
-        } else {
+
             List<MealTime> listNewMileTimes = new ArrayList<>();
             for (var mealTime : dishQuarry.getMealTimes()) {
                 var optionalMealTime
@@ -65,7 +63,7 @@ public class DishService {
                 }
             }
             newDish.setMealTimes(listNewMileTimes);
-        }
+
         return newDish;
     }
 

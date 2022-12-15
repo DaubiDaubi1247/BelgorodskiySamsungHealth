@@ -6,6 +6,8 @@ import com.example.reg3.Service.TrainingService;
 import com.example.reg3.Service.UserRegistrationDataService;
 import com.example.reg3.Service.UserService;
 import com.example.reg3.dao.*;
+import com.example.reg3.dish.DishQuarry;
+import com.example.reg3.dish.DishService;
 import com.example.reg3.meal.MealTime;
 import com.example.reg3.meal.MealTimeRepository;
 import com.example.reg3.repository.DayOfTrainingRepository;
@@ -31,7 +33,7 @@ public class AddInformationController {
     private final TrainingRepository trainingRepository;
     private final TrainingService trainingService;
     private final UserService userService;
-
+    private final DishService dishService;
     private final MealTimeRepository mealTimeRepository;
 
     @Autowired
@@ -39,13 +41,14 @@ public class AddInformationController {
                                     DayOfTrainingRepository dayOfTrainingRepositor,
                                     TrainingRepository trainingRepository,
                                     UserRegistrationDataService dayOfTrainingService,
-                                    TrainingService trainingService, UserService userService, MealTimeRepository mealTimeRepository) {
+                                    TrainingService trainingService, UserService userService, DishService dishService, MealTimeRepository mealTimeRepository) {
         this.trainingRepository = trainingRepository;
         this.dayOfTrainingRepository = dayOfTrainingRepositor;
         this.userRegistrationData = userRegistrationData;
         this.userRegistrationDataService = dayOfTrainingService;
         this.trainingService = trainingService;
         this.userService = userService;
+        this.dishService = dishService;
         this.mealTimeRepository = mealTimeRepository;
     }
 
@@ -153,6 +156,15 @@ public class AddInformationController {
 
     );
 
+    List<MealTime> mealTimeList = List.of(
+            new MealTime("завтрак"),
+            new MealTime("обед"),
+            new MealTime("ужин"),
+            new MealTime("полдник"),
+            new MealTime("перекус"),
+            new MealTime("второй завтрак")
+    );
+
 
     @GetMapping("all")
     public void registrationUser() {
@@ -169,6 +181,26 @@ public class AddInformationController {
 
         var res9 = userService.setTrainToUser(2L, 2L);
         var res8 = userService.setTrainToUser(1L, 1L);
+
+
+        mealTimeRepository.saveAll(mealTimeList);
+
+
+
+        List<DishQuarry> dishQuarryList = List.of(
+                new DishQuarry("куриный суп", "первое блюдо", 123, 23.4f,
+                        34.2f, 11.2f, List.of("обед", "второй завтрак")),
+                new DishQuarry("яблоко", "фрукт", 123, 20.4f,
+                        30.2f, 9.2f, List.of("перекус")),
+                new DishQuarry("цезарь", "салат", 121, 20.4f,
+                        30.2f, 9.2f, List.of("перекус")),
+                new DishQuarry("кекс", "десерт", 123, 20.4f,
+                        30.2f, 9.2f, List.of("перекус"))
+        );
+        for (var dish:dishQuarryList) {
+            dishService.addDish(dish);
+        }
+
 
         StringBuilder msg = new StringBuilder();
         msg.append("Добавление изначальных данных\n");
@@ -189,16 +221,7 @@ public class AddInformationController {
 
     @GetMapping("MealTime")
     public void addMealTime() {
-        List<MealTime> mealTimeList = List.of(
-                new MealTime("завтрак"),
-                new MealTime("обед"),
-                new MealTime("ужин"),
-                new MealTime("полдник"),
-                new MealTime("перекус"),
-                new MealTime("второй завтрак")
-                );
 
-        mealTimeRepository.saveAll(mealTimeList);
     }
 
 

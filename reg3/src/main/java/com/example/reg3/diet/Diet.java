@@ -24,8 +24,11 @@ public class Diet {
             unique = true, length = 20)
     private String label;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 50)
     private String description;
+
+    @Column(name = "status")
+    private String status;
 
     @ManyToMany()
     @JoinTable(name = "diet_dish_map",
@@ -39,4 +42,9 @@ public class Diet {
     private List<Dish> dishes;
 
 
+    public void setIfoWthoutDishes(DietQuary dietQuary) {
+        label = dietQuary.getLabel();
+        description = dietQuary.getDescription();
+        status = dietQuary.getStatus();
+    }
 }
