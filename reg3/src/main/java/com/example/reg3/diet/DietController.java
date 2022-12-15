@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("diet")
@@ -66,5 +68,17 @@ public class DietController {
                     body(e.toString());
         }
     }
+//    @GetMapping("dishes")
+//    public ResponseEntity<Object> getProducts(@RequestParam String idDiet,
+//                                              @RequestParam(required = false) String type,
+//                                              @RequestParam(required = false) String MailTyme) {
+//        try {
+//            bot.sendInfo("обращение к diet/getAll status=" + status);
+//
+//        } catch (Exception e) {
+//            bot.executeSendLog();
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.toString());
+//        }
+//    }
 
 }

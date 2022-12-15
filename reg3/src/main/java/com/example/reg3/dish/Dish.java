@@ -2,6 +2,7 @@ package com.example.reg3.dish;
 
 
 import com.example.reg3.meal.MealTime;
+import com.example.reg3.typeOfMeal.TypeOfMeal;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,9 +25,6 @@ public class Dish {
     @Column(name = "label", nullable = false,
             unique = true, length = 20)
     private String label;
-
-    @Column(name = "type", length = 20)
-    private String type;
 
     @Column(name = "cals_per_gram")
     private Integer calPerGram;
@@ -51,6 +49,11 @@ public class Dish {
     )
     private List<MealTime> mealTimes;
 
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "type_of_meal_id")
+    private TypeOfMeal type;
+
     public void setParamsWithOutMealTime(DishQuarry dish) {
         this.id = null;
         this.label = dish.getLabel();
@@ -58,6 +61,5 @@ public class Dish {
         this.carbsPerGram = dish.getCarbsPerGram();
         this.fatsPerGram =dish.getFatsPerGram();
         this.proteinsPerGram = dish.getProteinsPerGram();
-        this.type = dish.getType();
     }
 }
