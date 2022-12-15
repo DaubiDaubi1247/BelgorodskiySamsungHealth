@@ -45,6 +45,10 @@ public class Diet {
     public void setIfoWthoutDishes(DietQuary dietQuary) {
         label = dietQuary.getLabel();
         description = dietQuary.getDescription();
-        status = dietQuary.getStatus();
+        if (dietQuary.getStatus() != null){
+            status = dietQuary.getStatus();
+        } else {
+            status = "available";
+        }
     }
 }

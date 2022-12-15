@@ -31,7 +31,7 @@ public class DishService {
         Optional<Dish> dishInBd = dishRepository.findByLabel(dishQuarry.getLabel());
 
         if (dishInBd.isPresent()) {
-            String anser = "Блюдо с названием " + dishQuarry.getLabel() + "уже присутствует в БД";
+            String anser = "Блюдо с названием " + dishQuarry.getLabel() + " уже присутствует в БД";
             bot.sendWarning(anser);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(anser);
         }

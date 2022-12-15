@@ -1,8 +1,6 @@
 package com.example.reg3.diet;
 
 import com.example.reg3.LogBot.TelegramBot;
-import com.example.reg3.Service.UserService;
-import com.example.reg3.dish.DishQuarry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +23,7 @@ public class DietController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<Object> adDiet(@RequestBody DietQuary dietQuary ) {
+    public ResponseEntity<Object> addDiet(@RequestBody DietQuary dietQuary ) {
         try {
             bot.sendInfo("обращение к diet/add");
             ResponseEntity<Object> res = dietService.addDiet(dietQuary);

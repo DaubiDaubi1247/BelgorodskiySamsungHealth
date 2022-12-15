@@ -36,7 +36,7 @@ public class DietService {
         try {
             Diet newDiet = getNewDiet(dietQuary);
             dietRepository.save(newDiet);
-            String info = "диета " + newDiet.getLabel() + "успешно добавленно";
+            String info = "диета " + newDiet.getLabel() + " успешно добавленно";
             bot.sendInfo(info);
 
             return ResponseEntity.ok().body(info);
