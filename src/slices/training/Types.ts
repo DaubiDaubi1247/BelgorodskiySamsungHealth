@@ -9,6 +9,7 @@ export interface ItrainitState {
     percentOfProgress : number
     messageForCreate : string,
     userHasTraining : boolean
+    currentDay : number
 }
 
 export enum CONST  {

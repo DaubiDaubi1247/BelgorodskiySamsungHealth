@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr, ArrDaysExpires } from './../../API/trainingAPI/TtrainingAPI';
 import { CONST, ItrainitState } from './Types';
-import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining } from './thunk';
+import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining, updateDayUserTraining } from './thunk';
 import { useAppSelector } from '../../app/hooks';
 
 
@@ -12,8 +12,8 @@ const initialState: ItrainitState = {
     arrDaysExpires : [],
     percentOfProgress : CONST.NO_DATA,
     messageForCreate : "",
-    userHasTraining : false
-
+    userHasTraining : false,
+    currentDay : CONST.NO_DATA
 };
 
 const trainingSlice = createSlice({
@@ -44,6 +44,7 @@ const trainingSlice = createSlice({
                 state.percentOfProgress = action.payload.presentOfProgress !== undefined ? action.payload.presentOfProgress : CONST.NO_DATA
 
                 state.userHasTraining = action.payload !== undefined
+                state.currentDay = action.payload.dayOfTraining ? action.payload.dayOfTraining : CONST.NO_DATA
 
                 // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
                 // state.today = Math.round(2 / 9 * 100)
@@ -58,6 +59,9 @@ const trainingSlice = createSlice({
             })
             .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
                 state.userHasTraining = true
+            })
+            .addCase(updateDayUserTraining.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
+                state.currentDay++;
             })
             
     },

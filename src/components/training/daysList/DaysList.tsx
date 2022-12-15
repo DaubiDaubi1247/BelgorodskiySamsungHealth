@@ -5,7 +5,7 @@ import DayDescription from './dayDescription/DayDescription';
 interface IDayListProps {
     trainingsArr: ArrDaysExpires
     isVisible : boolean
-    currentDay? : number
+    currentDay? : number,
 }
 
 const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible,currentDay }) => {

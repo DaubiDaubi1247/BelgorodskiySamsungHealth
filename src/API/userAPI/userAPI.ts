@@ -15,6 +15,9 @@ export const userAPI = {
     },
     setUserData(userData : IuserDataForSet){
         return userAxios.post("/setUserData", userData)
-    } 
+    },
+    updateDayUserTraining(userId : number) {
+        return userAxios.get(`/updayteDayOfTrain?userId=${userId}`)
+    }
 }
 

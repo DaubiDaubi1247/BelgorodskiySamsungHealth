@@ -85,3 +85,15 @@ export const deactivateTraining = createAsyncThunk(
         }
    }
 )
+
+export const updateDayUserTraining = createAsyncThunk(
+    "training/updateDayUserTraining",
+    async (userId : number,thunkApi) => {
+        try {
+            const response = await userAPI.updateDayUserTraining(userId);
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+    }
+)
