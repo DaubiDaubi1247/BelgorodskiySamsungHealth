@@ -18,3 +18,10 @@ export const AdminRoutes = {
 
 export const profile = "/profile"
 
+export const diets = "/diets";
+export const DietsRoutes = {
+    training : main + "training"
+} 
+
+
+

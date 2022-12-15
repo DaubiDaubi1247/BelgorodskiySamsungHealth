@@ -4,7 +4,7 @@ import { useAppSelector } from '../../app/hooks';
 import Preloader from '../../common/preloader/Preloader';
 import { AuthRoutes } from '../../Routes/Routes';
 
-const withAuthRedicrect = (Component : any) => (props : any) => {
+const withLoading = (Component : any) => (props : any) => {
     let isLoading = useAppSelector(state => state.common.isLoading) 
 
     if (isLoading) return <Preloader/>
@@ -12,4 +12,4 @@ const withAuthRedicrect = (Component : any) => (props : any) => {
     return <Component {...props} />;
 };
 
-export default withAuthRedicrect
+export default withLoading

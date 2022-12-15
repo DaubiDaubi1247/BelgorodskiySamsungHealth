@@ -7,7 +7,7 @@ import Header from './components/header/Header';
 
 import MainContainer from './components/main/Main';
 import { Route, Routes } from 'react-router-dom';
-import { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes, profile } from './Routes/Routes';
+import { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes, profile, diets } from './Routes/Routes';
 import AuthContainer from './components/auth/AuthContainer';
 import NavBar from './components/navBar/NavBar';
 import TrainingContainer from './components/training/TraininigContainer';
@@ -39,6 +39,9 @@ function App() {
                             <Route path={AdminRoutes.createTraining} element={<AdminAddTrainingMenu/>}/>
                         </Route>
                         <Route path={profile} element={<ProfileContainer/>}/>
+                        <Route path={diets} element={<ProfileContainer/>}>
+
+                        </Route>
                     </Routes>
                 </div>
             </Container>
