@@ -54,6 +54,23 @@ public class UserController {
         }
     }
 
+    @GetMapping("setDietToUser")
+    public ResponseEntity<Object> addDietToUser(@RequestParam(required = false) Long userId,
+                                                 @RequestParam(required = false) Long dietId) {
+        try {
+            bot.sendInfo("обращение к user/setTrainToUser");
+            var res = userService.setDietToUser(userId, dietId);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
+    }
+
+
+
     @PostMapping("setUserData")
     public ResponseEntity<Object> setUserData(@RequestBody User user) {
         try {

@@ -4,6 +4,7 @@ package com.example.reg3.Service;
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.User;
 import com.example.reg3.dao.UserProgressInTraining;
+import com.example.reg3.diet.DietRepository;
 import com.example.reg3.repository.TrainingRepository;
 import com.example.reg3.repository.UserProgressInTrainingRepository;
 import com.example.reg3.repository.UserRepository;
@@ -21,15 +22,16 @@ public class UserService {
 
     private final TrainingRepository trainingRepository;
     private final UserRepository userRepository;
-
+    private final DietRepository dietRepository;
     private final UserProgressInTrainingRepository userProgressInTrainingRepository;
 
 
     @Autowired
     public UserService(TrainingRepository trainingRepository,
-                       UserRepository userRepository, UserProgressInTrainingRepository userProgressInTrainingRepository) {
+                       UserRepository userRepository, DietRepository dietRepository, UserProgressInTrainingRepository userProgressInTrainingRepository) {
         this.trainingRepository = trainingRepository;
         this.userRepository = userRepository;
+        this.dietRepository = dietRepository;
         this.userProgressInTrainingRepository = userProgressInTrainingRepository;
     }
 
@@ -116,6 +118,20 @@ public class UserService {
         }
     }
 
+    public ResponseEntity<Object> setDietToUser(Long userId, Long dietId) {
+        try {
+            var user = userRepository.getReferenceById(userId);
+            var diet = dietRepository.getReferenceById(dietId);
+            user.setDiet(diet);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("пользователь "+user.getName()+" подписался на диету " +diet.getLabel());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь или тренеровки с таким id не найдено");
+        }
+
+    }
+
     public ResponseEntity<Object> setUserData(User updateUserdata) {
         try {
             var user = userRepository.getReferenceById(updateUserdata.getId());
@@ -141,4 +157,6 @@ public class UserService {
 
         return ResponseEntity.status(HttpStatus.OK).body(userInfo.get());
     }
+
+
 }

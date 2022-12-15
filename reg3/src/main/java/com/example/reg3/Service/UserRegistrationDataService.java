@@ -33,7 +33,7 @@ public class UserRegistrationDataService {
     {
         Properties props = new Properties();
         try (InputStream in = Files.newInputStream
-                (Paths.get("reg3/src/main/resources/encryptionAlgorithm.properties"))) {
+                (Paths.get("src/main/resources/encryptionAlgorithm.properties"))) {
             props.load(in);
 
             String keyOfCipher = props.getProperty("key");
@@ -44,7 +44,7 @@ public class UserRegistrationDataService {
 
 
         } catch (IOException e) {
-            bot.sendError("Файл с переменными окружения для шифрования не найден\n" + e.getMessage());
+            //bot.sendError("Файл с переменными окружения для шифрования не найден\n" + e.getMessage());
             throw new RuntimeException("Файл с переменными окружения не найден\n" + e.getMessage());
         }
     }
