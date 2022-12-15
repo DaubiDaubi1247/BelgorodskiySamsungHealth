@@ -15,6 +15,7 @@ interface ITrainingContainerProps {
 const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (props) => {
     let userTraining = useAppSelector(state => state.training.smallUserTraining)
     let userId = useAppSelector(state => state.auth.accessData?.id)
+    let userHasTraining = useAppSelector(state => state.training.userHasTraining)
 
     let isLoading = useAppSelector(state => state.common.isLoading)
 
@@ -25,7 +26,7 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
             dispatch(setLoading(true))
             dispatch(getUserTraining(userId))
         }
-    },[])
+    },[userHasTraining])
 
     return (isLoading ? <Preloader/> :
         <div>

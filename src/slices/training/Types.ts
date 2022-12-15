@@ -7,7 +7,8 @@ export interface ItrainitState {
     smallUserTraining :  ItrainigData | null
     arrDaysExpires : ArrDaysExpires,
     percentOfProgress : number
-    messageForCreate : string
+    messageForCreate : string,
+    userHasTraining : boolean
 }
 
 export enum CONST  {

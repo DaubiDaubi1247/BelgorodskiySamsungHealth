@@ -5,6 +5,7 @@ import { DataForSetTrain } from '../../API/userAPI/TuserAPI';
 import { userAPI } from '../../API/userAPI/userAPI';
 import { setLoading } from '../common/commonSlice';
 import { trainingAPI } from './../../API/trainingAPI/trainingAPI';
+import { setUserHasTraining } from './trainingSlice';
 
 export const getSmallDataAboutTrainings = createAsyncThunk(
     "training/getSmallDataAboutTrainings",
@@ -53,6 +54,7 @@ export const setUserTrain = createAsyncThunk(
         try {
             const response = await userAPI.setUserTrain(body.userId, body.trainId);
             thunkApi.dispatch(setLoading(false))
+            thunkApi.dispatch(setUserHasTraining(false))
             return response.data
         } catch (error) {
             thunkApi.rejectWithValue("Что то пошло не так ...")

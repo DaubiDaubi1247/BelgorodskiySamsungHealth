@@ -16,3 +16,5 @@ export const AdminRoutes = {
     createTraining : admin + "/create"
 } 
 
+export const profile = "/profile"
+

@@ -6,8 +6,10 @@ interface IUserDataProfileProps {
 }
 
 const UserDataProfile: React.FunctionComponent<IUserDataProfileProps> = ({userData}) => {
+
   return (
     <div>
+        <p>Ваш Профиль</p>
         <p>Имя : {userData.name}</p>
         <p>Вес : {userData.weight} кг</p>
         <p>Рост : {userData.height || "N/A"} см</p>

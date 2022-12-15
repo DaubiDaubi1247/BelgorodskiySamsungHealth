@@ -11,7 +11,8 @@ const initialState: ItrainitState = {
     smallUserTraining : null,
     arrDaysExpires : [],
     percentOfProgress : CONST.NO_DATA,
-    messageForCreate : ""
+    messageForCreate : "",
+    userHasTraining : false
 
 };
 
@@ -26,6 +27,9 @@ const trainingSlice = createSlice({
 
         deleteTraining: (state, action : PayloadAction<number>) => {
             state.smallDataTrainings = state.smallDataTrainings.filter(el => el.id !== action.payload)
+        },
+        setUserHasTraining: (state, action : PayloadAction<boolean>) => {
+            state.userHasTraining = action.payload
         }
 
     },
@@ -39,6 +43,8 @@ const trainingSlice = createSlice({
                 state.smallUserTraining = action.payload
                 state.percentOfProgress = action.payload.presentOfProgress !== undefined ? action.payload.presentOfProgress : CONST.NO_DATA
 
+                state.userHasTraining = action.payload !== undefined
+
                 // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
                 // state.today = Math.round(2 / 9 * 100)
             })
@@ -50,14 +56,14 @@ const trainingSlice = createSlice({
                 
                 state.messageForCreate = action.payload
             })
-            // .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
-            //     state.arrDaysExpires = action.payload
-            // })
+            .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
+                state.userHasTraining = true
+            })
             
     },
 });
 
-export const { setSmallData,deleteTraining } = trainingSlice.actions;
+export const { setSmallData,deleteTraining,setUserHasTraining } = trainingSlice.actions;
 
 export const selectSmallUserTraining = (state : RootState) => state.training.smallUserTraining
 

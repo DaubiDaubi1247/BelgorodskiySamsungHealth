@@ -34,7 +34,10 @@ const ProfileContainer: React.FunctionComponent<IProfileContainerProps> = (props
   return (
     <div className="">
         <UserDataProfile userData={userData}/>
-        <Button variant="primary" onClick={handleShowAndClose}>
+        <Button 
+            variant="primary" 
+            onClick={handleShowAndClose}
+        >
           Обновить данные
         </Button>
         <ModalForSetUserData

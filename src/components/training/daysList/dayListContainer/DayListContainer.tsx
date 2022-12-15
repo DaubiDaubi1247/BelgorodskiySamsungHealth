@@ -10,11 +10,13 @@ interface IDayListContainerProps {
 const DayListContainer: React.FunctionComponent<IDayListContainerProps> = ({ isVisible }) => {
 
     let trainingsArr = useAppSelector(state => state.training.arrDaysExpires)
+    let currentDay = useAppSelector(state => state.training.smallUserTraining?.dayOfTraining)
     // let trainingsArr = arrDaysExpires.filter(el => el !== undefined)
     return (
         <DayList
             isVisible={isVisible}
             trainingsArr={trainingsArr}
+            currentDay={currentDay}
         />
     )
 };
