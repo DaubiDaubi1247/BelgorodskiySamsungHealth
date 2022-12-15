@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr, ArrDaysExpires } from './../../API/trainingAPI/TtrainingAPI';
 import { CONST, ItrainitState } from './Types';
-import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining } from './thunk';
+import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining, updateDayUserTraining } from './thunk';
 import { useAppSelector } from '../../app/hooks';
 
 
@@ -11,8 +11,9 @@ const initialState: ItrainitState = {
     smallUserTraining : null,
     arrDaysExpires : [],
     percentOfProgress : CONST.NO_DATA,
-    messageForCreate : ""
-
+    messageForCreate : "",
+    userHasTraining : false,
+    currentDay : CONST.NO_DATA
 };
 
 const trainingSlice = createSlice({
@@ -26,6 +27,9 @@ const trainingSlice = createSlice({
 
         deleteTraining: (state, action : PayloadAction<number>) => {
             state.smallDataTrainings = state.smallDataTrainings.filter(el => el.id !== action.payload)
+        },
+        setUserHasTraining: (state, action : PayloadAction<boolean>) => {
+            state.userHasTraining = action.payload
         }
 
     },
@@ -39,6 +43,9 @@ const trainingSlice = createSlice({
                 state.smallUserTraining = action.payload
                 state.percentOfProgress = action.payload.presentOfProgress !== undefined ? action.payload.presentOfProgress : CONST.NO_DATA
 
+                state.userHasTraining = action.payload !== undefined
+                state.currentDay = action.payload.dayOfTraining ? action.payload.dayOfTraining : CONST.NO_DATA
+
                 // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
                 // state.today = Math.round(2 / 9 * 100)
             })
@@ -50,14 +57,17 @@ const trainingSlice = createSlice({
                 
                 state.messageForCreate = action.payload
             })
-            // .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
-            //     state.arrDaysExpires = action.payload
-            // })
+            .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
+                state.userHasTraining = true
+            })
+            .addCase(updateDayUserTraining.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
+                state.currentDay++;
+            })
             
     },
 });
 
-export const { setSmallData,deleteTraining } = trainingSlice.actions;
+export const { setSmallData,deleteTraining,setUserHasTraining } = trainingSlice.actions;
 
 export const selectSmallUserTraining = (state : RootState) => state.training.smallUserTraining
 
