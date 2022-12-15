@@ -3,13 +3,15 @@ import authSlice from '../slices/auth/authSlice';
 import commonSlice from '../slices/common/commonSlice';
 import userSlice from '../slices/user/userSlice';
 import trainingSlice from './../slices/training/trainingSlice';
+import dietsSlice from './../slices/diets/diets';
 
 export const store = configureStore({
   reducer: {
     auth : authSlice,
     training : trainingSlice,
     common : commonSlice,
-    user : userSlice
+    user : userSlice,
+    diets : dietsSlice
   },
 });
 
