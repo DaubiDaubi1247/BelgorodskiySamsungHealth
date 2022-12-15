@@ -2,6 +2,7 @@ package com.example.reg3.diet;
 
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dish.Dish;
+import com.example.reg3.dish.DishQuarry;
 import com.example.reg3.dish.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -110,6 +111,26 @@ public class DietService {
             bot.sendInfo("возвращены диеты со статусом " + status);
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(diets);
+        }
+    }
+
+    public ResponseEntity<Object> getDishesWithFilters(Long idDiet,
+                                                       String typeOfMeal,
+                                                       String mailTime) {
+        List<Dish> dishList = dietRepository.getDishes(idDiet, typeOfMeal, mailTime);
+
+        if (dishList.size() == 0) {
+            String inf = "Отсуттвуют блда с параметрами: " + typeOfMeal + ", " + mailTime + " в диете с id " + idDiet;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(inf);
+        } else {
+           List< DishQuarry> dishQuarryList = new ArrayList<>();
+           for (int i = 0; i < dishList.size(); i++) {
+               DishQuarry dishQuarry = new DishQuarry();
+               dishQuarry.setParamsFromEntity(dishList.get(i));
+               dishQuarryList.add(dishQuarry);
+           }
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dishQuarryList);
         }
     }
 }

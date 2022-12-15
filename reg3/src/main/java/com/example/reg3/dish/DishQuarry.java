@@ -3,6 +3,7 @@ package com.example.reg3.dish;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,4 +27,17 @@ public class DishQuarry {
     private Float carbsPerGram;
 
     private List<String> mealTimes;
+
+    public void setParamsFromEntity(Dish dish) {
+        label = dish.getLabel();
+        type = dish.getType().getLabel();
+        calPerGram = dish.getCalPerGram();
+        proteinsPerGram = dish.getProteinsPerGram();
+        fatsPerGram = dish.getFatsPerGram();
+        carbsPerGram = dish.getCarbsPerGram();
+        mealTimes = new ArrayList<>();
+        for (var mealTime: dish.getMealTimes()) {
+            mealTimes.add(mealTime.getLabel());
+        }
+    }
 }

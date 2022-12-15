@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping("diet")
@@ -25,7 +23,7 @@ public class DietController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<Object> addDiet(@RequestBody DietQuary dietQuary ) {
+    public ResponseEntity<Object> addDiet(@RequestBody DietQuary dietQuary) {
         try {
             bot.sendInfo("обращение к diet/add");
             ResponseEntity<Object> res = dietService.addDiet(dietQuary);
@@ -68,17 +66,21 @@ public class DietController {
                     body(e.toString());
         }
     }
-//    @GetMapping("dishes")
-//    public ResponseEntity<Object> getProducts(@RequestParam String idDiet,
-//                                              @RequestParam(required = false) String type,
-//                                              @RequestParam(required = false) String MailTyme) {
-//        try {
-//            bot.sendInfo("обращение к diet/getAll status=" + status);
-//
-//        } catch (Exception e) {
-//            bot.executeSendLog();
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.toString());
-//        }
-//    }
+
+    @GetMapping("dishes")
+    public ResponseEntity<Object> getProducts(@RequestParam Long idDiet,
+                                              @RequestParam(required = false) String typeOfMeal,
+                                              @RequestParam(required = false) String MailTime) {
+        try {
+            //bot.sendInfo("обращение к diet/dishes" +
+                  //  " idDiet=" + idDiet + " type=" + typeOfMeal + "MailTime" + MailTime);
+            var res = dietService.getDishesWithFilters(idDiet, typeOfMeal, MailTime);
+           // bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+           // bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.toString());
+        }
+    }
 
 }
