@@ -50,5 +50,21 @@ public class DishController {
         }
     }
 
+    @GetMapping("getTypes")
+    public ResponseEntity<Object> getTypesOfMeal() {
+        try {
+            bot.sendInfo("обращение к dish/add");
+            ResponseEntity<Object> res = dishService.getTypesOfMeal();
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
+    }
+
+
+
 
 }

@@ -13,6 +13,8 @@ import com.example.reg3.meal.MealTimeRepository;
 import com.example.reg3.repository.DayOfTrainingRepository;
 import com.example.reg3.repository.TrainingRepository;
 import com.example.reg3.repository.UserRegistrationDataRepository;
+import com.example.reg3.typeOfMeal.TypeOfMeal;
+import com.example.reg3.typeOfMeal.TypeOfMealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,12 +38,14 @@ public class AddInformationController {
     private final DishService dishService;
     private final MealTimeRepository mealTimeRepository;
 
+    private final TypeOfMealRepository typeOfMealRepository;
+
     @Autowired
     public AddInformationController(UserRegistrationDataRepository userRegistrationData,
                                     DayOfTrainingRepository dayOfTrainingRepositor,
                                     TrainingRepository trainingRepository,
                                     UserRegistrationDataService dayOfTrainingService,
-                                    TrainingService trainingService, UserService userService, DishService dishService, MealTimeRepository mealTimeRepository) {
+                                    TrainingService trainingService, UserService userService, DishService dishService, MealTimeRepository mealTimeRepository, TypeOfMealRepository typeOfMealRepository) {
         this.trainingRepository = trainingRepository;
         this.dayOfTrainingRepository = dayOfTrainingRepositor;
         this.userRegistrationData = userRegistrationData;
@@ -50,6 +54,7 @@ public class AddInformationController {
         this.userService = userService;
         this.dishService = dishService;
         this.mealTimeRepository = mealTimeRepository;
+        this.typeOfMealRepository = typeOfMealRepository;
     }
 
     List<Exercise> exerciseList = new ArrayList<>();
@@ -164,6 +169,13 @@ public class AddInformationController {
             new MealTime("перекус"),
             new MealTime("второй завтрак")
     );
+    List<TypeOfMeal> typeOfMealList = List.of(
+            new TypeOfMeal("первое блюдо"),
+            new TypeOfMeal("фрукт"),
+            new TypeOfMeal("салат"),
+            new TypeOfMeal("десерт")
+    );
+
 
 
     @GetMapping("all")
@@ -184,7 +196,7 @@ public class AddInformationController {
 
 
         mealTimeRepository.saveAll(mealTimeList);
-
+        typeOfMealRepository.saveAll(typeOfMealList);
 
 
         List<DishQuarry> dishQuarryList = List.of(

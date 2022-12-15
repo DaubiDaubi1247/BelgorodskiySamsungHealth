@@ -87,7 +87,7 @@ public class DishService {
     }
 
     public ResponseEntity<Object> getMealTimes() {
-       var mealTimes =   mealTimeRepository.findAll();
+       var mealTimes =  mealTimeRepository.findAll();
        if (mealTimes.size() == 0) {
            bot.sendWarning("прием пищи отсутствуют в БД");
        }
@@ -97,7 +97,22 @@ public class DishService {
        for (int i = 0; i < mealTimes.size(); i++) {
            labelOfMealTimes.add(mealTimes.get(i).getLabel());
        }
-        bot.sendInfo("прием пищи отсутствуют в БД");
+        bot.sendInfo("прием пищи взят из БД");
        return ResponseEntity.ok().body(labelOfMealTimes);
+    }
+
+    public ResponseEntity<Object> getTypesOfMeal() {
+        var mealTimes =   typeOfMealRepository.findAll();
+        if (mealTimes.size() == 0) {
+            bot.sendWarning("типы блюда отсутствуют в БД");
+        }
+
+        List<String> labelOfMealTypes = new ArrayList<>();
+
+        for (int i = 0; i < mealTimes.size(); i++) {
+            labelOfMealTypes.add(mealTimes.get(i).getLabel());
+        }
+        bot.sendInfo("тип пищи взят из БД");
+        return ResponseEntity.ok().body(labelOfMealTypes);
     }
 }

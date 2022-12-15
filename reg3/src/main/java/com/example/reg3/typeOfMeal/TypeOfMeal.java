@@ -21,4 +21,8 @@ public class TypeOfMeal {
     @Column(name = "label", nullable = false,
             unique = true, length = 20)
     private String label;
+
+    public TypeOfMeal(String label) {
+        this.label = label;
+    }
 }
