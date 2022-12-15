@@ -72,17 +72,44 @@ public class DietService {
             if (diet.getStatus().equals("not available")){
                 diet.setStatus("available");
                 dietRepository.save(diet);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("диета "+diet.getLabel()+ " активирована");
+                String info = "диета "+diet.getLabel()+ " активирована";
+                bot.sendInfo(info);
+
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
             } else {
                 diet.setStatus("not available");
                 dietRepository.save(diet);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("диета "+diet.getLabel()+ " диактивирована");
+                String info = "диета "+diet.getLabel()+ " диактивирована";
+                bot.sendInfo(info);
+
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
             }
         }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("диета c id "+id +" не найдена");
+            String info = "диета c id "+id +" не найдена";
+            bot.sendInfo(info);
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
+        }
+    }
+
+    public ResponseEntity<Object> getAllDietsByStatus(String status) {
+        List<Diet> diets;
+        if (status == null){
+             diets = dietRepository.findAll();
+        }else {
+             diets = dietRepository.findAllByStatus(status);
+        }
+
+        if (diets.size() == 0) {
+            String info = "Отсутствуют  диеты co статусом " + status;
+            bot.sendWarning(info);
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
+        }else {
+            for (var diet: diets) diet.setDishes(null);
+            bot.sendInfo("возвращены диеты со статусом " + status);
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(diets);
         }
     }
 }

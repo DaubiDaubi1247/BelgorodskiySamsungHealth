@@ -37,10 +37,12 @@ public class DietController {
     }
 
     @GetMapping("changeStatus")
-    public ResponseEntity<Object> changeStatusDiet(@RequestParam(required = false) Long id) {
+    public ResponseEntity<Object> changeStatusDiet
+            (@RequestParam Long id) {
         try {
             bot.sendInfo("обращение к diet/changeStatus");
             ResponseEntity<Object> res = dietService.changeStatusDiet(id);
+
             bot.executeSendLog();
             return res;
         } catch (Exception e) {
@@ -50,5 +52,19 @@ public class DietController {
         }
     }
 
+
+    @GetMapping("getAll")
+    public ResponseEntity<Object> getAllDiets(@RequestParam(required = false) String status) {
+        try {
+            bot.sendInfo("обращение к diet/getAll status=" + status);
+            ResponseEntity<Object> res = dietService.getAllDietsByStatus(status);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
+    }
 
 }
