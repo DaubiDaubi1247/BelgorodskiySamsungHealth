@@ -64,4 +64,25 @@ public class DietService {
         newDiet.setDishes(dishes);
         return newDiet;
     }
+
+
+    public ResponseEntity<Object> changeStatusDiet(Long id) {
+        try {
+            var  diet = dietRepository.getReferenceById(id);
+            if (diet.getStatus().equals("not available")){
+                diet.setStatus("available");
+                dietRepository.save(diet);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("диета "+diet.getLabel()+ " активирована");
+            } else {
+                diet.setStatus("not available");
+                dietRepository.save(diet);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("диета "+diet.getLabel()+ " диактивирована");
+            }
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("диета c id "+id +" не найдена");
+        }
+    }
 }

@@ -35,4 +35,20 @@ public class DietController {
                     body(e.toString());
         }
     }
+
+    @GetMapping("changeStatus")
+    public ResponseEntity<Object> changeStatusDiet(@RequestParam(required = false) Long id) {
+        try {
+            bot.sendInfo("обращение к diet/changeStatus");
+            ResponseEntity<Object> res = dietService.changeStatusDiet(id);
+            bot.executeSendLog();
+            return res;
+        } catch (Exception e) {
+            bot.executeSendLog();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body(e.toString());
+        }
+    }
+
+
 }
