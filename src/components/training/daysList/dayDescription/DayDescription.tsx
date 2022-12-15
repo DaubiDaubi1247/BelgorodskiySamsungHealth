@@ -34,10 +34,6 @@ const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData,
 
             <Dropdown.Menu variant="" show={isActiveDay(dayData.numberOfDay)}>
                 {getAllexercisesForDay()}
-                
-                {/* <Button onClick={}>
-                    Тренировки закончена
-                </Button> */}
             </Dropdown.Menu>
 
         </Dropdown>
