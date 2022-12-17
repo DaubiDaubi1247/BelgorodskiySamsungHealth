@@ -10,6 +10,7 @@ export const getSmallDataAboutDiets = createAsyncThunk(
     async (_,thunkApi) => {
         try {
             const response = await dietsAPI.getSmallDataAboutDiets();
+            debugger
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {

@@ -3,13 +3,16 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './../../app/hooks';
 import { getSmallDataAboutDiets } from './../../slices/diets/thunk';
 import SubscribeDiet from './subscribeDiets/SubscribeDiets';
+import withLoading from './../training/daysList/dayListContainer/DayListContainer';
+import withAuthRedicrect from './../HOC/withAuthRedirect';
+
+
 interface IDietsContainerProps {
 }
 
 const DietsContainer: React.FunctionComponent<IDietsContainerProps> = (props) => {
 
     let userHasDiet = useAppSelector(state => state.diets.userHasDiet)
-    let dispatch = useAppDispatch()
 
     return (
         <>
@@ -18,4 +21,4 @@ const DietsContainer: React.FunctionComponent<IDietsContainerProps> = (props) =>
     )
 };
 
-export default DietsContainer;
+export default withAuthRedicrect(DietsContainer);
