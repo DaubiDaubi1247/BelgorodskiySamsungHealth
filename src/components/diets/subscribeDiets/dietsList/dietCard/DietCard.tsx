@@ -5,6 +5,8 @@ import { DietsRoutes } from './../../../../../Routes/Routes';
 import { useAppDispatch } from './../../../../../app/hooks';
 import { setLoading } from '../../../../../slices/common/commonSlice';
 import { setUserDiet } from '../../../../../slices/diets/thunk';
+import { setCurrentDietId } from '../../../../../slices/diets/diets';
+import { IsmallDataAboutDiets } from '../../../../../API/dietsAPI/TdietsAPI';
 
 interface IDietCardProps {
     id : number
@@ -19,6 +21,13 @@ const DietCard: React.FunctionComponent<IDietCardProps> = ({id, label, descripti
     const dispatch = useAppDispatch()
 
     const redirectToFullDescription = () => {
+        let dietData : IsmallDataAboutDiets = {
+            id : id,
+            label : label,
+            description : description
+        }
+        dispatch(setCurrentDietId(dietData))
+        
         dispatch(setLoading(true));
         if (userId) dispatch(setUserDiet({userId : userId, dietId : id}))
         navigate(DietsRoutes.fullDescription)

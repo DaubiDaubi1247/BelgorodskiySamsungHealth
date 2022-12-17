@@ -4,6 +4,7 @@ import commonSlice from '../slices/common/commonSlice';
 import userSlice from '../slices/user/userSlice';
 import trainingSlice from './../slices/training/trainingSlice';
 import dietsSlice from './../slices/diets/diets';
+import dish from '../slices/dish/dish';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     training : trainingSlice,
     common : commonSlice,
     user : userSlice,
-    diets : dietsSlice
+    diets : dietsSlice,
+    dish : dish
   },
 });
 

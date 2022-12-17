@@ -4,7 +4,7 @@ interface ISelectProps {
     valueArr : Array<string>
 }
 
-const SelectBasicExample : React.FunctionComponent<ISelectProps> = ({valueArr}) => {
+const Select : React.FunctionComponent<ISelectProps> = ({valueArr}) => {
 
     let optionsArr = valueArr.map(el => <option value={el}>{el}</option>)
 
@@ -15,4 +15,4 @@ const SelectBasicExample : React.FunctionComponent<ISelectProps> = ({valueArr}) 
   );
 }
 
-export default SelectBasicExample;
+export default Select;

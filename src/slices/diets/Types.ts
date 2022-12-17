@@ -7,4 +7,5 @@ export interface IdietsState {
     smallDataAboutDiets : IsmallDataAboutDietsArr
     smallDataAboutUserDiet : IsmallDataAboutDiets | null
     userHasDiet : boolean
+    currentDietId : IsmallDataAboutDiets | null
 }

@@ -2,14 +2,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IsmallDataAboutDietsArr } from '../../API/dietsAPI/TdietsAPI';
 import { IdietsState } from './Types';
-import { getSmallDataAboutDiets, getSmallDataUserTraing } from './thunk';
+import { getSmallDataAboutDiets, getSmallDataUserTraing, setUserDiet } from './thunk';
 import { IsmallDataAboutDiets } from './../../API/dietsAPI/TdietsAPI';
 import { stat } from 'fs';
+import { CONST } from '../common/Types';
 
 const initialState : IdietsState = {
     smallDataAboutUserDiet : null,
     userHasDiet : false,
     smallDataAboutDiets : [],
+    currentDietId : null
 }
 
 const dietsSlice = createSlice({
@@ -18,6 +20,9 @@ const dietsSlice = createSlice({
     reducers: {
         setUserHasDiet : (state, action : PayloadAction<boolean>) => {
             state.userHasDiet = action.payload
+        },
+        setCurrentDietId : (state, action : PayloadAction<IsmallDataAboutDiets>) => {
+            state.currentDietId = action.payload
         }
     },
 
@@ -29,13 +34,13 @@ const dietsSlice = createSlice({
             .addCase(getSmallDataUserTraing.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
                 state.smallDataAboutUserDiet = action.payload
             })
-            .addCase(getSmallDataUserTraing.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
+            .addCase(setUserDiet.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
                 state.userHasDiet = true;
             })
             
     }
 })
 
-export const {setUserHasDiet} = dietsSlice.actions
+export const {setUserHasDiet, setCurrentDietId} = dietsSlice.actions
 
 export default dietsSlice.reducer

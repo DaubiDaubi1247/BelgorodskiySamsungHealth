@@ -9,6 +9,9 @@ const dishAxios = axios.create({
 export const dishAPI = {
     getMealTimes() {
         return dishAxios.get<Array<string>>("/getMealTimes")
+    },
+    getTypes() {
+        return dishAxios.get<Array<string>>("/getTypes")
     }
 
 }
