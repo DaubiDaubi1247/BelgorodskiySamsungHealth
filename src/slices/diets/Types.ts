@@ -5,8 +5,6 @@ import { IsmallDataAboutDiets, IsmallDataAboutDietsArr } from './../../API/diets
 
 export interface IdietsState {
     smallDataAboutDiets : IsmallDataAboutDietsArr
-}
-
-export enum CONST  {
-    NO_DATA = -1
+    smallDataAboutUserDiet : IsmallDataAboutDiets | null
+    userHasDiet : boolean
 }

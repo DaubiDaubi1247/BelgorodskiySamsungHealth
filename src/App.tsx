@@ -15,6 +15,7 @@ import AdminPanelContainer from './components/adminPanel/AdminPanel';
 import AdminTrainingRedactor from './components/adminPanel/adminTrainingRedactor/AdminTrainingRedactor';
 import AdminAddTrainingMenu from './components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu';
 import ProfileContainer from './components/profile/ProfileContainer';
+import DietsContainer from './components/diets/DIetsContainer';
 
 function App() {
 
@@ -39,7 +40,7 @@ function App() {
                             <Route path={AdminRoutes.createTraining} element={<AdminAddTrainingMenu/>}/>
                         </Route>
                         <Route path={profile} element={<ProfileContainer/>}/>
-                        <Route path={diets} element={<ProfileContainer/>}>
+                        <Route path={diets} element={<DietsContainer/>}>
 
                         </Route>
                     </Routes>

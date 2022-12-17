@@ -17,3 +17,16 @@ export const getSmallDataAboutDiets = createAsyncThunk(
         }
     }
 )
+
+export const getSmallDataUserTraing = createAsyncThunk(
+    "diets/getSmallDataUserTraing",
+   async (userId : number, thunkApi) => {
+        try {
+            const response = await dietsAPI.getSmallDataUserTraing(userId)
+            thunkApi.dispatch(setLoading(false));
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("...")
+        }
+   }
+)
