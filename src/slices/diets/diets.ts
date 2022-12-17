@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IsmallDataAboutDietsArr } from '../../API/dietsAPI/TdietsAPI';
 import { IdietsState } from './Types';
-import { getSmallDataAboutDiets, getSmallDataUserTraing, setUserDiet } from './thunk';
+import { getSmallDataAboutDiets, setUserDiet } from './thunk';
 import { IsmallDataAboutDiets } from './../../API/dietsAPI/TdietsAPI';
 import { stat } from 'fs';
 import { CONST } from '../common/Types';
@@ -31,7 +31,7 @@ const dietsSlice = createSlice({
             .addCase(getSmallDataAboutDiets.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDietsArr>) => {
                 state.smallDataAboutDiets = action.payload
             })
-            .addCase(getSmallDataUserTraing.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
+            .addCase(getMealsByFilter.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
                 state.smallDataAboutUserDiet = action.payload
             })
             .addCase(setUserDiet.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {

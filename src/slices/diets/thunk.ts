@@ -1,5 +1,6 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Ifilters } from '../../API/dietsAPI/TdietsAPI';
 
 import { setLoading } from '../common/commonSlice';
 
@@ -37,11 +38,11 @@ export const setUserDiet = createAsyncThunk(
    }
 )
 
-export const getSmallDataUserTraing = createAsyncThunk(
-    "diets/getSmallDataUserTraing",
-   async (userId : number, thunkApi) => {
+export const getMealsByFilter = createAsyncThunk(
+    "diets/getMealsByFilter",
+   async (data : Ifilters, thunkApi) => {
         try {
-            const response = await dietsAPI.getSmallDataUserTraing(userId)
+            const response = await dietsAPI.getMealsByFilter(data)
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
@@ -49,3 +50,4 @@ export const getSmallDataUserTraing = createAsyncThunk(
         }
    }
 )
+

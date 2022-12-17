@@ -26,6 +26,10 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
         dispatch(getTypes())
     })
 
+    const getMealsByFilterHanlder = () => {
+        
+    }
+
     return (
         <div className='w-100' style={{margin : "10 auto"}}>
             <div>
