@@ -6,9 +6,9 @@ import { getSmallDataAboutDiets, getSmallDataUserTraing } from './thunk';
 import { IsmallDataAboutDiets } from './../../API/dietsAPI/TdietsAPI';
 
 const initialState : IdietsState = {
-    smallDataAboutDiets : [],
     smallDataAboutUserDiet : null,
-    userHasDiet : false
+    userHasDiet : false,
+    smallDataAboutDiets : [],
 }
 
 const dietsSlice = createSlice({
