@@ -4,11 +4,12 @@ import DietCard from './dietCard/DietCard';
 
 interface IDietsListProps {
     smallDataAboutDiet: IsmallDataAboutDietsArr
+    userId? : number
 }
 
-const DietsList: React.FunctionComponent<IDietsListProps> = ({ smallDataAboutDiet }) => {
+const DietsList: React.FunctionComponent<IDietsListProps> = ({ smallDataAboutDiet,userId }) => {
 
-    let dietCardList = smallDataAboutDiet.map(el => <DietCard {...el}/>)
+    let dietCardList = smallDataAboutDiet.map(el => <DietCard {...el} userId={userId}/>)
 
     return (
         <>

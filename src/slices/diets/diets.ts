@@ -4,6 +4,7 @@ import { IsmallDataAboutDietsArr } from '../../API/dietsAPI/TdietsAPI';
 import { IdietsState } from './Types';
 import { getSmallDataAboutDiets, getSmallDataUserTraing } from './thunk';
 import { IsmallDataAboutDiets } from './../../API/dietsAPI/TdietsAPI';
+import { stat } from 'fs';
 
 const initialState : IdietsState = {
     smallDataAboutUserDiet : null,
@@ -27,6 +28,9 @@ const dietsSlice = createSlice({
             })
             .addCase(getSmallDataUserTraing.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
                 state.smallDataAboutUserDiet = action.payload
+            })
+            .addCase(getSmallDataUserTraing.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
+                state.userHasDiet = true;
             })
             
     }

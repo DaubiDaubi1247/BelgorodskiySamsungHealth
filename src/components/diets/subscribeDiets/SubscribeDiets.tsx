@@ -8,11 +8,13 @@ import DietsList from "./dietsList/DietsList";
 
 
 interface ISubscribeDietProps {
+    userId? : number
 }
 
-const SubscribeDiet: React.FunctionComponent<ISubscribeDietProps> = (props) => {
+const SubscribeDiet: React.FunctionComponent<ISubscribeDietProps> = ({userId}) => {
 
-    let smallDataAboutDiets = useAppSelector(state => state.diets.smallDataAboutDiets)
+    //let smallDataAboutDiets = useAppSelector(state => state.diets.smallDataAboutDiets)
+    let smallDataAboutDiets : any[] = [];
 
     const dispatch = useAppDispatch()
 
@@ -23,7 +25,7 @@ const SubscribeDiet: React.FunctionComponent<ISubscribeDietProps> = (props) => {
 
   return (
     <>
-        <DietsList smallDataAboutDiet={smallDataAboutDiets}/>
+        <DietsList userId={userId} smallDataAboutDiet={smallDataAboutDiets}/>
     </>
   )
 };

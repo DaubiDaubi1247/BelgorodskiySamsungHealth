@@ -18,6 +18,9 @@ export const userAPI = {
     },
     updateDayUserTraining(userId : number) {
         return userAxios.get(`/updayteDayOfTrain?userId=${userId}`)
+    },
+    setUserDiet(userId : number, dietId : number) {
+        return userAxios.get(`setDietToUser?userId=${userId}&dietId=${dietId}`)
     }
 }
 

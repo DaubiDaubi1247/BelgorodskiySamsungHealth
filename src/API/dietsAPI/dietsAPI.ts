@@ -8,10 +8,10 @@ const dietsAxios = axios.create({
 
 export const dietsAPI = {
     getSmallDataAboutDiets() {
-        return dietsAxios.get<IsmallDataAboutDietsArr>("/getAll")
+        return dietsAxios.get<IsmallDataAboutDietsArr>("/getAll?status=available")
     },
     getSmallDataUserTraing(userId : number) {
         return dietsAxios.get<IsmallDataAboutDiets>(``)
-    }
+    },
 
 }
