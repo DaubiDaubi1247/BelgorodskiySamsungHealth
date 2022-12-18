@@ -4,6 +4,7 @@ package com.example.reg3.controller;
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.Service.DishService;
 import com.example.reg3.Service.DownloadFileService;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,27 @@ downloadFileService.downloadUsers();
         InputStreamResource in = new InputStreamResource(new FileInputStream(file));
         assert in != null;
         return ResponseEntity.ok()
+
                 .contentType(contentType)
                 .body(in);
+    }
+
+    @GetMapping("/diet2")
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> getImageDyn222()
+            throws IOException, DocumentException {
+
+        MediaType contentType = MediaType.APPLICATION_PDF;
+        downloadFileService.dowloadPDF();
+        String file = "src/main/resources/templates/myJSON.pdf";
+
+        InputStreamResource in = new InputStreamResource
+                (new FileInputStream(file));
+        assert in != null;
+        return ResponseEntity.ok()
+                .contentType(contentType)
+                .body(in);
+
+
     }
 }
