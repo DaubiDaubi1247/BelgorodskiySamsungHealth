@@ -1,7 +1,7 @@
-package com.example.reg3.diet;
+package com.example.reg3.dao;
 
 
-import com.example.reg3.dish.Dish;
+import com.example.reg3.requastion.DietQuary;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,6 +1,8 @@
-package com.example.reg3.diet;
+package com.example.reg3.controller;
 
 import com.example.reg3.LogBot.TelegramBot;
+import com.example.reg3.requastion.DietQuary;
+import com.example.reg3.Service.DietService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,7 @@
-package com.example.reg3.dish;
+package com.example.reg3.dao;
 
 
-import com.example.reg3.meal.MealTime;
-import com.example.reg3.typeOfMeal.TypeOfMeal;
+import com.example.reg3.requastion.DishQuarry;
 import lombok.*;
 
 import javax.persistence.*;

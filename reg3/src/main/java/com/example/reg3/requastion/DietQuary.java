@@ -1,10 +1,8 @@
-package com.example.reg3.diet;
+package com.example.reg3.requastion;
 
 
-import com.example.reg3.dish.Dish;
 import lombok.*;
 
-import javax.persistence.Column;
 import java.util.List;
 
 @Getter

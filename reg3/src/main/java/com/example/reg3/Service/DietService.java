@@ -1,9 +1,12 @@
-package com.example.reg3.diet;
+package com.example.reg3.Service;
 
 import com.example.reg3.LogBot.TelegramBot;
-import com.example.reg3.dish.Dish;
-import com.example.reg3.dish.DishQuarry;
-import com.example.reg3.dish.DishRepository;
+import com.example.reg3.dao.Diet;
+import com.example.reg3.dao.Dish;
+import com.example.reg3.repository.DietRepository;
+import com.example.reg3.requastion.DietQuary;
+import com.example.reg3.requastion.DishQuarry;
+import com.example.reg3.repository.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

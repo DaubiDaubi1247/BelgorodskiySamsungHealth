@@ -1,10 +1,13 @@
-package com.example.reg3.dish;
+package com.example.reg3.Service;
 
 import com.example.reg3.LogBot.TelegramBot;
-import com.example.reg3.meal.MealTime;
-import com.example.reg3.meal.MealTimeRepository;
-import com.example.reg3.typeOfMeal.TypeOfMeal;
-import com.example.reg3.typeOfMeal.TypeOfMealRepository;
+import com.example.reg3.dao.Dish;
+import com.example.reg3.dao.MealTime;
+import com.example.reg3.repository.DishRepository;
+import com.example.reg3.repository.MealTimeRepository;
+import com.example.reg3.dao.TypeOfMeal;
+import com.example.reg3.repository.TypeOfMealRepository;
+import com.example.reg3.requastion.DishQuarry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.reg3.meal;
+package com.example.reg3.dao;
 
 
 import lombok.*;

@@ -1,6 +1,5 @@
 package com.example.reg3.dao;
 
-import com.example.reg3.diet.Diet;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,6 +1,7 @@
-package com.example.reg3.dish;
+package com.example.reg3.requastion;
 
 
+import com.example.reg3.dao.Dish;
 import lombok.*;
 
 import java.util.ArrayList;

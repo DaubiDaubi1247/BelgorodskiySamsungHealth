@@ -1,7 +1,8 @@
-package com.example.reg3.diet;
+package com.example.reg3.repository;
 
 
-import com.example.reg3.dish.Dish;
+import com.example.reg3.dao.Diet;
+import com.example.reg3.dao.Dish;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
