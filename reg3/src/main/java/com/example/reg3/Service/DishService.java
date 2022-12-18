@@ -47,9 +47,11 @@ public class DishService {
             Dish newDish = createNewDish(dishQuarry);
             dishRepository.save(newDish);
             bot.sendInfo("блюдо " + newDish.getLabel() + "успешно добавленно");
+
             return ResponseEntity.ok().body("блюдо добавленно");
         } catch (Exception e) {
             bot.sendError(e.getMessage());
+
             return ResponseEntity.ok().body(e.getMessage());
         }
     }
