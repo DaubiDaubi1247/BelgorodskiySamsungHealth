@@ -12,6 +12,6 @@ export const dishAPI = {
     },
     getTypes() {
         return dishAxios.get<Array<string>>("/getTypes")
-    }
+    },
 
 }

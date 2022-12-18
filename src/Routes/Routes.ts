@@ -10,18 +10,24 @@ export const MainRoutes = {
     training : main + "training"
 } 
 
+export const diets = "/diets";
+export const DietsRoutes = {
+    fullDescription : diets + "/desc",
+    redactDiets : diets + "/redact",
+    createDiets : diets + "/create"
+} 
+
 export const admin = "/admin";
 export const AdminRoutes = {
     redactOfTrain : admin + "/redact",
-    createTraining : admin + "/create"
+    createTraining : admin + "/create",
+    redactDiets : admin + diets + "/redact",
+    createDiets : admin + diets + "/create"
 } 
 
 export const profile = "/profile"
 
-export const diets = "/diets";
-export const DietsRoutes = {
-    fullDescription : diets + "/desc"
-} 
+
 
 
 

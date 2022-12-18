@@ -2,11 +2,12 @@
 import { Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { DietsRoutes } from './../../../../../Routes/Routes';
-import { useAppDispatch } from './../../../../../app/hooks';
+import { useAppDispatch, useAppSelector } from './../../../../../app/hooks';
 import { setLoading } from '../../../../../slices/common/commonSlice';
 import { setUserDiet } from '../../../../../slices/diets/thunk';
 import { setCurrentDietId } from '../../../../../slices/diets/diets';
 import { IsmallDataAboutDiets } from '../../../../../API/dietsAPI/TdietsAPI';
+import { dietsAPI } from './../../../../../API/dietsAPI/dietsAPI';
 
 interface IDietCardProps {
     id : number
@@ -19,6 +20,12 @@ const DietCard: React.FunctionComponent<IDietCardProps> = ({id, label, descripti
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+
+    let isAdmin = useAppSelector(state => state.auth.isAdmin)
+
+    const deactivateDiet = () => {
+        dietsAPI.changeStatusDiet(id)
+    }
 
     const redirectToFullDescription = () => {
         let dietData : IsmallDataAboutDiets = {
@@ -41,6 +48,7 @@ const DietCard: React.FunctionComponent<IDietCardProps> = ({id, label, descripti
               {description}
             </Card.Text>
             <Button variant="primary" onClick={redirectToFullDescription}>Посмотреть полностью</Button>
+            {isAdmin ? <Button variant='danger' onClick={deactivateDiet}>x</Button> : <></>}
           </Card.Body>
         </Card>
       );

@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
-import { AdminRoutes } from "../../../Routes/Routes";
+import { AdminRoutes, DietsRoutes } from "../../../Routes/Routes";
 import { useAppDispatch } from './../../../app/hooks';
 import { getSmallDataAboutTrainings } from './../../../slices/training/thunk';
 
@@ -17,12 +17,22 @@ const AdminPanelButtons: React.FunctionComponent<AadminPanelButtonsProps> = (pro
         navigate(AdminRoutes.redactOfTrain);
     }
 
+    const watchDiets = () => {
+        dispatch(getSmallDataAboutTrainings())
+        navigate(AdminRoutes.redactDiets);
+    }
+
     const createTraining = () => navigate(AdminRoutes.createTraining)
+
+    const createDiet = () => navigate(AdminRoutes.createDiets)
 
     return (
         <>
             <Button style={{marginRight:"15px"}} onClick={watchTraining}>Просмотреть тренировки</Button>
-            <Button onClick={createTraining}>Создать тренировку</Button>
+            <Button style={{marginRight:"15px"}} onClick={createTraining}>Создать тренировку</Button>
+
+            <Button style={{marginRight:"15px"}} onClick={watchDiets}>Посмотреть все диеты</Button>
+            <Button style={{marginRight:"15px"}} onClick={createDiet}>Создать диету</Button>
         </>
     )
 };

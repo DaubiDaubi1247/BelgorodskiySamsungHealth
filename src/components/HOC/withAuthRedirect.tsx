@@ -7,7 +7,10 @@ const withAuthRedicrect = (Component : any) => (props : any) => {
     const navigate = useNavigate()
     let isAuth = useAppSelector(state => state.auth.isAuth);
 
-    if (!isAuth) navigate(AuthRoutes.authRoute)
+
+    useEffect(() => {
+        if (!isAuth) navigate(AuthRoutes.authRoute)
+    })
 
 
     return <Component {...props} />;

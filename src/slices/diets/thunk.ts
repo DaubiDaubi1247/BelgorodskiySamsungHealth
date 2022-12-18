@@ -1,6 +1,6 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Ifilters } from '../../API/dietsAPI/TdietsAPI';
+import { Ifilters, TCreateDush } from '../../API/dietsAPI/TdietsAPI';
 
 import { setLoading } from '../common/commonSlice';
 
@@ -50,4 +50,19 @@ export const getMealsByFilter = createAsyncThunk(
         }
    }
 )
+
+export const createDiet = createAsyncThunk(
+    "diets/createDiet",
+   async (body : TCreateDush, thunkApi) => {
+        try {
+            const response = await dietsAPI.createDiet(body)
+            thunkApi.dispatch(setLoading(false));
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("...")
+        }
+   }
+)
+
+
 

@@ -7,7 +7,7 @@ import Header from './components/header/Header';
 
 import MainContainer from './components/main/Main';
 import { Route, Routes } from 'react-router-dom';
-import { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes, profile, diets } from './Routes/Routes';
+import { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes, profile, diets, DietsRoutes } from './Routes/Routes';
 import AuthContainer from './components/auth/AuthContainer';
 import NavBar from './components/navBar/NavBar';
 import TrainingContainer from './components/training/TraininigContainer';
@@ -16,6 +16,8 @@ import AdminTrainingRedactor from './components/adminPanel/adminTrainingRedactor
 import AdminAddTrainingMenu from './components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu';
 import ProfileContainer from './components/profile/ProfileContainer';
 import DietsContainer from './components/diets/DIetsContainer';
+import AdminCreateDIets from './components/adminPanel/adminCreateDIets/AdminCreateDIets';
+import AdminAddRedactDiets from './components/adminPanel/adminAddRedactDiets/AdminAddRedactDiets';
 
 function App() {
 
@@ -39,8 +41,12 @@ function App() {
 
                         <Route path={admin}>
                             <Route path={admin} element={<AdminPanelContainer />} />
+
                             <Route path={AdminRoutes.redactOfTrain} element={<AdminTrainingRedactor/>}/>
                             <Route path={AdminRoutes.createTraining} element={<AdminAddTrainingMenu/>}/>
+
+                            <Route path={AdminRoutes.redactDiets} element={<AdminAddRedactDiets/>}/>
+                            <Route path={AdminRoutes.createDiets} element={<AdminCreateDIets/>}/>
                         </Route>
 
                         <Route path={profile} element={<ProfileContainer/>}/>

@@ -14,6 +14,7 @@ interface ISubscribeDietProps {
 const SubscribeDiet: React.FunctionComponent<ISubscribeDietProps> = ({userId}) => {
 
     //let smallDataAboutDiets = useAppSelector(state => state.diets.smallDataAboutDiets)
+    //потому что пока саня не починил так
     let smallDataAboutDiets : any[] = [];
 
     const dispatch = useAppDispatch()

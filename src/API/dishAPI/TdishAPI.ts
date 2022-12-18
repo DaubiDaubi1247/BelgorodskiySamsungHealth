@@ -13,6 +13,7 @@ export interface IdishDescription {
     fatsPerGram : number
 }
 
+
 export type TDishDescriptionArr = Array<IdishDescription>
 
 export type IsmallDataAboutDietsArr = Array<IsmallDataAboutDiets>

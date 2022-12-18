@@ -11,5 +11,11 @@ export interface Ifilters {
     mealTime : string
 }
 
+export type TCreateDush = {
+    label : string
+    description : string
+    dishes : Array<string>
+}
+
 export type IsmallDataAboutDietsArr = Array<IsmallDataAboutDiets>
 

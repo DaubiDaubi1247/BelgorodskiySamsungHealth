@@ -1,6 +1,6 @@
 import axios from "axios"
-import { TDishDescriptionArr } from "../dishAPI/TdishAPI"
-import { Ifilters, IsmallDataAboutDiets, IsmallDataAboutDietsArr} from "./TdietsAPI"
+import {TDishDescriptionArr } from "../dishAPI/TdishAPI"
+import { Ifilters, IsmallDataAboutDiets, IsmallDataAboutDietsArr, TCreateDush} from "./TdietsAPI"
 
 
 const dietsAxios = axios.create({
@@ -11,8 +11,16 @@ export const dietsAPI = {
     getSmallDataAboutDiets() {
         return dietsAxios.get<IsmallDataAboutDietsArr>("/getAll?status=available")
     },
+
     getMealsByFilter(filters : Ifilters) {
         return dietsAxios.get<TDishDescriptionArr>(`/dishes?idDiet=${filters.dietId}&typeOfMeal=${filters.typeOfMeal}&MailTime=${filters.mealTime}`)
-    }
+    },
+
+    changeStatusDiet(dietId : number) {
+        return dietsAxios.get(`/changeStatus?id=${dietId}`)
+    },
+    createDiet(body : TCreateDush) {
+        return dietsAxios.post(`/add`, body)
+    } 
 
 }

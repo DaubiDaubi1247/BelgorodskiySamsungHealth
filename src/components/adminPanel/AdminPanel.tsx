@@ -16,18 +16,12 @@ const AdminPanelContainer: React.FunctionComponent<IAdminPanelProps> = (props) =
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        // navigate to error page
-        //if (!isAdmin) navigate()
-        //dispatch(getAllTra)
-
-    })
+    if (!isAdmin) navigate("/")
 
     return (
         <div >
             <h2>Здравствуйте, Вы посетили панель администратора</h2>
             <AdminPanelButtons/>
-            
         </div>
     )
 };
