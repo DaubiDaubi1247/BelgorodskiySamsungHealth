@@ -1,9 +1,9 @@
 package com.example.reg3.controller;
 
-
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.Service.DishService;
 import com.example.reg3.Service.DownloadFileService;
+
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -40,7 +40,6 @@ downloadFileService.downloadUsers();
         InputStreamResource in = new InputStreamResource(new FileInputStream(file));
         assert in != null;
         return ResponseEntity.ok()
-
                 .contentType(contentType)
                 .body(in);
     }
