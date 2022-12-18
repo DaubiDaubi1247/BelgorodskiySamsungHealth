@@ -98,4 +98,19 @@ public class UserController {
                     body(e.toString());
         }
     }
+
+//    @GetMapping("getDiet")
+//    public ResponseEntity<Object> getDiet(@RequestParam Long userId) {
+//        try {
+//            bot.sendInfo("обращение к user/getUserData");
+//            var res = userService.getDiet(userId);
+//            bot.executeSendLog();
+//            return res;
+//        } catch (Exception e) {
+//            bot.executeSendLog();
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+//                    body(e.toString());
+//        }
+//    }
+
 }

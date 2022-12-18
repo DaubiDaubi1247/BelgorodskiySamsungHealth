@@ -6,6 +6,8 @@ import com.example.reg3.Service.TrainingService;
 import com.example.reg3.Service.UserRegistrationDataService;
 import com.example.reg3.Service.UserService;
 import com.example.reg3.dao.*;
+import com.example.reg3.diet.DietQuary;
+import com.example.reg3.diet.DietService;
 import com.example.reg3.dish.DishQuarry;
 import com.example.reg3.dish.DishService;
 import com.example.reg3.meal.MealTime;
@@ -16,6 +18,7 @@ import com.example.reg3.repository.UserRegistrationDataRepository;
 import com.example.reg3.typeOfMeal.TypeOfMeal;
 import com.example.reg3.typeOfMeal.TypeOfMealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class AddInformationController {
     private final DishService dishService;
     private final MealTimeRepository mealTimeRepository;
 
+    private final DietService dietService;
     private final TypeOfMealRepository typeOfMealRepository;
 
     @Autowired
@@ -45,7 +49,7 @@ public class AddInformationController {
                                     DayOfTrainingRepository dayOfTrainingRepositor,
                                     TrainingRepository trainingRepository,
                                     UserRegistrationDataService dayOfTrainingService,
-                                    TrainingService trainingService, UserService userService, DishService dishService, MealTimeRepository mealTimeRepository, TypeOfMealRepository typeOfMealRepository) {
+                                    TrainingService trainingService, UserService userService, DishService dishService, MealTimeRepository mealTimeRepository, DishService dietService, DietService dietService1, TypeOfMealRepository typeOfMealRepository) {
         this.trainingRepository = trainingRepository;
         this.dayOfTrainingRepository = dayOfTrainingRepositor;
         this.userRegistrationData = userRegistrationData;
@@ -54,6 +58,8 @@ public class AddInformationController {
         this.userService = userService;
         this.dishService = dishService;
         this.mealTimeRepository = mealTimeRepository;
+        this.dietService = dietService1;
+
         this.typeOfMealRepository = typeOfMealRepository;
     }
 
@@ -117,16 +123,7 @@ public class AddInformationController {
             new DayOfTraining(3, setListJump)
     );
 
-    //todo добавить упражнения
-//    {
-//        List<Set> setListUp = new ArrayList<>();
-//
-//        setListUp.add(new Set(5, exerciseList.get(1), 15));
-//        setListUp.add(new Set(6, exerciseList.get(1), 15));
-//        setListUp.add(new Set(7, exerciseList.get(1), 15));
-//        setListUp.add(new Set(8, exerciseList.get(1), 15));
-//
-//    }
+
 
 
     List<Training> trainingList = List.of(
@@ -213,6 +210,17 @@ public class AddInformationController {
             dishService.addDish(dish);
         }
 
+        List<String> listDish1 = List.of("цезарь", "куриный суп");
+        List<String> listDish2 = List.of("яблоко", "кекс");
+        List<String> listDish3 = List.of("яблоко", "цезарь", "кекс", "куриный суп");
+
+        DietQuary dietQuary1 = new DietQuary("Углеводная", "диета на углеводах",null, listDish1);
+        DietQuary dietQuary2 = new DietQuary("Белковая", "диета на бЕлках",null, listDish2);
+        DietQuary dietQuary3 = new DietQuary("Монодиета", "хз что это",null, listDish3);
+
+        ResponseEntity<Object> res10 = dietService.addDiet(dietQuary1);
+        ResponseEntity<Object> res11 = dietService.addDiet(dietQuary2);
+        ResponseEntity<Object> res12 = dietService.addDiet(dietQuary3);
 
         StringBuilder msg = new StringBuilder();
         msg.append("Добавление изначальных данных\n");
@@ -225,6 +233,8 @@ public class AddInformationController {
         msg.append(res7).append("\n");
         msg.append(res8).append("\n");
         msg.append(res9).append("\n");
+        msg.append(res10).append("\n");
+
         bot.sendInfo(msg.toString());
         bot.executeSendLog();
 

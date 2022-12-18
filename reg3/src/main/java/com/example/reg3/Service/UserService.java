@@ -4,6 +4,7 @@ package com.example.reg3.Service;
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.User;
 import com.example.reg3.dao.UserProgressInTraining;
+import com.example.reg3.diet.Diet;
 import com.example.reg3.diet.DietRepository;
 import com.example.reg3.repository.TrainingRepository;
 import com.example.reg3.repository.UserProgressInTrainingRepository;
@@ -59,27 +60,27 @@ public class UserService {
 
     public ResponseEntity<Object> addProgressOfTrain(Long userId) {
         try {
-        User user = userRepository.getReferenceById(userId);
+            User user = userRepository.getReferenceById(userId);
 
 
-        var check = user.getUserProgresInTraining();
-        if (check != null) {
-            UserProgressInTraining userProgress = user.getUserProgresInTraining();
+            var check = user.getUserProgresInTraining();
+            if (check != null) {
+                UserProgressInTraining userProgress = user.getUserProgresInTraining();
 
-            if (userProgress.isComplite()) {
-                completionTrain(user);
-                return ResponseEntity.status(HttpStatus.OK).body("Пользователь завершил программу тренеровок");
-            } else {
+                if (userProgress.isComplite()) {
+                    completionTrain(user);
+                    return ResponseEntity.status(HttpStatus.OK).body("Пользователь завершил программу тренеровок");
+                } else {
 
                     upProgress(userProgress);
                     return ResponseEntity.status(HttpStatus.OK)
                             .body("Пользователь перешел к следующему дню тренеровок программу тренеровок");
 
 
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь не подписан на программу тренеровки");
             }
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь не подписан на программу тренеровки");
-        }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Пользователь с данным id не найден");
         }
@@ -125,7 +126,7 @@ public class UserService {
             user.setDiet(diet);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("пользователь "+user.getName()+" подписался на диету " +diet.getLabel());
+                    .body("пользователь " + user.getName() + " подписался на диету " + diet.getLabel());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь или тренеровки с таким id не найдено");
         }
@@ -147,16 +148,26 @@ public class UserService {
         }
     }
 
+    //todo доделать
     public ResponseEntity<Object> getUserData(Long userId) {
-
-        var userInfo = userRepository.findUserById(userId);
-
-        if (userInfo.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдено");
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(userInfo.get());
+        return null;
+//        var userInfo = userRepository.getBIOData(userId);
+//
+//        if (userInfo.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдено");
+//        }
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(userInfo.get());
     }
 
 
+//    public ResponseEntity<Object> getDiet(Long userId) {
+//
+//        var userOptional = userRepository.findUserById(userId);
+//
+//        if (userOptional.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с  id "+userId+" не найдено");
+//        }
+//        Diet
+//    }
 }

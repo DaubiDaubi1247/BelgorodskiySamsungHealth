@@ -42,6 +42,9 @@ public class Diet {
     private List<Dish> dishes;
 
 
+
+
+
     public void setIfoWthoutDishes(DietQuary dietQuary) {
         label = dietQuary.getLabel();
         description = dietQuary.getDescription();
@@ -51,4 +54,9 @@ public class Diet {
             status = "available";
         }
     }
+
+
+
+
+
 }

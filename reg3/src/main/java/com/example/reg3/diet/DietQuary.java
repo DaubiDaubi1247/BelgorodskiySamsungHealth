@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class DietQuary {
 
     private String label;
@@ -22,4 +21,13 @@ public class DietQuary {
 
     private List<String> dishes;
 
+    public DietQuary(String label,
+                     String description,
+                     String status,
+                     List<String> dishes) {
+        this.label = label;
+        this.description = description;
+        this.status = status;
+        this.dishes = dishes;
+    }
 }
