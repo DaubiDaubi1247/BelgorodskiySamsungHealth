@@ -6,7 +6,7 @@ export interface IsmallDataAboutDiets {
 }
 
 export interface Ifilters {
-    dietId : number
+    dietId? : number
     typeOfMeal : string
     mealTime : string
 }

@@ -6,7 +6,7 @@ import {getMealsTimes, getTypes } from './thunk';
 
 const initialState : IdishState = {
     mealTimesArr : [],
-    mealTypesArr : []
+    mealTypesArr : [],
 }
 
 const dishSlice = createSlice({
