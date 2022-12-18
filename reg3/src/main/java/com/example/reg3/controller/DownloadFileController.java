@@ -51,6 +51,7 @@ downloadFileService.downloadUsers();
             throws IOException, DocumentException {
 
         MediaType contentType = MediaType.APPLICATION_PDF;
+        downloadFileService.downloadUsers();
         downloadFileService.dowloadPDF();
         String file = "src/main/resources/templates/myJSON.pdf";
 
