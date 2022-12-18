@@ -82,10 +82,11 @@ public class DownloadFileService {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/templates/myJSON.pdf"));
         List<User> users = userRepository.findAll();
-        String jsonString = mapper.writeValueAsString(users);
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        Chunk chunk = new Chunk(jsonString, font);
+        Chunk chunk = new Chunk(json, font);
 
         document.add(chunk);
         document.close();
