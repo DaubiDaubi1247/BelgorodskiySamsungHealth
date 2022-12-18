@@ -34,9 +34,8 @@ const DietCard: React.FunctionComponent<IDietCardProps> = ({id, label, descripti
             description : description
         }
         dispatch(setCurrentDietId(dietData))
-        
-        dispatch(setLoading(true));
-        if (userId) dispatch(setUserDiet({userId : userId, dietId : id}))
+
+        //if (userId) dispatch(setUserDiet({userId : userId, dietId : id}))
         navigate(DietsRoutes.fullDescription)
     }
 

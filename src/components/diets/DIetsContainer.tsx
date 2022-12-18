@@ -16,7 +16,6 @@ const DietsContainer: React.FunctionComponent<IDietsContainerProps> = (props) =>
     let userHasDiet = useAppSelector(state => state.diets.userHasDiet)
     let userId = useAppSelector(state => state.auth.accessData?.id)
 
-
     return (
         <>
             {userHasDiet ? <></> : <SubscribeDiet userId={userId}/>}

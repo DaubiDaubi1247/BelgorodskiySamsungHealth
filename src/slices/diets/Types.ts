@@ -10,4 +10,5 @@ export interface IdietsState {
     userHasDiet : boolean
     currentDietId : IsmallDataAboutDiets | null
     recomendedDishArr : TDishDescriptionArr
+    dietsError : string
 }

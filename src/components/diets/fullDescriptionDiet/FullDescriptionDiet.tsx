@@ -10,6 +10,8 @@ import { Button } from 'react-bootstrap';
 import { getMealsByFilter } from './../../../slices/diets/thunk';
 import { Ifilters } from '../../../API/dietsAPI/TdietsAPI';
 import RecomendedDish from './recomendedDIsh/RecomendenDish';
+import FormError from '../../../common/form/formError/FormError';
+import withAuthRedicrect from './../../main/Main';
 
 interface IFullDescriptionDietProps {
 }
@@ -24,15 +26,19 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     let mealTypesArr = useAppSelector(state => state.dish.mealTypesArr)
     let currentDiet = useAppSelector(state => state.diets.currentDietId)
     let recomendedDishArr = useAppSelector(state => state.diets.recomendedDishArr)
+    let dietError = useAppSelector(state => state.diets.dietsError)
 
     const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(setLoading(true))
-        dispatch(getMealsTimes())
+    
+    useEffect(() => {   
         dispatch(setLoading(true))
         dispatch(getTypes())
-    })
+    },[])
+
+    useEffect(() => {
+        dispatch(getMealsTimes())
+    },[])
+
 
     const getMealsByFilterHanlder = () => {
         const filters : Ifilters = {
@@ -41,6 +47,7 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
             mealTime : mealTime
         }
 
+        debugger
         dispatch(getMealsByFilter(filters))
         setisVisible(true)
     }
@@ -57,8 +64,9 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
             </div>
             <Button onClick={getMealsByFilterHanlder}>Просмотреть еду из данной диеты</Button>
             {isVisible ? <RecomendedDish recomendedDishArr={recomendedDishArr}/> : <></>}
+            {dietError.length !== 0 ? <FormError message={dietError} /> : <></>}
         </div>
     )
 };
 
-export default withLoading(FullDescriptionDiet);
+export default withAuthRedicrect(FullDescriptionDiet);

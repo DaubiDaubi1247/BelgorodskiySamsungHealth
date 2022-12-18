@@ -18,6 +18,7 @@ import ProfileContainer from './components/profile/ProfileContainer';
 import DietsContainer from './components/diets/DIetsContainer';
 import AdminCreateDIets from './components/adminPanel/adminCreateDIets/AdminCreateDIets';
 import AdminAddRedactDiets from './components/adminPanel/adminAddRedactDiets/AdminAddRedactDiets';
+import FullDescriptionDiet from './components/diets/fullDescriptionDiet/FullDescriptionDiet';
 
 function App() {
 
@@ -51,7 +52,9 @@ function App() {
 
                         <Route path={profile} element={<ProfileContainer/>}/>
 
-                        <Route path={diets} element={<DietsContainer/>}>
+                        <Route path={diets}>
+                            <Route path={diets} element={<DietsContainer/>}/>
+                            <Route path={DietsRoutes.fullDescription} element={<FullDescriptionDiet/>}/>
                         </Route>
                         
                     </Routes>

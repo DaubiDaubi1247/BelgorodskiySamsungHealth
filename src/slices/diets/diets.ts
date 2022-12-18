@@ -13,7 +13,8 @@ const initialState : IdietsState = {
     userHasDiet : false,
     smallDataAboutDiets : [],
     currentDietId : null,
-    recomendedDishArr : []
+    recomendedDishArr : [],
+    dietsError : ""
 }
 
 const dietsSlice = createSlice({
@@ -35,9 +36,13 @@ const dietsSlice = createSlice({
             })
             .addCase(getMealsByFilter.fulfilled.type, (state, action: PayloadAction<TDishDescriptionArr>) => {
                 state.recomendedDishArr = action.payload
+                state.dietsError = ""
             })
             .addCase(setUserDiet.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
                 state.userHasDiet = true;
+            })
+            .addCase(getMealsByFilter.rejected.type, (state, action: PayloadAction<string>) => {
+                state.dietsError = action.payload
             })
             
     }

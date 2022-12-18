@@ -10,7 +10,7 @@ export const getMealsTimes = createAsyncThunk(
     async (_,thunkApi) => {
         try {
             const response = await dishAPI.getMealTimes();
-            thunkApi.dispatch(setLoading(false));
+            //thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
             thunkApi.rejectWithValue("Что то пошло не так ...")

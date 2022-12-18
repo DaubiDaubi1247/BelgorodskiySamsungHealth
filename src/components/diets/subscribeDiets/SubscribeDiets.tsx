@@ -13,16 +13,19 @@ interface ISubscribeDietProps {
 
 const SubscribeDiet: React.FunctionComponent<ISubscribeDietProps> = ({userId}) => {
 
-    //let smallDataAboutDiets = useAppSelector(state => state.diets.smallDataAboutDiets)
+    let smallDataAboutDiets = useAppSelector(state => state.diets.smallDataAboutDiets)
+    let isAuth = useAppSelector(state => state.auth.isAuth)
     //потому что пока саня не починил так
-    let smallDataAboutDiets : any[] = [];
+    // let smallDataAboutDiets : any[] = [];
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(setLoading(true));
-        dispatch(getSmallDataAboutDiets())
-    },[])
+        if (isAuth) {
+            dispatch(setLoading(true));
+            dispatch(getSmallDataAboutDiets())
+        }
+    },[isAuth])
 
   return (
     <>

@@ -7,6 +7,7 @@ import { AuthRoutes } from '../../Routes/Routes';
 const withLoading = (Component : any) => (props : any) => {
     let isLoading = useAppSelector(state => state.common.isLoading) 
 
+    debugger
     if (isLoading) return <Preloader/>
 
     return <Component {...props} />;

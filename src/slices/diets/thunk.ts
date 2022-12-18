@@ -17,6 +17,7 @@ export const getSmallDataAboutDiets = createAsyncThunk(
     async (_,thunkApi) => {
         try {
             const response = await dietsAPI.getSmallDataAboutDiets();
+            console.log(response)
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
@@ -46,7 +47,7 @@ export const getMealsByFilter = createAsyncThunk(
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("...")
+            return thunkApi.rejectWithValue("Такие блюда отсутсвуют")
         }
    }
 )
@@ -59,7 +60,7 @@ export const createDiet = createAsyncThunk(
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("...")
+            thunkApi.rejectWithValue(error)
         }
    }
 )
