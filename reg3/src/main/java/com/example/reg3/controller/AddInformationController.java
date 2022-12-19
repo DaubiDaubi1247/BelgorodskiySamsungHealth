@@ -134,10 +134,7 @@ public class AddInformationController {
     );
 
 
-//    static List<UserProgressInTraining> userProgressInTrainings = List.of(
-//            new UserProgressInTraining(1, trainingList.get(0)),
-//            new UserProgressInTraining(3, trainingList.get(1))
-//    );
+
 
 
     static List<User> userList = List.of(

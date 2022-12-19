@@ -1,31 +1,37 @@
 package com.example.reg3.Service;
 
-
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.User;
 import com.example.reg3.repository.DishRepository;
 import com.example.reg3.repository.MealTimeRepository;
 import com.example.reg3.repository.TypeOfMealRepository;
 import com.example.reg3.repository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
+import java.util.Collections;
 import java.util.List;
 
+
 @Service
+@PropertySource("application.properties")
 public class DownloadFileService {
+
+    @Value("${pass.json}")
+
+    private String passToJsonFolder;
+
+    @Value("${pass.pdf}")
+    private String passToPDFFolder;
 
     @Autowired
     TelegramBot bot;
@@ -47,31 +53,48 @@ public class DownloadFileService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<Object> downloadUsers() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
+    public void downloadUsers() throws IOException {
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
         List<User> users = userRepository.findAll();
-
-        File placeOfSave =new File("src/main/resources/templates/user.json");
-
-        mapper.writeValue(placeOfSave, users);
-
+        saveListObjectsToJSON(Collections.singletonList(users), "/user.pdf");
         bot.sendInfo("Информация из таблицы преобразовалась в JSON");
+    }
 
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(placeOfSave));
-
-        HttpHeaders header = new HttpHeaders();
-        header.add("Content-Disposition", String.format("attachment; filename=%s", placeOfSave.getName()));
-        header.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        header.add("Pragma", "no-cache");
-        header.add("Expires", "0");
-
-        return ResponseEntity.ok()
-                .headers(header)
-                .contentLength(placeOfSave.length())
-                .contentType(MediaType.parseMediaType("application/json"))
-                .body(resource);
+    private  void saveListObjectsToJSON(List<Object> users, String s) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        File placeOfSave = new File(passToJsonFolder + s);
+        mapper.writeValue(placeOfSave, users);
     }
 
 
+    public void dowloadPDF() throws FileNotFoundException, DocumentException {
+        bot.sendInfo("Запрсо всех записей из таблицы пользователей");
+        List<User> users = userRepository.findAll();
+        bot.sendInfo("Информация из таблицы преобразовалась в JSON");
+        saveListObjectsToPDF(Collections.singletonList(users), "/user.pdf");
+    }
+
+    private  void saveListObjectsToPDF(List<Object> list, String pass) throws DocumentException, FileNotFoundException {
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(list);
+
+        Document document = new Document();
+        pass = passToPDFFolder + pass;
+        PdfWriter.getInstance(document, new FileOutputStream(pass));
+        document.open();
+        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+
+        var lines = json.split("\n");
+        for (var line:lines) {
+            Paragraph p = new Paragraph(line);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
+            document.add(p);
+        }
+
+        Paragraph p = new Paragraph("line");
+        p.setAlignment(Element.ALIGN_JUSTIFIED);
+        document.add(p);
+        document.close();
+    }
 }
