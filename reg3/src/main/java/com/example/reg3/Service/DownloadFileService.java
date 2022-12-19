@@ -8,10 +8,7 @@ import com.example.reg3.repository.TypeOfMealRepository;
 import com.example.reg3.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;

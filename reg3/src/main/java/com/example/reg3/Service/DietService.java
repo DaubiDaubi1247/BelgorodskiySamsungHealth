@@ -35,7 +35,7 @@ public class DietService {
         if (dietInBd.isPresent()) {
             String info = "диета с названием " + dietQuary.getLabel() + " уже есть в БД";
             bot.sendWarning(info);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
+            return ResponseEntity.status(HttpStatus.OK).body(info);
         }
         try {
             Diet newDiet = getNewDiet(dietQuary);
@@ -79,20 +79,20 @@ public class DietService {
                 String info = "диета "+diet.getLabel()+ " активирована";
                 bot.sendInfo(info);
 
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
+                return ResponseEntity.status(HttpStatus.OK).body(info);
             } else {
                 diet.setStatus("not available");
                 dietRepository.save(diet);
                 String info = "диета "+diet.getLabel()+ " диактивирована";
                 bot.sendInfo(info);
 
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
+                return ResponseEntity.status(HttpStatus.OK).body(info);
             }
         }catch (Exception e) {
             String info = "диета c id "+id +" не найдена";
             bot.sendInfo(info);
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
+            return ResponseEntity.status(HttpStatus.OK).body(info);
         }
     }
 
@@ -108,12 +108,12 @@ public class DietService {
             String info = "Отсутствуют  диеты co статусом " + status;
             bot.sendWarning(info);
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(info);
+            return ResponseEntity.status(HttpStatus.OK).body(info);
         }else {
             for (var diet: diets) diet.setDishes(null);
             bot.sendInfo("возвращены диеты со статусом " + status);
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(diets);
+            return ResponseEntity.status(HttpStatus.OK).body(diets);
         }
     }
 
@@ -133,7 +133,7 @@ public class DietService {
                dishQuarryList.add(dishQuarry);
            }
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dishQuarryList);
+            return ResponseEntity.status(HttpStatus.OK).body(dishQuarryList);
         }
     }
 }

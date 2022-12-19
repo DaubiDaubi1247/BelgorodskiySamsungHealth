@@ -33,7 +33,7 @@ public class DietController {
             return res;
         } catch (Exception e) {
             bot.executeSendLog();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+            return ResponseEntity.status(HttpStatus.OK).
                     body(e.toString());
         }
     }
@@ -49,7 +49,7 @@ public class DietController {
             return res;
         } catch (Exception e) {
             bot.executeSendLog();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+            return ResponseEntity.status(HttpStatus.OK).
                     body(e.toString());
         }
     }
@@ -64,7 +64,7 @@ public class DietController {
             return res;
         } catch (Exception e) {
             bot.executeSendLog();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+            return ResponseEntity.status(HttpStatus.OK).
                     body(e.toString());
         }
     }
@@ -81,7 +81,7 @@ public class DietController {
             return res;
         } catch (Exception e) {
            // bot.executeSendLog();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.toString());
+            return ResponseEntity.status(HttpStatus.OK).body(e.toString());
         }
     }
 

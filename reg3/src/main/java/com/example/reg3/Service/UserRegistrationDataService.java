@@ -33,7 +33,7 @@ public class UserRegistrationDataService {
     {
         Properties props = new Properties();
         try (InputStream in = Files.newInputStream
-                (Paths.get("src/main/resources/encryptionAlgorithm.properties"))) {
+                (Paths.get("reg3/src/main/resources/encryptionAlgorithm.properties"))) {
             props.load(in);
 
             String keyOfCipher = props.getProperty("key");
