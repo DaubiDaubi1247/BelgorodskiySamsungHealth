@@ -31,27 +31,19 @@ public class UserRegistrationDataService {
     String algorithm;
 
     {
-        Properties props = new Properties();
-        try (InputStream in = Files.newInputStream
-                (Paths.get("reg3/src/main/resources/encryptionAlgorithm.properties"))) {
-            props.load(in);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!DOCKER PLease!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n\n\n\n\n\n\n\n");
+        //Properties props = new Properties();
+        String keyOfCipher = "??????2020??-202";
+        algorithm = "AES";
 
-            String keyOfCipher = props.getProperty("key");
-            algorithm = props.getProperty("algorithm");
-
-            key = new SecretKeySpec
-                    (keyOfCipher.getBytes(), algorithm);
-
-
-        } catch (IOException e) {
-            //bot.sendError("Файл с переменными окружения для шифрования не найден\n" + e.getMessage());
-            throw new RuntimeException("Файл с переменными окружения не найден\n" + e.getMessage());
-        }
+        key = new SecretKeySpec(keyOfCipher.getBytes(), algorithm);
     }
 
     Cipher cipher;
+
     {
         try {
+
             cipher = Cipher.getInstance(algorithm);
             cipher.init(Cipher.ENCRYPT_MODE, key);
 

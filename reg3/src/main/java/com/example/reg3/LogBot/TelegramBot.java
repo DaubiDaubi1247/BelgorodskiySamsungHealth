@@ -81,7 +81,7 @@ public class TelegramBot
     }
 
     public void executeSendLog() {
-        if (accumulateInfo.isEmpty()) {
+        if (accumulateInfo.length() == 0) {
             sendLog("Пустой лог");
         }else {
             sendLog(accumulateInfo.toString());
