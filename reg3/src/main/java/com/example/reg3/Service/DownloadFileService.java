@@ -56,7 +56,7 @@ public class DownloadFileService {
     public void downloadUsers() throws IOException {
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
         List<User> users = userRepository.findAll();
-        saveListObjectsToJSON(Collections.singletonList(users), "/user.pdf");
+        saveListObjectsToJSON(Collections.singletonList(users), "/user.json");
         bot.sendInfo("Информация из таблицы преобразовалась в JSON");
     }
 
