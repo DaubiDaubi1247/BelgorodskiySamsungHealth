@@ -149,24 +149,24 @@ public class UserService {
 
     //todo доделать
     public ResponseEntity<Object> getUserData(Long userId) {
-        return null;
-//        var userInfo = userRepository.getBIOData(userId);
-//
-//        if (userInfo.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдено");
-//        }
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(userInfo.get());
+
+        var userInfo = userRepository.findUserById(userId);
+
+        if (userInfo.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с таким id не найдено");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(userInfo.get());
     }
 
 
-//    public ResponseEntity<Object> getDiet(Long userId) {
-//
-//        var userOptional = userRepository.findUserById(userId);
-//
-//        if (userOptional.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с  id "+userId+" не найдено");
-//        }
-//        Diet
-//    }
+    public ResponseEntity<Object> getDiet(Long userId) {
+
+        var dietOptional = dietRepository.findDietById(userId);
+
+        if (dietOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь с  id "+userId+" не найдено");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(dietOptional.get());
+    }
 }
