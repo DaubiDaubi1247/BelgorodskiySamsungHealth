@@ -22,7 +22,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+                                          //docker idi nahui!!!!!!!!!!!!!!!!!!
     @GetMapping("updayteDayOfTrain")
 
     public ResponseEntity<Object> updateDayOfTraining
