@@ -16,6 +16,8 @@ public interface DietRepository
 
     Optional<Diet> findByLabel(String label);
 
+    Optional<Diet> findDietById(Long id);
+
     List<Diet> findAllByStatus(String status);
 
     @Query("SELECT dish " +
