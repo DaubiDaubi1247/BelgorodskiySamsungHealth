@@ -66,7 +66,7 @@ public class DownloadFileService {
         mapper.writeValue(placeOfSave, users);
     }
 
-
+/////
     public void dowloadPDF() throws FileNotFoundException, DocumentException {
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
         List<User> users = userRepository.findAll();
