@@ -1,40 +1,37 @@
 package com.example.reg3.Service;
 
-
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.User;
 import com.example.reg3.repository.DishRepository;
 import com.example.reg3.repository.MealTimeRepository;
 import com.example.reg3.repository.TypeOfMealRepository;
 import com.example.reg3.repository.UserRepository;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-
 import com.itextpdf.text.*;
-
 import com.itextpdf.text.pdf.PdfWriter;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
+
 @Service
+@PropertySource("application.properties")
 public class DownloadFileService {
+
+    @Value("${pass.json}")
+
+    private String passToJsonFolder;
+
+    @Value("${pass.pdf}")
+    private String passToPDFFolder;
 
     @Autowired
     TelegramBot bot;
@@ -57,38 +54,47 @@ public class DownloadFileService {
     }
 
     public void downloadUsers() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
         List<User> users = userRepository.findAll();
-
-        File placeOfSave =new File("src/main/resources/templates/user.json");
-
-        mapper.writeValue(placeOfSave, users);
-
+        saveListObjectsToJSON(Collections.singletonList(users), "/user.pdf");
         bot.sendInfo("Информация из таблицы преобразовалась в JSON");
-
-
-
-
     }
 
-
-
-
-    public void dowloadPDF() throws FileNotFoundException, DocumentException, JsonProcessingException {
-
+    private  void saveListObjectsToJSON(List<Object> users, String s) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        File placeOfSave = new File(passToJsonFolder + s);
+        mapper.writeValue(placeOfSave, users);
+    }
+
+/////
+    public void dowloadPDF() throws FileNotFoundException, DocumentException {
+        bot.sendInfo("Запрсо всех записей из таблицы пользователей");
+        List<User> users = userRepository.findAll();
+        bot.sendInfo("Информация из таблицы преобразовалась в JSON");
+        saveListObjectsToPDF(Collections.singletonList(users), "/user.pdf");
+    }
+
+    private  void saveListObjectsToPDF(List<Object> list, String pass) throws DocumentException, FileNotFoundException {
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(list);
 
         Document document = new Document();
-        PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/templates/myJSON.pdf"));
-        List<User> users = userRepository.findAll();
-        Gson gson = new Gson();
-        String json = gson.toJson(users);
+        pass = passToPDFFolder + pass;
+        PdfWriter.getInstance(document, new FileOutputStream(pass));
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        Chunk chunk = new Chunk(json, font);
 
-        document.add(chunk);
+        var lines = json.split("\n");
+        for (var line:lines) {
+            Paragraph p = new Paragraph(line);
+            p.setAlignment(Element.ALIGN_JUSTIFIED);
+            document.add(p);
+        }
+
+        Paragraph p = new Paragraph("line");
+        p.setAlignment(Element.ALIGN_JUSTIFIED);
+        document.add(p);
         document.close();
     }
 }
