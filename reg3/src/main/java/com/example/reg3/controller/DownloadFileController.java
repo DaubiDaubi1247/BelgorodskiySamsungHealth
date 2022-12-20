@@ -42,7 +42,7 @@ public class DownloadFileController {
         downloadFileService.downloadUsers();
 
         MediaType contentType =  MediaType.APPLICATION_JSON;
-        InputStreamResource in = new InputStreamResource(new FileInputStream(passToJsonFolder + "/user.pdf"));
+        InputStreamResource in = new InputStreamResource(new FileInputStream(passToJsonFolder + "/user.json"));
         return ResponseEntity.ok()
                 .contentType(contentType)
                 .body(in);
