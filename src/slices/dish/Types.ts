@@ -7,4 +7,5 @@ import { TDishDescriptionArr } from "../../API/dishAPI/TdishAPI";
 export interface IdishState {
     mealTimesArr : Array<string>
     mealTypesArr : Array<string>
+    mealCreateRes : string
 }

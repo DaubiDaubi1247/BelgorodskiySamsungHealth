@@ -1,8 +1,10 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { IdishDescription } from '../../API/dishAPI/TdishAPI';
 
 import { setLoading } from '../common/commonSlice';
 import { dishAPI } from './../../API/dishAPI/dietsAPI';
+import { IDishCreate } from './../../API/dishAPI/TdishAPI';
 
 
 export const getMealsTimes = createAsyncThunk(
@@ -30,3 +32,18 @@ export const getTypes = createAsyncThunk(
         }
     }
 )
+
+export const createDish = createAsyncThunk(
+    "dish/createDish",
+    async (body : IDishCreate, thunkApi) => {
+        try {
+            const response = await dishAPI.createDish(body);
+            thunkApi.dispatch(setLoading(false));
+            return response.data
+        } catch (error) {debugger
+            thunkApi.rejectWithValue(error)
+        }
+    }
+)
+
+

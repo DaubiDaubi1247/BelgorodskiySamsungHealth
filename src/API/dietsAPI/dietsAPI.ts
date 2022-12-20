@@ -20,6 +20,7 @@ export const dietsAPI = {
         return dietsAxios.get(`/changeStatus?id=${dietId}`)
     },
     createDiet(body : TCreateDush) {
+        debugger
         return dietsAxios.post(`/add`, body)
     } 
 

@@ -10,7 +10,7 @@ const Select : React.FunctionComponent<ISelectProps> = ({valueArr,onChangeHanler
     let optionsArr = valueArr.map(el => <option value={el}>{el}</option>)
 
   return (
-    <Form.Select aria-label="Default select example" onChange={e => onChangeHanler(e.target.value)}>
+    <Form.Select style={{width : "50%"}} aria-label="Default select example" onChange={e => onChangeHanler(e.target.value)}>
         {optionsArr}
     </Form.Select>
   );

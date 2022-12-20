@@ -14,7 +14,7 @@ const AdminAddRedactDiets: React.FunctionComponent<AadminAddRedactDietsProps> = 
 
     useEffect(() => {
         dispatch(getSmallDataAboutDiets())
-    })
+    },[])
 
     return (
         <>

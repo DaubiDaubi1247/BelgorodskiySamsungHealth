@@ -13,6 +13,11 @@ export interface IdishDescription {
     fatsPerGram : number
 }
 
+export interface IDishCreate extends IdishDescription {
+    mealTimes : Array<string>
+    carbsPerGram : number
+}
+
 
 export type TDishDescriptionArr = Array<IdishDescription>
 

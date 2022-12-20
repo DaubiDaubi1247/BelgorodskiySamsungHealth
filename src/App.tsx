@@ -19,6 +19,7 @@ import DietsContainer from './components/diets/DIetsContainer';
 import AdminCreateDIets from './components/adminPanel/adminCreateDIets/AdminCreateDIets';
 import AdminAddRedactDiets from './components/adminPanel/adminAddRedactDiets/AdminAddRedactDiets';
 import FullDescriptionDiet from './components/diets/fullDescriptionDiet/FullDescriptionDiet';
+import AdminCreateDish from './components/adminPanel/adminCreateDish/AdminCreateDish';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
 
                             <Route path={AdminRoutes.redactDiets} element={<AdminAddRedactDiets/>}/>
                             <Route path={AdminRoutes.createDiets} element={<AdminCreateDIets/>}/>
+                            <Route path={AdminRoutes.createDish} element={<AdminCreateDish/>}/>
                         </Route>
 
                         <Route path={profile} element={<ProfileContainer/>}/>

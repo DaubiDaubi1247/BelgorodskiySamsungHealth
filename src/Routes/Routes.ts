@@ -22,7 +22,8 @@ export const AdminRoutes = {
     redactOfTrain : admin + "/redact",
     createTraining : admin + "/create",
     redactDiets : admin + diets + "/redact",
-    createDiets : admin + diets + "/create"
+    createDiets : admin + diets + "/create",
+    createDish : admin + "/dish" + "/create",
 } 
 
 export const profile = "/profile"

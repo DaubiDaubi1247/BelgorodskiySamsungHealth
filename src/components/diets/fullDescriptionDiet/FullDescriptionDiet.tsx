@@ -53,7 +53,7 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     }
 
     return (
-        <div className='w-100' style={{margin : "10 auto"}}>
+        <div className='w-100' style={{marginLeft : "20px"}}>
             <div>
                 <p>Вы выбрали тренировку {currentDiet?.label}</p>
                 <p>Для просмотра блюд выберите тип блюд и время приема пищи</p>
@@ -62,11 +62,11 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
                 <Select valueArr={mealTimesArr} onChangeHanler={setmealTime}/>
                 <Select valueArr={mealTypesArr} onChangeHanler={settypeOfMeal}/>
             </div>
-            <Button onClick={getMealsByFilterHanlder}>Просмотреть еду из данной диеты</Button>
+            <Button style={{marginTop : "10px"}} onClick={getMealsByFilterHanlder}>Просмотреть еду из данной диеты</Button>
             {isVisible ? <RecomendedDish recomendedDishArr={recomendedDishArr}/> : <></>}
             {dietError.length !== 0 ? <FormError message={dietError} /> : <></>}
         </div>
     )
 };
 
-export default withAuthRedicrect(FullDescriptionDiet);
+export default FullDescriptionDiet;

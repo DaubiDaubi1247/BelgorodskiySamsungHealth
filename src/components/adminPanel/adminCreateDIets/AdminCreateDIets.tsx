@@ -7,21 +7,22 @@ import { useAppDispatch } from './../../../app/hooks';
 import { createDiet } from "../../../slices/diets/thunk";
 import { TCreateDush } from "../../../API/dietsAPI/TdietsAPI";
 import { useForm } from 'react-hook-form';
+import { useState } from "react";
 
 interface AadminCreateDIetsProps {
 }
 
 const AdminCreateDIets: React.FunctionComponent<AadminCreateDIetsProps> = (props) => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const watchAllFields = watch();
 
-    const dishArr : Array<string> = []
-
+    const [dishArr, setdishArr] = useState<Array<string>>([])
 
     const dispatch = useAppDispatch()
 
     const createDietRequest = () => {
+        debugger
         let diet : TCreateDush = {
             label : watchAllFields.nameOfDiet,
             description : watchAllFields.description,
@@ -33,6 +34,11 @@ const AdminCreateDIets: React.FunctionComponent<AadminCreateDIetsProps> = (props
 
     const addDishHandler = () => {
         dishArr.push(watchAllFields.dish)
+        reset({
+            dish: '',
+            nameOfDiet : watchAllFields.nameOfDiet,
+            description : watchAllFields.description
+          })
     }
 
     return (
@@ -47,9 +53,9 @@ const AdminCreateDIets: React.FunctionComponent<AadminCreateDIetsProps> = (props
                         <Form.Control
                             type="text"
                             placeholder="Название диеты"
-                            {...register("nameOfdiet", { required: true })}
+                            {...register("nameOfDiet", { required: true })}
                         />
-                        {errors.nameOfTrain?.type === "required" && <FormError message='Поле является обязательным' />}
+                        {errors.nameOfDiet?.type === "required" && <FormError message='Поле является обязательным' />}
                     </Form.Group>
 
                     <Form.Group
@@ -76,7 +82,6 @@ const AdminCreateDIets: React.FunctionComponent<AadminCreateDIetsProps> = (props
                             {...register("dish", { required: true })}
                         />
                     </Form.Group>
-                    {errors.dish && <FormError message='Поле является обязательным' />}
 
                     <Button
                         variant="primary"
@@ -86,7 +91,9 @@ const AdminCreateDIets: React.FunctionComponent<AadminCreateDIetsProps> = (props
                     </Button>
                     <Button
                         variant="primary"
-                        type="submit"
+                        className="d-flex"
+                        style={{marginTop:"10px"}}
+                        onClick={createDietRequest}
                     >
                         Сохранить Диету
                     </Button>

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { IsmallDataAboutDiets, IsmallDataAboutDietsArr} from "./TdishAPI"
+import { IDishCreate, IsmallDataAboutDiets, IsmallDataAboutDietsArr} from "./TdishAPI"
 
 
 const dishAxios = axios.create({
@@ -13,5 +13,8 @@ export const dishAPI = {
     getTypes() {
         return dishAxios.get<Array<string>>("/getTypes")
     },
+    createDish(body : IDishCreate) {
+        return dishAxios.post("/add" , body)
+    }
 
 }
