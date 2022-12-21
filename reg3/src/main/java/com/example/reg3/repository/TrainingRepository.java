@@ -35,7 +35,7 @@ public interface TrainingRepository
     @Query("SELECT d " +
             "FROM Training t " +
             "JOIN t.daysOfTrainings d " +
-            "WHERE d.numberOfDay = :numOfDay AND t.id = :idOfTrain")
+            "WHERE d.numberOfDay = ?2 AND t.id = ?1")
     DayOfTraining findDayOfTrain(Long idOfTrain, Integer numOfDay);
 
 

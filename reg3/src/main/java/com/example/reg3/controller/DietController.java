@@ -74,13 +74,13 @@ public class DietController {
                                               @RequestParam(required = false) String typeOfMeal,
                                               @RequestParam(required = false) String MailTime) {
         try {
-            //bot.sendInfo("обращение к diet/dishes" +
-                  //  " idDiet=" + idDiet + " type=" + typeOfMeal + "MailTime" + MailTime);
+            bot.sendInfo("обращение к diet/dishes" +
+                    " idDiet=" + idDiet + " type=" + typeOfMeal + "MailTime" + MailTime);
             var res = dietService.getDishesWithFilters(idDiet, typeOfMeal, MailTime);
-           // bot.executeSendLog();
+            bot.executeSendLog();
             return res;
         } catch (Exception e) {
-           // bot.executeSendLog();
+            bot.executeSendLog();
             return ResponseEntity.status(HttpStatus.OK).body(e.toString());
         }
     }

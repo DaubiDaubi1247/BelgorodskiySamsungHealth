@@ -1,5 +1,7 @@
 FROM openjdk:11
 
 RUN mkdir "jarHolder"
-ADD /target/demo1-0.0.1-SNAPSHOT.jar backend1.jar
-ENTRYPOINT ["java", "-jar", "backend1.jar"]
+RUN mkdir "jarHolder/json"
+RUN mkdir "jarHolder/pdf"
+ADD /target/demo1-0.0.1-SNAPSHOT.jar /jarHolder/backend.jar
+ENTRYPOINT ["java", "-jar", "jarHolder/backend.jar"]
