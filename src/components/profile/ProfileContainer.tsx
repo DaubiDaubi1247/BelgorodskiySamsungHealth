@@ -17,6 +17,7 @@ const ProfileContainer: React.FunctionComponent<IProfileContainerProps> = (props
     const dispatch = useAppDispatch() 
     const id = useAppSelector(state => state.auth.accessData?.id)
     const userData = useAppSelector(state => state.user)
+    const userChangedata = useAppSelector(state => state.user.userChangedata)
 
     const [show, setShow] = useState(false);
 
@@ -29,7 +30,7 @@ const ProfileContainer: React.FunctionComponent<IProfileContainerProps> = (props
     useEffect(() => {
         dispatch(setLoading(true))
         if (id) dispatch(getUserData(id))
-    })
+    },[userChangedata])
 
   return (
     <div className="">

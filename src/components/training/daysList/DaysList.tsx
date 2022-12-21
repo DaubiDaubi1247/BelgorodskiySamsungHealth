@@ -6,11 +6,12 @@ interface IDayListProps {
     trainingsArr: ArrDaysExpires
     isVisible : boolean
     currentDay? : number,
+    isUserTraining : boolean
 }
 
-const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible,currentDay }) => {
+const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible,currentDay,isUserTraining }) => {
 
-    const getAllTrainingsDay = () => trainingsArr.map((day, index) => <DayDescription currentDay={currentDay} dayData={day} />)
+    const getAllTrainingsDay = () => trainingsArr.map((day, index) => <DayDescription isUserTraining={isUserTraining} currentDay={currentDay} dayData={day} />)
 
     return (isVisible ? 
         <div className='mt-4'>

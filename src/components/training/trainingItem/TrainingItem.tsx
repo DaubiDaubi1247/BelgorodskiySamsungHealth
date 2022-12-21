@@ -60,10 +60,10 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
             <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>
             <div className="d-flex justify-content-between">
-                <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
+                <Button onClick={onClickHandler} >Посмотреть все упражения</Button>
                 {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler} className={styles.myButtons}>+</Button>}
             </div>
-            <DayListContainer isVisible={isVisible} isUserTraining/>
+            <DayListContainer isVisible={isVisible} isUserTraining={isUserTraining}/>
             {isUserTraining ? <Button style={{marginTop : "10px"}} onClick={endOfDayTraining} >Закончить день</Button> : <></>}
           </Card.Body>
         </Card>

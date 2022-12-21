@@ -11,6 +11,9 @@ export const dietsAPI = {
     getSmallDataAboutDiets() {
         return dietsAxios.get<IsmallDataAboutDietsArr>("/getAll?status=available")
     },
+    getSmallDataAboutUserDiet(userId : number) {
+        return axios.get<IsmallDataAboutDietsArr>(`http://localhost:8010/user/getDiet?userId=${userId}`)
+    },
 
     getMealsByFilter(filters : Ifilters) {
         return dietsAxios.get<TDishDescriptionArr>(`/dishes?idDiet=${filters.dietId}&typeOfMeal=${filters.typeOfMeal}&MailTime=${filters.mealTime}`)
@@ -20,7 +23,6 @@ export const dietsAPI = {
         return dietsAxios.get(`/changeStatus?id=${dietId}`)
     },
     createDiet(body : TCreateDush) {
-        debugger
         return dietsAxios.post(`/add`, body)
     } 
 

@@ -1,13 +1,14 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IuserIS } from './Types';
-import { getUserData} from './thunk';
+import { getUserData, setUserData} from './thunk';
 
 const initialState: IuserIS = {
     name : "",
     weight : 0,
     height : 0,
-    countOfCompletedTrainers : 0
+    countOfCompletedTrainers : 0,
+    userChangedata : false
 };
 
 const userSlice = createSlice({
@@ -30,7 +31,11 @@ const userSlice = createSlice({
                 state.height = action.payload.height
                 state.countOfCompletedTrainers = action.payload.countOfCompletedTrainers
             })
+            .addCase(setUserData.fulfilled.type , (state, action: PayloadAction<IuserIS>) => {
+                state.userChangedata = true
+            })
     },
+    
 });
 
 //export const { setLoading } = userSlice.actions;

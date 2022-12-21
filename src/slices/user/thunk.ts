@@ -21,6 +21,7 @@ export const setUserData = createAsyncThunk(
     async (userData : IuserDataForSet,thunkApi) => {
         try {
             const response = await userAPI.setUserData(userData);
+            debugger
             return response.data
         } catch (error) {
             thunkApi.rejectWithValue("Что то пошло не так ...")

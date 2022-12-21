@@ -5,6 +5,7 @@ export interface IuserIS {
     weight : number
     height : number
     countOfCompletedTrainers : number
+    userChangedata : boolean
 }
 
 export enum CONST  {

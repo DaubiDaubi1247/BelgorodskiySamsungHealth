@@ -26,6 +26,18 @@ export const getSmallDataAboutDiets = createAsyncThunk(
     }
 )
 
+export const getSmallDataAboutUserDiet = createAsyncThunk(
+    "diets/getSmallDataAboutUserDiet",
+    async (userId : number,thunkApi) => {
+        try {
+            const response = await dietsAPI.getSmallDataAboutUserDiet(userId);
+            return response.data
+        } catch (error) {
+            thunkApi.rejectWithValue("Что то пошло не так ...")
+        }
+    }
+)
+
 export const setUserDiet = createAsyncThunk(
     "diets/setUserDiet",
    async (data : TSetUserDiet, thunkApi) => {

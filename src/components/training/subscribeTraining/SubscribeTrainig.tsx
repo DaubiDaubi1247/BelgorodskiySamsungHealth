@@ -28,7 +28,7 @@ const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = ({is
 
     return (
         <div className={"d-flex " + styles.wrapper}>
-            {!isUserTrain ? <span className="d-block">Кажется Вы не подписаны на тренировку...</span> :<></>}
+            {isUserTrain ? <span className="d-block">Кажется Вы не подписаны на тренировку...</span> :<></>}
             <Button variant="primary" onClick={handleShowAndClose}>
                 Просмотреть список тренировок
             </Button>
