@@ -1,0 +1,9 @@
+.myButtons {
+    width: 40px;
+    height: 40px;
+}
+
+.delButton {
+    background-color: red;
+    border: none;
+}

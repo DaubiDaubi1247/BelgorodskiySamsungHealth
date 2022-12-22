@@ -8,11 +8,11 @@ services:
       - /var/opt/pgbackups:/backups
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - .env
+      - reg3/.env
   app:
     depends_on:
       - postgres
-    build: ./
+    build: reg3
     container_name: 'java-app'
     volumes:
       - /var/opt/pgbackups:/backups
