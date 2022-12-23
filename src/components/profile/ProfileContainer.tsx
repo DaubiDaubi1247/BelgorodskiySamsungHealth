@@ -36,7 +36,7 @@ const ProfileContainer: React.FunctionComponent<IProfileContainerProps> = (props
 
     useEffect(() => function cleanUserMsg() {
         dispatch(setUserMsg(""))
-    })
+    },[])
 
   return (
     <div className="">

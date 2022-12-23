@@ -20,16 +20,19 @@ import AdminCreateDIets from './components/adminPanel/adminCreateDIets/AdminCrea
 import AdminAddRedactDiets from './components/adminPanel/adminAddRedactDiets/AdminAddRedactDiets';
 import FullDescriptionDiet from './components/diets/fullDescriptionDiet/FullDescriptionDiet';
 import AdminCreateDish from './components/adminPanel/adminCreateDish/AdminCreateDish';
+import { useAppSelector } from './app/hooks';
 
 //---------------------------------------------------- ПРИВЕТ САНЯ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!----------------------
 
 function App() {
 
+    let isAuth = useAppSelector(state => state.auth.isAuth)
+
     return (
         <div className="App">
             <Header />
             <Container className='d-flex'>
-                <NavBar />
+                {isAuth ? <NavBar /> : <></>}
                 <div className='flex-fill d-flex justify-content-center'>
                     <Routes>
 

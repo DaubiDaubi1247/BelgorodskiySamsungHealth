@@ -4,6 +4,7 @@ import { IuserIS } from './../../../slices/user/Types';
 import { useEffect } from 'react';
 import { useAppDispatch } from './../../../app/hooks';
 import { setUserMsg } from '../../../slices/user/userSlice';
+import MessagefromServer from './../../../common/messageFromServer/MessageFromServer';
 
 interface IUserDataProfileProps {
     userData: IuserIS
@@ -15,7 +16,7 @@ const UserDataProfile: React.FunctionComponent<IUserDataProfileProps> = ({ userD
 
     return (
         <div>
-            {userMsg.length !== 0 ? <p>{userMsg}</p> : <></>}
+            {userMsg.length !== 0 ? <MessagefromServer message={userMsg}/>: <></>}
             <p>Ваш Профиль</p>
             <p>Имя : {userData.name}</p>
             <p>Вес : {userData.weight} кг</p>
