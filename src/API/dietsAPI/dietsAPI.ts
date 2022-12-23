@@ -4,7 +4,7 @@ import { Ifilters, IsmallDataAboutDiets, IsmallDataAboutDietsArr, TCreateDush} f
 
 
 const dietsAxios = axios.create({
-    baseURL: "http://app:8011/diet",
+    baseURL: "http://localhost:8011/diet",
 })
 
 export const dietsAPI = {
@@ -12,7 +12,7 @@ export const dietsAPI = {
         return dietsAxios.get<IsmallDataAboutDietsArr>("/getAll?status=available")
     },
     getSmallDataAboutUserDiet(userId : number) {
-        return axios.get<IsmallDataAboutDietsArr>(`http://app:8011/user/getDiet?userId=${userId}`)
+        return axios.get<IsmallDataAboutDietsArr>(`http://localhost:8011/user/getDiet?userId=${userId}`)
     },
 
     getMealsByFilter(filters : Ifilters) {

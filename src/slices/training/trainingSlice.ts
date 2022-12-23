@@ -46,15 +46,16 @@ const trainingSlice = createSlice({
                 state.userHasTraining = action.payload !== undefined
                 state.currentDay = action.payload.dayOfTraining ? action.payload.dayOfTraining : CONST.NO_DATA
 
-                // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
-                // state.today = Math.round(2 / 9 * 100)
+            })
+
+            .addCase(getUserTraining.rejected.type, (state, action: PayloadAction<ItrainigData>) => {
+                
             })
             .addCase(getArrDaysExpires.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
-                
                 state.arrDaysExpires = action.payload
             })
+
             .addCase(createTraining.fulfilled.type, (state, action: PayloadAction<string>) => {
-                
                 state.messageForCreate = action.payload
             })
             .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {

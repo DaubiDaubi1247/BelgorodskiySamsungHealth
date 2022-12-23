@@ -3,7 +3,7 @@ import { IDishCreate, IsmallDataAboutDiets, IsmallDataAboutDietsArr} from "./Tdi
 
 
 const dishAxios = axios.create({
-    baseURL: "http://app:8011/dish",
+    baseURL: "http://localhost:8011/dish",
 })
 
 export const dishAPI = {

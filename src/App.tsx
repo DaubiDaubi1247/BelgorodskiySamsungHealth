@@ -21,6 +21,8 @@ import AdminAddRedactDiets from './components/adminPanel/adminAddRedactDiets/Adm
 import FullDescriptionDiet from './components/diets/fullDescriptionDiet/FullDescriptionDiet';
 import AdminCreateDish from './components/adminPanel/adminCreateDish/AdminCreateDish';
 
+//---------------------------------------------------- ПРИВЕТ САНЯ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!----------------------
+
 function App() {
 
     return (
