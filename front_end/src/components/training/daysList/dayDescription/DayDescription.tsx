@@ -1,41 +1,45 @@
 import * as React from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 import { DayExercises } from '../../../../API/trainingAPI/TtrainingAPI';
 import { IdayDescription } from './../../../../API/trainingAPI/TtrainingAPI';
 import ExcercisesInfo from './exerciseInfo/ExcercisesInfo';
+import { useAppDispatch } from './../../../../app/hooks';
+import { useState } from 'react';
 
 interface IDayDescriptionProps {
     dayData : IdayDescription
+    currentDay? : number
+    isUserTraining? : boolean
 }
 
-const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData}) => {
+const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData,currentDay,isUserTraining}) => {
 
-    const isActiveDay = (day : number) => dayData.numberOfDay === day
+    const [isVisible, setisVisible] = useState(true)
 
-    console.log(dayData.sets)
-    const getAllexercisesForDay = () => dayData.sets.map((exercises) => 
+    const isActiveDay = (day : number) => isUserTraining && currentDay === day
+
+    const isFinishedDay = (day : number) => isUserTraining && currentDay ? currentDay > day : false
+
+    const getAllexercisesForDay = () => dayData.sets.map(exercises => 
         <Dropdown.Item >
             <ExcercisesInfo {...exercises}/>
         </Dropdown.Item>
         
     )
 
+    const dispatch = useAppDispatch()
+
+
     return (
         <Dropdown className='mb-4'>
-            <Dropdown.Toggle  id="dropdown-button-dark-example1 " variant="secondary" active={isActiveDay(dayData.numberOfDay)}>
+            <Dropdown.Toggle  id="dropdown-button-dark-example1 " variant={isFinishedDay(dayData.numberOfDay) ? "success" : "secondary"} onBlur={() => setisVisible(false)}>
                 День № {dayData.numberOfDay}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu variant="">
+            <Dropdown.Menu variant="" show={isVisible && isActiveDay(dayData.numberOfDay)}>
                 {getAllexercisesForDay()}
-                {/* <Dropdown.Item href="#/action-1" active>
-                    Actions
-                </Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item> */}
             </Dropdown.Menu>
+
         </Dropdown>
     );
 };

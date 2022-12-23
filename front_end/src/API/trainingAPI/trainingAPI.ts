@@ -3,7 +3,7 @@ import { IDaysData, IsmallDataAboutTrainings, ItrainigData, TCreateTrainig, Trai
 
 
 const trainingAxios = axios.create({
-    baseURL: "http://localhost:8010/training",
+    baseURL: "http://app:8011/training",
 })
 
 export const trainingAPI = {

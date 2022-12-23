@@ -89,7 +89,7 @@ const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuPr
                     <Form.Control
                         type="text"
                         placeholder="Повторения"
-                        {...register("numberOfRepetitions", { required: true, pattern: /\d/ })}
+                        {...register("numberOfRepetitions", { required: true, pattern: /\d+/ })}
                     />
                     {errors.numberOfRepetitions?.type === "required" && <FormError message='Поле является обязательным' />}
                     {errors.numberOfRepetitions?.type === "pattern" && <FormError message='Поле может быть только числовым' />}
@@ -102,7 +102,7 @@ const AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuPr
                     <Form.Control
                         type="text"
                         placeholder="Отдых"
-                        {...register("restTimeInSec", { required: true, pattern : /\d/ })}
+                        {...register("restTimeInSec", { required: true, pattern : /\d+/ })}
                     />
                     {errors.restTimeInSec?.type === "required" && <FormError message='Поле является обязательным' />}
                     {errors.restTimeInSec?.type === "pattern" && <FormError message='Поле может быть только числовым' />}

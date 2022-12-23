@@ -5,11 +5,13 @@ import DayDescription from './dayDescription/DayDescription';
 interface IDayListProps {
     trainingsArr: ArrDaysExpires
     isVisible : boolean
+    currentDay? : number,
+    isUserTraining : boolean
 }
 
-const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible }) => {
+const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible,currentDay,isUserTraining }) => {
 
-    const getAllTrainingsDay = () => trainingsArr.map(day => <DayDescription dayData={day} />)
+    const getAllTrainingsDay = () => trainingsArr.map((day, index) => <DayDescription isUserTraining={isUserTraining} currentDay={currentDay} dayData={day} />)
 
     return (isVisible ? 
         <div className='mt-4'>

@@ -63,7 +63,7 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
                         <Form.Control
                             type="text"
                             placeholder="Количество дней"
-                            {...register("countOfDays", { required: true, pattern: /\d/ })}
+                            {...register("countOfDays", { required: true, pattern: /\d+/ })}
                         />
                     </Form.Group>
                     {errors.countOfDays?.type === "pattern" && <FormError message='Поле может быть только числовым' />}
@@ -92,7 +92,6 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
                         daysOfTraining={daysOfTraining}
                         createTraining={createTrainingRequest}
                 />
-                    
                 </Form>
             </div>
         </div>

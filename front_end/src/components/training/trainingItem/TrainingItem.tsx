@@ -6,12 +6,13 @@ import { useAppSelector } from '../../../app/hooks';
 import { Button } from 'react-bootstrap';
 import DayList from './../daysList/DaysList';
 import { useAppDispatch } from './../../../app/hooks';
-import { deactivateTraining, getArrDaysExpires, setUserTrain } from './../../../slices/training/thunk';
+import { deactivateTraining, getArrDaysExpires, setUserTrain, updateDayUserTraining } from './../../../slices/training/thunk';
 import Progressbar from './progressBar/progressbar';
 import DayListContainer from './../daysList/dayListContainer/DayListContainer';
 import { setLoading } from '../../../slices/common/commonSlice';
 import styles from "./TI.module.css"
 import { deleteTraining } from '../../../slices/training/trainingSlice';
+
 
 interface ITrainingProps extends ItrainigData {
     isUserTraining : boolean
@@ -22,6 +23,7 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
 
     const [isVisible, setVisible] = useState(false);
     let percentAction = useAppSelector(state => state.training.percentOfProgress)
+    let userId = useAppSelector(state => state.auth.accessData?.id)
 
     
     let dispatch = useAppDispatch();
@@ -32,7 +34,6 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
         if (!isVisible) dispatch(getArrDaysExpires(id))
     }
 
-    let userId = useAppSelector(state => state.auth.accessData?.id)
 
     const subscribeTraininghandler = () => {
         if (userId) {
@@ -45,8 +46,9 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
         dispatch(deleteTraining(id))
     }
 
-    // delete thunk
-    //const handlerForDeleteBtn = () => dispatch()
+    const endOfDayTraining = () => {
+        if (userId) dispatch(updateDayUserTraining(userId))
+    }
 
     return (
         <Card style={{ maxWidth: '400px', margin: "0 auto" }}>
@@ -58,10 +60,11 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDa
             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
             <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>
             <div className="d-flex justify-content-between">
-                <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
+                <Button onClick={onClickHandler} >Посмотреть все упражения</Button>
                 {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler} className={styles.myButtons}>+</Button>}
             </div>
-            <DayListContainer isVisible={isVisible}/>
+            <DayListContainer isVisible={isVisible} isUserTraining={isUserTraining}/>
+            {isUserTraining ? <Button style={{marginTop : "10px"}} onClick={endOfDayTraining} >Закончить день</Button> : <></>}
           </Card.Body>
         </Card>
       );

@@ -9,6 +9,7 @@ export interface ItrainigData {
     label : string
     countOfDays : number
     description : string
+    dayOfTraining? : number
     presentOfProgress? : number
 }
 

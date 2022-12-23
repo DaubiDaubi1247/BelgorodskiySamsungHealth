@@ -1,13 +1,19 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import authSlice from '../slices/auth/authSlice';
 import commonSlice from '../slices/common/commonSlice';
+import userSlice from '../slices/user/userSlice';
 import trainingSlice from './../slices/training/trainingSlice';
+import dietsSlice from './../slices/diets/diets';
+import dish from '../slices/dish/dish';
 
 export const store = configureStore({
   reducer: {
     auth : authSlice,
     training : trainingSlice,
-    common : commonSlice
+    common : commonSlice,
+    user : userSlice,
+    diets : dietsSlice,
+    dish : dish
   },
 });
 
