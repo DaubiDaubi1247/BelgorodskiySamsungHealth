@@ -3,7 +3,7 @@ import { IuserDataForSet } from "./TuserAPI"
 
 
 const userAxios = axios.create({
-    baseURL: "http://localhost:8010/user",
+    baseURL: "http://app:8011/user",
 })
 
 export const userAPI = {
