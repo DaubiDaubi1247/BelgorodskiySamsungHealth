@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="исправил баг ошибки функционала со старых версий" />
+    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="исправил баг ошибки функционала со старых версий">
+      <change afterPath="$PROJECT_DIR$/front_end/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,10 +83,12 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\sem5\data base\kursuch5\BelgorodskiySamsungHealth\front_end" />
+      <recent name="D:\sem5\data base\kursuch5\BelgorodskiySamsungHealth" />
       <recent name="D:\sem5\data base\kursuch3\BelgorodskiySamsungHealth\reg3" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Reg3Application">
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="Reg3Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="demo1" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.reg3.Reg3Application" />
@@ -96,6 +104,26 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="front_end/Dockerfile build" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="node14.17.1_build" />
+          <option name="buildCliOptions" value="--target build" />
+          <option name="buildKitEnabled" value="true" />
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="front_end/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="front_end/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="front_end/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="reg3: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -104,52 +132,21 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="reg3.app: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
+    <configuration name="reg3/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
         <settings>
-          <option name="services">
-            <list>
-              <option value="app" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="reg3/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="reg3.pgbackups: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="pgbackups" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="reg3/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="reg3.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="postgres" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="reg3/docker-compose.yml" />
+          <option name="sourceFilePath" value="reg3/Dockerfile" />
         </settings>
       </deployment>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.reg3: Compose Deployment" />
-        <item itemvalue="Docker.reg3.app: Compose Deployment" />
-        <item itemvalue="Docker.reg3.postgres: Compose Deployment" />
-        <item itemvalue="Docker.reg3.pgbackups: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.front_end/Dockerfile" />
+        <item itemvalue="Docker.reg3/Dockerfile" />
+        <item itemvalue="Docker.front_end/Dockerfile build" />
+        <item itemvalue="Docker.reg3: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -169,6 +166,8 @@
       <workItem from="1671635763958" duration="1797000" />
       <workItem from="1671643157553" duration="2534000" />
       <workItem from="1671645752001" duration="3792000" />
+      <workItem from="1671697670202" duration="9627000" />
+      <workItem from="1671711934195" duration="17028000" />
     </task>
     <task id="LOCAL-00001" summary="победа на докером">
       <created>1671557224018</created>
