@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="изменил запрос на выборку" />
+    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="изменил запрос на выборку">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -175,7 +181,7 @@
       <workItem from="1671697670202" duration="9627000" />
       <workItem from="1671711934195" duration="17028000" />
       <workItem from="1671783134624" duration="15969000" />
-      <workItem from="1671881442688" duration="12539000" />
+      <workItem from="1671881442688" duration="15509000" />
     </task>
     <task id="LOCAL-00001" summary="победа на докером">
       <created>1671557224018</created>
@@ -212,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671898031469</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="изменил запрос на выборку">
+      <created>1671898193909</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671898193909</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +270,16 @@
           <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DishService.java</url>
           <line>95</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

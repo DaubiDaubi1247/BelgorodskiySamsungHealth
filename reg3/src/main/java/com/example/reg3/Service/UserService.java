@@ -69,7 +69,7 @@ public class UserService {
 
                 if (userProgress.isComplite()) {
                     completionTrain(user);
-                    return ResponseEntity.status(HttpStatus.OK).body("Пользователь завершил программу тренеровок");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Пользователь завершил программу тренеровок");
                 } else {
 
                     upProgress(userProgress);

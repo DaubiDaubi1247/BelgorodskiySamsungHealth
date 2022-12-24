@@ -38,7 +38,7 @@ public class DownloadFileController {
 
     @GetMapping("user/json")
     @ResponseBody
-    public ResponseEntity<InputStreamResource> getJsonStatistic(Integer percentOfProgress) throws IOException {
+    public ResponseEntity<InputStreamResource> getJsonStatistic(@RequestParam Integer percentOfProgress) throws IOException {
         downloadFileService.downloadTopOfTraningsStatistic(percentOfProgress);
 
         MediaType contentType =  MediaType.APPLICATION_JSON;
@@ -50,7 +50,7 @@ public class DownloadFileController {
 
     @GetMapping("user/pdf")
     @ResponseBody
-    public ResponseEntity<InputStreamResource> getPdfStatistc(Integer percentOfProgress)
+    public ResponseEntity<InputStreamResource> getPdfStatistc(@RequestParam Integer percentOfProgress)
             throws IOException, DocumentException {
 
         MediaType contentType = MediaType.APPLICATION_PDF;

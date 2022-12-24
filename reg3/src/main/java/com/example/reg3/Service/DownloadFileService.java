@@ -46,7 +46,7 @@ public class DownloadFileService {
     public void downloadTopOfTraningsStatistic(Integer percentOfProgress) throws IOException {
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
 
-        List<StatisticOfTrain> statistic = trainingRepository.findTopOfTranings(Float.valueOf(percentOfProgress));
+        List<StatisticOfTrain> statistic = trainingRepository.findTopOfTranings(Double.valueOf(percentOfProgress));
         saveListObjectsToJSON(statistic);
         bot.sendInfo("Информация из таблицы преобразовалась в JSON");
     }
@@ -60,7 +60,7 @@ public class DownloadFileService {
     /////
     public void dowloadPDF(Integer percentOfProgress) throws FileNotFoundException, DocumentException {
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
-        List<StatisticOfTrain> statistic = trainingRepository.findTopOfTranings(Float.valueOf(percentOfProgress));
+        List<StatisticOfTrain> statistic = trainingRepository.findTopOfTranings(Double.valueOf(percentOfProgress));
         bot.sendInfo("Информация из таблицы преобразовалась в JSON");
         saveListObjectsToPDF(statistic, "/user.pdf");
     }

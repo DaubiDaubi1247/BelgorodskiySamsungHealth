@@ -45,7 +45,9 @@ public interface TrainingRepository
     @Query("SELECT t.label as label, COUNT(up) as countOfUsers " +
             "FROM UserProgressInTraining up " +
             "JOIN up.trainingId t " +
-            "WHERE up.dayOfTraining / t.countOfDays * 100 >= ?1")
+            "WHERE up.dayOfTraining  * 1.0 / t.countOfDays * 100 >= ?1 " +
+            "GROUP BY t.label " +
+            "ORDER BY COUNT(up)")
 
-    List<StatisticOfTrain> findTopOfTranings(Float percentOfProgress);
+    List<StatisticOfTrain> findTopOfTranings(Double percentOfProgress);
 }
