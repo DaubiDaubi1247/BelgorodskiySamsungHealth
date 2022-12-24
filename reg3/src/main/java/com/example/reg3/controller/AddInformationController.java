@@ -154,7 +154,11 @@ public class AddInformationController {
             new UserRegistrationData("prosto_chell", "prosto_chell@gmail.com",
                     "prosto_chell", true, userList.get(1)),
             new UserRegistrationData("vlu", "vlu@gmail.com",
-                    "vlu", false, userList.get(2))
+                    "vlu", false, userList.get(2)),
+            new UserRegistrationData("man", "man@gmail.com",
+                    "man", false, null),
+            new UserRegistrationData("Hahatach", "Hahatach@gmail.com",
+                    "Hahatach", false, null)
 
     );
 
@@ -168,9 +172,11 @@ public class AddInformationController {
     );
     List<TypeOfMeal> typeOfMealList = List.of(
             new TypeOfMeal("первое блюдо"),
+            new TypeOfMeal("гарнир"),
             new TypeOfMeal("фрукт"),
             new TypeOfMeal("салат"),
-            new TypeOfMeal("десерт")
+            new TypeOfMeal("десерт"),
+            new TypeOfMeal("мучное")
     );
 
 
@@ -178,24 +184,30 @@ public class AddInformationController {
     @GetMapping("all")
     public void registrationUser() {
         bot.sendInfo("Вызов http://localhost:8011/add/all");
+
+        //добавление пользователей
         var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
         var res2 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
         var res3 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(2));
+        var res13 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(3));
+        var res14 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(4));
 
+        //добавление тренеровок
         var res4 = trainingService.addTrain(trainingList.get(0));
         var res5 = trainingService.addTrain(trainingList.get(1));
         var res6 = trainingService.addTrain(trainingList.get(2));
         var res7 = trainingService.addTrain(trainingList.get(3));
 
-
+        //подписка пользователей на тренеровки
         var res9 = userService.setTrainToUser(2L, 2L);
         var res8 = userService.setTrainToUser(1L, 1L);
 
-
+        //сохранение характеристик блюд
         mealTimeRepository.saveAll(mealTimeList);
         typeOfMealRepository.saveAll(typeOfMealList);
 
 
+        //блюда
         List<DishQuarry> dishQuarryList = List.of(
                 new DishQuarry("куриный суп", "первое блюдо", 123, 23.4f,
                         34.2f, 11.2f, List.of("обед", "второй завтрак")),
@@ -204,15 +216,19 @@ public class AddInformationController {
                 new DishQuarry("цезарь", "салат", 121, 20.4f,
                         30.2f, 9.2f, List.of("перекус")),
                 new DishQuarry("кекс", "десерт", 123, 20.4f,
-                        30.2f, 9.2f, List.of("перекус"))
+                        30.2f, 9.2f, List.of("перекус")),
+                new DishQuarry("хлеб", "мучное", 123, 20.4f,
+                        30.2f, 9.2f, List.of("завтрак", "обед",
+                        "ужин", "полдник", "перекус", "второй завтрак"))
         );
         for (var dish:dishQuarryList) {
             dishService.addDish(dish);
         }
 
-        List<String> listDish1 = List.of("цезарь", "куриный суп");
-        List<String> listDish2 = List.of("яблоко", "кекс");
-        List<String> listDish3 = List.of("яблоко", "цезарь", "кекс", "куриный суп");
+        //диеты
+        List<String> listDish1 = List.of("цезарь", "куриный суп", "хлеб");
+        List<String> listDish2 = List.of("яблоко", "кекс", "хлеб");
+        List<String> listDish3 = List.of("яблоко", "цезарь", "кекс", "куриный суп", "хлеб");
 
         DietQuary dietQuary1 = new DietQuary("Углеводная", "диета на углеводах",null, listDish1);
         DietQuary dietQuary2 = new DietQuary("Белковая", "диета на бЕлках",null, listDish2);
@@ -241,22 +257,4 @@ public class AddInformationController {
         bot.executeSendLog();
 
     }
-
-
-    @GetMapping("MealTime")
-    public void addMealTime() {
-
-    }
-
-
-    @PostMapping("train")
-    public void addTrain() {
-        var trin = trainingList.get(0);
-        trin.setDaysOfTrainings(daysOfTrainingsFloppy1);
-
-        var ans = trainingService.addTrain(trainingList.get(0));
-
-        System.out.println(ans);
-    }
-
 }

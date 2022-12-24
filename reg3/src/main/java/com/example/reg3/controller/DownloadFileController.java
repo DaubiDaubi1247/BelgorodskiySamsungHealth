@@ -61,7 +61,5 @@ public class DownloadFileController {
         return ResponseEntity.ok()
                 .contentType(contentType)
                 .body(in);
-
-
     }
 }

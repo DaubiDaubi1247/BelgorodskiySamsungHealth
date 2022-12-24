@@ -49,7 +49,8 @@ public class UserService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("прогресс не найден");
             } else {
                 bot.sendInfo("у пользователя несколько прогрессов одновременно id пользователя = " + userId);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("непредвиденная ошибка");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("непредвиденная ошибка у пользователя несколко прогрессов");
             }
         } catch (Exception e) {
             bot.sendError(e.getMessage());
@@ -81,7 +82,7 @@ public class UserService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь не подписан на программу тренеровки");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Пользователь с данным id не найден");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Пользователь с данным id не найден");
         }
     }
 
@@ -127,7 +128,7 @@ public class UserService {
             return ResponseEntity.status(HttpStatus.OK)
                     .body("пользователь " + user.getName() + " подписался на диету " + diet.getLabel());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь или тренеровки с таким id не найдено");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("пользователь или диеты с таким id не найдено");
         }
 
     }

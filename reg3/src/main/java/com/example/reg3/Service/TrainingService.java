@@ -39,6 +39,12 @@ public class TrainingService {
 
     public ResponseEntity<Object> getTrainingDays(Long trainId) {
         bot.sendInfo("запрос всех дней тренеровоки с id " + trainId);
+        var checkAlienable = trainingRepository.findById(trainId);
+        if (checkAlienable.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("отсутсвует тренеровка с данным id");
+        }
+
         var trainingDays = trainingRepository.findDaysOfTraining(trainId);
 
 

@@ -52,7 +52,7 @@ public class DishService {
         } catch (Exception e) {
             bot.sendError(e.getMessage());
 
-            return ResponseEntity.ok().body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -94,7 +94,8 @@ public class DishService {
     public ResponseEntity<Object> getMealTimes() {
        var mealTimes =  mealTimeRepository.findAll();
        if (mealTimes.size() == 0) {
-           bot.sendWarning("прием пищи отсутствуют в БД");
+           bot.sendWarning("приемы пищи отсутствуют в БД");
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("приемы пищи отсутствуют в БД");
        }
 
        List<String> labelOfMealTimes = new ArrayList<>();
@@ -110,6 +111,8 @@ public class DishService {
         var mealTimes =   typeOfMealRepository.findAll();
         if (mealTimes.size() == 0) {
             bot.sendWarning("типы блюда отсутствуют в БД");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("типы блюда отсутствуют в БД");
+
         }
 
         List<String> labelOfMealTypes = new ArrayList<>();
@@ -117,7 +120,7 @@ public class DishService {
         for (int i = 0; i < mealTimes.size(); i++) {
             labelOfMealTypes.add(mealTimes.get(i).getLabel());
         }
-        bot.sendInfo("тип пищи взят из БД");
+        bot.sendInfo("тип , блюда взят из БД");
         return ResponseEntity.ok().body(labelOfMealTypes);
     }
 }
