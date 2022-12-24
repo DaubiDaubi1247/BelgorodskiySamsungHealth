@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="исправил рекветсты">
-      <change afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/requastion/StatisticOfTrain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/UserRepository.java" afterDir="false" />
-    </list>
+    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="изменил запрос на выборку" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -182,7 +175,7 @@
       <workItem from="1671697670202" duration="9627000" />
       <workItem from="1671711934195" duration="17028000" />
       <workItem from="1671783134624" duration="15969000" />
-      <workItem from="1671881442688" duration="12183000" />
+      <workItem from="1671881442688" duration="12539000" />
     </task>
     <task id="LOCAL-00001" summary="победа на докером">
       <created>1671557224018</created>
@@ -212,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671894055250</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="изменил запрос на выборку">
+      <created>1671898031469</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671898031469</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,7 +237,8 @@
     <MESSAGE value="докер фиксация" />
     <MESSAGE value="исправил баг ошибки функционала со старых версий" />
     <MESSAGE value="исправил рекветсты" />
-    <option name="LAST_COMMIT_MESSAGE" value="исправил рекветсты" />
+    <MESSAGE value="изменил запрос на выборку" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменил запрос на выборку" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
