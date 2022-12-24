@@ -1,7 +1,11 @@
-import * as React from 'react';
+
 import { useAppSelector } from '../../../../app/hooks';
 import DayList from './../DaysList';
 import withLoading from './../../../HOC/withAuthRedirect';
+import { useEffect } from 'react';
+import { useAppDispatch } from './../../../../app/hooks';
+import { setErrorMsg } from '../../../../slices/training/trainingSlice';
+import MessagefromServer from '../../../../common/messageFromServer/MessageFromServer';
 
 interface IDayListContainerProps {
     isVisible: boolean
@@ -12,14 +16,25 @@ const DayListContainer: React.FunctionComponent<IDayListContainerProps> = ({ isV
 
     let trainingsArr = useAppSelector(state => state.training.arrDaysExpires)
     let currentDay = useAppSelector(state => state.training.currentDay)
-    // let trainingsArr = arrDaysExpires.filter(el => el !== undefined)
+    let errorMsg = useAppSelector(state => state.training.errorMsg)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => function() {
+        dispatch(setErrorMsg(null))
+    })
+    
     return (
-        <DayList
-            isVisible={isVisible}
-            trainingsArr={trainingsArr}
-            currentDay={currentDay}
-            isUserTraining={isUserTraining}
-        />
+        <div className="">
+            {errorMsg ? <MessagefromServer message={errorMsg} isError={true}/> : 
+            <DayList
+                isVisible={isVisible}
+                trainingsArr={trainingsArr}
+                currentDay={currentDay}
+                isUserTraining={isUserTraining}
+            />
+    }
+        </div>
     )
 };
 

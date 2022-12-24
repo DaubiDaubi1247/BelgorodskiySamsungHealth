@@ -6,6 +6,7 @@ import { setLoading } from '../common/commonSlice';
 
 import { dietsAPI } from './../../API/dietsAPI/dietsAPI';
 import { userAPI } from './../../API/userAPI/userAPI';
+import { setDietsError } from './diets';
 
 type TSetUserDiet = {
     userId : number
@@ -55,6 +56,7 @@ export const getMealsByFilter = createAsyncThunk(
     "diets/getMealsByFilter",
    async (data : Ifilters, thunkApi) => {
         try {
+            thunkApi.dispatch(setDietsError(""))
             const response = await dietsAPI.getMealsByFilter(data)
             thunkApi.dispatch(setLoading(false));
             return response.data

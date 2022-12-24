@@ -30,7 +30,7 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
 
     return (isLoading ? <Preloader/> :
         <div>
-            {userTraining ? <TrainingItem {...userTraining} isUserTraining={true}/> : <></>}
+            {userHasTraining && userTraining ? <TrainingItem {...userTraining} isUserTraining={true}/> : <></>}
             <SubscribeTraining isUserTrain={false}/>
         </div>
     );

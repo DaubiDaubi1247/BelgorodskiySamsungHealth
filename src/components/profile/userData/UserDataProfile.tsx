@@ -16,7 +16,7 @@ const UserDataProfile: React.FunctionComponent<IUserDataProfileProps> = ({ userD
 
     return (
         <div>
-            {userMsg.length !== 0 ? <MessagefromServer message={userMsg}/>: <></>}
+            {userMsg.length !== 0 ? <MessagefromServer message={userMsg} isError={false}/>: <></>}
             <p>Ваш Профиль</p>
             <p>Имя : {userData.name}</p>
             <p>Вес : {userData.weight} кг</p>

@@ -53,14 +53,14 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     }
 
     return (
-        <div className='w-100' style={{marginLeft : "20px"}}>
+        <div className='' style={{marginLeft : "20px"}}>
             <div>
-                <p>Вы выбрали тренировку {currentDiet?.label}</p>
+                <h3>Вы выбрали тренировку : {currentDiet?.label}</h3>
                 <p>Для просмотра блюд выберите тип блюд и время приема пищи</p>
             </div>
             <div className="selectWrapper">
-                <Select valueArr={mealTimesArr} onChangeHanler={setmealTime}/>
-                <Select valueArr={mealTypesArr} onChangeHanler={settypeOfMeal}/>
+                <Select valueArr={mealTimesArr} onChangeHanler={setmealTime} isEmpty={mealTime.length === 0}/>
+                <Select valueArr={mealTypesArr} onChangeHanler={settypeOfMeal} isEmpty={typeOfMeal.length === 0}/>
             </div>
             <Button style={{marginTop : "10px"}} onClick={getMealsByFilterHanlder}>Просмотреть еду из данной диеты</Button>
             {isVisible ? <RecomendedDish recomendedDishArr={recomendedDishArr}/> : <></>}

@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import styles from "../../../common/form/form.module.css"
@@ -9,6 +9,8 @@ import {IdayDescription, TCreateTrainig } from './../../../API/trainingAPI/Ttrai
 import AdminAddTrainingInnerForm from './innerForm/InnerForm';
 import { useAppDispatch, useAppSelector } from './../../../app/hooks';
 import { createTraining } from './../../../slices/training/thunk';
+import MessagefromServer from '../../../common/messageFromServer/MessageFromServer';
+import { setErrorMsg, setMessageForCreate } from '../../../slices/training/trainingSlice';
 
 
 interface IAdminAddTrainingMenuProps {
@@ -17,6 +19,7 @@ interface IAdminAddTrainingMenuProps {
 const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> = (props) => {
 
     const messageForCreate = useAppSelector(state => state.training.messageForCreate)
+    const errorMsg = useAppSelector(state => state.training.errorMsg)
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const watchAllFields = watch();
@@ -35,13 +38,22 @@ const AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> 
             daysOfTrainings : daysOfTraining
         }
 
+        dispatch(setMessageForCreate(""))
+        dispatch(setErrorMsg(null))
+
         dispatch(createTraining(training))
     }
+
+    useEffect(() => function() {
+        dispatch(setMessageForCreate(""))
+        dispatch(setErrorMsg(null))
+    })
 
     return (
         <div className={styles.formWrapper + " d-flex justify-content-between"}>
             <div>
-            {messageForCreate.length !== 0 ? <span style={{color : "green"}}>{messageForCreate}</span> : ""}
+            {messageForCreate.length !== 0 ? <MessagefromServer message={messageForCreate} isError={false}/> : <></>}
+            {errorMsg ? <MessagefromServer message={errorMsg} isError={true}/> : <></>}
                 <Form onSubmit={handleSubmit(createTrainingRequest)} className={styles.form}>
                     <Form.Group
                         className="mb-3"

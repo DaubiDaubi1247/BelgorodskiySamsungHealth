@@ -9,6 +9,7 @@ import { CONST } from '../../slices/common/Types';
 import { stat } from 'fs';
 import DietCard from './subscribeDiets/dietsList/dietCard/DietCard';
 import { Button } from 'react-bootstrap';
+import { setDietsError } from '../../slices/diets/diets';
 
 
 
@@ -28,6 +29,10 @@ const DietsContainer: React.FunctionComponent<IDietsContainerProps> = (props) =>
     useEffect(() => {
         if (userId) dispatch(getSmallDataAboutUserDiet(userId))
     },[userHasDiet])
+
+    useEffect(() => function() {
+        dispatch(setDietsError(""))
+    })
 
     return (
         <div>

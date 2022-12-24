@@ -26,7 +26,10 @@ const dietsSlice = createSlice({
         },
         setCurrentDietId : (state, action : PayloadAction<IsmallDataAboutDiets>) => {
             state.currentDietId = action.payload
-        }
+        },
+        setDietsError : (state, action : PayloadAction<string>) => {
+            state.dietsError = action.payload
+        },
     },
 
     extraReducers: builder => {
@@ -41,21 +44,18 @@ const dietsSlice = createSlice({
             .addCase(setUserDiet.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
                 state.userHasDiet = true;
             })
-            .addCase(getMealsByFilter.rejected.type, (state, action: PayloadAction<string>) => {
-                state.dietsError = action.payload
-            })
             .addCase(getSmallDataAboutUserDiet.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDiets>) => {
                 state.smallDataAboutUserDiet = action.payload
                 state.userHasDiet = true;
-                debugger
-                // if (action.payload.length !== 0) {
-                // }
             })
             
             
+            .addCase(getMealsByFilter.rejected.type, (state, action: PayloadAction<string>) => {
+                state.dietsError = action.payload
+            })
     }
 })
 
-export const {setUserHasDiet, setCurrentDietId} = dietsSlice.actions
+export const {setUserHasDiet, setCurrentDietId,setDietsError} = dietsSlice.actions
 
 export default dietsSlice.reducer

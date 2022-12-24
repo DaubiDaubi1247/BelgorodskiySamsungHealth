@@ -10,6 +10,7 @@ export interface ItrainitState {
     messageForCreate : string,
     userHasTraining : boolean
     currentDay : number
+    errorMsg : string | null
 }
 
 export enum CONST  {
