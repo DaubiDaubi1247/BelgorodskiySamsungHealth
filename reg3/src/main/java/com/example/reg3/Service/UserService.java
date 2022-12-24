@@ -104,7 +104,7 @@ public class UserService {
             var train = trainingRepository.getReferenceById(trainId);
 
             var progress = new UserProgressInTraining();
-            progress.setDayOfTraining(1);
+            progress.setDayOfTraining(0);
             progress.setTrainingId(train);
 
             progress = userProgressInTrainingRepository.save(progress);

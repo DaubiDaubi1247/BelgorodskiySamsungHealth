@@ -63,6 +63,9 @@ const trainingSlice = createSlice({
             .addCase(updateDayUserTraining.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
                 state.currentDay++;
             })
+            .addCase(getUserTraining.rejected.type, (state, action: PayloadAction<ItrainigData>) => {
+
+                })
             
     },
 });

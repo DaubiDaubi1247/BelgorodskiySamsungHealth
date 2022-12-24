@@ -1,0 +1,1081 @@
+Index: reg3/src/main/java/com/example/reg3/repository/DietRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.reg3.repository;\r\n\r\n\r\nimport com.example.reg3.dao.Diet;\r\nimport com.example.reg3.dao.Dish;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.data.jpa.repository.Query;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@Repository\r\npublic interface DietRepository\r\n        extends JpaRepository<Diet, Long> {\r\n\r\n    Optional<Diet> findByLabel(String label);\r\n\r\n    Optional<Diet> findDietById(Long id);\r\n\r\n    List<Diet> findAllByStatus(String status);\r\n\r\n    @Query(\"SELECT dish \" +\r\n            \"FROM Diet diet \" +\r\n            \"JOIN diet.dishes dish \" +\r\n            \"JOIN dish.mealTimes mt \" +\r\n            \"JOIN dish.type t \" +\r\n            \"WHERE (?1 is null or diet.id = ?1)\" +\r\n            \" AND (?2 is null or mt.label = ?2)\" +\r\n            \" AND (?3 is null or t.label = ?3)\")\r\n    List<Dish> getDishes(Long idDiet, String type, String mailTime);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/reg3/src/main/java/com/example/reg3/repository/DietRepository.java b/reg3/src/main/java/com/example/reg3/repository/DietRepository.java
+--- a/reg3/src/main/java/com/example/reg3/repository/DietRepository.java	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/reg3/src/main/java/com/example/reg3/repository/DietRepository.java	(date 1671791866607)
+@@ -26,7 +26,7 @@
+             "JOIN dish.mealTimes mt " +
+             "JOIN dish.type t " +
+             "WHERE (?1 is null or diet.id = ?1)" +
+-            " AND (?2 is null or mt.label = ?2)" +
+-            " AND (?3 is null or t.label = ?3)")
++            " AND (?3 is null or mt.label = ?3)" +
++            " AND (?2 is null or t.label = ?2)")
+     List<Dish> getDishes(Long idDiet, String type, String mailTime);
+ }
+Index: reg3/Dockerfile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>FROM openjdk:11\r\n\r\nRUN mkdir \"jarHolder\"\r\nRUN mkdir \"jarHolder/json\"\r\nRUN mkdir \"jarHolder/pdf\"\r\nADD /target/demo1-0.0.1-SNAPSHOT.jar /jarHolder/backend.jar\r\nENTRYPOINT [\"java\", \"-jar\", \"jarHolder/backend.jar\"]\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/reg3/Dockerfile b/reg3/Dockerfile
+--- a/reg3/Dockerfile	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/reg3/Dockerfile	(date 1671800192530)
+@@ -1,5 +1,6 @@
+ FROM openjdk:11
+ 
++
+ RUN mkdir "jarHolder"
+ RUN mkdir "jarHolder/json"
+ RUN mkdir "jarHolder/pdf"
+Index: front_end/src/API/userAPI/TuserAPI.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n\r\nexport type DataForSetTrain = {\r\n    userId : number\r\n    trainId : number\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/API/userAPI/TuserAPI.ts b/front_end/src/API/userAPI/TuserAPI.ts
+--- a/front_end/src/API/userAPI/TuserAPI.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/API/userAPI/TuserAPI.ts	(date 1671782886912)
+@@ -3,4 +3,11 @@
+ export type DataForSetTrain = {
+     userId : number
+     trainId : number
++}
++
++export interface IuserDataForSet {
++    weight : number
++    height : number
++    name : string
++    id : number
+ }
+\ No newline at end of file
+Index: front_end/src/components/navBar/NavBar.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as React from 'react';\r\nimport { useAppSelector } from '../../app/hooks';\r\nimport NavLinkConfig from './../../common/navLinks/NavLinkConfig';\r\nimport { main, MainRoutes, admin } from './../../Routes/Routes';\r\n\r\ninterface INavBarProps {\r\n}\r\n\r\nconst NavBar: React.FunctionComponent<INavBarProps> = (props) => {\r\n\r\n    let isAdmin = useAppSelector(state => state.auth.isAdmin)\r\n\r\n  return (\r\n    <div className=\"h-100 align-self-start\">\r\n        <NavLinkConfig path={main} text='Главная'/>\r\n        <NavLinkConfig path={MainRoutes.training} text='Мои тренировки'/>\r\n        {isAdmin ? <NavLinkConfig path={admin} text='Панель администратора'/> : <></> }\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default NavBar;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/navBar/NavBar.tsx b/front_end/src/components/navBar/NavBar.tsx
+--- a/front_end/src/components/navBar/NavBar.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/navBar/NavBar.tsx	(date 1671782886932)
+@@ -1,7 +1,7 @@
+ import * as React from 'react';
+ import { useAppSelector } from '../../app/hooks';
+ import NavLinkConfig from './../../common/navLinks/NavLinkConfig';
+-import { main, MainRoutes, admin } from './../../Routes/Routes';
++import { main, MainRoutes, admin, profile, diets } from './../../Routes/Routes';
+ 
+ interface INavBarProps {
+ }
+@@ -14,6 +14,8 @@
+     <div className="h-100 align-self-start">
+         <NavLinkConfig path={main} text='Главная'/>
+         <NavLinkConfig path={MainRoutes.training} text='Мои тренировки'/>
++        <NavLinkConfig path={profile} text='Мой Профиль'/>
++        <NavLinkConfig path={diets} text='Моя диета'/>
+         {isAdmin ? <NavLinkConfig path={admin} text='Панель администратора'/> : <></> }
+     </div>
+   );
+Index: front_end/src/API/userAPI/userAPI.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\"\r\n\r\n\r\nconst userAxios = axios.create({\r\n    baseURL: \"http://localhost:8010/user\",\r\n})\r\n\r\nexport const userAPI = {\r\n    setUserTrain(userId : number, trainId : number) {\r\n        return userAxios.get(`setTrainToUser?userId=${userId}&trainId=${trainId}`)\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/API/userAPI/userAPI.ts b/front_end/src/API/userAPI/userAPI.ts
+--- a/front_end/src/API/userAPI/userAPI.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/API/userAPI/userAPI.ts	(date 1671784412431)
+@@ -1,13 +1,26 @@
+ import axios from "axios"
++import { IuserDataForSet } from "./TuserAPI"
+ 
+ 
+ const userAxios = axios.create({
+-    baseURL: "http://localhost:8010/user",
++    baseURL: "http://localhost:8011/user",
+ })
+ 
+ export const userAPI = {
+     setUserTrain(userId : number, trainId : number) {
+         return userAxios.get(`setTrainToUser?userId=${userId}&trainId=${trainId}`)
++    },
++    getUserData(userId : number ){
++        return userAxios.get(`/getUserData?userId=${userId}`)
++    },
++    setUserData(userData : IuserDataForSet){
++        return userAxios.post("/setUserData", userData)
++    },
++    updateDayUserTraining(userId : number) {
++        return userAxios.get(`/updayteDayOfTrain?userId=${userId}`)
++    },
++    setUserDiet(userId : number, dietId : number) {
++        return userAxios.get(`setDietToUser?userId=${userId}&dietId=${dietId}`)
+     }
+ }
+ 
+Index: front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Button } from \"react-bootstrap\";\r\nimport { useNavigate } from 'react-router-dom';\r\nimport { AdminRoutes } from \"../../../Routes/Routes\";\r\nimport { useAppDispatch } from './../../../app/hooks';\r\nimport { getSmallDataAboutTrainings } from './../../../slices/training/thunk';\r\n\r\n\r\ninterface AadminPanelButtonsProps {\r\n}\r\n\r\nconst AdminPanelButtons: React.FunctionComponent<AadminPanelButtonsProps> = (props) => {\r\n    const navigate = useNavigate();\r\n    const dispatch = useAppDispatch()\r\n\r\n    const watchTraining = () => {\r\n        dispatch(getSmallDataAboutTrainings())\r\n        navigate(AdminRoutes.redactOfTrain);\r\n    }\r\n\r\n    const createTraining = () => navigate(AdminRoutes.createTraining)\r\n\r\n    return (\r\n        <>\r\n            <Button style={{marginRight:\"15px\"}} onClick={watchTraining}>Просмотреть тренировки</Button>\r\n            <Button onClick={createTraining}>Создать тренировку</Button>\r\n        </>\r\n    )\r\n};\r\n\r\nexport default AdminPanelButtons;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx b/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx
+--- a/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx	(date 1671782886923)
+@@ -1,8 +1,9 @@
+ import { Button } from "react-bootstrap";
+ import { useNavigate } from 'react-router-dom';
+-import { AdminRoutes } from "../../../Routes/Routes";
++import { AdminRoutes, DietsRoutes } from "../../../Routes/Routes";
+ import { useAppDispatch } from './../../../app/hooks';
+ import { getSmallDataAboutTrainings } from './../../../slices/training/thunk';
++import { adminAPI } from './../../../API/adminAPI/adminAPI';
+ 
+ 
+ interface AadminPanelButtonsProps {
+@@ -17,12 +18,54 @@
+         navigate(AdminRoutes.redactOfTrain);
+     }
+ 
++    const watchDiets = () => {
++        dispatch(getSmallDataAboutTrainings())
++        navigate(AdminRoutes.redactDiets);
++    }
++
+     const createTraining = () => navigate(AdminRoutes.createTraining)
+ 
++    const createDiet = () => navigate(AdminRoutes.createDiets)
++
++    const createDish = () => navigate(AdminRoutes.createDish)
++
++    const downloadFileInJSON = () => {
++        adminAPI.downloadInJSON()
++            .then(response => {
++                response.blob().then(blob => {
++                    let url = window.URL.createObjectURL(blob);
++                    let a = document.createElement('a');
++                    a.href = url;
++                    a.download = 'employees.json';
++                    a.click();
++                });
++            })
++    }
++
++    const downloadFileIn__ = () => {
++        adminAPI.downloadInPDF()
++            .then(response => {
++                response.blob().then(blob => {
++                    let url = window.URL.createObjectURL(blob);
++                    let a = document.createElement('a');
++                    a.href = url;
++                    a.download = 'employees.pdf';
++                    a.click();
++                });
++            })
++    }
++
+     return (
+         <>
+-            <Button style={{marginRight:"15px"}} onClick={watchTraining}>Просмотреть тренировки</Button>
+-            <Button onClick={createTraining}>Создать тренировку</Button>
++            <Button style={{ marginRight: "15px" }} onClick={watchTraining}>Просмотреть тренировки</Button>
++            <Button style={{ marginRight: "15px" }} onClick={createTraining}>Создать тренировку</Button>
++
++            <Button style={{ marginRight: "15px" }} onClick={watchDiets}>Посмотреть все диеты</Button>
++            <Button style={{ marginRight: "15px" }} onClick={createDiet}>Создать диету</Button>
++            <Button style={{ marginRight: "15px" }} onClick={createDish}>Создать Блюдо</Button>
++
++            <Button style={{ marginRight: "15px" }} onClick={downloadFileInJSON}>Выгрузка данных в json</Button>
++            <Button style={{ marginRight: "15px", marginTop: "10px" }} onClick={downloadFileIn__}>Выгрузка данных в pdf</Button>
+         </>
+     )
+ };
+Index: front_end/src/slices/training/thunk.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport { createAsyncThunk } from '@reduxjs/toolkit';\r\nimport { TCreateTrainig } from '../../API/trainingAPI/TtrainingAPI';\r\nimport { DataForSetTrain } from '../../API/userAPI/TuserAPI';\r\nimport { userAPI } from '../../API/userAPI/userAPI';\r\nimport { setLoading } from '../common/commonSlice';\r\nimport { trainingAPI } from './../../API/trainingAPI/trainingAPI';\r\n\r\nexport const getSmallDataAboutTrainings = createAsyncThunk(\r\n    \"training/getSmallDataAboutTrainings\",\r\n    async (_,thunkApi) => {\r\n        try {\r\n            const response = await trainingAPI.getSmallDataAboutTrainings();\r\n            thunkApi.dispatch(setLoading(false));\r\n            return response.data\r\n        } catch (error) {\r\n            thunkApi.rejectWithValue(\"Что то пошло не так ...\")\r\n        }\r\n    }\r\n)\r\n\r\nexport const getUserTraining = createAsyncThunk(\r\n    \"training/getUserTraining\",\r\n    async (id : number,thunkApi) => {\r\n        try {\r\n            const response = await trainingAPI.getUserTraining(id)\r\n            thunkApi.dispatch(setLoading(false));\r\n            return response.data\r\n        } catch (error) {\r\n            thunkApi.dispatch(setLoading(false)); // ---- пока нет сервера прийдется так тестить\r\n\r\n            thunkApi.rejectWithValue(\"Что то пошло не так ...\")\r\n        }\r\n    }\r\n)\r\n\r\nexport const getArrDaysExpires = createAsyncThunk(\r\n    \"training/getArrDaysExpires\",\r\n   async (id : number, thunkApi) => {\r\n        try {\r\n            const response = await trainingAPI.getDataDaysExpires(id);\r\n            thunkApi.dispatch(setLoading(false))\r\n            return response.data\r\n        } catch (error) {\r\n            thunkApi.rejectWithValue(\"Что то пошло не так ...\")\r\n        }\r\n   }\r\n)\r\n\r\nexport const setUserTrain = createAsyncThunk(\r\n    \"training/setUserTrain\",\r\n   async (body : DataForSetTrain, thunkApi) => {\r\n        try {\r\n            const response = await userAPI.setUserTrain(body.userId, body.trainId);\r\n            thunkApi.dispatch(setLoading(false))\r\n            return response.data\r\n        } catch (error) {\r\n            thunkApi.rejectWithValue(\"Что то пошло не так ...\")\r\n        }\r\n   }\r\n)\r\n\r\nexport const createTraining = createAsyncThunk(\r\n    \"training/createTraining\",\r\n   async (training : TCreateTrainig, thunkApi) => {\r\n        try {\r\n            const response = await trainingAPI.createTraining(training);\r\n            return response.data\r\n        } catch (error) {\r\n            thunkApi.rejectWithValue(\"Что то пошло не так ...\")\r\n        }\r\n   }\r\n)\r\n\r\nexport const deactivateTraining = createAsyncThunk(\r\n    \"training/deactivateTraining\",\r\n   async (trainingId : number, thunkApi) => {\r\n        try {\r\n            const response = await trainingAPI.deactivateTraining(trainingId);\r\n            return response.data\r\n        } catch (error) {\r\n            thunkApi.rejectWithValue(\"Что то пошло не так ...\")\r\n        }\r\n   }\r\n)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/slices/training/thunk.ts b/front_end/src/slices/training/thunk.ts
+--- a/front_end/src/slices/training/thunk.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/slices/training/thunk.ts	(date 1671782886947)
+@@ -5,6 +5,7 @@
+ import { userAPI } from '../../API/userAPI/userAPI';
+ import { setLoading } from '../common/commonSlice';
+ import { trainingAPI } from './../../API/trainingAPI/trainingAPI';
++import { setUserHasTraining } from './trainingSlice';
+ 
+ export const getSmallDataAboutTrainings = createAsyncThunk(
+     "training/getSmallDataAboutTrainings",
+@@ -53,6 +54,7 @@
+         try {
+             const response = await userAPI.setUserTrain(body.userId, body.trainId);
+             thunkApi.dispatch(setLoading(false))
++            thunkApi.dispatch(setUserHasTraining(false))
+             return response.data
+         } catch (error) {
+             thunkApi.rejectWithValue("Что то пошло не так ...")
+@@ -82,4 +84,16 @@
+             thunkApi.rejectWithValue("Что то пошло не так ...")
+         }
+    }
++)
++
++export const updateDayUserTraining = createAsyncThunk(
++    "training/updateDayUserTraining",
++    async (userId : number,thunkApi) => {
++        try {
++            const response = await userAPI.updateDayUserTraining(userId);
++            return response.data
++        } catch (error) {
++            thunkApi.rejectWithValue("Что то пошло не так ...")
++        }
++    }
+ )
+\ No newline at end of file
+Index: front_end/src/components/training/daysList/dayDescription/DayDescription.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as React from 'react';\r\nimport { Dropdown } from 'react-bootstrap';\r\nimport { DayExercises } from '../../../../API/trainingAPI/TtrainingAPI';\r\nimport { IdayDescription } from './../../../../API/trainingAPI/TtrainingAPI';\r\nimport ExcercisesInfo from './exerciseInfo/ExcercisesInfo';\r\n\r\ninterface IDayDescriptionProps {\r\n    dayData : IdayDescription\r\n}\r\n\r\nconst DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData}) => {\r\n\r\n    const isActiveDay = (day : number) => dayData.numberOfDay === day\r\n\r\n    console.log(dayData.sets)\r\n    const getAllexercisesForDay = () => dayData.sets.map((exercises) => \r\n        <Dropdown.Item >\r\n            <ExcercisesInfo {...exercises}/>\r\n        </Dropdown.Item>\r\n        \r\n    )\r\n\r\n    return (\r\n        <Dropdown className='mb-4'>\r\n            <Dropdown.Toggle  id=\"dropdown-button-dark-example1 \" variant=\"secondary\" active={isActiveDay(dayData.numberOfDay)}>\r\n                День № {dayData.numberOfDay}\r\n            </Dropdown.Toggle>\r\n\r\n            <Dropdown.Menu variant=\"\">\r\n                {getAllexercisesForDay()}\r\n                {/* <Dropdown.Item href=\"#/action-1\" active>\r\n                    Actions\r\n                </Dropdown.Item>\r\n                <Dropdown.Item href=\"#/action-2\">Another action</Dropdown.Item>\r\n                <Dropdown.Item href=\"#/action-3\">Something else</Dropdown.Item>\r\n                <Dropdown.Divider />\r\n                <Dropdown.Item href=\"#/action-4\">Separated link</Dropdown.Item> */}\r\n            </Dropdown.Menu>\r\n        </Dropdown>\r\n    );\r\n};\r\n\r\nexport default DayDescription;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx b/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx
+--- a/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx	(date 1671782886937)
+@@ -1,41 +1,45 @@
+ import * as React from 'react';
+-import { Dropdown } from 'react-bootstrap';
++import { Button, Dropdown } from 'react-bootstrap';
+ import { DayExercises } from '../../../../API/trainingAPI/TtrainingAPI';
+ import { IdayDescription } from './../../../../API/trainingAPI/TtrainingAPI';
+ import ExcercisesInfo from './exerciseInfo/ExcercisesInfo';
++import { useAppDispatch } from './../../../../app/hooks';
++import { useState } from 'react';
+ 
+ interface IDayDescriptionProps {
+     dayData : IdayDescription
++    currentDay? : number
++    isUserTraining? : boolean
+ }
+ 
+-const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData}) => {
++const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData,currentDay,isUserTraining}) => {
++
++    const [isVisible, setisVisible] = useState(true)
+ 
+-    const isActiveDay = (day : number) => dayData.numberOfDay === day
++    const isActiveDay = (day : number) => isUserTraining && currentDay === day
+ 
+-    console.log(dayData.sets)
+-    const getAllexercisesForDay = () => dayData.sets.map((exercises) => 
++    const isFinishedDay = (day : number) => isUserTraining && currentDay ? currentDay > day : false
++
++    const getAllexercisesForDay = () => dayData.sets.map(exercises => 
+         <Dropdown.Item >
+             <ExcercisesInfo {...exercises}/>
+         </Dropdown.Item>
+         
+     )
+ 
++    const dispatch = useAppDispatch()
++
++
+     return (
+         <Dropdown className='mb-4'>
+-            <Dropdown.Toggle  id="dropdown-button-dark-example1 " variant="secondary" active={isActiveDay(dayData.numberOfDay)}>
++            <Dropdown.Toggle  id="dropdown-button-dark-example1 " variant={isFinishedDay(dayData.numberOfDay) ? "success" : "secondary"} onBlur={() => setisVisible(false)}>
+                 День № {dayData.numberOfDay}
+             </Dropdown.Toggle>
+ 
+-            <Dropdown.Menu variant="">
++            <Dropdown.Menu variant="" show={isVisible && isActiveDay(dayData.numberOfDay)}>
+                 {getAllexercisesForDay()}
+-                {/* <Dropdown.Item href="#/action-1" active>
+-                    Actions
+-                </Dropdown.Item>
+-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+-                <Dropdown.Divider />
+-                <Dropdown.Item href="#/action-4">Separated link</Dropdown.Item> */}
+             </Dropdown.Menu>
++
+         </Dropdown>
+     );
+ };
+Index: front_end/src/app/store.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';\r\nimport authSlice from '../slices/auth/authSlice';\r\nimport commonSlice from '../slices/common/commonSlice';\r\nimport trainingSlice from './../slices/training/trainingSlice';\r\n\r\nexport const store = configureStore({\r\n  reducer: {\r\n    auth : authSlice,\r\n    training : trainingSlice,\r\n    common : commonSlice\r\n  },\r\n});\r\n\r\nexport type AppDispatch = typeof store.dispatch;\r\nexport type RootState = ReturnType<typeof store.getState>;\r\nexport type AppThunk<ReturnType = void> = ThunkAction<\r\n  ReturnType,\r\n  RootState,\r\n  unknown,\r\n  Action<string>\r\n>;\r\n\r\n//@ts-ignore\r\nwindow.store = store.getState();\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/app/store.ts b/front_end/src/app/store.ts
+--- a/front_end/src/app/store.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/app/store.ts	(date 1671782886915)
+@@ -1,13 +1,19 @@
+ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+ import authSlice from '../slices/auth/authSlice';
+ import commonSlice from '../slices/common/commonSlice';
++import userSlice from '../slices/user/userSlice';
+ import trainingSlice from './../slices/training/trainingSlice';
++import dietsSlice from './../slices/diets/diets';
++import dish from '../slices/dish/dish';
+ 
+ export const store = configureStore({
+   reducer: {
+     auth : authSlice,
+     training : trainingSlice,
+-    common : commonSlice
++    common : commonSlice,
++    user : userSlice,
++    diets : dietsSlice,
++    dish : dish
+   },
+ });
+ 
+Index: front_end/src/API/trainingAPI/TtrainingAPI.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export interface IsmallDataAboutTrainings {\r\n    trainingArr : TrainingDataArr\r\n}\r\n\r\nexport type TrainingDataArr = Array<ItrainigData>\r\n\r\nexport interface ItrainigData {\r\n    id : number\r\n    label : string\r\n    countOfDays : number\r\n    description : string\r\n    presentOfProgress? : number\r\n}\r\n\r\nexport interface ItrainigDataForCreate {\r\n    label : string\r\n    countOfDays : number\r\n    description : string\r\n    presentOfProgress? : number\r\n}\r\n\r\nexport interface IDaysData {\r\n    daysOfTrainings : ArrDaysExpires\r\n}\r\n\r\nexport type ArrDaysExpires = Array<IdayDescription>\r\n\r\nexport type DayExercises = Array<Exercises>\r\n\r\nexport interface IdayDescription {\r\n    numberOfDay : number\r\n    sets : DayExercises\r\n}\r\n\r\nexport type Exercises = {\r\n    restTimeInSec : string\r\n    numberOfRepetitions : number\r\n    exercise : {\r\n        label : string\r\n        description : string\r\n    }\r\n}\r\n\r\nexport type TCreateTrainig = ItrainigDataForCreate | IDaysData
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/API/trainingAPI/TtrainingAPI.ts b/front_end/src/API/trainingAPI/TtrainingAPI.ts
+--- a/front_end/src/API/trainingAPI/TtrainingAPI.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/API/trainingAPI/TtrainingAPI.ts	(date 1671782886909)
+@@ -9,6 +9,7 @@
+     label : string
+     countOfDays : number
+     description : string
++    dayOfTraining? : number
+     presentOfProgress? : number
+ }
+ 
+Index: front_end/src/components/HOC/withLoading.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { useEffect } from 'react';\r\nimport { useNavigate } from 'react-router-dom';\r\nimport { useAppSelector } from '../../app/hooks';\r\nimport Preloader from '../../common/preloader/Preloader';\r\nimport { AuthRoutes } from '../../Routes/Routes';\r\n\r\nconst withAuthRedicrect = (Component : any) => (props : any) => {\r\n    let isLoading = useAppSelector(state => state.common.isLoading) \r\n\r\n    if (isLoading) return <Preloader/>\r\n\r\n    return <Component {...props} />;\r\n};\r\n\r\nexport default withAuthRedicrect
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/HOC/withLoading.tsx b/front_end/src/components/HOC/withLoading.tsx
+--- a/front_end/src/components/HOC/withLoading.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/HOC/withLoading.tsx	(date 1671782886918)
+@@ -4,12 +4,13 @@
+ import Preloader from '../../common/preloader/Preloader';
+ import { AuthRoutes } from '../../Routes/Routes';
+ 
+-const withAuthRedicrect = (Component : any) => (props : any) => {
++const withLoading = (Component : any) => (props : any) => {
+     let isLoading = useAppSelector(state => state.common.isLoading) 
+ 
++    debugger
+     if (isLoading) return <Preloader/>
+ 
+     return <Component {...props} />;
+ };
+ 
+-export default withAuthRedicrect
+\ No newline at end of file
++export default withLoading
+\ No newline at end of file
+Index: front_end/src/components/HOC/withAuthRedirect.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { useEffect } from 'react';\r\nimport { useNavigate } from 'react-router-dom';\r\nimport { useAppSelector } from '../../app/hooks';\r\nimport { AuthRoutes } from '../../Routes/Routes';\r\n\r\nconst withLoading = (Component : any) => (props : any) => {\r\n    const navigate = useNavigate()\r\n    let isAuth = useAppSelector(state => state.auth.isAuth);\r\n\r\n    useEffect(() => {\r\n        if (!isAuth) navigate(AuthRoutes.authRoute)\r\n    })\r\n\r\n\r\n    return <Component {...props} />;\r\n};\r\n\r\nexport default withLoading
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/HOC/withAuthRedirect.tsx b/front_end/src/components/HOC/withAuthRedirect.tsx
+--- a/front_end/src/components/HOC/withAuthRedirect.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/HOC/withAuthRedirect.tsx	(date 1671782886917)
+@@ -3,10 +3,11 @@
+ import { useAppSelector } from '../../app/hooks';
+ import { AuthRoutes } from '../../Routes/Routes';
+ 
+-const withLoading = (Component : any) => (props : any) => {
++const withAuthRedicrect = (Component : any) => (props : any) => {
+     const navigate = useNavigate()
+     let isAuth = useAppSelector(state => state.auth.isAuth);
+ 
++
+     useEffect(() => {
+         if (!isAuth) navigate(AuthRoutes.authRoute)
+     })
+@@ -15,4 +16,4 @@
+     return <Component {...props} />;
+ };
+ 
+-export default withLoading
+\ No newline at end of file
++export default withAuthRedicrect
+\ No newline at end of file
+Index: front_end/src/components/training/daysList/DaysList.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as React from 'react';\r\nimport { ArrDaysExpires } from '../../../API/trainingAPI/TtrainingAPI';\r\nimport DayDescription from './dayDescription/DayDescription';\r\n\r\ninterface IDayListProps {\r\n    trainingsArr: ArrDaysExpires\r\n    isVisible : boolean\r\n}\r\n\r\nconst DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible }) => {\r\n\r\n    const getAllTrainingsDay = () => trainingsArr.map(day => <DayDescription dayData={day} />)\r\n\r\n    return (isVisible ? \r\n        <div className='mt-4'>\r\n            {getAllTrainingsDay()}\r\n        </div>\r\n        : <></>\r\n    );\r\n};\r\n\r\nexport default DayList;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/training/daysList/DaysList.tsx b/front_end/src/components/training/daysList/DaysList.tsx
+--- a/front_end/src/components/training/daysList/DaysList.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/training/daysList/DaysList.tsx	(date 1671782886936)
+@@ -5,11 +5,13 @@
+ interface IDayListProps {
+     trainingsArr: ArrDaysExpires
+     isVisible : boolean
++    currentDay? : number,
++    isUserTraining : boolean
+ }
+ 
+-const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible }) => {
++const DayList: React.FunctionComponent<IDayListProps> = ({ trainingsArr, isVisible,currentDay,isUserTraining }) => {
+ 
+-    const getAllTrainingsDay = () => trainingsArr.map(day => <DayDescription dayData={day} />)
++    const getAllTrainingsDay = () => trainingsArr.map((day, index) => <DayDescription isUserTraining={isUserTraining} currentDay={currentDay} dayData={day} />)
+ 
+     return (isVisible ? 
+         <div className='mt-4'>
+Index: front_end/src/Routes/Routes.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nexport const auth = \"/auth\";\r\nexport const AuthRoutes = {\r\n    authRoute : auth + \"/login\" ,\r\n    registration : auth + \"/registration\"\r\n} \r\n\r\nexport const main = \"/\";\r\nexport const MainRoutes = {\r\n    training : main + \"training\"\r\n} \r\n\r\nexport const admin = \"/admin\";\r\nexport const AdminRoutes = {\r\n    redactOfTrain : admin + \"/redact\",\r\n    createTraining : admin + \"/create\"\r\n} \r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/Routes/Routes.ts b/front_end/src/Routes/Routes.ts
+--- a/front_end/src/Routes/Routes.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/Routes/Routes.ts	(date 1671782886914)
+@@ -10,9 +10,25 @@
+     training : main + "training"
+ } 
+ 
++export const diets = "/diets";
++export const DietsRoutes = {
++    fullDescription : diets + "/desc",
++    redactDiets : diets + "/redact",
++    createDiets : diets + "/create"
++} 
++
+ export const admin = "/admin";
+ export const AdminRoutes = {
+     redactOfTrain : admin + "/redact",
+-    createTraining : admin + "/create"
++    createTraining : admin + "/create",
++    redactDiets : admin + diets + "/redact",
++    createDiets : admin + diets + "/create",
++    createDish : admin + "/dish" + "/create",
+ } 
+ 
++export const profile = "/profile"
++
++
++
++
++
+Index: front_end/src/components/adminPanel/AdminPanel.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport { useAppSelector } from '../../app/hooks';\r\nimport { useNavigate } from 'react-router-dom';\r\nimport { useEffect } from 'react';\r\nimport { useAppDispatch } from './../../app/hooks';\r\nimport AdminPanelButtons from './adminPanelButtons/AdminPanelButtons';\r\nimport { Container } from 'react-bootstrap';\r\n\r\ninterface IAdminPanelProps {\r\n}\r\n\r\nconst AdminPanelContainer: React.FunctionComponent<IAdminPanelProps> = (props) => {\r\n\r\n    let isAdmin = useAppSelector(state => state.auth.isAdmin)\r\n\r\n    const navigate = useNavigate();\r\n    const dispatch = useAppDispatch()\r\n\r\n    useEffect(() => {\r\n        // navigate to error page\r\n        //if (!isAdmin) navigate()\r\n        //dispatch(getAllTra)\r\n\r\n    })\r\n\r\n    return (\r\n        <div >\r\n            <h2>Здравствуйте, Вы посетили панель администратора</h2>\r\n            <AdminPanelButtons/>\r\n            \r\n        </div>\r\n    )\r\n};\r\n\r\nexport default AdminPanelContainer;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/adminPanel/AdminPanel.tsx b/front_end/src/components/adminPanel/AdminPanel.tsx
+--- a/front_end/src/components/adminPanel/AdminPanel.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/adminPanel/AdminPanel.tsx	(date 1671782886919)
+@@ -16,18 +16,12 @@
+     const navigate = useNavigate();
+     const dispatch = useAppDispatch()
+ 
+-    useEffect(() => {
+-        // navigate to error page
+-        //if (!isAdmin) navigate()
+-        //dispatch(getAllTra)
+-
+-    })
++    if (!isAdmin) navigate("/")
+ 
+     return (
+         <div >
+             <h2>Здравствуйте, Вы посетили панель администратора</h2>
+             <AdminPanelButtons/>
+-            
+         </div>
+     )
+ };
+Index: front_end/src/components/training/TraininigContainer.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport { useAppSelector } from '../../app/hooks';\r\nimport { useEffect } from 'react';\r\nimport { useAppDispatch } from './../../app/hooks';\r\nimport { getUserTraining } from '../../slices/training/thunk';\r\nimport TrainingItem from './trainingItem/TrainingItem';\r\nimport SubscribeTraining from './subscribeTraining/SubscribeTrainig';\r\nimport { setLoading } from '../../slices/common/commonSlice';\r\nimport Preloader from '../../common/preloader/Preloader';\r\nimport withAuthRedicrect from './../HOC/withAuthRedirect';\r\n\r\ninterface ITrainingContainerProps {\r\n}\r\n\r\nconst TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (props) => {\r\n    let userTraining = useAppSelector(state => state.training.smallUserTraining)\r\n    let userId = useAppSelector(state => state.auth.accessData?.id)\r\n\r\n    let isLoading = useAppSelector(state => state.common.isLoading)\r\n\r\n    let dispatch = useAppDispatch()\r\n\r\n    useEffect(() => {\r\n        if (userId) {\r\n            dispatch(setLoading(true))\r\n            dispatch(getUserTraining(userId))\r\n        }\r\n    },[])\r\n\r\n    return (isLoading ? <Preloader/> :\r\n        <div>\r\n            {userTraining ? <TrainingItem {...userTraining} isUserTraining={true}/> : <></>}\r\n            <SubscribeTraining isUserTrain={userTraining !== null}/>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default withAuthRedicrect(TrainingContainer)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/training/TraininigContainer.tsx b/front_end/src/components/training/TraininigContainer.tsx
+--- a/front_end/src/components/training/TraininigContainer.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/training/TraininigContainer.tsx	(date 1671782886936)
+@@ -15,6 +15,7 @@
+ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (props) => {
+     let userTraining = useAppSelector(state => state.training.smallUserTraining)
+     let userId = useAppSelector(state => state.auth.accessData?.id)
++    let userHasTraining = useAppSelector(state => state.training.userHasTraining)
+ 
+     let isLoading = useAppSelector(state => state.common.isLoading)
+ 
+@@ -25,12 +26,12 @@
+             dispatch(setLoading(true))
+             dispatch(getUserTraining(userId))
+         }
+-    },[])
++    },[userHasTraining])
+ 
+     return (isLoading ? <Preloader/> :
+         <div>
+             {userTraining ? <TrainingItem {...userTraining} isUserTraining={true}/> : <></>}
+-            <SubscribeTraining isUserTrain={userTraining !== null}/>
++            <SubscribeTraining isUserTrain={false}/>
+         </div>
+     );
+ };
+Index: front_end/src/slices/training/Types.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { ArrDaysExpires, TrainingDataArr } from \"../../API/trainingAPI/TtrainingAPI\";\r\nimport { ItrainigData } from './../../API/trainingAPI/TtrainingAPI';\r\n\r\n\r\nexport interface ItrainitState {\r\n    smallDataTrainings : TrainingDataArr,\r\n    smallUserTraining :  ItrainigData | null\r\n    arrDaysExpires : ArrDaysExpires,\r\n    percentOfProgress : number\r\n    messageForCreate : string\r\n}\r\n\r\nexport enum CONST  {\r\n    NO_DATA = -1\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/slices/training/Types.ts b/front_end/src/slices/training/Types.ts
+--- a/front_end/src/slices/training/Types.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/slices/training/Types.ts	(date 1671782886946)
+@@ -7,7 +7,9 @@
+     smallUserTraining :  ItrainigData | null
+     arrDaysExpires : ArrDaysExpires,
+     percentOfProgress : number
+-    messageForCreate : string
++    messageForCreate : string,
++    userHasTraining : boolean
++    currentDay : number
+ }
+ 
+ export enum CONST  {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"04bd9be8-437b-43f3-955e-ac1565bae486\" name=\"Changes\" comment=\"исправил баг ошибки функционала со старых версий\">\r\n      <change afterPath=\"$PROJECT_DIR$/front_end/Dockerfile\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/reg3/.env\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.env\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/reg3/docker-compose.yml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/docker-compose.yml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/reg3/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/reg3/src/main/resources/application.properties\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$PROJECT_DIR$/reg3/pom.xml\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/reg3/src/main/resources/application.properties\" root0=\"FORCE_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"JpbToolWindowState\">\r\n    <option name=\"myId2FirstActivated\">\r\n      <map>\r\n        <entry key=\"com.haulmont.jpb.jpaInspector\" value=\"true\" />\r\n        <entry key=\"com.haulmont.jpb.jpaPalette\" value=\"true\" />\r\n        <entry key=\"com.haulmont.jpb.jpaStructure\" value=\"true\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"myId2Visible\">\r\n      <map>\r\n        <entry key=\"com.haulmont.jpb.jpaInspector\" value=\"true\" />\r\n        <entry key=\"com.haulmont.jpb.jpaPalette\" value=\"false\" />\r\n        <entry key=\"com.haulmont.jpb.jpaStructure\" value=\"false\" />\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"useMavenConfig\" value=\"true\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2JBWa9kExBXo62LbtlwgrqEJmM9\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,\r\n    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,\r\n    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,\r\n    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;D:/sem5/data base/kursach&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,\r\n    &quot;spring.configuration.checksum&quot;: &quot;e368b9938746fa090d6afd3628355133&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;DatabaseDriversLRU&quot;: [\r\n      &quot;postgresql&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\sem5\\data base\\kursuch5\\BelgorodskiySamsungHealth\\front_end\" />\r\n      <recent name=\"D:\\sem5\\data base\\kursuch5\\BelgorodskiySamsungHealth\" />\r\n      <recent name=\"D:\\sem5\\data base\\kursuch3\\BelgorodskiySamsungHealth\\reg3\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Docker.docker-compose.yml: Compose Deployment\">\r\n    <configuration name=\"Reg3Application\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <module name=\"demo1\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.example.reg3.Reg3Application\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"docker-compose.yml: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"sourceFilePath\" value=\"docker-compose.yml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"front_end/Dockerfile build\" type=\"docker-deploy\" factoryName=\"dockerfile\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"dockerfile\">\r\n        <settings>\r\n          <option name=\"imageTag\" value=\"node14.17.1_build\" />\r\n          <option name=\"buildCliOptions\" value=\"--target build\" />\r\n          <option name=\"buildKitEnabled\" value=\"true\" />\r\n          <option name=\"buildOnly\" value=\"true\" />\r\n          <option name=\"sourceFilePath\" value=\"front_end/Dockerfile\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"front_end/Dockerfile\" type=\"docker-deploy\" factoryName=\"dockerfile\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"dockerfile\">\r\n        <settings>\r\n          <option name=\"sourceFilePath\" value=\"front_end/Dockerfile\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"reg3: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"sourceFilePath\" value=\"reg3/docker-compose.yml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"reg3/Dockerfile\" type=\"docker-deploy\" factoryName=\"dockerfile\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"dockerfile\">\r\n        <settings>\r\n          <option name=\"sourceFilePath\" value=\"reg3/Dockerfile\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Docker.docker-compose.yml: Compose Deployment\" />\r\n        <item itemvalue=\"Docker.front_end/Dockerfile\" />\r\n        <item itemvalue=\"Docker.reg3/Dockerfile\" />\r\n        <item itemvalue=\"Docker.front_end/Dockerfile build\" />\r\n        <item itemvalue=\"Docker.reg3: Compose Deployment\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"04bd9be8-437b-43f3-955e-ac1565bae486\" name=\"Changes\" comment=\"\" />\r\n      <created>1671552017276</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1671552017276</updated>\r\n      <workItem from=\"1671552019504\" duration=\"485000\" />\r\n      <workItem from=\"1671552540006\" duration=\"599000\" />\r\n      <workItem from=\"1671553401848\" duration=\"2951000\" />\r\n      <workItem from=\"1671556479919\" duration=\"12729000\" />\r\n      <workItem from=\"1671608129475\" duration=\"7155000\" />\r\n      <workItem from=\"1671635763958\" duration=\"1797000\" />\r\n      <workItem from=\"1671643157553\" duration=\"2534000\" />\r\n      <workItem from=\"1671645752001\" duration=\"3792000\" />\r\n      <workItem from=\"1671697670202\" duration=\"9627000\" />\r\n      <workItem from=\"1671711934195\" duration=\"17028000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"победа на докером\">\r\n      <created>1671557224018</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671557224018</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"докер фиксация\">\r\n      <created>1671633782466</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671633782466</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"исправил баг ошибки функционала со старых версий\">\r\n      <created>1671651168157</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1671651168157</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"UnknownFeatures\">\r\n    <option featureType=\"com.intellij.fileTypeFactory\" implementationName=\".env\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"победа на докером\" />\r\n    <MESSAGE value=\"докер фиксация\" />\r\n    <MESSAGE value=\"исправил баг ошибки функционала со старых версий\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"исправил баг ошибки функционала со старых версий\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DietService.java</url>\r\n          <line>122</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DietController.java</url>\r\n          <line>78</line>\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/.idea/workspace.xml	(date 1671801395455)
+@@ -5,11 +5,35 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="исправил баг ошибки функционала со старых версий">
+-      <change afterPath="$PROJECT_DIR$/front_end/Dockerfile" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/reg3/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/reg3/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/API/authAPI/authAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/authAPI/authAPI.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/API/trainingAPI/TtrainingAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/trainingAPI/TtrainingAPI.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/API/trainingAPI/trainingAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/trainingAPI/trainingAPI.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/API/userAPI/TuserAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/userAPI/TuserAPI.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/API/userAPI/userAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/userAPI/userAPI.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/App.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/Routes/Routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/Routes/Routes.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/app/store.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/HOC/withAuthRedirect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/HOC/withAuthRedirect.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/HOC/withLoading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/HOC/withLoading.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/AdminPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/AdminPanel.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/header/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/header/header.module.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/header/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/header/profile/Profile.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/navBar/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/navBar/NavBar.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/TraininigContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/TraininigContainer.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/daysList/DaysList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/daysList/DaysList.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/trainingItem/TrainingItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/trainingItem/TrainingItem.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/slices/training/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/slices/training/Types.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/slices/training/thunk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/slices/training/thunk.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/front_end/src/slices/training/trainingSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/slices/training/trainingSlice.ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/reg3/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/Dockerfile" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/DietRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/DietRepository.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -99,6 +123,19 @@
+     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+       <deployment type="docker-compose.yml">
+         <settings>
++          <option name="sourceFilePath" value="docker-compose.yml" />
++        </settings>
++      </deployment>
++      <method v="2" />
++    </configuration>
++    <configuration name="docker-compose.yml.frontend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
++      <deployment type="docker-compose.yml">
++        <settings>
++          <option name="services">
++            <list>
++              <option value="frontend" />
++            </list>
++          </option>
+           <option name="sourceFilePath" value="docker-compose.yml" />
+         </settings>
+       </deployment>
+@@ -120,14 +157,6 @@
+       <deployment type="dockerfile">
+         <settings>
+           <option name="sourceFilePath" value="front_end/Dockerfile" />
+-        </settings>
+-      </deployment>
+-      <method v="2" />
+-    </configuration>
+-    <configuration name="reg3: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+-      <deployment type="docker-compose.yml">
+-        <settings>
+-          <option name="sourceFilePath" value="reg3/docker-compose.yml" />
+         </settings>
+       </deployment>
+       <method v="2" />
+@@ -143,10 +172,10 @@
+     <recent_temporary>
+       <list>
+         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
++        <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
+         <item itemvalue="Docker.front_end/Dockerfile" />
+         <item itemvalue="Docker.reg3/Dockerfile" />
+         <item itemvalue="Docker.front_end/Dockerfile build" />
+-        <item itemvalue="Docker.reg3: Compose Deployment" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -168,6 +197,7 @@
+       <workItem from="1671645752001" duration="3792000" />
+       <workItem from="1671697670202" duration="9627000" />
+       <workItem from="1671711934195" duration="17028000" />
++      <workItem from="1671783134624" duration="10708000" />
+     </task>
+     <task id="LOCAL-00001" summary="победа на докером">
+       <created>1671557224018</created>
+Index: front_end/src/components/header/header.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nheader {\r\n    max-height: 200px;\r\n    background-color: #000;\r\n    color: #fff;\r\n}\r\n\r\n.flexContainer {\r\n    height: 100px;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/header/header.module.css b/front_end/src/components/header/header.module.css
+--- a/front_end/src/components/header/header.module.css	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/header/header.module.css	(date 1671782886930)
+@@ -9,4 +9,10 @@
+     height: 100px;
+     justify-content: space-between;
+     align-items: center;
++}
++
++.profile {
++    color : white;
++    font-size: 20px;
++    text-decoration: none;
+ }
+\ No newline at end of file
+Index: front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport { useState } from 'react';\r\nimport { Form, Button } from 'react-bootstrap';\r\nimport { useForm } from 'react-hook-form';\r\nimport styles from \"../../../common/form/form.module.css\"\r\nimport localStyles from \"./addTraining.module.css\"\r\nimport FormError from './../../../common/form/formError/FormError';\r\nimport {IdayDescription, TCreateTrainig } from './../../../API/trainingAPI/TtrainingAPI';\r\nimport AdminAddTrainingInnerForm from './innerForm/InnerForm';\r\nimport { useAppDispatch, useAppSelector } from './../../../app/hooks';\r\nimport { createTraining } from './../../../slices/training/thunk';\r\n\r\n\r\ninterface IAdminAddTrainingMenuProps {\r\n}\r\n\r\nconst AdminAddTrainingMenu: React.FunctionComponent<IAdminAddTrainingMenuProps> = (props) => {\r\n\r\n    const messageForCreate = useAppSelector(state => state.training.messageForCreate)\r\n\r\n    const { register, handleSubmit, watch, formState: { errors } } = useForm();\r\n    const watchAllFields = watch();\r\n\r\n    const [isVisble, setisVisble] = useState(false)\r\n\r\n    const daysOfTraining : Array<IdayDescription> = []\r\n\r\n    const dispatch = useAppDispatch()\r\n\r\n    const createTrainingRequest = () => {\r\n        let training : TCreateTrainig = {\r\n            label : watchAllFields.nameOfTrain,\r\n            countOfDays : watchAllFields.countOfDays,\r\n            description : watchAllFields.description,\r\n            daysOfTrainings : daysOfTraining\r\n        }\r\n\r\n        dispatch(createTraining(training))\r\n    }\r\n\r\n    return (\r\n        <div className={styles.formWrapper + \" d-flex justify-content-between\"}>\r\n            <div>\r\n            {messageForCreate.length !== 0 ? <span style={{color : \"green\"}}>{messageForCreate}</span> : \"\"}\r\n                <Form onSubmit={handleSubmit(createTrainingRequest)} className={styles.form}>\r\n                    <Form.Group\r\n                        className=\"mb-3\"\r\n                        controlId=\"formBasicEmail\"\r\n                    >\r\n                        <Form.Label>Название Тренировки</Form.Label>\r\n                        <Form.Control\r\n                            type=\"text\"\r\n                            placeholder=\"Название тренировки\"\r\n                            {...register(\"nameOfTrain\", { required: true })}\r\n                        />\r\n                        {errors.nameOfTrain?.type === \"required\" && <FormError message='Поле является обязательным' />}\r\n                    </Form.Group>\r\n                    <Form.Group\r\n                        className=\"mb-3\"\r\n                        controlId=\"formBasicPassword\"\r\n                    >\r\n                        <Form.Label>Количество дней</Form.Label>\r\n                        <Form.Control\r\n                            type=\"text\"\r\n                            placeholder=\"Количество дней\"\r\n                            {...register(\"countOfDays\", { required: true, pattern: /\\d/ })}\r\n                        />\r\n                    </Form.Group>\r\n                    {errors.countOfDays?.type === \"pattern\" && <FormError message='Поле может быть только числовым' />}\r\n                    <Form.Group\r\n                        className=\"mb-3\"\r\n                        controlId=\"formBasicPassword\"\r\n                    >\r\n                        <Form.Label>Описание</Form.Label>\r\n                        <Form.Control\r\n                            type=\"text\"\r\n                            placeholder=\"Описание\"\r\n                            {...register(\"description\", { required: true })}\r\n                        />\r\n                    </Form.Group>\r\n                    {errors.password && <FormError message='Поле является обязательным' />}\r\n                    <Button\r\n                        variant=\"primary\"\r\n                        onClick={() => setisVisble(true)}\r\n                        className={localStyles.btnForTraining}\r\n                    >\r\n                    Сохранить общее описание\r\n                    </Button>\r\n                \r\n                <AdminAddTrainingInnerForm\r\n                        isVisible={isVisble}\r\n                        daysOfTraining={daysOfTraining}\r\n                        createTraining={createTrainingRequest}\r\n                />\r\n                    \r\n                </Form>\r\n            </div>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default AdminAddTrainingMenu;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx b/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx
+--- a/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx	(date 1671782886920)
+@@ -63,7 +63,7 @@
+                         <Form.Control
+                             type="text"
+                             placeholder="Количество дней"
+-                            {...register("countOfDays", { required: true, pattern: /\d/ })}
++                            {...register("countOfDays", { required: true, pattern: /\d+/ })}
+                         />
+                     </Form.Group>
+                     {errors.countOfDays?.type === "pattern" && <FormError message='Поле может быть только числовым' />}
+@@ -92,7 +92,6 @@
+                         daysOfTraining={daysOfTraining}
+                         createTraining={createTrainingRequest}
+                 />
+-                    
+                 </Form>
+             </div>
+         </div>
+Index: front_end/src/API/authAPI/authAPI.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\";\r\nimport { Inputs } from \"../../slices/auth/Types\";\r\nimport { IResponse } from './API_T';\r\n\r\nconst authAxios = axios.create({\r\n    baseURL: \"http://localhost:8010/hole\",\r\n    \r\n})\r\n\r\nexport const authAPI = {\r\n    authUser(accessData : Inputs) {\r\n        debugger\r\n        return authAxios.post<IResponse>(\"/authentication\", accessData)\r\n    },\r\n\r\n    registrationUser(accessData : Inputs) {\r\n        return authAxios.post<IResponse>(\"/registration\", accessData)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/API/authAPI/authAPI.ts b/front_end/src/API/authAPI/authAPI.ts
+--- a/front_end/src/API/authAPI/authAPI.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/API/authAPI/authAPI.ts	(date 1671784412472)
+@@ -3,7 +3,7 @@
+ import { IResponse } from './API_T';
+ 
+ const authAxios = axios.create({
+-    baseURL: "http://localhost:8010/hole",
++    baseURL: "http://localhost:8011/hole",
+     
+ })
+ 
+Index: front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import * as React from 'react';\r\nimport { useAppSelector } from '../../../../app/hooks';\r\nimport DayList from './../DaysList';\r\nimport withLoading from './../../../HOC/withAuthRedirect';\r\n\r\ninterface IDayListContainerProps {\r\n    isVisible: boolean\r\n}\r\n\r\nconst DayListContainer: React.FunctionComponent<IDayListContainerProps> = ({ isVisible }) => {\r\n\r\n    let trainingsArr = useAppSelector(state => state.training.arrDaysExpires)\r\n    // let trainingsArr = arrDaysExpires.filter(el => el !== undefined)\r\n    return (\r\n        <DayList\r\n            isVisible={isVisible}\r\n            trainingsArr={trainingsArr}\r\n        />\r\n    )\r\n};\r\n\r\nexport default withLoading(DayListContainer);\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx b/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx
+--- a/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx	(date 1671782886938)
+@@ -5,16 +5,20 @@
+ 
+ interface IDayListContainerProps {
+     isVisible: boolean
++    isUserTraining : boolean
+ }
+ 
+-const DayListContainer: React.FunctionComponent<IDayListContainerProps> = ({ isVisible }) => {
++const DayListContainer: React.FunctionComponent<IDayListContainerProps> = ({ isVisible,isUserTraining }) => {
+ 
+     let trainingsArr = useAppSelector(state => state.training.arrDaysExpires)
++    let currentDay = useAppSelector(state => state.training.currentDay)
+     // let trainingsArr = arrDaysExpires.filter(el => el !== undefined)
+     return (
+         <DayList
+             isVisible={isVisible}
+             trainingsArr={trainingsArr}
++            currentDay={currentDay}
++            isUserTraining={isUserTraining}
+         />
+     )
+ };
+Index: front_end/src/App.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport { Container } from 'react-bootstrap';\r\n\r\nimport './App.css';\r\n\r\nimport Header from './components/header/Header';\r\n\r\nimport MainContainer from './components/main/Main';\r\nimport { Route, Routes } from 'react-router-dom';\r\nimport { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes } from './Routes/Routes';\r\nimport AuthContainer from './components/auth/AuthContainer';\r\nimport NavBar from './components/navBar/NavBar';\r\nimport TrainingContainer from './components/training/TraininigContainer';\r\nimport AdminPanelContainer from './components/adminPanel/AdminPanel';\r\nimport AdminTrainingRedactor from './components/adminPanel/adminTrainingRedactor/AdminTrainingRedactor';\r\nimport AdminAddTrainingMenu from './components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu';\r\n\r\nfunction App() {\r\n\r\n    return (\r\n        <div className=\"App\">\r\n            <Header />\r\n            <Container className='d-flex'>\r\n                <NavBar />\r\n                <div className='flex-fill d-flex justify-content-center'>\r\n                    <Routes>\r\n                        <Route path={main}>\r\n                            <Route path={main} element={<MainContainer />} />\r\n                            <Route path={MainRoutes.training} element={<TrainingContainer />} />\r\n                        </Route>\r\n                        <Route path={auth}>\r\n                            <Route path={AuthRoutes.authRoute} element={<AuthContainer isRegistration={false} />} />\r\n                            <Route path={AuthRoutes.registration} element={<AuthContainer isRegistration={true} />} />\r\n                        </Route>\r\n                        <Route path={admin}>\r\n                            <Route path={admin} element={<AdminPanelContainer />} />\r\n                            <Route path={AdminRoutes.redactOfTrain} element={<AdminTrainingRedactor/>}/>\r\n                            <Route path={AdminRoutes.createTraining} element={<AdminAddTrainingMenu/>}/>\r\n                        </Route>\r\n                    </Routes>\r\n                </div>\r\n            </Container>\r\n        </div>\r\n    );\r\n}\r\n\r\nexport default App;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/App.tsx b/front_end/src/App.tsx
+--- a/front_end/src/App.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/App.tsx	(date 1671782886914)
+@@ -7,13 +7,19 @@
+ 
+ import MainContainer from './components/main/Main';
+ import { Route, Routes } from 'react-router-dom';
+-import { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes } from './Routes/Routes';
++import { auth, AuthRoutes, main, MainRoutes, admin, AdminRoutes, profile, diets, DietsRoutes } from './Routes/Routes';
+ import AuthContainer from './components/auth/AuthContainer';
+ import NavBar from './components/navBar/NavBar';
+ import TrainingContainer from './components/training/TraininigContainer';
+ import AdminPanelContainer from './components/adminPanel/AdminPanel';
+ import AdminTrainingRedactor from './components/adminPanel/adminTrainingRedactor/AdminTrainingRedactor';
+ import AdminAddTrainingMenu from './components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu';
++import ProfileContainer from './components/profile/ProfileContainer';
++import DietsContainer from './components/diets/DIetsContainer';
++import AdminCreateDIets from './components/adminPanel/adminCreateDIets/AdminCreateDIets';
++import AdminAddRedactDiets from './components/adminPanel/adminAddRedactDiets/AdminAddRedactDiets';
++import FullDescriptionDiet from './components/diets/fullDescriptionDiet/FullDescriptionDiet';
++import AdminCreateDish from './components/adminPanel/adminCreateDish/AdminCreateDish';
+ 
+ function App() {
+ 
+@@ -24,19 +30,35 @@
+                 <NavBar />
+                 <div className='flex-fill d-flex justify-content-center'>
+                     <Routes>
++
+                         <Route path={main}>
+                             <Route path={main} element={<MainContainer />} />
+                             <Route path={MainRoutes.training} element={<TrainingContainer />} />
+                         </Route>
++
+                         <Route path={auth}>
+                             <Route path={AuthRoutes.authRoute} element={<AuthContainer isRegistration={false} />} />
+                             <Route path={AuthRoutes.registration} element={<AuthContainer isRegistration={true} />} />
+                         </Route>
++
+                         <Route path={admin}>
+                             <Route path={admin} element={<AdminPanelContainer />} />
++
+                             <Route path={AdminRoutes.redactOfTrain} element={<AdminTrainingRedactor/>}/>
+                             <Route path={AdminRoutes.createTraining} element={<AdminAddTrainingMenu/>}/>
++
++                            <Route path={AdminRoutes.redactDiets} element={<AdminAddRedactDiets/>}/>
++                            <Route path={AdminRoutes.createDiets} element={<AdminCreateDIets/>}/>
++                            <Route path={AdminRoutes.createDish} element={<AdminCreateDish/>}/>
++                        </Route>
++
++                        <Route path={profile} element={<ProfileContainer/>}/>
++
++                        <Route path={diets}>
++                            <Route path={diets} element={<DietsContainer/>}/>
++                            <Route path={DietsRoutes.fullDescription} element={<FullDescriptionDiet/>}/>
+                         </Route>
++                        
+                     </Routes>
+                 </div>
+             </Container>
+Index: front_end/src/API/trainingAPI/trainingAPI.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from \"axios\"\r\nimport { IDaysData, IsmallDataAboutTrainings, ItrainigData, TCreateTrainig, TrainingDataArr } from \"./TtrainingAPI\"\r\n\r\n\r\nconst trainingAxios = axios.create({\r\n    baseURL: \"http://localhost:8010/training\",\r\n})\r\n\r\nexport const trainingAPI = {\r\n    getSmallDataAboutTrainings() {\r\n        return trainingAxios.get<TrainingDataArr>(\"/LightBackground\")\r\n    },\r\n\r\n    getUserTraining(id : number) {\r\n        return trainingAxios.get<ItrainigData>(`/userTrainingProgress?id=${id}`)\r\n    },\r\n\r\n    getDataDaysExpires(trainingId : number) {\r\n        return trainingAxios.get<IDaysData>(`/daysOfTrain?id=${trainingId}`)\r\n    },\r\n\r\n    createTraining(trainig : TCreateTrainig) {\r\n        return trainingAxios.post(\"/addTrain\", trainig)\r\n    },\r\n    \r\n    deactivateTraining(trainingId : number) {\r\n        return trainingAxios.get(`/deactivate?trainId=${trainingId}`)\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/API/trainingAPI/trainingAPI.ts b/front_end/src/API/trainingAPI/trainingAPI.ts
+--- a/front_end/src/API/trainingAPI/trainingAPI.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/API/trainingAPI/trainingAPI.ts	(date 1671784412452)
+@@ -3,7 +3,7 @@
+ 
+ 
+ const trainingAxios = axios.create({
+-    baseURL: "http://localhost:8010/training",
++    baseURL: "http://localhost:8011/training",
+ })
+ 
+ export const trainingAPI = {
+Index: front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport { useEffect, useState } from 'react';\r\nimport { Form, Button } from 'react-bootstrap';\r\nimport { useForm } from 'react-hook-form';\r\nimport styles from \"../../../../common/form/form.module.css\"\r\nimport localStyles from \"../addTraining.module.css\"\r\nimport FormError from './../../../../common/form/formError/FormError';\r\nimport { DayExercises, Exercises, IdayDescription } from './../../../../API/trainingAPI/TtrainingAPI';\r\nimport DayDescription from './../../../training/daysList/dayDescription/DayDescription';\r\n\r\n\r\n\r\ninterface IAdminAddTrainingMenuProps {\r\n    daysOfTraining : Array<IdayDescription>\r\n    isVisible : boolean\r\n    createTraining : () => void\r\n}\r\n\r\nconst AdminAddTrainingInnerForm: React.FunctionComponent<IAdminAddTrainingMenuProps> = ({daysOfTraining,isVisible,createTraining}) => {\r\n\r\n\r\n    const { register, handleSubmit, watch, formState: { errors },reset } = useForm();\r\n    const onSubmit = () => console.log(1);\r\n    const watchAllFields = watch();\r\n\r\n    const [counterDays, setcounterDays] = useState(1)\r\n    const [sets, setsets] = useState<DayExercises>([])\r\n\r\n\r\n    if (!isVisible) return <></>\r\n\r\n    const arrForPrint = () => daysOfTraining.map(el => <DayDescription dayData={el}/>)\r\n\r\n    const setExercise = () => {\r\n        let exercise : Exercises = {\r\n            restTimeInSec : watchAllFields.restTimeInSec,\r\n            numberOfRepetitions : watchAllFields.numberOfRepetitions,\r\n            exercise : {\r\n                label : watchAllFields.label,\r\n                description : watchAllFields.description\r\n            }\r\n        }\r\n        sets.push(exercise)\r\n        reset()\r\n    }\r\n\r\n    const setDayOfTraining = () => {\r\n        let day :IdayDescription = {\r\n            numberOfDay : counterDays,\r\n            sets : [...sets]\r\n        }\r\n        daysOfTraining.push(day)\r\n        setcounterDays(counterDays + 1);\r\n        sets.splice(0)\r\n    }\r\n\r\n    return (\r\n        <div className={styles.formWrapper + \" d-flex justify-content-between\"}>\r\n            <Form onSubmit={handleSubmit(onSubmit)} className={styles.form}>\r\n            <Form.Group\r\n                    className=\"mb-3\"\r\n                    controlId=\"formBasicEmail\"\r\n                >\r\n                    <Form.Label>Упражение</Form.Label>\r\n                    <Form.Control\r\n                        type=\"text\"\r\n                        placeholder=\"Упражнение\"\r\n                        {...register(\"label\", { required: true })}\r\n                    />\r\n                    {errors.label?.type === \"required\" && <FormError message='Поле является обязательным' />}\r\n                </Form.Group>\r\n                <Form.Group\r\n                    className=\"mb-3\"\r\n                    controlId=\"formBasicEmail\"\r\n                >\r\n                    <Form.Label>Описание Упражения</Form.Label>\r\n                    <Form.Control\r\n                        type=\"text\"\r\n                        placeholder=\"Описание\"\r\n                        {...register(\"description\", { required: true })}\r\n                    />\r\n                    {errors.description?.type === \"required\" && <FormError message='Поле является обязательным' />}\r\n                </Form.Group>\r\n                <Form.Group\r\n                    className=\"mb-3\"\r\n                    controlId=\"formBasicEmail\"\r\n                >\r\n                    <Form.Label>Количество повторений</Form.Label>\r\n                    <Form.Control\r\n                        type=\"text\"\r\n                        placeholder=\"Повторения\"\r\n                        {...register(\"numberOfRepetitions\", { required: true, pattern: /\\d/ })}\r\n                    />\r\n                    {errors.numberOfRepetitions?.type === \"required\" && <FormError message='Поле является обязательным' />}\r\n                    {errors.numberOfRepetitions?.type === \"pattern\" && <FormError message='Поле может быть только числовым' />}\r\n                </Form.Group>\r\n                <Form.Group\r\n                    className=\"mb-3\"\r\n                    controlId=\"formBasicEmail\"\r\n                >\r\n                    <Form.Label>Количество отдыха(сек)</Form.Label>\r\n                    <Form.Control\r\n                        type=\"text\"\r\n                        placeholder=\"Отдых\"\r\n                        {...register(\"restTimeInSec\", { required: true, pattern : /\\d/ })}\r\n                    />\r\n                    {errors.restTimeInSec?.type === \"required\" && <FormError message='Поле является обязательным' />}\r\n                    {errors.restTimeInSec?.type === \"pattern\" && <FormError message='Поле может быть только числовым' />}\r\n                </Form.Group>\r\n\r\n                <Button\r\n                    variant=\"primary\"\r\n                    onClick={setExercise}\r\n                    className={localStyles.btnForTraining}\r\n                >\r\n                Зафиксировать Упражение\r\n                </Button>\r\n                <Button\r\n                    variant=\"primary\"\r\n                    onClick={setDayOfTraining}\r\n                    className={localStyles.btnForTraining}\r\n                >\r\n                Закончить день тренировки\r\n                </Button>\r\n                <Button\r\n                    variant=\"primary\"\r\n                    onClick={createTraining}\r\n                    className={localStyles.btnForTraining}\r\n                >\r\n                Закончить создание тренировки\r\n                </Button>\r\n            </Form>\r\n            <div className={localStyles.resBlock}>\r\n                {arrForPrint()}\r\n            </div>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default AdminAddTrainingInnerForm;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx b/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx
+--- a/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx	(date 1671782886921)
+@@ -89,7 +89,7 @@
+                     <Form.Control
+                         type="text"
+                         placeholder="Повторения"
+-                        {...register("numberOfRepetitions", { required: true, pattern: /\d/ })}
++                        {...register("numberOfRepetitions", { required: true, pattern: /\d+/ })}
+                     />
+                     {errors.numberOfRepetitions?.type === "required" && <FormError message='Поле является обязательным' />}
+                     {errors.numberOfRepetitions?.type === "pattern" && <FormError message='Поле может быть только числовым' />}
+@@ -102,7 +102,7 @@
+                     <Form.Control
+                         type="text"
+                         placeholder="Отдых"
+-                        {...register("restTimeInSec", { required: true, pattern : /\d/ })}
++                        {...register("restTimeInSec", { required: true, pattern : /\d+/ })}
+                     />
+                     {errors.restTimeInSec?.type === "required" && <FormError message='Поле является обязательным' />}
+                     {errors.restTimeInSec?.type === "pattern" && <FormError message='Поле может быть только числовым' />}
+Index: front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import ModalAllTraining from \"../popUpForAllTraining/ModalAllTraining\";\r\nimport styles from \"../subscribeTraining/style.module.css\"\r\nimport { useState } from 'react';\r\nimport { Button } from \"react-bootstrap\";\r\nimport { useAppDispatch, useAppSelector } from './../../../app/hooks';\r\nimport { getSmallDataAboutTrainings } from './../../../slices/training/thunk';\r\nimport TrainingItem from \"../trainingItem/TrainingItem\";\r\n\r\n\r\ninterface ISubscribeTrainingProps {\r\n    isUserTrain : boolean\r\n}\r\n\r\nconst SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = ({isUserTrain}) => {\r\n\r\n    let smallDataAboutTRainings = useAppSelector(state => state.training.smallDataTrainings)\r\n\r\n    const trainingItemArr = smallDataAboutTRainings.map(el => <TrainingItem {...el} isUserTraining={false}/>)\r\n\r\n    const [show, setShow] = useState(false)\r\n\r\n    const dispatch = useAppDispatch()\r\n\r\n    const handleShowAndClose = () => {\r\n        setShow(!show);\r\n        dispatch(getSmallDataAboutTrainings());\r\n    }\r\n\r\n    return (\r\n        <div className={\"d-flex \" + styles.wrapper}>\r\n            {!isUserTrain ? <span className=\"d-block\">Кажется Вы не подписаны на тренировку...</span> :<></>}\r\n            <Button variant=\"primary\" onClick={handleShowAndClose}>\r\n                Просмотреть список тренировок\r\n            </Button>\r\n            <ModalAllTraining show={show} setShow={setShow} trainigCardArr={trainingItemArr}/>\r\n        </div>\r\n    )\r\n};\r\n\r\nexport default SubscribeTraining;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx b/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx
+--- a/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx	(date 1671782886939)
+@@ -28,7 +28,7 @@
+ 
+     return (
+         <div className={"d-flex " + styles.wrapper}>
+-            {!isUserTrain ? <span className="d-block">Кажется Вы не подписаны на тренировку...</span> :<></>}
++            {isUserTrain ? <span className="d-block">Кажется Вы не подписаны на тренировку...</span> :<></>}
+             <Button variant="primary" onClick={handleShowAndClose}>
+                 Просмотреть список тренировок
+             </Button>
+Index: front_end/src/components/training/trainingItem/TrainingItem.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport { ItrainigData } from './../../../API/trainingAPI/TtrainingAPI';\r\nimport { useState } from 'react';\r\nimport { Card, ProgressBar } from 'react-bootstrap';\r\nimport { useAppSelector } from '../../../app/hooks';\r\nimport { Button } from 'react-bootstrap';\r\nimport DayList from './../daysList/DaysList';\r\nimport { useAppDispatch } from './../../../app/hooks';\r\nimport { deactivateTraining, getArrDaysExpires, setUserTrain } from './../../../slices/training/thunk';\r\nimport Progressbar from './progressBar/progressbar';\r\nimport DayListContainer from './../daysList/dayListContainer/DayListContainer';\r\nimport { setLoading } from '../../../slices/common/commonSlice';\r\nimport styles from \"./TI.module.css\"\r\nimport { deleteTraining } from '../../../slices/training/trainingSlice';\r\n\r\ninterface ITrainingProps extends ItrainigData {\r\n    isUserTraining : boolean\r\n    isAdmin? :boolean\r\n}\r\n\r\nconst TrainingItem: React.FunctionComponent<ITrainingProps> = ({label, countOfDays, isUserTraining, id, isAdmin}) => {\r\n\r\n    const [isVisible, setVisible] = useState(false);\r\n    let percentAction = useAppSelector(state => state.training.percentOfProgress)\r\n\r\n    \r\n    let dispatch = useAppDispatch();\r\n\r\n    const onClickHandler = () => {\r\n        setVisible(!isVisible)\r\n\r\n        if (!isVisible) dispatch(getArrDaysExpires(id))\r\n    }\r\n\r\n    let userId = useAppSelector(state => state.auth.accessData?.id)\r\n\r\n    const subscribeTraininghandler = () => {\r\n        if (userId) {\r\n            dispatch(setUserTrain({userId : userId, trainId : id}))\r\n        }\r\n    }\r\n\r\n    const deactivateTrainingHandler = () => {\r\n        dispatch(deactivateTraining(id))\r\n        dispatch(deleteTraining(id))\r\n    }\r\n\r\n    // delete thunk\r\n    //const handlerForDeleteBtn = () => dispatch()\r\n\r\n    return (\r\n        <Card style={{ maxWidth: '400px', margin: \"0 auto\" }}>\r\n          <Card.Body>\r\n            <div className=\"d-flex justify-content-between\">\r\n                <Card.Title>{label}</Card.Title>\r\n                {isAdmin ? <Button  className={styles.myButtons} onClick={deactivateTrainingHandler} variant=\"danger\">x</Button> : <></>}\r\n            </div>\r\n            <Card.Subtitle className=\"mb-2 text-muted\">Общее количество дней : {countOfDays}</Card.Subtitle>\r\n            <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>\r\n            <div className=\"d-flex justify-content-between\">\r\n                <Button onClick={onClickHandler}>Посмотреть все упражения</Button>\r\n                {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler} className={styles.myButtons}>+</Button>}\r\n            </div>\r\n            <DayListContainer isVisible={isVisible}/>\r\n          </Card.Body>\r\n        </Card>\r\n      );\r\n};\r\n\r\nexport default TrainingItem;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/training/trainingItem/TrainingItem.tsx b/front_end/src/components/training/trainingItem/TrainingItem.tsx
+--- a/front_end/src/components/training/trainingItem/TrainingItem.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/training/trainingItem/TrainingItem.tsx	(date 1671782886940)
+@@ -6,13 +6,14 @@
+ import { Button } from 'react-bootstrap';
+ import DayList from './../daysList/DaysList';
+ import { useAppDispatch } from './../../../app/hooks';
+-import { deactivateTraining, getArrDaysExpires, setUserTrain } from './../../../slices/training/thunk';
++import { deactivateTraining, getArrDaysExpires, setUserTrain, updateDayUserTraining } from './../../../slices/training/thunk';
+ import Progressbar from './progressBar/progressbar';
+ import DayListContainer from './../daysList/dayListContainer/DayListContainer';
+ import { setLoading } from '../../../slices/common/commonSlice';
+ import styles from "./TI.module.css"
+ import { deleteTraining } from '../../../slices/training/trainingSlice';
+ 
++
+ interface ITrainingProps extends ItrainigData {
+     isUserTraining : boolean
+     isAdmin? :boolean
+@@ -22,6 +23,7 @@
+ 
+     const [isVisible, setVisible] = useState(false);
+     let percentAction = useAppSelector(state => state.training.percentOfProgress)
++    let userId = useAppSelector(state => state.auth.accessData?.id)
+ 
+     
+     let dispatch = useAppDispatch();
+@@ -32,7 +34,6 @@
+         if (!isVisible) dispatch(getArrDaysExpires(id))
+     }
+ 
+-    let userId = useAppSelector(state => state.auth.accessData?.id)
+ 
+     const subscribeTraininghandler = () => {
+         if (userId) {
+@@ -45,8 +46,9 @@
+         dispatch(deleteTraining(id))
+     }
+ 
+-    // delete thunk
+-    //const handlerForDeleteBtn = () => dispatch()
++    const endOfDayTraining = () => {
++        if (userId) dispatch(updateDayUserTraining(userId))
++    }
+ 
+     return (
+         <Card style={{ maxWidth: '400px', margin: "0 auto" }}>
+@@ -58,10 +60,11 @@
+             <Card.Subtitle className="mb-2 text-muted">Общее количество дней : {countOfDays}</Card.Subtitle>
+             <Progressbar isUserTraining={isUserTraining} text='Процент выполнения' percentAction={percentAction}/>
+             <div className="d-flex justify-content-between">
+-                <Button onClick={onClickHandler}>Посмотреть все упражения</Button>
++                <Button onClick={onClickHandler} >Посмотреть все упражения</Button>
+                 {isUserTraining ? <></> : <Button onClick={subscribeTraininghandler} className={styles.myButtons}>+</Button>}
+             </div>
+-            <DayListContainer isVisible={isVisible}/>
++            <DayListContainer isVisible={isVisible} isUserTraining={isUserTraining}/>
++            {isUserTraining ? <Button style={{marginTop : "10px"}} onClick={endOfDayTraining} >Закончить день</Button> : <></>}
+           </Card.Body>
+         </Card>
+       );
+Index: front_end/src/slices/training/trainingSlice.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { createSlice, PayloadAction } from '@reduxjs/toolkit';\r\nimport { RootState } from '../../app/store';\r\nimport { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr, ArrDaysExpires } from './../../API/trainingAPI/TtrainingAPI';\r\nimport { CONST, ItrainitState } from './Types';\r\nimport { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining } from './thunk';\r\nimport { useAppSelector } from '../../app/hooks';\r\n\r\n\r\nconst initialState: ItrainitState = {\r\n    smallDataTrainings : [],\r\n    smallUserTraining : null,\r\n    arrDaysExpires : [],\r\n    percentOfProgress : CONST.NO_DATA,\r\n    messageForCreate : \"\"\r\n\r\n};\r\n\r\nconst trainingSlice = createSlice({\r\n    name: 'training',\r\n    initialState,\r\n\r\n    reducers: {\r\n        setSmallData: (state, action: PayloadAction<TrainingDataArr>) => {\r\n            state.smallDataTrainings = action.payload;\r\n        },\r\n\r\n        deleteTraining: (state, action : PayloadAction<number>) => {\r\n            state.smallDataTrainings = state.smallDataTrainings.filter(el => el.id !== action.payload)\r\n        }\r\n\r\n    },\r\n\r\n    extraReducers: (builder) => {                                                        //для санок!!!!\r\n        builder\r\n            .addCase(getSmallDataAboutTrainings.fulfilled.type, (state, action: PayloadAction<TrainingDataArr>) => {\r\n                state.smallDataTrainings = action.payload\r\n            })\r\n            .addCase(getUserTraining.fulfilled.type, (state, action: PayloadAction<ItrainigData>) => {\r\n                state.smallUserTraining = action.payload\r\n                state.percentOfProgress = action.payload.presentOfProgress !== undefined ? action.payload.presentOfProgress : CONST.NO_DATA\r\n\r\n                // state.smallUserTraining = {id : 1, name : \"Набор массы\", countDays : 9}\r\n                // state.today = Math.round(2 / 9 * 100)\r\n            })\r\n            .addCase(getArrDaysExpires.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {\r\n                \r\n                state.arrDaysExpires = action.payload\r\n            })\r\n            .addCase(createTraining.fulfilled.type, (state, action: PayloadAction<string>) => {\r\n                \r\n                state.messageForCreate = action.payload\r\n            })\r\n            // .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {\r\n            //     state.arrDaysExpires = action.payload\r\n            // })\r\n            \r\n    },\r\n});\r\n\r\nexport const { setSmallData,deleteTraining } = trainingSlice.actions;\r\n\r\nexport const selectSmallUserTraining = (state : RootState) => state.training.smallUserTraining\r\n\r\n\r\nexport default trainingSlice.reducer;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/slices/training/trainingSlice.ts b/front_end/src/slices/training/trainingSlice.ts
+--- a/front_end/src/slices/training/trainingSlice.ts	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/slices/training/trainingSlice.ts	(date 1671786962047)
+@@ -2,7 +2,7 @@
+ import { RootState } from '../../app/store';
+ import { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr, ArrDaysExpires } from './../../API/trainingAPI/TtrainingAPI';
+ import { CONST, ItrainitState } from './Types';
+-import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining } from './thunk';
++import { getSmallDataAboutTrainings, getUserTraining, getArrDaysExpires, setUserTrain, createTraining, updateDayUserTraining } from './thunk';
+ import { useAppSelector } from '../../app/hooks';
+ 
+ 
+@@ -11,8 +11,9 @@
+     smallUserTraining : null,
+     arrDaysExpires : [],
+     percentOfProgress : CONST.NO_DATA,
+-    messageForCreate : ""
+-
++    messageForCreate : "",
++    userHasTraining : false,
++    currentDay : CONST.NO_DATA
+ };
+ 
+ const trainingSlice = createSlice({
+@@ -26,6 +27,9 @@
+ 
+         deleteTraining: (state, action : PayloadAction<number>) => {
+             state.smallDataTrainings = state.smallDataTrainings.filter(el => el.id !== action.payload)
++        },
++        setUserHasTraining: (state, action : PayloadAction<boolean>) => {
++            state.userHasTraining = action.payload
+         }
+ 
+     },
+@@ -39,6 +43,9 @@
+                 state.smallUserTraining = action.payload
+                 state.percentOfProgress = action.payload.presentOfProgress !== undefined ? action.payload.presentOfProgress : CONST.NO_DATA
+ 
++                state.userHasTraining = action.payload !== undefined
++                state.currentDay = action.payload.dayOfTraining ? action.payload.dayOfTraining : CONST.NO_DATA
++
+                 // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
+                 // state.today = Math.round(2 / 9 * 100)
+             })
+@@ -50,14 +57,20 @@
+                 
+                 state.messageForCreate = action.payload
+             })
+-            // .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
+-            //     state.arrDaysExpires = action.payload
+-            // })
++            .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
++                state.userHasTraining = true
++            })
++            .addCase(updateDayUserTraining.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
++                state.currentDay++;
++            })
++            .addCase(getUserTraining.rejected.type, (state, action: PayloadAction<ItrainigData>) => {
++
++                })
+             
+     },
+ });
+ 
+-export const { setSmallData,deleteTraining } = trainingSlice.actions;
++export const { setSmallData,deleteTraining,setUserHasTraining } = trainingSlice.actions;
+ 
+ export const selectSmallUserTraining = (state : RootState) => state.training.smallUserTraining
+ 
+Index: front_end/src/components/header/profile/Profile.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react'\r\nimport { Link } from 'react-router-dom'\r\nimport { useAppSelector } from '../../../app/hooks'\r\n\r\ntype Props = {}\r\n\r\nconst Profile = (props: Props) => {\r\n    let login = useAppSelector(state => state.auth.accessData?.login)\r\n    return (\r\n        <Link to=\"/profile\">{login}</Link>\r\n    )\r\n}\r\n\r\nexport default Profile
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/front_end/src/components/header/profile/Profile.tsx b/front_end/src/components/header/profile/Profile.tsx
+--- a/front_end/src/components/header/profile/Profile.tsx	(revision a84d68ea409d02dfa6b497b7ee691752d578839e)
++++ b/front_end/src/components/header/profile/Profile.tsx	(date 1671782886931)
+@@ -1,13 +1,14 @@
+ import React from 'react'
+ import { Link } from 'react-router-dom'
+ import { useAppSelector } from '../../../app/hooks'
++import styles from "../header.module.css"
+ 
+ type Props = {}
+ 
+ const Profile = (props: Props) => {
+     let login = useAppSelector(state => state.auth.accessData?.login)
+     return (
+-        <Link to="/profile">{login}</Link>
++        <Link className={styles.profile} to="/profile">{login}</Link>
+     )
+ }
+ 

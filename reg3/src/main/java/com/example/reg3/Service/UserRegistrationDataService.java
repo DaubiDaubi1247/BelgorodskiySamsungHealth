@@ -79,28 +79,29 @@ public class UserRegistrationDataService {
     }
 
 
-    public UserRegistrationDataRequest addNewUser(UserRegistrationData usersOfApp) {
+    public UserRegistrationDataRequest addNewUser(UserRegistrationData userOfApp) {
         bot.sendInfo("Добавление нового пользователя \n" +
-                "email: " + usersOfApp.getEmail() + "\n" +
-                "логин: " + usersOfApp.getLogin() + "\n" +
-                "Админский доступ: " + usersOfApp.getIsAdmin() + "\n");
+                "email: " + userOfApp.getEmail() + "\n" +
+                "логин: " + userOfApp.getLogin() + "\n" +
+                "Админский доступ: " + userOfApp.getIsAdmin() + "\n");
 
-        bot.sendInfo("Поиск пользователя с email " + usersOfApp.getEmail() + "\n");
+        bot.sendInfo("Поиск пользователя с email " + userOfApp.getEmail() + "\n");
         Optional<UserRegistrationData> userOptional =
-                userRepository.findUserRegistrationDataByEmail(usersOfApp.getEmail());
+                userRepository.findUserRegistrationDataByEmail(userOfApp.getEmail());
 
         if (userOptional.isPresent()) {
-            bot.sendWarning("email  " + usersOfApp.getEmail() + " занят");
-            return new UserRegistrationDataRequest(1, "email занят", usersOfApp);
+            bot.sendWarning("email  " + userOfApp.getEmail() + " занят");
+            return new UserRegistrationDataRequest(1, "email занят", userOfApp);
         } else {
             try {
-                if (usersOfApp.getIsAdmin() == null) usersOfApp.setIsAdmin(false);
+                if (userOfApp.getIsAdmin() == null) userOfApp.setIsAdmin(false);
 
-                usersOfApp = saveNewUser(usersOfApp);
-                bot.sendInfo("Успешная регистрация пользователя с   " + usersOfApp.getId() + " id" +
-                        "email: " + usersOfApp.getEmail());
 
-                return new UserRegistrationDataRequest(0, "регистрация прошлва успешно", usersOfApp);
+                userOfApp = saveNewUser(userOfApp);
+                bot.sendInfo("Успешная регистрация пользователя с   " + userOfApp.getId() + " id" +
+                        "email: " + userOfApp.getEmail());
+
+                return new UserRegistrationDataRequest(0, "регистрация прошлва успешно", userOfApp);
             } catch (IllegalBlockSizeException | BadPaddingException e) {
                 bot.sendError("Непредвиденная ошибка   " + e.getMessage());
                 throw new RuntimeException(e);
@@ -115,7 +116,9 @@ public class UserRegistrationDataService {
         String userPass = userOfApp.getPassword();
         userOfApp.setPassword(new String(cipher.doFinal(userPass.getBytes())));
 
-        if (userOfApp.getUser() == null) userOfApp.setUser(new User());
+        var dataOfUser = new User();
+        dataOfUser.setCountOfCompletedTrainers(0);
+        if (userOfApp.getUser() == null) userOfApp.setUser(dataOfUser);
 
         userOfApp = userRepository.save(userOfApp);
         userOfApp.setId(userOfApp.getUser().getId());

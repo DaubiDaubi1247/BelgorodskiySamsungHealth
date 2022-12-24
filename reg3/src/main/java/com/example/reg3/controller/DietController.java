@@ -33,7 +33,7 @@ public class DietController {
             return res;
         } catch (Exception e) {
             bot.executeSendLog();
-            return ResponseEntity.status(HttpStatus.OK).
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
                     body(e.toString());
         }
     }

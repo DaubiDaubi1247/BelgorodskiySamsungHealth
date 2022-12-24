@@ -5,10 +5,115 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="исправил баг ошибки функционала со старых версий">
-      <change afterPath="$PROJECT_DIR$/front_end/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/API/authAPI/API_T.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/API/authAPI/authAPI.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/API/trainingAPI/TtrainingAPI.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/API/trainingAPI/trainingAPI.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/API/userAPI/TuserAPI.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/API/userAPI/userAPI.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/Routes/Routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/hooks.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/form/form.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/form/formError/Auth.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/form/formError/FormError.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/logo/45735.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/logo/Logo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/logo/logo.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/navLinks/NavLinkConfig.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/preloader/Preloader.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/common/preloader/preloader.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/HOC/withAuthRedirect.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/HOC/withLoading.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/adminPanel/AdminPanel.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/adminPanel/adminAddTrainingMenu/addTraining.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/adminPanel/adminTrainingRedactor/AdminTrainingRedactor.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/auth/Auth.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/auth/AuthContainer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/header/Header.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/header/header.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/header/profile/Profile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/main/Main.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/navBar/NavBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/TraininigContainer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/daysList/DaysList.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/daysList/dayDescription/DayDescription.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/daysList/dayDescription/exerciseInfo/ExcercisesInfo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/daysList/dayListContainer/DayListContainer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/popUpForAllTraining/ModalAllTraining.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/subscribeTraining/SubscribeTrainig.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/subscribeTraining/style.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/trainingItem/TI.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/trainingItem/TrainingItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/components/training/trainingItem/progressBar/progressbar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/react-app-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/reportWebVitals.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/setupTests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/auth/Types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/auth/authSlice.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/auth/thunk.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/common/Types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/common/commonSlice.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/training/Types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/training/thunk.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/slices/training/trainingSlice.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/authAPI/authAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/authAPI/authAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/trainingAPI/TtrainingAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/trainingAPI/TtrainingAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/trainingAPI/trainingAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/trainingAPI/trainingAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/userAPI/TuserAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/userAPI/TuserAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/userAPI/userAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/userAPI/userAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/Routes/Routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/Routes/Routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/app/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/HOC/withAuthRedirect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/HOC/withAuthRedirect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/HOC/withLoading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/HOC/withLoading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/AdminPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/AdminPanel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/AdminAddTrainingMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminAddTrainingMenu/innerForm/InnerForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/adminPanel/adminPanelButtons/AdminPanelButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/header/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/header/header.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/header/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/header/profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/navBar/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/navBar/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/TraininigContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/TraininigContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/daysList/DaysList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/daysList/DaysList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayDescription/DayDescription.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/daysList/dayListContainer/DayListContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/subscribeTraining/SubscribeTrainig.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/training/trainingItem/TrainingItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/training/trainingItem/TrainingItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/slices/training/Types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/slices/training/Types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/slices/training/thunk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/slices/training/thunk.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/slices/training/trainingSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/slices/training/trainingSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/UserRegistrationDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/UserRegistrationDataService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DietController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DietController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/DietRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/DietRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/requastion/ProgressOfUserWithPresent.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/requastion/ProgressOfUserWithPresent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +193,7 @@
       <recent name="D:\sem5\data base\kursuch3\BelgorodskiySamsungHealth\reg3" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Spring Boot.Reg3Application">
     <configuration name="Reg3Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="demo1" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.reg3.Reg3Application" />
@@ -99,6 +204,19 @@
     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.frontend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="frontend" />
+            </list>
+          </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
@@ -124,14 +242,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="reg3: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="reg3/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="reg3/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -143,10 +253,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
         <item itemvalue="Docker.front_end/Dockerfile" />
         <item itemvalue="Docker.reg3/Dockerfile" />
         <item itemvalue="Docker.front_end/Dockerfile build" />
-        <item itemvalue="Docker.reg3: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -168,6 +278,7 @@
       <workItem from="1671645752001" duration="3792000" />
       <workItem from="1671697670202" duration="9627000" />
       <workItem from="1671711934195" duration="17028000" />
+      <workItem from="1671783134624" duration="15969000" />
     </task>
     <task id="LOCAL-00001" summary="победа на докером">
       <created>1671557224018</created>
