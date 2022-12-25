@@ -52,6 +52,12 @@ const dietsSlice = createSlice({
             
             .addCase(getMealsByFilter.rejected.type, (state, action: PayloadAction<string>) => {
                 state.dietsError = action.payload
+                state.recomendedDishArr = []
+
+            })
+
+            .addCase(getSmallDataAboutDiets.rejected.type, (state, action: PayloadAction<string>) => {
+                debugger
             })
     }
 })

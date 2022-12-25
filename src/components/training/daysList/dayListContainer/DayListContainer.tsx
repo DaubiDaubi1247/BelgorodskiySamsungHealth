@@ -6,36 +6,44 @@ import { useEffect } from 'react';
 import { useAppDispatch } from './../../../../app/hooks';
 import { setErrorMsg } from '../../../../slices/training/trainingSlice';
 import MessagefromServer from '../../../../common/messageFromServer/MessageFromServer';
+import { ClickAwayListener } from '@material-ui/core';
 
 interface IDayListContainerProps {
     isVisible: boolean
-    isUserTraining : boolean
+    isUserTraining: boolean
+    setVisible: (value: boolean) => void
 }
 
-const DayListContainer: React.FunctionComponent<IDayListContainerProps> = ({ isVisible,isUserTraining }) => {
+const DayListContainer: React.FunctionComponent<IDayListContainerProps> = ({ isVisible, isUserTraining, setVisible }) => {
 
     let trainingsArr = useAppSelector(state => state.training.arrDaysExpires)
     let currentDay = useAppSelector(state => state.training.currentDay)
-    let errorMsg = useAppSelector(state => state.training.errorMsg)
 
     const dispatch = useAppDispatch()
 
-    useEffect(() => function() {
+    useEffect(() => function () {
         dispatch(setErrorMsg(null))
-    })
-    
+    }, [])
+
+    const handleClick = () => setVisible(!isVisible);
+    // useEffect(()=>{
+    //     debugger
+    //     document.addEventListener('onmousedown', handleClick)
+    //     return () => document.removeEventListener('onmousedown', handleClick)
+    // }, [])
+
     return (
-        <div className="">
-            {errorMsg ? <MessagefromServer message={errorMsg} isError={true}/> : 
-            <DayList
-                isVisible={isVisible}
-                trainingsArr={trainingsArr}
-                currentDay={currentDay}
-                isUserTraining={isUserTraining}
-            />
-    }
+        <div>
+            {isVisible ?
+                <DayList
+                    trainingsArr={trainingsArr}
+                    currentDay={currentDay}
+                    isUserTraining={isUserTraining}
+                />
+                : <></>
+            }
         </div>
     )
 };
 
-export default withLoading(DayListContainer);
+export default DayListContainer;

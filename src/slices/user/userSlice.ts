@@ -20,6 +20,9 @@ const userSlice = createSlice({
         setUserMsg: (state, action: PayloadAction<string>) => {
             state.userMsg = action.payload;
         },
+        setUserChanedata : (state, action: PayloadAction<boolean>) => {
+            state.userChangedata = action.payload;
+        },
 
     },
     // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -33,6 +36,7 @@ const userSlice = createSlice({
                 state.countOfCompletedTrainers = action.payload.countOfCompletedTrainers
             })
             .addCase(setUserData.fulfilled.type , (state, action: PayloadAction<string>) => {
+                debugger
                 state.userChangedata = true
                 state.userMsg = action.payload
             })
@@ -40,6 +44,6 @@ const userSlice = createSlice({
     
 });
 
-export const { setUserMsg } = userSlice.actions;
+export const { setUserMsg,setUserChanedata } = userSlice.actions;
 
 export default userSlice.reducer;

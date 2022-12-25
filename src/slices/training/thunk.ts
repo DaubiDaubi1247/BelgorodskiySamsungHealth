@@ -16,7 +16,7 @@ export const getSmallDataAboutTrainings = createAsyncThunk(
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue(error)
+             return thunkApi.rejectWithValue(error)
         }
     }
 )
@@ -32,7 +32,7 @@ export const getUserTraining = createAsyncThunk(
         } catch (error) {
             thunkApi.dispatch(setLoading(false)); // ---- пока нет сервера прийдется так тестить
 
-            thunkApi.rejectWithValue(error)
+             return thunkApi.rejectWithValue(error)
         }
     }
 )
@@ -46,7 +46,8 @@ export const getArrDaysExpires = createAsyncThunk(
             thunkApi.dispatch(setLoading(false))
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue(error)
+            //@ts-ignore
+            return thunkApi.rejectWithValue(error.response.data)
         }
     }
 )
@@ -61,7 +62,7 @@ export const setUserTrain = createAsyncThunk(
             thunkApi.dispatch(setUserHasTraining(false))
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+             return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )
@@ -74,7 +75,7 @@ export const createTraining = createAsyncThunk(
             const response = await trainingAPI.createTraining(training);
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue(error)
+             thunkApi.rejectWithValue(error)
         }
     }
 )
@@ -87,7 +88,7 @@ export const deactivateTraining = createAsyncThunk(
             const response = await trainingAPI.deactivateTraining(trainingId);
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+             return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )
@@ -100,8 +101,7 @@ export const updateDayUserTraining = createAsyncThunk(
             const response = await userAPI.updateDayUserTraining(userId);
             return response.data
         } catch (error) {
-            debugger
-            thunkApi.rejectWithValue("123")
+            return thunkApi.rejectWithValue(error)
         }
     }
 )

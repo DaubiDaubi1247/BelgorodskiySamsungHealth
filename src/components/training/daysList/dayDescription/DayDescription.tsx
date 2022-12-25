@@ -3,8 +3,10 @@ import { Button, Dropdown } from 'react-bootstrap';
 import { DayExercises } from '../../../../API/trainingAPI/TtrainingAPI';
 import { IdayDescription } from './../../../../API/trainingAPI/TtrainingAPI';
 import ExcercisesInfo from './exerciseInfo/ExcercisesInfo';
-import { useAppDispatch } from './../../../../app/hooks';
+import { useAppDispatch, useAppSelector } from './../../../../app/hooks';
 import { useState } from 'react';
+import MessagefromServer from './../../../../common/messageFromServer/MessageFromServer';
+import { stat } from 'fs';
 
 interface IDayDescriptionProps {
     dayData : IdayDescription
@@ -26,21 +28,15 @@ const DayDescription: React.FunctionComponent<IDayDescriptionProps> = ({dayData,
         </Dropdown.Item>
         
     )
-
-    const dispatch = useAppDispatch()
-
-
-    return (
-        <Dropdown className='mb-4'>
-            <Dropdown.Toggle  id="dropdown-button-dark-example1 " variant={isFinishedDay(dayData.numberOfDay) ? "success" : "secondary"} onBlur={() => setisVisible(false)}>
-                День № {dayData.numberOfDay}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu variant="" show={isVisible && isActiveDay(dayData.numberOfDay)}>
-                {getAllexercisesForDay()}
-            </Dropdown.Menu>
-
-        </Dropdown>
+    return ( 
+            <Dropdown className='mb-4'>
+                <Dropdown.Toggle  id="dropdown-button-dark-example1 " variant={isFinishedDay(dayData.numberOfDay) ? "success" : "secondary"} onBlur={() => setisVisible(false)}>
+                    День № {dayData.numberOfDay}
+                </Dropdown.Toggle>
+                <Dropdown.Menu variant="" show={isVisible && isActiveDay(dayData.numberOfDay)}>
+                    {getAllexercisesForDay()}
+                </Dropdown.Menu>
+            </Dropdown>
     );
 };
 

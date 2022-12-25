@@ -31,11 +31,10 @@ const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = ({ i
 
     useEffect(() => function() {
         dispatch(setErrorMsg(null))
-    })
+    },[])
 
     return (
         <div className="">
-            {errorMsg ? <MessagefromServer message={errorMsg} isError={true} /> :
                 <div className={"d-flex " + styles.wrapper}>
                     {isUserTrain ? <span className="d-block">Кажется Вы не подписаны на тренировку...</span> : <></>}
                     <Button variant="primary" onClick={handleShowAndClose}>
@@ -43,7 +42,7 @@ const SubscribeTraining: React.FunctionComponent<ISubscribeTrainingProps> = ({ i
                     </Button>
                     <ModalAllTraining show={show} setShow={setShow} trainigCardArr={trainingItemArr} />
                 </div>
-            }
+            
         </div>
     )
 };

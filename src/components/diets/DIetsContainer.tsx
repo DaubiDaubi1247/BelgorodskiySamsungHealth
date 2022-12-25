@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './../../app/hooks';
 import { getSmallDataAboutDiets, getSmallDataAboutUserDiet } from './../../slices/diets/thunk';
 import SubscribeDiet from './subscribeDiets/SubscribeDiets';
-import withLoading from './../training/daysList/dayListContainer/DayListContainer';
 import withAuthRedicrect from './../HOC/withAuthRedirect';
 import { CONST } from '../../slices/common/Types';
 import { stat } from 'fs';

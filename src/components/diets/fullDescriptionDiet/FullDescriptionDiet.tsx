@@ -11,16 +11,16 @@ import { getMealsByFilter } from './../../../slices/diets/thunk';
 import { Ifilters } from '../../../API/dietsAPI/TdietsAPI';
 import RecomendedDish from './recomendedDIsh/RecomendenDish';
 import FormError from '../../../common/form/formError/FormError';
-import withAuthRedicrect from './../../main/Main';
+import withAuthRedicrect from '../../HOC/withAuthRedirect';
 
 interface IFullDescriptionDietProps {
 }
 
 const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = (props) => {
 
-    const [typeOfMeal, settypeOfMeal] = useState("")
-    const [mealTime, setmealTime] = useState("");
-    const [isVisible, setisVisible] = useState(false)
+    const [typeOfMeal, settypeOfMeal] = useState("первое блюдо")
+    let [mealTime, setmealTime] = useState("завтрак");
+    let [isVisible, setisVisible] = useState(false)
 
     let mealTimesArr = useAppSelector(state => state.dish.mealTimesArr)
     let mealTypesArr = useAppSelector(state => state.dish.mealTypesArr)
@@ -31,7 +31,7 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     const dispatch = useAppDispatch()
     
     useEffect(() => {   
-        dispatch(setLoading(true))
+        //dispatch(setLoading(true))
         dispatch(getTypes())
     },[])
 
@@ -69,4 +69,4 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     )
 };
 
-export default FullDescriptionDiet;
+export default withAuthRedicrect(FullDescriptionDiet);

@@ -72,8 +72,7 @@ const trainingSlice = createSlice({
                 let days = state.smallUserTraining?.countOfDays ? state.smallUserTraining?.countOfDays : CONST.NO_DATA
                 state.percentOfProgress = Math.round(state.currentDay / days * 100)
                 state.currentDay++;
-                if (state.percentOfProgress >= 100) {
-                    state.userHasTraining = false}
+                
             })
 
             // -- rejecteds--
@@ -82,7 +81,7 @@ const trainingSlice = createSlice({
                 state.errorMsg = action.payload
             })
 
-            .addCase(getArrDaysExpires.rejected.type, (state, action: PayloadAction<string>) => {
+            .addCase(getArrDaysExpires.rejected, (state, action: any) => {
                 state.errorMsg = action.payload
             })
 
@@ -94,11 +93,11 @@ const trainingSlice = createSlice({
                 state.errorMsg = action.payload
             })
 
-            // .addCase(updateDayUserTraining.rejected.type, (state, action: PayloadAction<string>) => {
-            //     debugger
-            //     state.errorMsg = action.payload
-            //     state.userHasTraining = false
-            // })
+            .addCase(updateDayUserTraining.rejected.type, (state, action: PayloadAction<string>) => {
+                debugger
+                state.errorMsg = action.payload
+                state.userHasTraining = false
+            })
             
     },
 });
