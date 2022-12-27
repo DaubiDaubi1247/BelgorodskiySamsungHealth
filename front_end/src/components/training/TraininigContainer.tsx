@@ -23,6 +23,7 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
 
     useEffect(() => {
         if (userId) {
+            debugger
             dispatch(setLoading(true))
             dispatch(getUserTraining(userId))
         }
@@ -30,7 +31,7 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
 
     return (isLoading ? <Preloader/> :
         <div>
-            {userTraining ? <TrainingItem {...userTraining} isUserTraining={true}/> : <></>}
+            {userHasTraining && userTraining ? <TrainingItem {...userTraining} isUserTraining={true}/> : <></>}
             <SubscribeTraining isUserTrain={false}/>
         </div>
     );

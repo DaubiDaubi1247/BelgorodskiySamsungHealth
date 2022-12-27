@@ -26,7 +26,7 @@ public interface DietRepository
             "JOIN dish.mealTimes mt " +
             "JOIN dish.type t " +
             "WHERE (?1 is null or diet.id = ?1)" +
-            " AND (?2 is null or mt.label = ?2)" +
-            " AND (?3 is null or t.label = ?3)")
+            " AND (?3 is null or mt.label = ?3)" +
+            " AND (?2 is null or t.label = ?2)")
     List<Dish> getDishes(Long idDiet, String type, String mailTime);
 }

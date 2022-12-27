@@ -22,9 +22,8 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-                                          //docker idi nahui!!!!!!!!!!!!!!!!!!
-    @GetMapping("updayteDayOfTrain")
 
+    @GetMapping("updayteDayOfTrain")
     public ResponseEntity<Object> updateDayOfTraining
             (@RequestParam(required = false) Long userId) {
         try {

@@ -1,21 +1,29 @@
-import * as React from 'react';
+
+import { useAppSelector } from '../../../app/hooks';
 import { IuserIS } from './../../../slices/user/Types';
+import { useEffect } from 'react';
+import { useAppDispatch } from './../../../app/hooks';
+import { setUserMsg } from '../../../slices/user/userSlice';
+import MessagefromServer from './../../../common/messageFromServer/MessageFromServer';
 
 interface IUserDataProfileProps {
-    userData : IuserIS
+    userData: IuserIS
 }
 
-const UserDataProfile: React.FunctionComponent<IUserDataProfileProps> = ({userData}) => {
+const UserDataProfile: React.FunctionComponent<IUserDataProfileProps> = ({ userData }) => {
 
-  return (
-    <div>
-        <p>Ваш Профиль</p>
-        <p>Имя : {userData.name}</p>
-        <p>Вес : {userData.weight} кг</p>
-        <p>Рост : {userData.height || "N/A"} см</p>
-        <p>Количество выполненных тренировок : {userData.countOfCompletedTrainers}</p>
-    </div>
-  )
+    let userMsg = useAppSelector(state => state.user.userMsg)
+
+    return (
+        <div>
+            {userMsg.length !== 0 ? <MessagefromServer message={userMsg} isError={false}/>: <></>}
+            <p>Ваш Профиль</p>
+            <p>Имя : {userData.name}</p>
+            <p>Вес : {userData.weight} кг</p>
+            <p>Рост : {userData.height || "N/A"} см</p>
+            <p>Количество выполненных тренировок : {userData.countOfCompletedTrainers}</p>
+        </div>
+    )
 };
 
 export default UserDataProfile;

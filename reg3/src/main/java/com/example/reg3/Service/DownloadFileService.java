@@ -2,11 +2,8 @@ package com.example.reg3.Service;
 
 import com.example.reg3.LogBot.TelegramBot;
 import com.example.reg3.dao.User;
-import com.example.reg3.repository.DishRepository;
-import com.example.reg3.repository.MealTimeRepository;
-import com.example.reg3.repository.TypeOfMealRepository;
-import com.example.reg3.repository.UserRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.reg3.repository.*;
+import com.example.reg3.requastion.StatisticOfTrain;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,66 +32,62 @@ public class DownloadFileService {
 
     @Autowired
     TelegramBot bot;
-    private final DishRepository dishRepository;
-    private final MealTimeRepository mealTimeRepository;
-    private final TypeOfMealRepository typeOfMealRepository;
-    private final UserRepository userRepository;
+
+    private final TrainingRepository trainingRepository;
 
 
     @Autowired
-    public DownloadFileService(DishRepository dishRepository,
-                               MealTimeRepository mealTimeRepository,
-                               TypeOfMealRepository typeOfMealRepository,
-                               UserRepository userRepository) {
+    public DownloadFileService(TrainingRepository trainingRepository) {
+        this.trainingRepository = trainingRepository;
 
-        this.dishRepository = dishRepository;
-        this.mealTimeRepository = mealTimeRepository;
-        this.typeOfMealRepository = typeOfMealRepository;
-        this.userRepository = userRepository;
+
     }
 
-    public void downloadUsers() throws IOException {
+    public void downloadTopOfTraningsStatistic(Integer percentOfProgress) throws IOException {
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
-        List<User> users = userRepository.findAll();
-        saveListObjectsToJSON(Collections.singletonList(users), "/user.json");
+
+        List<StatisticOfTrain> statistic = trainingRepository.findTopOfTranings(Double.valueOf(percentOfProgress));
+        saveListObjectsToJSON(statistic);
         bot.sendInfo("Информация из таблицы преобразовалась в JSON");
     }
 
-    private  void saveListObjectsToJSON(List<Object> users, String s) throws IOException {
+    private void saveListObjectsToJSON(List<StatisticOfTrain> statistic) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        File placeOfSave = new File(passToJsonFolder + s);
-        mapper.writeValue(placeOfSave, users);
+        File placeOfSave = new File(passToJsonFolder + "/user.json");
+        mapper.writeValue(placeOfSave, statistic);
     }
 
-/////
-    public void dowloadPDF() throws FileNotFoundException, DocumentException {
+    /////
+    public void dowloadPDF(Integer percentOfProgress) throws FileNotFoundException, DocumentException {
         bot.sendInfo("Запрсо всех записей из таблицы пользователей");
-        List<User> users = userRepository.findAll();
+        List<StatisticOfTrain> statistic = trainingRepository.findTopOfTranings(Double.valueOf(percentOfProgress));
         bot.sendInfo("Информация из таблицы преобразовалась в JSON");
-        saveListObjectsToPDF(Collections.singletonList(users), "/user.pdf");
+        saveListObjectsToPDF(statistic, "/user.pdf");
     }
 
-    private  void saveListObjectsToPDF(List<Object> list, String pass) throws DocumentException, FileNotFoundException {
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(list);
+    private void saveListObjectsToPDF(List<StatisticOfTrain> list, String pass) throws DocumentException, FileNotFoundException {
 
         Document document = new Document();
         pass = passToPDFFolder + pass;
         PdfWriter.getInstance(document, new FileOutputStream(pass));
         document.open();
-        Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
 
-        var lines = json.split("\n");
-        for (var line:lines) {
-            Paragraph p = new Paragraph(line);
-            p.setAlignment(Element.ALIGN_JUSTIFIED);
-            document.add(p);
+        for (var stat : list) {
+            addStat(document, stat);
         }
 
-        Paragraph p = new Paragraph("line");
+        document.close();
+    }
+
+    private static void addStat(Document document, StatisticOfTrain stat) throws DocumentException {
+        Paragraph p = new Paragraph("Название тренеровки: " + stat.getLabel());
         p.setAlignment(Element.ALIGN_JUSTIFIED);
         document.add(p);
-        document.close();
+        Paragraph p2 = new Paragraph("Колличество пользователей: " + stat.getCountOfUsers());
+        p.setAlignment(Element.ALIGN_JUSTIFIED);
+        document.add(p2);
+        Paragraph p3 = new Paragraph("========================");
+        p.setAlignment(Element.ALIGN_JUSTIFIED);
+        document.add(p3);
     }
 }

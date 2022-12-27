@@ -8,6 +8,7 @@ import { getUserData, setUserData } from './../../slices/user/thunk';
 import withLoading from './../HOC/withAuthRedirect';
 import UserDataProfile from './userData/UserDataProfile';
 import ModalForSetUserData from './userData/modalForSetUserData/ModalForSetUserData';
+import { setUserMsg } from '../../slices/user/userSlice';
 
 interface IProfileContainerProps {
 }
@@ -29,8 +30,16 @@ const ProfileContainer: React.FunctionComponent<IProfileContainerProps> = (props
 
     useEffect(() => {
         dispatch(setLoading(true))
-        if (id) dispatch(getUserData(id))
+        if (id) {
+                debugger
+            dispatch(getUserData(id))
+        }
     },[userChangedata])
+
+
+    useEffect(() => function cleanUserMsg() {
+        dispatch(setUserMsg(""))
+    },[])
 
   return (
     <div className="">

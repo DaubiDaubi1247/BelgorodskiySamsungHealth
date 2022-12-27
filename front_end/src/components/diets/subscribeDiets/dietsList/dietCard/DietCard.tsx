@@ -55,7 +55,6 @@ const DietCard: React.FunctionComponent<IDietCardProps> = ({id, label, descripti
               {description}
             </Card.Text>
             <Button variant="primary" onClick={redirectToFullDescription}>Посмотреть полностью</Button>
-            {userHasDiet ? <></> : <Button variant="primary" style={{margin : "5px 47px 0 0"}} onClick={subscribeDiet}>Подписаться</Button>}
             {isAdmin ? <Button variant='danger' onClick={deactivateDiet}>x</Button> : <></>}
           </Card.Body>
         </Card>

@@ -38,8 +38,8 @@ public class DownloadFileController {
 
     @GetMapping("user/json")
     @ResponseBody
-    public ResponseEntity<InputStreamResource> getImageDynamicType() throws IOException {
-        downloadFileService.downloadUsers();
+    public ResponseEntity<InputStreamResource> getJsonStatistic(@RequestParam Integer percentOfProgress) throws IOException {
+        downloadFileService.downloadTopOfTraningsStatistic(percentOfProgress);
 
         MediaType contentType =  MediaType.APPLICATION_JSON;
         InputStreamResource in = new InputStreamResource(new FileInputStream(passToJsonFolder + "/user.json"));
@@ -50,18 +50,16 @@ public class DownloadFileController {
 
     @GetMapping("user/pdf")
     @ResponseBody
-    public ResponseEntity<InputStreamResource> getImageDyn222()
+    public ResponseEntity<InputStreamResource> getPdfStatistc(@RequestParam Integer percentOfProgress)
             throws IOException, DocumentException {
 
         MediaType contentType = MediaType.APPLICATION_PDF;
-        downloadFileService.dowloadPDF();
+        downloadFileService.dowloadPDF(percentOfProgress);
 
         InputStreamResource in = new InputStreamResource(new FileInputStream(passToPDFFolder + "/user.pdf"));
 
         return ResponseEntity.ok()
                 .contentType(contentType)
                 .body(in);
-
-
     }
 }

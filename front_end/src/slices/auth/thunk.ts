@@ -11,7 +11,7 @@ export const registrationUser = createAsyncThunk(
             const response = await authAPI.registrationUser(accessData)
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+            return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )
@@ -23,7 +23,7 @@ export const authUser = createAsyncThunk(
             const response = await authAPI.authUser(accessData)
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+            return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )

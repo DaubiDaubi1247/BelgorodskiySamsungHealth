@@ -3,6 +3,7 @@ package com.example.reg3.repository;
 import com.example.reg3.dao.DayOfTraining;
 import com.example.reg3.dao.Training;
 import com.example.reg3.requastion.ProgressOfUser;
+import com.example.reg3.requastion.StatisticOfTrain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -40,4 +41,13 @@ public interface TrainingRepository
 
 
     List<Training> findByLabel(String label);
+
+    @Query("SELECT t.label as label, COUNT(up) as countOfUsers " +
+            "FROM UserProgressInTraining up " +
+            "JOIN up.trainingId t " +
+            "WHERE up.dayOfTraining  * 1.0 / t.countOfDays * 100 >= ?1 " +
+            "GROUP BY t.label " +
+            "ORDER BY COUNT(up)")
+
+    List<StatisticOfTrain> findTopOfTranings(Double percentOfProgress);
 }

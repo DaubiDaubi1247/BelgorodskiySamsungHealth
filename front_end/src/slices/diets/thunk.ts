@@ -6,6 +6,7 @@ import { setLoading } from '../common/commonSlice';
 
 import { dietsAPI } from './../../API/dietsAPI/dietsAPI';
 import { userAPI } from './../../API/userAPI/userAPI';
+import { setDietsError } from './diets';
 
 type TSetUserDiet = {
     userId : number
@@ -21,7 +22,7 @@ export const getSmallDataAboutDiets = createAsyncThunk(
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+            return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )
@@ -33,7 +34,7 @@ export const getSmallDataAboutUserDiet = createAsyncThunk(
             const response = await dietsAPI.getSmallDataAboutUserDiet(userId);
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+            return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )
@@ -46,7 +47,7 @@ export const setUserDiet = createAsyncThunk(
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("...")
+            return thunkApi.rejectWithValue("...")
         }
    }
 )
@@ -55,6 +56,7 @@ export const getMealsByFilter = createAsyncThunk(
     "diets/getMealsByFilter",
    async (data : Ifilters, thunkApi) => {
         try {
+            thunkApi.dispatch(setDietsError(""))
             const response = await dietsAPI.getMealsByFilter(data)
             thunkApi.dispatch(setLoading(false));
             return response.data
@@ -72,7 +74,7 @@ export const createDiet = createAsyncThunk(
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue(error)
+            return thunkApi.rejectWithValue(error)
         }
    }
 )

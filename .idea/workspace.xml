@@ -4,17 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="исправил баг ошибки функционала со старых версий">
-      <change afterPath="$PROJECT_DIR$/front_end/Dockerfile" afterDir="false" />
+    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="изменил запрос на выборку">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,7 +95,7 @@
       <recent name="D:\sem5\data base\kursuch3\BelgorodskiySamsungHealth\reg3" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Spring Boot.Reg3Application">
     <configuration name="Reg3Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="demo1" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.reg3.Reg3Application" />
@@ -99,6 +106,19 @@
     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.frontend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="frontend" />
+            </list>
+          </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
@@ -124,14 +144,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="reg3: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="reg3/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="reg3/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -143,10 +155,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
         <item itemvalue="Docker.front_end/Dockerfile" />
         <item itemvalue="Docker.reg3/Dockerfile" />
         <item itemvalue="Docker.front_end/Dockerfile build" />
-        <item itemvalue="Docker.reg3: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -168,6 +180,8 @@
       <workItem from="1671645752001" duration="3792000" />
       <workItem from="1671697670202" duration="9627000" />
       <workItem from="1671711934195" duration="17028000" />
+      <workItem from="1671783134624" duration="15969000" />
+      <workItem from="1671881442688" duration="15509000" />
     </task>
     <task id="LOCAL-00001" summary="победа на докером">
       <created>1671557224018</created>
@@ -190,7 +204,28 @@
       <option name="project" value="LOCAL" />
       <updated>1671651168157</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="исправил рекветсты">
+      <created>1671894055250</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671894055250</updated>
+    </task>
+    <task id="LOCAL-00005" summary="изменил запрос на выборку">
+      <created>1671898031469</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671898031469</updated>
+    </task>
+    <task id="LOCAL-00006" summary="изменил запрос на выборку">
+      <created>1671898193909</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671898193909</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,7 +249,9 @@
     <MESSAGE value="победа на докером" />
     <MESSAGE value="докер фиксация" />
     <MESSAGE value="исправил баг ошибки функционала со старых версий" />
-    <option name="LAST_COMMIT_MESSAGE" value="исправил баг ошибки функционала со старых версий" />
+    <MESSAGE value="исправил рекветсты" />
+    <MESSAGE value="изменил запрос на выборку" />
+    <option name="LAST_COMMIT_MESSAGE" value="изменил запрос на выборку" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -228,6 +265,21 @@
           <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DietController.java</url>
           <line>78</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DishService.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

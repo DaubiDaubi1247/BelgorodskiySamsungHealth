@@ -11,16 +11,16 @@ import { getMealsByFilter } from './../../../slices/diets/thunk';
 import { Ifilters } from '../../../API/dietsAPI/TdietsAPI';
 import RecomendedDish from './recomendedDIsh/RecomendenDish';
 import FormError from '../../../common/form/formError/FormError';
-import withAuthRedicrect from './../../main/Main';
+import withAuthRedicrect from '../../HOC/withAuthRedirect';
 
 interface IFullDescriptionDietProps {
 }
 
 const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = (props) => {
 
-    const [typeOfMeal, settypeOfMeal] = useState("")
-    const [mealTime, setmealTime] = useState("");
-    const [isVisible, setisVisible] = useState(false)
+    const [typeOfMeal, settypeOfMeal] = useState("первое блюдо")
+    let [mealTime, setmealTime] = useState("завтрак");
+    let [isVisible, setisVisible] = useState(false)
 
     let mealTimesArr = useAppSelector(state => state.dish.mealTimesArr)
     let mealTypesArr = useAppSelector(state => state.dish.mealTypesArr)
@@ -31,7 +31,7 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     const dispatch = useAppDispatch()
     
     useEffect(() => {   
-        dispatch(setLoading(true))
+        //dispatch(setLoading(true))
         dispatch(getTypes())
     },[])
 
@@ -53,14 +53,14 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     }
 
     return (
-        <div className='w-100' style={{marginLeft : "20px"}}>
+        <div className='' style={{marginLeft : "20px"}}>
             <div>
-                <p>Вы выбрали тренировку {currentDiet?.label}</p>
+                <h3>Вы выбрали тренировку : {currentDiet?.label}</h3>
                 <p>Для просмотра блюд выберите тип блюд и время приема пищи</p>
             </div>
             <div className="selectWrapper">
-                <Select valueArr={mealTimesArr} onChangeHanler={setmealTime}/>
-                <Select valueArr={mealTypesArr} onChangeHanler={settypeOfMeal}/>
+                <Select valueArr={mealTimesArr} onChangeHanler={setmealTime} isEmpty={mealTime.length === 0}/>
+                <Select valueArr={mealTypesArr} onChangeHanler={settypeOfMeal} isEmpty={typeOfMeal.length === 0}/>
             </div>
             <Button style={{marginTop : "10px"}} onClick={getMealsByFilterHanlder}>Просмотреть еду из данной диеты</Button>
             {isVisible ? <RecomendedDish recomendedDishArr={recomendedDishArr}/> : <></>}
@@ -69,4 +69,4 @@ const FullDescriptionDiet: React.FunctionComponent<IFullDescriptionDietProps> = 
     )
 };
 
-export default FullDescriptionDiet;
+export default withAuthRedicrect(FullDescriptionDiet);
