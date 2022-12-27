@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { ItrainigData, IsmallDataAboutTrainings, TrainingDataArr, ArrDaysExpires } from './../../API/trainingAPI/TtrainingAPI';
 import { CONST, ItrainitState } from './Types';
@@ -13,7 +13,8 @@ const initialState: ItrainitState = {
     percentOfProgress : CONST.NO_DATA,
     messageForCreate : "",
     userHasTraining : false,
-    currentDay : CONST.NO_DATA
+    currentDay : CONST.NO_DATA,
+    errorMsg : null
 };
 
 const trainingSlice = createSlice({
@@ -30,6 +31,14 @@ const trainingSlice = createSlice({
         },
         setUserHasTraining: (state, action : PayloadAction<boolean>) => {
             state.userHasTraining = action.payload
+        },
+
+        setMessageForCreate :  (state, action : PayloadAction<string>) => {
+            state.messageForCreate = action.payload
+        },
+
+        setErrorMsg : (state, action : PayloadAction<string | null>) => {
+            state.errorMsg = action.payload
         }
 
     },
@@ -44,33 +53,56 @@ const trainingSlice = createSlice({
                 state.percentOfProgress = action.payload.presentOfProgress !== undefined ? action.payload.presentOfProgress : CONST.NO_DATA
 
                 state.userHasTraining = action.payload !== undefined
-                state.currentDay = action.payload.dayOfTraining ? action.payload.dayOfTraining : CONST.NO_DATA
+                state.currentDay = action.payload.dayOfTraining + 1
 
-                // state.smallUserTraining = {id : 1, name : "Набор массы", countDays : 9}
-                // state.today = Math.round(2 / 9 * 100)
             })
+
             .addCase(getArrDaysExpires.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
-                
                 state.arrDaysExpires = action.payload
             })
+
             .addCase(createTraining.fulfilled.type, (state, action: PayloadAction<string>) => {
-                
                 state.messageForCreate = action.payload
             })
             .addCase(setUserTrain.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
                 state.userHasTraining = true
+
             })
             .addCase(updateDayUserTraining.fulfilled.type, (state, action: PayloadAction<ArrDaysExpires>) => {
+                let days = state.smallUserTraining?.countOfDays ? state.smallUserTraining?.countOfDays : CONST.NO_DATA
+                state.percentOfProgress = Math.round(state.currentDay / days * 100)
                 state.currentDay++;
+                
             })
-            .addCase(getUserTraining.rejected.type, (state, action: PayloadAction<ItrainigData>) => {
 
-                })
+            // -- rejecteds--
+            
+            .addCase(createTraining.rejected.type, (state, action: PayloadAction<string>) => {
+                state.errorMsg = action.payload
+            })
+
+            .addCase(getArrDaysExpires.rejected, (state, action: any) => {
+                state.errorMsg = action.payload
+            })
+
+            .addCase(getSmallDataAboutTrainings.rejected.type, (state, action: PayloadAction<string>) => {
+                state.errorMsg = action.payload
+            })
+
+            .addCase(getUserTraining.rejected.type, (state, action: PayloadAction<string>) => {
+                state.errorMsg = action.payload
+            })
+
+            .addCase(updateDayUserTraining.rejected.type, (state, action: PayloadAction<string>) => {
+                debugger
+                state.errorMsg = action.payload
+                state.userHasTraining = false
+            })
             
     },
 });
 
-export const { setSmallData,deleteTraining,setUserHasTraining } = trainingSlice.actions;
+export const { setSmallData,deleteTraining,setUserHasTraining,setMessageForCreate,setErrorMsg } = trainingSlice.actions;
 
 export const selectSmallUserTraining = (state : RootState) => state.training.smallUserTraining
 

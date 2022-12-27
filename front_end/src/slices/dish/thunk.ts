@@ -12,10 +12,9 @@ export const getMealsTimes = createAsyncThunk(
     async (_,thunkApi) => {
         try {
             const response = await dishAPI.getMealTimes();
-            //thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+            return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )
@@ -28,7 +27,7 @@ export const getTypes = createAsyncThunk(
             thunkApi.dispatch(setLoading(false));
             return response.data
         } catch (error) {
-            thunkApi.rejectWithValue("Что то пошло не так ...")
+            return thunkApi.rejectWithValue("Что то пошло не так ...")
         }
     }
 )
@@ -40,8 +39,8 @@ export const createDish = createAsyncThunk(
             const response = await dishAPI.createDish(body);
             thunkApi.dispatch(setLoading(false));
             return response.data
-        } catch (error) {debugger
-            thunkApi.rejectWithValue(error)
+        } catch (error) {
+            return thunkApi.rejectWithValue(error)
         }
     }
 )

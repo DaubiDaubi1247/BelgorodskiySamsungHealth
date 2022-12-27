@@ -23,13 +23,16 @@ const dishSlice = createSlice({
                 state.mealTimesArr = action.payload
             })
             .addCase(getTypes.fulfilled.type, (state, action: PayloadAction<Array<string>>) => {
-                debugger
                 state.mealTypesArr = action.payload
             })
             .addCase(createDish.rejected.type, (state, action: PayloadAction<string>) => {
             })
             .addCase(createDish.fulfilled.type, (state, action: PayloadAction<string>) => {
                 
+                state.mealCreateRes = action.payload
+            })
+
+            .addCase(getMealsTimes.rejected.type, (state, action: PayloadAction<string>) => {
                 state.mealCreateRes = action.payload
             })
     }

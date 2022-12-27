@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch } from './../../app/hooks';
 import AdminPanelButtons from './adminPanelButtons/AdminPanelButtons';
-import { Container } from 'react-bootstrap';
+
+import withAuthRedicrect from './../HOC/withAuthRedirect';
 
 interface IAdminPanelProps {
 }
@@ -26,4 +27,4 @@ const AdminPanelContainer: React.FunctionComponent<IAdminPanelProps> = (props) =
     )
 };
 
-export default AdminPanelContainer;
+export default withAuthRedicrect(AdminPanelContainer);

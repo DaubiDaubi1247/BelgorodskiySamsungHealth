@@ -8,7 +8,8 @@ const initialState: IuserIS = {
     weight : 0,
     height : 0,
     countOfCompletedTrainers : 0,
-    userChangedata : false
+    userChangedata : false,
+    userMsg : ""
 };
 
 const userSlice = createSlice({
@@ -16,9 +17,12 @@ const userSlice = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
-        // setLoading: (state, action: PayloadAction<boolean>) => {
-        //     state.isLoading = action.payload;
-        // },
+        setUserMsg: (state, action: PayloadAction<string>) => {
+            state.userMsg = action.payload;
+        },
+        setUserChanedata : (state, action: PayloadAction<boolean>) => {
+            state.userChangedata = action.payload;
+        },
 
     },
     // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -31,13 +35,15 @@ const userSlice = createSlice({
                 state.height = action.payload.height
                 state.countOfCompletedTrainers = action.payload.countOfCompletedTrainers
             })
-            .addCase(setUserData.fulfilled.type , (state, action: PayloadAction<IuserIS>) => {
+            .addCase(setUserData.fulfilled.type , (state, action: PayloadAction<string>) => {
+                debugger
                 state.userChangedata = true
+                state.userMsg = action.payload
             })
     },
     
 });
 
-//export const { setLoading } = userSlice.actions;
+export const { setUserMsg,setUserChanedata } = userSlice.actions;
 
 export default userSlice.reducer;

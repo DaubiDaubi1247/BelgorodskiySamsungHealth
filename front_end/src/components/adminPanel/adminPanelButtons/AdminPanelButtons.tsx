@@ -4,6 +4,7 @@ import { AdminRoutes, DietsRoutes } from "../../../Routes/Routes";
 import { useAppDispatch } from './../../../app/hooks';
 import { getSmallDataAboutTrainings } from './../../../slices/training/thunk';
 import { adminAPI } from './../../../API/adminAPI/adminAPI';
+import { useState } from 'react';
 
 
 interface AadminPanelButtonsProps {
@@ -12,6 +13,8 @@ interface AadminPanelButtonsProps {
 const AdminPanelButtons: React.FunctionComponent<AadminPanelButtonsProps> = (props) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch()
+
+    const [value, setvalue] = useState(0)
 
     const watchTraining = () => {
         dispatch(getSmallDataAboutTrainings())
@@ -30,7 +33,7 @@ const AdminPanelButtons: React.FunctionComponent<AadminPanelButtonsProps> = (pro
     const createDish = () => navigate(AdminRoutes.createDish)
 
     const downloadFileInJSON = () => {
-        adminAPI.downloadInJSON()
+        adminAPI.downloadInJSON(value)
             .then(response => {
                 response.blob().then(blob => {
                     let url = window.URL.createObjectURL(blob);
@@ -43,7 +46,7 @@ const AdminPanelButtons: React.FunctionComponent<AadminPanelButtonsProps> = (pro
     }
 
     const downloadFileIn__ = () => {
-        adminAPI.downloadInPDF()
+        adminAPI.downloadInPDF(value)
             .then(response => {
                 response.blob().then(blob => {
                     let url = window.URL.createObjectURL(blob);
@@ -64,8 +67,12 @@ const AdminPanelButtons: React.FunctionComponent<AadminPanelButtonsProps> = (pro
             <Button style={{ marginRight: "15px" }} onClick={createDiet}>Создать диету</Button>
             <Button style={{ marginRight: "15px" }} onClick={createDish}>Создать Блюдо</Button>
 
-            <Button style={{ marginRight: "15px" }} onClick={downloadFileInJSON}>Выгрузка данных в json</Button>
-            <Button style={{ marginRight: "15px", marginTop: "10px" }} onClick={downloadFileIn__}>Выгрузка данных в pdf</Button>
+            <div className="" style={{ marginTop: "15px"}}>
+                <h3>Для получения данных введите процент выполения</h3>
+                <input style={{display : 'block', marginBottom : "10px"}} type="text" placeholder="Процент выполнения" value={value} onChange={e => setvalue(+e.target.value)}/>
+                <Button style={{ marginRight: "15px" }} onClick={downloadFileInJSON}>Выгрузка данных в json</Button>
+                <Button style={{ marginRight: "15px" }} onClick={downloadFileIn__}>Выгрузка данных в pdf</Button>
+            </div>
         </>
     )
 };

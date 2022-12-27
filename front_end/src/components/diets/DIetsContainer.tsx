@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './../../app/hooks';
 import { getSmallDataAboutDiets, getSmallDataAboutUserDiet } from './../../slices/diets/thunk';
 import SubscribeDiet from './subscribeDiets/SubscribeDiets';
-import withLoading from './../training/daysList/dayListContainer/DayListContainer';
 import withAuthRedicrect from './../HOC/withAuthRedirect';
 import { CONST } from '../../slices/common/Types';
 import { stat } from 'fs';
 import DietCard from './subscribeDiets/dietsList/dietCard/DietCard';
 import { Button } from 'react-bootstrap';
+import { setDietsError } from '../../slices/diets/diets';
 
 
 
@@ -28,6 +28,10 @@ const DietsContainer: React.FunctionComponent<IDietsContainerProps> = (props) =>
     useEffect(() => {
         if (userId) dispatch(getSmallDataAboutUserDiet(userId))
     },[userHasDiet])
+
+    useEffect(() => function() {
+        dispatch(setDietsError(""))
+    })
 
     return (
         <div>
