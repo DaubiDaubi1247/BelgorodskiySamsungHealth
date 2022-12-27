@@ -2,11 +2,11 @@ import axios from "axios"
 
 
 export const adminAPI = {
-    downloadInJSON() {
-        return fetch("http://localhost:8011/download/user/json")
+    downloadInJSON(percentOfProgress : number) {
+        return fetch(`http://localhost:8011/download/user/json?percentOfProgress=${percentOfProgress}`)
     },
-    downloadInPDF() {
-        return fetch("http://localhost:8011/download/user/pdf")
+    downloadInPDF(percentOfProgress : number) {
+        return fetch(`http://localhost:8011/download/user/pdf?percentOfProgress=${percentOfProgress}`)
     }
 }
 
