@@ -3,13 +3,12 @@ import { Inputs } from "../../slices/auth/Types";
 import { IResponse } from './API_T';
 
 const authAxios = axios.create({
-    baseURL: "http://79.143.30.176:8011/hole",
+    baseURL: "http://localhost:8011/hole",
     
 })
 
 export const authAPI = {
     authUser(accessData : Inputs) {
-        debugger
         return authAxios.post<IResponse>("/authentication", accessData)
     },
 

@@ -35,7 +35,9 @@ const dietsSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getSmallDataAboutDiets.fulfilled.type, (state, action: PayloadAction<IsmallDataAboutDietsArr>) => {
-                state.smallDataAboutDiets = action.payload
+                //@ts-ignore
+                if (action.payload !== "Отсутствуют  диеты co статусом available")
+                    state.smallDataAboutDiets = action.payload
             })
             .addCase(getMealsByFilter.fulfilled.type, (state, action: PayloadAction<TDishDescriptionArr>) => {
                 state.recomendedDishArr = action.payload
@@ -57,7 +59,6 @@ const dietsSlice = createSlice({
             })
 
             .addCase(getSmallDataAboutDiets.rejected.type, (state, action: PayloadAction<string>) => {
-                debugger
             })
     }
 })

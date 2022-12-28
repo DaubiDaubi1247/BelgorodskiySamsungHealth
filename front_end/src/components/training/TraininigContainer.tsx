@@ -23,7 +23,6 @@ const TrainingContainer: React.FunctionComponent<ITrainingContainerProps> = (pro
 
     useEffect(() => {
         if (userId) {
-            debugger
             dispatch(setLoading(true))
             dispatch(getUserTraining(userId))
         }

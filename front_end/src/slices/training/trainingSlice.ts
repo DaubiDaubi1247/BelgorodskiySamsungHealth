@@ -94,7 +94,6 @@ const trainingSlice = createSlice({
             })
 
             .addCase(updateDayUserTraining.rejected.type, (state, action: PayloadAction<string>) => {
-                debugger
                 state.errorMsg = action.payload
                 state.userHasTraining = false
             })

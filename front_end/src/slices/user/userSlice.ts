@@ -34,9 +34,11 @@ const userSlice = createSlice({
                 state.countOfCompletedTrainers = action.payload.countOfCompletedTrainers
             })
             .addCase(setUserData.fulfilled.type , (state, action: PayloadAction<string>) => {
-                debugger
                 state.userChangedata = true
                 state.userMsg = action.payload
+            })
+
+            .addCase(getUserData.rejected.type , (state, action: PayloadAction<IuserIS>) => {
             })
     },
     

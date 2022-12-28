@@ -15,17 +15,16 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     const dispatch = useAppDispatch()
 
     const exitFromAccount = () => {
-        dispatch(setAuth(false))
-        dispatch(setAccessData(null))
+        window.location.reload()
     }
 
   return (
     <header className={styles.header}>
         <div className={styles.flexContainer + " mh-100 mw-100 d-flex p-2"}>
             <Logo/>
-            <div className="title">
-                Lorem, ipsum dolor.
-            </div>
+            <h3 className="title">
+                BelgorodskiySamsungHealth
+            </h3>
             <div className="">
                 <Profile/>
                 <NavLink to={AuthRoutes.authRoute} style={{marginLeft : "10px", color: "white", textDecoration : 'none', fontSize : '20px'}} onClick={exitFromAccount}>Выход</NavLink>
