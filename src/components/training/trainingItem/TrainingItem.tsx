@@ -31,7 +31,6 @@ const TrainingItem: React.FunctionComponent<ITrainingProps> = ({ label, countOfD
     let dispatch = useAppDispatch();
 
     const onClickHandler = () => {
-        debugger
         setVisible(!isVisible)
 
         dispatch(getArrDaysExpires(id))

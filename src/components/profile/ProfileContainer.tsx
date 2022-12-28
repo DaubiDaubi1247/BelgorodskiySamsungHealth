@@ -31,7 +31,6 @@ const ProfileContainer: React.FunctionComponent<IProfileContainerProps> = (props
     useEffect(() => {
         dispatch(setLoading(true))
         if (id) {
-                debugger
             dispatch(getUserData(id))
         }
     },[userChangedata])
