@@ -149,17 +149,8 @@ public class AddInformationController {
 
     //Пользовательские данные
     List<UserRegistrationData> userRegistrationDataList = List.of(
-            new UserRegistrationData("monokas", "monokas@gmail.com",
-                    "monokas", true, userList.get(0)),
-            new UserRegistrationData("prosto_chell", "prosto_chell@gmail.com",
-                    "prosto_chell", true, userList.get(1)),
-            new UserRegistrationData("vlu", "vlu@gmail.com",
-                    "vlu", false, userList.get(2)),
-            new UserRegistrationData("man", "man@gmail.com",
-                    "man", false, null),
-            new UserRegistrationData("Hahatach", "Hahatach@gmail.com",
-                    "Hahatach", false, null)
-
+            new UserRegistrationData("monokas", "m@g",
+                    "123", true, userList.get(0))
     );
 
     List<MealTime> mealTimeList = List.of(
@@ -179,18 +170,14 @@ public class AddInformationController {
             new TypeOfMeal("мучное")
     );
 
-
+    @GetMapping("admin")
+    public void registrationAdmin() {
+        var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
+    }
 
     @GetMapping("all")
     public void registrationUser() {
         bot.sendInfo("Вызов http://localhost:8011/add/all");
-
-        //добавление пользователей
-        var res = userRegistrationDataService.addNewUser(userRegistrationDataList.get(0));
-        var res2 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(1));
-        var res3 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(2));
-        var res13 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(3));
-        var res14 = userRegistrationDataService.addNewUser(userRegistrationDataList.get(4));
 
         //добавление тренеровок
         var res4 = trainingService.addTrain(trainingList.get(0));
@@ -240,9 +227,8 @@ public class AddInformationController {
 
         StringBuilder msg = new StringBuilder();
         msg.append("Добавление изначальных данных\n");
-        msg.append(res).append("\n");
-        msg.append(res2).append("\n");
-        msg.append(res3).append("\n");
+
+
         msg.append(res4).append("\n");
         msg.append(res5).append("\n");
         msg.append(res6).append("\n");

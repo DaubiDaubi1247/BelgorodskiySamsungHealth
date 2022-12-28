@@ -28,6 +28,8 @@ services:
       - app
     build: front_end
     container_name: front
+    links:
+      -   app
     ports:
       - "3000:3000"
     stdin_open: true
@@ -45,6 +47,14 @@ services:
       - postgres
     env_file:
       - .env
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
 
 volumes:
   postgres_data:
