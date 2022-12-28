@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.util.Collections;
 import java.util.List;
+
+import static com.itextpdf.text.html.HtmlTags.FONT;
 
 
 @Service
@@ -75,18 +78,19 @@ public class DownloadFileService {
         for (var stat : list) {
             addStat(document, stat);
         }
-
+        document.add(new Paragraph());
         document.close();
     }
 
     private static void addStat(Document document, StatisticOfTrain stat) throws DocumentException {
-        Paragraph p = new Paragraph("Название тренеровки: " + stat.getLabel());
+        Font font = FontFactory.getFont(FONT, "Cp1250", true);;
+        Paragraph p = new Paragraph("Название тренеровки: " + stat.getLabel(), font);
         p.setAlignment(Element.ALIGN_JUSTIFIED);
         document.add(p);
-        Paragraph p2 = new Paragraph("Колличество пользователей: " + stat.getCountOfUsers());
+        Paragraph p2 = new Paragraph("Кол-во пользователей: " + stat.getCountOfUsers(), font);
         p.setAlignment(Element.ALIGN_JUSTIFIED);
         document.add(p2);
-        Paragraph p3 = new Paragraph("========================");
+        Paragraph p3 = new Paragraph("========================", font);
         p.setAlignment(Element.ALIGN_JUSTIFIED);
         document.add(p3);
     }

@@ -3,7 +3,7 @@ import { Inputs } from "../../slices/auth/Types";
 import { IResponse } from './API_T';
 
 const authAxios = axios.create({
-    baseURL: "http://localhost:8011/hole",
+    baseURL: "http://79.143.30.176:8011/hole",
     
 })
 

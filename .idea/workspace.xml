@@ -4,12 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="изменил запрос на выборку">
+    <list default="true" id="04bd9be8-437b-43f3-955e-ac1565bae486" name="Changes" comment="полное приложение">
+      <change afterPath="$PROJECT_DIR$/nginx/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/502d0c0a-a773-4443-93c6-d521d2371501.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/502d0c0a-a773-4443-93c6-d521d2371501.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_12_2022_16_16__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_12_2022_16_16__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2022_15_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2022_15_06__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/adminAPI/adminAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/adminAPI/adminAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/authAPI/authAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/authAPI/authAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/dietsAPI/dietsAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/dietsAPI/dietsAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/dishAPI/dietsAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/dishAPI/dietsAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/trainingAPI/trainingAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/trainingAPI/trainingAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/API/userAPI/userAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/API/userAPI/userAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_end/src/components/main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front_end/src/components/main/Main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/Service/DownloadFileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/DownloadFileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/repository/TrainingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/AddInformationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/java/com/example/reg3/controller/AddInformationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/templates/json/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/templates/json/user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reg3/src/main/resources/templates/pdf/user.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/reg3/src/main/resources/templates/pdf/user.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +39,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="315a642831656754ed0c79b6ab2219477295c224" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -40,7 +60,7 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
         <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
@@ -61,33 +81,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/sem5/data base/kursach&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;e368b9938746fa090d6afd3628355133&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "temurin-11",
+    "last_opened_file_path": "D:/sem5/data base/kursach",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "spring.configuration.checksum": "e368b9938746fa090d6afd3628355133"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\sem5\data base\kursuch5\BelgorodskiySamsungHealth\front_end" />
@@ -95,7 +116,7 @@
       <recent name="D:\sem5\data base\kursuch3\BelgorodskiySamsungHealth\reg3" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Reg3Application">
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="Reg3Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="demo1" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.reg3.Reg3Application" />
@@ -182,6 +203,8 @@
       <workItem from="1671711934195" duration="17028000" />
       <workItem from="1671783134624" duration="15969000" />
       <workItem from="1671881442688" duration="15509000" />
+      <workItem from="1672144463805" duration="172000" />
+      <workItem from="1672144676473" duration="18291000" />
     </task>
     <task id="LOCAL-00001" summary="победа на докером">
       <created>1671557224018</created>
@@ -225,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671898193909</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="полное приложение">
+      <created>1672143727384</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672143727384</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,7 +281,8 @@
     <MESSAGE value="исправил баг ошибки функционала со старых версий" />
     <MESSAGE value="исправил рекветсты" />
     <MESSAGE value="изменил запрос на выборку" />
-    <option name="LAST_COMMIT_MESSAGE" value="изменил запрос на выборку" />
+    <MESSAGE value="полное приложение" />
+    <option name="LAST_COMMIT_MESSAGE" value="полное приложение" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

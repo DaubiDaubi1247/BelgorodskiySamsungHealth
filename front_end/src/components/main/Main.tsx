@@ -11,7 +11,10 @@ interface IMainProps {
 const MainContainer: React.FunctionComponent<IMainProps> = (props) => {
 
     return (
-        <></>
+        <h2>
+            Добро пожаловать в наше приложение!!!
+            (возможно когда то тут буду новости)
+        </h2>
     );
 };
 
