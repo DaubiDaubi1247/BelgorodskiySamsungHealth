@@ -4,7 +4,7 @@ import styles from "./header.module.css"
 import Profile from './profile/Profile';
 import { NavLink } from 'react-router-dom';
 import { AuthRoutes } from '../../Routes/Routes';
-import { useAppDispatch } from './../../app/hooks';
+import { useAppDispatch, useAppSelector } from './../../app/hooks';
 import { setAccessData, setAuth } from '../../slices/auth/authSlice';
 
 interface IHeaderProps {
@@ -12,7 +12,7 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 
-    const dispatch = useAppDispatch()
+    let isAuth = useAppSelector(state => state.auth.isAuth)
 
     const exitFromAccount = () => {
         window.location.reload()
@@ -27,7 +27,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
             </h3>
             <div className="">
                 <Profile/>
-                <NavLink to={AuthRoutes.authRoute} style={{marginLeft : "10px", color: "white", textDecoration : 'none', fontSize : '20px'}} onClick={exitFromAccount}>Выход</NavLink>
+                {isAuth ? <NavLink to={AuthRoutes.authRoute} style={{marginLeft : "10px", color: "white", textDecoration : 'none', fontSize : '20px'}} onClick={exitFromAccount}>Выход</NavLink> : ""}
             </div>
         </div>
     </header>
